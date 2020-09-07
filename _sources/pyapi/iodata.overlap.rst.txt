@@ -1,0 +1,8 @@
+iodata.overlap module
+=====================
+
+.. automodule:: iodata.overlap
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :inherited-members:

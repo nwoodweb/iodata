@@ -1,0 +1,523 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>iodata.utils module &mdash; IOData  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/override.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["fast-preview.js"], "TeX": {"Macros": {"ket": ["{\\left\\vert { #1 } \\right\\rangle}", 1], "bra": ["{\\left\\langle { #1} \\right\\vert}", 1], "braket": ["{\\left\\langle {#1} \\mid { #2} \\right\\rangle}", 2], "ketbra": ["{\\left\\vert { #1 } \\right\\rangle\\left\\langle { #2} \\right\\vert}", 2], "ev": ["{\\left\\langle {#2} \\vert {#1} \\vert {#2} \\right\\rangle}", 2], "mel": ["{\\left\\langle{ #1 }\\right\\vert{ #2 }\\left\\vert{#3}\\right\\rangle}", 3]}}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="iodata.version module" href="iodata.version.html" />
+    <link rel="prev" title="iodata.periodic module" href="iodata.periodic.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> IOData
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../formats.html">Supported File Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basis.html">Basis set conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">IOData Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgments.html">Acknowledgments</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">iodata</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="iodata.html">iodata package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="iodata.html#subpackages">Subpackages</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="iodata.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="iodata.api.html">iodata.api module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.attrutils.html">iodata.attrutils module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.basis.html">iodata.basis module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.docstrings.html">iodata.docstrings module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.iodata.html">iodata.iodata module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.orbitals.html">iodata.orbitals module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.overlap.html">iodata.overlap module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.overlap_cartpure.html">iodata.overlap_cartpure module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.periodic.html">iodata.periodic module</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">iodata.utils module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.version.html">iodata.version module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="iodata.html#module-iodata">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">IOData</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="modules.html">iodata</a> &raquo;</li>
+        
+          <li><a href="iodata.html">iodata package</a> &raquo;</li>
+        
+      <li>iodata.utils module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/pyapi/iodata.utils.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-iodata.utils">
+<span id="iodata-utils-module"></span><h1>iodata.utils module<a class="headerlink" href="#module-iodata.utils" title="Permalink to this headline">¶</a></h1>
+<p>Utility functions module.</p>
+<dl class="py class">
+<dt id="iodata.utils.Cube">
+<em class="property">class </em><code class="sig-name descname">Cube</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">origin</span></em>, <em class="sig-param"><span class="n">axes</span></em>, <em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iodata/utils.html#Cube"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iodata.utils.Cube" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>The volumetric data from a cube (or similar) file.</p>
+<dl class="py attribute">
+<dt id="iodata.utils.Cube.origin">
+<code class="sig-name descname">origin</code><a class="headerlink" href="#iodata.utils.Cube.origin" title="Permalink to this definition">¶</a></dt>
+<dd><p>A 3D vector with the origin of the axes frame.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.utils.Cube.axes">
+<code class="sig-name descname">axes</code><a class="headerlink" href="#iodata.utils.Cube.axes" title="Permalink to this definition">¶</a></dt>
+<dd><p>A (3, 3) array where each row represents the spacing between two
+neighboring grid points along the first, second and third axis,
+respectively.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.utils.Cube.data">
+<code class="sig-name descname">data</code><a class="headerlink" href="#iodata.utils.Cube.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>A (K, L, M) array of data on a uniform grid</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="iodata.utils.Cube.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">origin</span></em>, <em class="sig-param"><span class="n">axes</span></em>, <em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#iodata.utils.Cube.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method generated by attrs for class Cube.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="id0">
+<code class="sig-name descname">axes</code><em class="property">: numpy.ndarray</em><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id1">
+<code class="sig-name descname">data</code><em class="property">: numpy.ndarray</em><a class="headerlink" href="#id1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id2">
+<code class="sig-name descname">origin</code><em class="property">: numpy.ndarray</em><a class="headerlink" href="#id2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="iodata.utils.Cube.shape">
+<em class="property">property </em><code class="sig-name descname">shape</code><a class="headerlink" href="#iodata.utils.Cube.shape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shape of the rectangular grid.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt id="iodata.utils.FileFormatError">
+<em class="property">exception </em><code class="sig-name descname">FileFormatError</code><a class="reference internal" href="../_modules/iodata/utils.html#FileFormatError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iodata.utils.FileFormatError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#OSError" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">OSError</span></code></a></p>
+<p>Raised when incorrect content is encountered when loading files.</p>
+<dl class="py method">
+<dt id="iodata.utils.FileFormatError.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#iodata.utils.FileFormatError.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.utils.FileFormatError.args">
+<code class="sig-name descname">args</code><a class="headerlink" href="#iodata.utils.FileFormatError.args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.utils.FileFormatError.characters_written">
+<code class="sig-name descname">characters_written</code><a class="headerlink" href="#iodata.utils.FileFormatError.characters_written" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.utils.FileFormatError.errno">
+<code class="sig-name descname">errno</code><a class="headerlink" href="#iodata.utils.FileFormatError.errno" title="Permalink to this definition">¶</a></dt>
+<dd><p>POSIX exception code</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.utils.FileFormatError.filename">
+<code class="sig-name descname">filename</code><a class="headerlink" href="#iodata.utils.FileFormatError.filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>exception filename</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.utils.FileFormatError.filename2">
+<code class="sig-name descname">filename2</code><a class="headerlink" href="#iodata.utils.FileFormatError.filename2" title="Permalink to this definition">¶</a></dt>
+<dd><p>second exception filename</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.utils.FileFormatError.strerror">
+<code class="sig-name descname">strerror</code><a class="headerlink" href="#iodata.utils.FileFormatError.strerror" title="Permalink to this definition">¶</a></dt>
+<dd><p>exception strerror</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="iodata.utils.FileFormatError.with_traceback">
+<code class="sig-name descname">with_traceback</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iodata.utils.FileFormatError.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt id="iodata.utils.FileFormatWarning">
+<em class="property">exception </em><code class="sig-name descname">FileFormatWarning</code><a class="reference internal" href="../_modules/iodata/utils.html#FileFormatWarning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iodata.utils.FileFormatWarning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Warning" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Warning</span></code></a></p>
+<p>Raised when incorrect content is encountered and fixed when loading files.</p>
+<dl class="py method">
+<dt id="iodata.utils.FileFormatWarning.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#iodata.utils.FileFormatWarning.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.utils.FileFormatWarning.args">
+<code class="sig-name descname">args</code><a class="headerlink" href="#iodata.utils.FileFormatWarning.args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="iodata.utils.FileFormatWarning.with_traceback">
+<code class="sig-name descname">with_traceback</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iodata.utils.FileFormatWarning.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="iodata.utils.LineIterator">
+<em class="property">class </em><code class="sig-name descname">LineIterator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iodata/utils.html#LineIterator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iodata.utils.LineIterator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Iterator class for looping over lines and keeping track of the line number.</p>
+<dl class="py method">
+<dt id="iodata.utils.LineIterator.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iodata/utils.html#LineIterator.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iodata.utils.LineIterator.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize a LineIterator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The file that will be read.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="iodata.utils.LineIterator.back">
+<code class="sig-name descname">back</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">line</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iodata/utils.html#LineIterator.back"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iodata.utils.LineIterator.back" title="Permalink to this definition">¶</a></dt>
+<dd><p>Go one line back and decrease the lineno attribute by one.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="iodata.utils.LineIterator.error">
+<code class="sig-name descname">error</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iodata/utils.html#LineIterator.error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iodata.utils.LineIterator.error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raise an error while reading a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>msg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Message to raise alongside filename and line number.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="iodata.utils.LineIterator.warn">
+<code class="sig-name descname">warn</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iodata/utils.html#LineIterator.warn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iodata.utils.LineIterator.warn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raise a warning while reading a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>msg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Message to raise alongside filename and line number.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="iodata.utils.check_dm">
+<code class="sig-name descname">check_dm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dm</span></em>, <em class="sig-param"><span class="n">overlap</span></em>, <em class="sig-param"><span class="n">eps</span><span class="o">=</span><span class="default_value">0.0001</span></em>, <em class="sig-param"><span class="n">occ_max</span><span class="o">=</span><span class="default_value">1.0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iodata/utils.html#check_dm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iodata.utils.check_dm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the density matrix has eigenvalues in the proper range.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dm</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – The density matrix
+shape=(nbasis, nbasis), dtype=float</p></li>
+<li><p><strong>overlap</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – The overlap matrix
+shape=(nbasis, nbasis), dtype=float</p></li>
+<li><p><strong>eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – The threshold on the eigenvalue inequalities.</p></li>
+<li><p><strong>occ_max</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – The maximum occupation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><strong>ValueError</strong></a> – When the density matrix has wrong eigenvalues.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="iodata.utils.derive_naturals">
+<code class="sig-name descname">derive_naturals</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dm</span></em>, <em class="sig-param"><span class="n">overlap</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iodata/utils.html#derive_naturals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iodata.utils.derive_naturals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Derive natural orbitals from a given density matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dm</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – The density matrix.
+shape=(nbasis, nbasis)</p></li>
+<li><p><strong>overlap</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – The overlap matrix
+shape=(nbasis, nbasis)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><em>coeffs</em> – Orbital coefficients
+shape=(nbasis, nfn)</p></li>
+<li><p><em>occs</em> – Orbital occupations
+shape=(nfn, )</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="iodata.utils.set_four_index_element">
+<code class="sig-name descname">set_four_index_element</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">four_index_object</span></em>, <em class="sig-param"><span class="n">i</span></em>, <em class="sig-param"><span class="n">j</span></em>, <em class="sig-param"><span class="n">k</span></em>, <em class="sig-param"><span class="n">l</span></em>, <em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iodata/utils.html#set_four_index_element"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iodata.utils.set_four_index_element" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign values to a four index object, account for 8-fold index symmetry.</p>
+<p>This function assumes physicists’ notation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>four_index_object</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – The four-index object. It will be written to.
+shape=(nbasis, nbasis, nbasis, nbasis), dtype=float</p></li>
+<li><p><strong>i</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – The indices to assign to.</p></li>
+<li><p><strong>j</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – The indices to assign to.</p></li>
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – The indices to assign to.</p></li>
+<li><p><strong>l</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – The indices to assign to.</p></li>
+<li><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – The value of the matrix element to store.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="iodata.utils.volume">
+<code class="sig-name descname">volume</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cellvecs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iodata/utils.html#volume"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iodata.utils.volume" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the (generalized) cell volume.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>cellvecs</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – A numpy matrix of shape (x,3) where x is in {1,2,3}. Each row is one
+cellvector.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>In case of 3D, the cell volume. In case of 2D, the cell area. In case of
+1D, the cell length.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>volume</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="iodata.version.html" class="btn btn-neutral float-right" title="iodata.version module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="iodata.periodic.html" class="btn btn-neutral float-left" title="iodata.periodic module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, The IODATA Development Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

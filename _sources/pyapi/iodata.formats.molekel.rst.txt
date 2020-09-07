@@ -1,0 +1,8 @@
+iodata.formats.molekel module
+=============================
+
+.. automodule:: iodata.formats.molekel
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :inherited-members:

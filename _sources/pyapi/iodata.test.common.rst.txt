@@ -1,0 +1,8 @@
+iodata.test.common module
+=========================
+
+.. automodule:: iodata.test.common
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :inherited-members:

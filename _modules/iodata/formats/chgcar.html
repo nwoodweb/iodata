@@ -1,0 +1,364 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>iodata.formats.chgcar &mdash; IOData  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/override.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["fast-preview.js"], "TeX": {"Macros": {"ket": ["{\\left\\vert { #1 } \\right\\rangle}", 1], "bra": ["{\\left\\langle { #1} \\right\\vert}", 1], "braket": ["{\\left\\langle {#1} \\mid { #2} \\right\\rangle}", 2], "ketbra": ["{\\left\\vert { #1 } \\right\\rangle\\left\\langle { #2} \\right\\vert}", 2], "ev": ["{\\left\\langle {#2} \\vert {#1} \\vert {#2} \\right\\rangle}", 2], "mel": ["{\\left\\langle{ #1 }\\right\\vert{ #2 }\\left\\vert{#3}\\right\\rangle}", 3]}}})</script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> IOData
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../formats.html">Supported File Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../basis.html">Basis set conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">IOData Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgments.html">Acknowledgments</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pyapi/modules.html">iodata</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">IOData</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>iodata.formats.chgcar</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for iodata.formats.chgcar</h1><div class="highlight"><pre>
+<span></span><span class="c1"># IODATA is an input and output module for quantum chemistry.</span>
+<span class="c1"># Copyright (C) 2011-2019 The IODATA Development Team</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of IODATA.</span>
+<span class="c1">#</span>
+<span class="c1"># IODATA is free software; you can redistribute it and/or</span>
+<span class="c1"># modify it under the terms of the GNU General Public License</span>
+<span class="c1"># as published by the Free Software Foundation; either version 3</span>
+<span class="c1"># of the License, or (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># IODATA is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program; if not, see &lt;http://www.gnu.org/licenses/&gt;</span>
+<span class="c1"># --</span>
+<span class="sd">&quot;&quot;&quot;VASP 5 CHGCAR file format.</span>
+
+<span class="sd">This format is used by `VASP 5.X &lt;https://www.vasp.at/&gt;`_ and</span>
+<span class="sd">`VESTA &lt;http://jp-minerals.org/vesta/en/&gt;`_.</span>
+
+<span class="sd">Note that even though the ``CHGCAR`` and ``LOCPOT`` files look very similar, they require</span>
+<span class="sd">different conversions to atomic units.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">..docstrings</span> <span class="kn">import</span> <span class="n">document_load_one</span>
+<span class="kn">from</span> <span class="nn">..periodic</span> <span class="kn">import</span> <span class="n">sym2num</span>
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="n">angstrom</span><span class="p">,</span> <span class="n">volume</span><span class="p">,</span> <span class="n">LineIterator</span><span class="p">,</span> <span class="n">Cube</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+<span class="n">PATTERNS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;CHGCAR*&#39;</span><span class="p">,</span> <span class="s1">&#39;AECCAR*&#39;</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">_load_vasp_header</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Load the cell and atoms from a VASP file format.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    lit</span>
+<span class="sd">        The line iterator to read the data from.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    out</span>
+<span class="sd">        Output Contains ``title``, ``cellvecs``, ``atnums``, ``atcoords``.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    For file specification see http://cms.mpi.univie.ac.at/vasp/guide/node59.html.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># read the title</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="c1"># read the universal scaling factor</span>
+    <span class="n">scaling</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+
+    <span class="c1"># read cell parameters in angstrom, without the universal scaling factor.</span>
+    <span class="c1"># each row is one cell vector</span>
+    <span class="n">cellvecs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">_i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="n">cellvecs</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()])</span>
+    <span class="n">cellvecs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">cellvecs</span><span class="p">)</span> <span class="o">*</span> <span class="n">angstrom</span> <span class="o">*</span> <span class="n">scaling</span>
+
+    <span class="c1"># note that in older VASP version the following line might be absent</span>
+    <span class="n">vasp_atnums</span> <span class="o">=</span> <span class="p">[</span><span class="n">sym2num</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
+    <span class="n">vasp_counts</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
+    <span class="n">atnums</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">vasp_atnums</span><span class="p">,</span> <span class="n">vasp_counts</span><span class="p">):</span>
+        <span class="n">atnums</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">n</span><span class="p">]</span> <span class="o">*</span> <span class="n">c</span><span class="p">)</span>
+    <span class="n">atnums</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">atnums</span><span class="p">)</span>
+
+    <span class="n">line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+    <span class="c1"># the 7th line can optionally indicate selective dynamics</span>
+    <span class="k">if</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;s&#39;</span><span class="p">]:</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+    <span class="c1"># parse direct/cartesian switch</span>
+    <span class="n">cartesian</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">]</span>
+
+    <span class="c1"># read the coordinates</span>
+    <span class="n">atcoords</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">_iatom</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">atnums</span><span class="p">)):</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+        <span class="n">atcoords</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[:</span><span class="mi">3</span><span class="p">]])</span>
+    <span class="k">if</span> <span class="n">cartesian</span><span class="p">:</span>
+        <span class="n">atcoords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">atcoords</span><span class="p">)</span> <span class="o">*</span> <span class="n">angstrom</span> <span class="o">*</span> <span class="n">scaling</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">atcoords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">atcoords</span><span class="p">),</span> <span class="n">cellvecs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">title</span><span class="p">,</span> <span class="n">cellvecs</span><span class="p">,</span> <span class="n">atnums</span><span class="p">,</span> <span class="n">atcoords</span>
+
+
+<span class="k">def</span> <span class="nf">_load_vasp_grid</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Load grid data file from the VASP 5 file format.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    lit</span>
+<span class="sd">        The line iterator to read the data from.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    out</span>
+<span class="sd">        Output dictionary containing ``title``, ``atcoords``, ``atnums``,</span>
+<span class="sd">        ``cellvecs`` &amp; ``cube`` keys and their corresponding values.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Load header</span>
+    <span class="n">title</span><span class="p">,</span> <span class="n">cellvecs</span><span class="p">,</span> <span class="n">atnums</span><span class="p">,</span> <span class="n">atcoords</span> <span class="o">=</span> <span class="n">_load_vasp_header</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+
+    <span class="c1"># read the shape of the data</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lit</span><span class="p">:</span>
+        <span class="n">shape</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()])</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">break</span>
+
+    <span class="c1"># read data</span>
+    <span class="n">cube_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i2</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">i1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="k">for</span> <span class="n">i0</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">words</span><span class="p">:</span>
+                    <span class="n">words</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                <span class="n">cube_data</span><span class="p">[</span><span class="n">i0</span><span class="p">,</span> <span class="n">i1</span><span class="p">,</span> <span class="n">i2</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+
+    <span class="n">cube</span> <span class="o">=</span> <span class="n">Cube</span><span class="p">(</span><span class="n">origin</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">axes</span><span class="o">=</span><span class="n">cellvecs</span> <span class="o">/</span> <span class="n">shape</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                <span class="n">data</span><span class="o">=</span><span class="n">cube_data</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
+        <span class="s1">&#39;atcoords&#39;</span><span class="p">:</span> <span class="n">atcoords</span><span class="p">,</span>
+        <span class="s1">&#39;atnums&#39;</span><span class="p">:</span> <span class="n">atnums</span><span class="p">,</span>
+        <span class="s1">&#39;cellvecs&#39;</span><span class="p">:</span> <span class="n">cellvecs</span><span class="p">,</span>
+        <span class="s1">&#39;cube&#39;</span><span class="p">:</span> <span class="n">cube</span><span class="p">,</span>
+    <span class="p">}</span>
+
+
+<div class="viewcode-block" id="load_one"><a class="viewcode-back" href="../../../pyapi/iodata.formats.chgcar.html#iodata.formats.chgcar.load_one">[docs]</a><span class="nd">@document_load_one</span><span class="p">(</span><span class="s2">&quot;VASP 5 CHGCAR&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;atcoords&#39;</span><span class="p">,</span> <span class="s1">&#39;atnums&#39;</span><span class="p">,</span> <span class="s1">&#39;cellvecs&#39;</span><span class="p">,</span> <span class="s1">&#39;cube&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">load_one</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Do not edit this docstring. It will be overwritten.&quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">_load_vasp_grid</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+    <span class="c1"># renormalize electron density</span>
+    <span class="n">result</span><span class="p">[</span><span class="s1">&#39;cube&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[:]</span> <span class="o">/=</span> <span class="n">volume</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;cellvecs&#39;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, The IODATA Development Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+iodata.formats.extxyz module
+============================
+
+.. automodule:: iodata.formats.extxyz
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :inherited-members:

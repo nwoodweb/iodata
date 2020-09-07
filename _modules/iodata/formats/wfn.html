@@ -1,0 +1,757 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>iodata.formats.wfn &mdash; IOData  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/override.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["fast-preview.js"], "TeX": {"Macros": {"ket": ["{\\left\\vert { #1 } \\right\\rangle}", 1], "bra": ["{\\left\\langle { #1} \\right\\vert}", 1], "braket": ["{\\left\\langle {#1} \\mid { #2} \\right\\rangle}", 2], "ketbra": ["{\\left\\vert { #1 } \\right\\rangle\\left\\langle { #2} \\right\\vert}", 2], "ev": ["{\\left\\langle {#2} \\vert {#1} \\vert {#2} \\right\\rangle}", 2], "mel": ["{\\left\\langle{ #1 }\\right\\vert{ #2 }\\left\\vert{#3}\\right\\rangle}", 3]}}})</script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> IOData
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../formats.html">Supported File Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../basis.html">Basis set conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">IOData Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgments.html">Acknowledgments</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pyapi/modules.html">iodata</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">IOData</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>iodata.formats.wfn</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for iodata.formats.wfn</h1><div class="highlight"><pre>
+<span></span><span class="c1"># IODATA is an input and output module for quantum chemistry.</span>
+<span class="c1"># Copyright (C) 2011-2019 The IODATA Development Team</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of IODATA.</span>
+<span class="c1">#</span>
+<span class="c1"># IODATA is free software; you can redistribute it and/or</span>
+<span class="c1"># modify it under the terms of the GNU General Public License</span>
+<span class="c1"># as published by the Free Software Foundation; either version 3</span>
+<span class="c1"># of the License, or (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># IODATA is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program; if not, see &lt;http://www.gnu.org/licenses/&gt;</span>
+<span class="c1"># --</span>
+<span class="sd">&quot;&quot;&quot;Gaussian/GAMESS-US WFN file format.</span>
+
+<span class="sd">Only use this format if the program that generated it does not offer any alternatives that</span>
+<span class="sd">HORTON can load. The WFN format has the disadvantage that it cannot represent contractions</span>
+<span class="sd">and therefore expands all orbitals into a decontracted basis. This makes the</span>
+<span class="sd">post-processing less efficient compared to formats that do support contractions of</span>
+<span class="sd">Gaussian functions.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">TextIO</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">..basis</span> <span class="kn">import</span> <span class="n">MolecularBasis</span><span class="p">,</span> <span class="n">Shell</span><span class="p">,</span> <span class="n">convert_conventions</span>
+<span class="kn">from</span> <span class="nn">..docstrings</span> <span class="kn">import</span> <span class="n">document_load_one</span><span class="p">,</span> <span class="n">document_dump_one</span>
+<span class="kn">from</span> <span class="nn">..iodata</span> <span class="kn">import</span> <span class="n">IOData</span>
+<span class="kn">from</span> <span class="nn">..overlap</span> <span class="kn">import</span> <span class="n">gob_cart_normalization</span>
+<span class="kn">from</span> <span class="nn">..orbitals</span> <span class="kn">import</span> <span class="n">MolecularOrbitals</span>
+<span class="kn">from</span> <span class="nn">..periodic</span> <span class="kn">import</span> <span class="n">num2sym</span><span class="p">,</span> <span class="n">sym2num</span>
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="n">LineIterator</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+<span class="n">PATTERNS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;*.wfn&#39;</span><span class="p">]</span>
+
+
+<span class="c1"># From the AIMALL documentation</span>
+<span class="c1"># 1 S</span>
+<span class="c1"># 2 PX</span>
+<span class="c1"># 3 PY</span>
+<span class="c1"># 4 PZ</span>
+<span class="c1"># 5 DXX</span>
+<span class="c1"># 6 DYY</span>
+<span class="c1"># 7 DZZ</span>
+<span class="c1"># 8 DXY</span>
+<span class="c1"># 9 DXZ</span>
+<span class="c1"># 10 DYZ</span>
+<span class="c1"># 11 FXXX</span>
+<span class="c1"># 12 FYYY</span>
+<span class="c1"># 13 FZZZ</span>
+<span class="c1"># 14 FXXY</span>
+<span class="c1"># 15 FXXZ</span>
+<span class="c1"># 16 FYYZ</span>
+<span class="c1"># 17 FXYY</span>
+<span class="c1"># 18 FXZZ</span>
+<span class="c1"># 19 FYZZ</span>
+<span class="c1"># 20 FXYZ</span>
+<span class="c1"># 21 GXXXX</span>
+<span class="c1"># 22 GYYYY</span>
+<span class="c1"># 23 GZZZZ</span>
+<span class="c1"># 24 GXXXY</span>
+<span class="c1"># 25 GXXXZ</span>
+<span class="c1"># 26 GXYYY</span>
+<span class="c1"># 27 GYYYZ</span>
+<span class="c1"># 28 GXZZZ</span>
+<span class="c1"># 29 GYZZZ</span>
+<span class="c1"># 30 GXXYY</span>
+<span class="c1"># 31 GXXZZ</span>
+<span class="c1"># 32 GYYZZ</span>
+<span class="c1"># 33 GXXYZ</span>
+<span class="c1"># 34 GXYYZ</span>
+<span class="c1"># 35 GXYZZ</span>
+<span class="c1"># 36 HZZZZZ (005)</span>
+<span class="c1"># 37 HYZZZZ (014)</span>
+<span class="c1"># 38 HYYZZZ (023)</span>
+<span class="c1"># 39 HYYYZZ (032)</span>
+<span class="c1"># 40 HYYYYZ (041)</span>
+<span class="c1"># 41 HYYYYY (050)</span>
+<span class="c1"># 42 HXZZZZ (104)</span>
+<span class="c1"># 43 HXYZZZ (113)</span>
+<span class="c1"># 44 HXYYZZ (122)</span>
+<span class="c1"># 45 HXYYYZ (131)</span>
+<span class="c1"># 46 HXYYYY (140)</span>
+<span class="c1"># 47 HXXZZZ (203)</span>
+<span class="c1"># 48 HXXYZZ (212)</span>
+<span class="c1"># 49 HXXYYZ (221)</span>
+<span class="c1"># 50 HXXYYY (230)</span>
+<span class="c1"># 51 HXXXZZ (302)</span>
+<span class="c1"># 52 HXXXYZ (311)</span>
+<span class="c1"># 53 HXXXYY (320)</span>
+<span class="c1"># 54 HXXXXZ (401)</span>
+<span class="c1"># 55 HXXXXY (410)</span>
+<span class="c1"># 56 HXXXXX (500)</span>
+
+
+<span class="n">CONVENTIONS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">):</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">],</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">):</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">],</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">):</span> <span class="p">[</span><span class="s1">&#39;xx&#39;</span><span class="p">,</span> <span class="s1">&#39;yy&#39;</span><span class="p">,</span> <span class="s1">&#39;zz&#39;</span><span class="p">,</span> <span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="s1">&#39;xz&#39;</span><span class="p">,</span> <span class="s1">&#39;yz&#39;</span><span class="p">],</span>
+    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">):</span> <span class="p">[</span><span class="s1">&#39;xxx&#39;</span><span class="p">,</span> <span class="s1">&#39;yyy&#39;</span><span class="p">,</span> <span class="s1">&#39;zzz&#39;</span><span class="p">,</span> <span class="s1">&#39;xxy&#39;</span><span class="p">,</span> <span class="s1">&#39;xxz&#39;</span><span class="p">,</span> <span class="s1">&#39;yyz&#39;</span><span class="p">,</span> <span class="s1">&#39;xyy&#39;</span><span class="p">,</span> <span class="s1">&#39;xzz&#39;</span><span class="p">,</span> <span class="s1">&#39;yzz&#39;</span><span class="p">,</span> <span class="s1">&#39;xyz&#39;</span><span class="p">],</span>
+    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">):</span> <span class="p">[</span><span class="s1">&#39;xxxx&#39;</span><span class="p">,</span> <span class="s1">&#39;yyyy&#39;</span><span class="p">,</span> <span class="s1">&#39;zzzz&#39;</span><span class="p">,</span> <span class="s1">&#39;xxxy&#39;</span><span class="p">,</span> <span class="s1">&#39;xxxz&#39;</span><span class="p">,</span> <span class="s1">&#39;xyyy&#39;</span><span class="p">,</span> <span class="s1">&#39;yyyz&#39;</span><span class="p">,</span> <span class="s1">&#39;xzzz&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;yzzz&#39;</span><span class="p">,</span> <span class="s1">&#39;xxyy&#39;</span><span class="p">,</span> <span class="s1">&#39;xxzz&#39;</span><span class="p">,</span> <span class="s1">&#39;yyzz&#39;</span><span class="p">,</span> <span class="s1">&#39;xxyz&#39;</span><span class="p">,</span> <span class="s1">&#39;xyyz&#39;</span><span class="p">,</span> <span class="s1">&#39;xyzz&#39;</span><span class="p">],</span>
+    <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">):</span> <span class="p">[</span><span class="s1">&#39;zzzzz&#39;</span><span class="p">,</span> <span class="s1">&#39;yzzzz&#39;</span><span class="p">,</span> <span class="s1">&#39;yyzzz&#39;</span><span class="p">,</span> <span class="s1">&#39;yyyzz&#39;</span><span class="p">,</span> <span class="s1">&#39;yyyyz&#39;</span><span class="p">,</span> <span class="s1">&#39;yyyyy&#39;</span><span class="p">,</span> <span class="s1">&#39;xzzzz&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;xyzzz&#39;</span><span class="p">,</span> <span class="s1">&#39;xyyzz&#39;</span><span class="p">,</span> <span class="s1">&#39;xyyyz&#39;</span><span class="p">,</span> <span class="s1">&#39;xyyyy&#39;</span><span class="p">,</span> <span class="s1">&#39;xxzzz&#39;</span><span class="p">,</span> <span class="s1">&#39;xxyzz&#39;</span><span class="p">,</span> <span class="s1">&#39;xxyyz&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;xxyyy&#39;</span><span class="p">,</span> <span class="s1">&#39;xxxzz&#39;</span><span class="p">,</span> <span class="s1">&#39;xxxyz&#39;</span><span class="p">,</span> <span class="s1">&#39;xxxyy&#39;</span><span class="p">,</span> <span class="s1">&#39;xxxxz&#39;</span><span class="p">,</span> <span class="s1">&#39;xxxxy&#39;</span><span class="p">,</span> <span class="s1">&#39;xxxxx&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+
+<span class="c1"># Definition of primitives in the WFN format. This is the order of the primitive</span>
+<span class="c1"># types as documented by aimall, used in the field TYPE ASSIGNMENTS.</span>
+<span class="n">PRIMITIVE_NAMES</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">CONVENTIONS</span><span class="p">[(</span><span class="n">angmom</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)]</span> <span class="k">for</span> <span class="n">angmom</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)],</span> <span class="p">[])</span>
+
+
+<span class="k">def</span> <span class="nf">_load_helper_num</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Read number of orbitals, primitives and atoms.&quot;&quot;&quot;</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;G&#39;</span><span class="p">):</span>
+        <span class="n">lit</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Expecting line to start with &#39;G&#39;&quot;</span><span class="p">)</span>
+    <span class="c1"># FORMAT (16X,I7,13X,I7,11X,I9)</span>
+    <span class="n">num_mo</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">16</span><span class="p">:</span><span class="mi">23</span><span class="p">])</span>
+    <span class="n">nprim</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">36</span><span class="p">:</span><span class="mi">43</span><span class="p">])</span>
+    <span class="n">num_atoms</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">54</span><span class="p">:</span><span class="mi">63</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">num_mo</span><span class="p">,</span> <span class="n">nprim</span><span class="p">,</span> <span class="n">num_atoms</span>
+
+
+<span class="k">def</span> <span class="nf">_load_helper_atoms</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">,</span> <span class="n">num_atoms</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Read the coordinates of the atoms.&quot;&quot;&quot;</span>
+    <span class="n">atnums</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">num_atoms</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+    <span class="n">atcoords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">num_atoms</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="nb">float</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_atoms</span><span class="p">):</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+        <span class="c1"># FORMAT (A8,16X,3F12.8)</span>
+        <span class="n">symbol</span> <span class="o">=</span> <span class="n">line</span><span class="p">[:</span><span class="mi">8</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">title</span><span class="p">()[:</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">atcoords</span><span class="p">[</span><span class="n">atom</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">24</span><span class="p">:</span><span class="mi">36</span><span class="p">])</span>
+        <span class="n">atcoords</span><span class="p">[</span><span class="n">atom</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">36</span><span class="p">:</span><span class="mi">48</span><span class="p">])</span>
+        <span class="n">atcoords</span><span class="p">[</span><span class="n">atom</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">48</span><span class="p">:</span><span class="mi">60</span><span class="p">])</span>
+        <span class="n">atnum</span> <span class="o">=</span> <span class="n">sym2num</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span>
+        <span class="c1"># WFN files created with AIMAll have the symbol and index combined in one word.</span>
+        <span class="k">if</span> <span class="n">atnum</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">atnum</span> <span class="o">=</span> <span class="n">sym2num</span><span class="p">[</span><span class="n">symbol</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="n">atnums</span><span class="p">[</span><span class="n">atom</span><span class="p">]</span> <span class="o">=</span> <span class="n">atnum</span>
+    <span class="k">return</span> <span class="n">atnums</span><span class="p">,</span> <span class="n">atcoords</span>
+
+
+<span class="k">def</span> <span class="nf">_load_helper_section</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">skip</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">step</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                         <span class="n">dtype</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Read CENTRE ASSIGNMENTS, TYPE ASSIGNMENTS, and EXPONENTS sections.&quot;&quot;&quot;</span>
+    <span class="n">section</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">section</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">start</span><span class="p">):</span>
+            <span class="n">lit</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expecting line to start with &#39;</span><span class="si">{</span><span class="n">start</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="n">skip</span><span class="p">:]</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">step</span><span class="p">:</span>
+            <span class="n">section</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dtype</span><span class="p">(</span><span class="n">line</span><span class="p">[:</span><span class="n">step</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">)))</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="n">step</span><span class="p">:]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">section</span><span class="p">)</span> <span class="o">!=</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">lit</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Number of elements in section do not match &#39;n&#39;&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_load_helper_mo</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">,</span> <span class="n">nprim</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Read one section of MO information.&quot;&quot;&quot;</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;MO&#39;</span><span class="p">):</span>
+        <span class="n">lit</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Expecting line to start with &#39;MO&#39;&quot;</span><span class="p">)</span>
+    <span class="c1"># FORMAT (2X,I5,27X,F13.7,15X,F12.6)</span>
+    <span class="n">number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">7</span><span class="p">])</span>
+    <span class="n">occ</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">34</span><span class="p">:</span><span class="mi">47</span><span class="p">])</span>
+    <span class="n">energy</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">62</span><span class="p">:</span><span class="mi">74</span><span class="p">])</span>
+    <span class="c1"># FORMAT (5E16.8)</span>
+    <span class="n">coeffs</span> <span class="o">=</span> <span class="n">_load_helper_section</span><span class="p">(</span><span class="n">lit</span><span class="p">,</span> <span class="n">nprim</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">number</span><span class="p">,</span> <span class="n">occ</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">coeffs</span>
+
+
+<span class="k">def</span> <span class="nf">_load_helper_energy</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Read energy.&quot;&quot;&quot;</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+    <span class="k">while</span> <span class="s1">&#39;ENERGY&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">line</span> <span class="ow">and</span> <span class="n">line</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+    <span class="c1"># FORMAT (17X,F20.12)</span>
+    <span class="c1"># Note: this differs between *.WFN files -- in some files the energy field ends at</span>
+    <span class="c1"># column 35 instead of column 37 -- so use split() to extract energy</span>
+    <span class="n">energy</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">17</span><span class="p">:</span><span class="mi">37</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">virial</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">55</span><span class="p">:</span><span class="mi">68</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">energy</span><span class="p">,</span> <span class="n">virial</span>
+
+
+<span class="k">def</span> <span class="nf">_load_helper_multiwfn</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">,</span> <span class="n">num_mo</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Read MO spin information from MULTIWFN extension.&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lit</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">&quot;$MOSPIN $END&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+            <span class="c1"># FORMAT (40I2)</span>
+            <span class="k">return</span> <span class="n">_load_helper_section</span><span class="p">(</span><span class="n">lit</span><span class="p">,</span> <span class="n">num_mo</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="load_wfn_low"><a class="viewcode-back" href="../../../pyapi/iodata.formats.wfn.html#iodata.formats.wfn.load_wfn_low">[docs]</a><span class="k">def</span> <span class="nf">load_wfn_low</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Load data from a WFN file into arrays.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    lit</span>
+<span class="sd">        The line iterator to read the data from.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># read sections of wfn file</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="n">num_mo</span><span class="p">,</span> <span class="n">nprim</span><span class="p">,</span> <span class="n">num_atoms</span> <span class="o">=</span> <span class="n">_load_helper_num</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+    <span class="n">atnums</span><span class="p">,</span> <span class="n">atcoords</span> <span class="o">=</span> <span class="n">_load_helper_atoms</span><span class="p">(</span><span class="n">lit</span><span class="p">,</span> <span class="n">num_atoms</span><span class="p">)</span>
+    <span class="c1"># centers are indexed from zero in HORTON</span>
+    <span class="n">icenters</span> <span class="o">=</span> <span class="n">_load_helper_section</span><span class="p">(</span><span class="n">lit</span><span class="p">,</span> <span class="n">nprim</span><span class="p">,</span> <span class="s1">&#39;CENTRE ASSIGNMENTS&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="c1"># The type assignments are integer indices for individual basis functions,</span>
+    <span class="c1"># while in IOData, only the order within shells is fixed by configurable</span>
+    <span class="c1"># conventions. In principle, the wfn format makes it possible for two</span>
+    <span class="c1"># shells with the same angular momentum to have a different ordering of</span>
+    <span class="c1"># the basis functions.</span>
+    <span class="n">type_assignments</span> <span class="o">=</span> <span class="n">_load_helper_section</span><span class="p">(</span><span class="n">lit</span><span class="p">,</span> <span class="n">nprim</span><span class="p">,</span> <span class="s1">&#39;TYPE ASSIGNMENTS&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">exponent</span> <span class="o">=</span> <span class="n">_load_helper_section</span><span class="p">(</span><span class="n">lit</span><span class="p">,</span> <span class="n">nprim</span><span class="p">,</span> <span class="s1">&#39;EXPONENTS&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
+    <span class="n">mo_numbers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">num_mo</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+    <span class="n">mo_occs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">num_mo</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
+    <span class="n">mo_energies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">num_mo</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
+    <span class="n">mo_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="n">nprim</span><span class="p">,</span> <span class="n">num_mo</span><span class="p">],</span> <span class="nb">float</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">mo</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_mo</span><span class="p">):</span>
+        <span class="n">mo_numbers</span><span class="p">[</span><span class="n">mo</span><span class="p">],</span> <span class="n">mo_occs</span><span class="p">[</span><span class="n">mo</span><span class="p">],</span> <span class="n">mo_energies</span><span class="p">[</span><span class="n">mo</span><span class="p">],</span> <span class="n">mo_coeffs</span><span class="p">[:,</span> <span class="n">mo</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="n">_load_helper_mo</span><span class="p">(</span><span class="n">lit</span><span class="p">,</span> <span class="n">nprim</span><span class="p">)</span>
+    <span class="n">energy</span><span class="p">,</span> <span class="n">virial</span> <span class="o">=</span> <span class="n">_load_helper_energy</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+    <span class="n">mo_spin</span> <span class="o">=</span> <span class="n">_load_helper_multiwfn</span><span class="p">(</span><span class="n">lit</span><span class="p">,</span> <span class="n">num_mo</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">title</span><span class="p">,</span> <span class="n">atnums</span><span class="p">,</span> <span class="n">atcoords</span><span class="p">,</span> <span class="n">icenters</span><span class="p">,</span> <span class="n">type_assignments</span><span class="p">,</span> <span class="n">exponent</span><span class="p">,</span> \
+        <span class="n">mo_numbers</span><span class="p">,</span> <span class="n">mo_occs</span><span class="p">,</span> <span class="n">mo_energies</span><span class="p">,</span> <span class="n">mo_coeffs</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">virial</span><span class="p">,</span> <span class="n">mo_spin</span></div>
+
+
+<span class="c1"># pylint: disable=too-many-branches</span>
+<div class="viewcode-block" id="build_obasis"><a class="viewcode-back" href="../../../pyapi/iodata.formats.wfn.html#iodata.formats.wfn.build_obasis">[docs]</a><span class="k">def</span> <span class="nf">build_obasis</span><span class="p">(</span><span class="n">icenters</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">type_assignments</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+                 <span class="n">exponents</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">MolecularBasis</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Construct a basis set using the arrays read from a WFN or WFX file.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    icenters</span>
+<span class="sd">        The center indices for all basis functions. shape=(nbasis,). Lowest</span>
+<span class="sd">        index is zero.</span>
+<span class="sd">    type_assignments</span>
+<span class="sd">        Integer codes for basis function names. shape=(nbasis,). Lowest index</span>
+<span class="sd">        is zero.</span>
+<span class="sd">    exponents</span>
+<span class="sd">        The Gaussian exponents of all basis functions. shape=(nbasis,)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Build the basis set, keeping track of permutations in case there are</span>
+    <span class="c1"># deviations from the default ordering of primitives in a WFN file.</span>
+    <span class="n">shells</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">ibasis</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">nbasis</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">icenters</span><span class="p">)</span>
+    <span class="n">permutation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nbasis</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="c1"># Loop over all (batches of primitive) basis functions and extract shells.</span>
+    <span class="k">while</span> <span class="n">ibasis</span> <span class="o">&lt;</span> <span class="n">nbasis</span><span class="p">:</span>
+        <span class="c1"># Determine the angular moment of the shell</span>
+        <span class="n">type_assignment</span> <span class="o">=</span> <span class="n">type_assignments</span><span class="p">[</span><span class="n">ibasis</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">type_assignment</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">angmom</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># multiple different type assignments (codes for individual basis</span>
+            <span class="c1"># functions) can match one angular momentum.</span>
+            <span class="n">angmom</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">PRIMITIVE_NAMES</span><span class="p">[</span><span class="n">type_assignments</span><span class="p">[</span><span class="n">ibasis</span><span class="p">]])</span>
+        <span class="c1"># The number of cartesian functions for the current angular momentum</span>
+        <span class="n">ncart</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">CONVENTIONS</span><span class="p">[(</span><span class="n">angmom</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)])</span>
+        <span class="c1"># Determine how many shells are to be read in one batch. E.g. for a</span>
+        <span class="c1"># contracted p shell, the WFN format contains first all px basis</span>
+        <span class="c1"># functions, the all py, finally all pz. These need to be regrouped into</span>
+        <span class="c1"># shells.</span>
+        <span class="c1"># This pattern can almost be used to reverse-engineer contractions.</span>
+        <span class="c1"># One should also check (i) if the corresponding mo-coefficients are the</span>
+        <span class="c1"># same (after fixing them for normalization) and (ii) if the functions</span>
+        <span class="c1"># are centered on the same atom.</span>
+        <span class="c1"># For now, this implementation makes no attempt to reverse-engineer</span>
+        <span class="c1"># contractions, but it can be done.</span>
+        <span class="n">ncon</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># the contraction length</span>
+        <span class="k">if</span> <span class="n">angmom</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># batches for s-type functions are not necessary and may result in</span>
+            <span class="c1"># multiple centers being pulled into one batch.</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">ibasis</span> <span class="o">+</span> <span class="n">ncon</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">type_assignments</span><span class="p">)</span>
+                   <span class="ow">and</span> <span class="n">type_assignments</span><span class="p">[</span><span class="n">ibasis</span> <span class="o">+</span> <span class="n">ncon</span><span class="p">]</span> <span class="o">==</span> <span class="n">type_assignment</span><span class="p">):</span>
+                <span class="n">ncon</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="c1"># Check if the type assignment is consistent for remaining basis</span>
+        <span class="c1"># functions in this batch.</span>
+        <span class="k">for</span> <span class="n">ifn</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ncart</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">type_assignments</span><span class="p">[</span><span class="n">ibasis</span> <span class="o">+</span> <span class="n">ncon</span> <span class="o">*</span> <span class="n">ifn</span><span class="p">:</span> <span class="n">ibasis</span> <span class="o">+</span> <span class="n">ncon</span> <span class="o">*</span> <span class="p">(</span><span class="n">ifn</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+                    <span class="o">==</span> <span class="n">type_assignments</span><span class="p">[</span><span class="n">ibasis</span> <span class="o">+</span> <span class="n">ncon</span> <span class="o">*</span> <span class="n">ifn</span><span class="p">])</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+                <span class="n">lit</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Inconcsistent type assignments in current batch of shells.&quot;</span><span class="p">)</span>
+        <span class="c1"># Check if all basis functions in the current batch sit on</span>
+        <span class="c1"># the same center. If not, IOData cannot read this file.</span>
+        <span class="n">icenter</span> <span class="o">=</span> <span class="n">icenters</span><span class="p">[</span><span class="n">ibasis</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">icenters</span><span class="p">[</span><span class="n">ibasis</span><span class="p">:</span> <span class="n">ibasis</span> <span class="o">+</span> <span class="n">ncon</span> <span class="o">*</span> <span class="n">ncart</span><span class="p">]</span> <span class="o">==</span> <span class="n">icenter</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+            <span class="n">lit</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Incomplete shells in WFN file not supported by IOData.&quot;</span><span class="p">)</span>
+        <span class="c1"># Check if the same exponent is used for corresponding basis functions.</span>
+        <span class="n">batch_exponents</span> <span class="o">=</span> <span class="n">exponents</span><span class="p">[</span><span class="n">ibasis</span><span class="p">:</span> <span class="n">ibasis</span> <span class="o">+</span> <span class="n">ncon</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">ifn</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ncart</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">exponents</span><span class="p">[</span><span class="n">ibasis</span> <span class="o">+</span> <span class="n">ncon</span> <span class="o">*</span> <span class="n">ifn</span><span class="p">:</span> <span class="n">ibasis</span> <span class="o">+</span> <span class="n">ncon</span> <span class="o">*</span> <span class="p">(</span><span class="n">ifn</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+                    <span class="o">==</span> <span class="n">batch_exponents</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+                <span class="n">lit</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Exponents must be the same for corresponding basis functions.&quot;</span><span class="p">)</span>
+        <span class="c1"># A permutation is needed because we need to regroup basis functions</span>
+        <span class="c1"># into shells.</span>
+        <span class="n">batch_primitive_names</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">PRIMITIVE_NAMES</span><span class="p">[</span><span class="n">type_assignments</span><span class="p">[</span><span class="n">ibasis</span> <span class="o">+</span> <span class="n">ifn</span> <span class="o">*</span> <span class="n">ncon</span><span class="p">]]</span>
+            <span class="k">for</span> <span class="n">ifn</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ncart</span><span class="p">)]</span>
+        <span class="k">for</span> <span class="n">irep</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ncon</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">primitive_name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">batch_primitive_names</span><span class="p">):</span>
+                <span class="n">ifn</span> <span class="o">=</span> <span class="n">CONVENTIONS</span><span class="p">[(</span><span class="n">angmom</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">primitive_name</span><span class="p">)</span>
+                <span class="n">permutation</span><span class="p">[</span><span class="n">ibasis</span> <span class="o">+</span> <span class="n">irep</span> <span class="o">*</span> <span class="n">ncart</span> <span class="o">+</span> <span class="n">ifn</span><span class="p">]</span> <span class="o">=</span> <span class="n">ibasis</span> <span class="o">+</span> <span class="n">irep</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="n">ncon</span>
+        <span class="c1"># WFN uses non-normalized primitives, which will be corrected for</span>
+        <span class="c1"># when processing the MO coefficients. Normalized primitives will</span>
+        <span class="c1"># be used here. No attempt is made here to reconstruct the contraction.</span>
+        <span class="k">for</span> <span class="n">exponent</span> <span class="ow">in</span> <span class="n">batch_exponents</span><span class="p">:</span>
+            <span class="n">shells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Shell</span><span class="p">(</span><span class="n">icenter</span><span class="p">,</span> <span class="p">[</span><span class="n">angmom</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">exponent</span><span class="p">]),</span>
+                                <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">]])))</span>
+        <span class="c1"># Move on to the next contraction</span>
+        <span class="n">ibasis</span> <span class="o">+=</span> <span class="n">ncart</span> <span class="o">*</span> <span class="n">ncon</span>
+    <span class="n">obasis</span> <span class="o">=</span> <span class="n">MolecularBasis</span><span class="p">(</span><span class="n">shells</span><span class="p">,</span> <span class="n">CONVENTIONS</span><span class="p">,</span> <span class="s1">&#39;L2&#39;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">obasis</span><span class="o">.</span><span class="n">nbasis</span> <span class="o">==</span> <span class="n">nbasis</span>
+    <span class="k">return</span> <span class="n">obasis</span><span class="p">,</span> <span class="n">permutation</span></div>
+
+
+<div class="viewcode-block" id="get_mocoeff_scales"><a class="viewcode-back" href="../../../pyapi/iodata.formats.wfn.html#iodata.formats.wfn.get_mocoeff_scales">[docs]</a><span class="k">def</span> <span class="nf">get_mocoeff_scales</span><span class="p">(</span><span class="n">obasis</span><span class="p">:</span> <span class="n">MolecularBasis</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Get the L2-normalization of the un-normalized Cartesian basis functions.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    obasis</span>
+<span class="sd">        The molecular orbital basis.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    scales</span>
+<span class="sd">        Scaling factors to be multiplied into the molecular orbital</span>
+<span class="sd">        coefficients.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">scales</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">shell</span> <span class="ow">in</span> <span class="n">obasis</span><span class="o">.</span><span class="n">shells</span><span class="p">:</span>
+        <span class="n">angmom</span> <span class="o">=</span> <span class="n">shell</span><span class="o">.</span><span class="n">angmoms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">obasis</span><span class="o">.</span><span class="n">conventions</span><span class="p">[(</span><span class="n">angmom</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)]:</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span>
+                <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">nx</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+                <span class="n">ny</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+                <span class="n">nz</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">)</span>
+            <span class="n">scales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gob_cart_normalization</span><span class="p">(</span><span class="n">shell</span><span class="o">.</span><span class="n">exponents</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">])))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">scales</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="load_one"><a class="viewcode-back" href="../../../pyapi/iodata.formats.wfn.html#iodata.formats.wfn.load_one">[docs]</a><span class="nd">@document_load_one</span><span class="p">(</span><span class="s2">&quot;WFN&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;atcoords&#39;</span><span class="p">,</span> <span class="s1">&#39;atnums&#39;</span><span class="p">,</span> <span class="s1">&#39;energy&#39;</span><span class="p">,</span> <span class="s1">&#39;mo&#39;</span><span class="p">,</span> <span class="s1">&#39;obasis&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;extra&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">load_one</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Do not edit this docstring. It will be overwritten.&quot;&quot;&quot;</span>
+    <span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">atnums</span><span class="p">,</span> <span class="n">atcoords</span><span class="p">,</span> <span class="n">icenters</span><span class="p">,</span> <span class="n">type_assignments</span><span class="p">,</span> <span class="n">exponents</span><span class="p">,</span> <span class="n">mo_numbers</span><span class="p">,</span> <span class="n">mo_occs</span><span class="p">,</span>
+     <span class="n">mo_energies</span><span class="p">,</span> <span class="n">mo_coeffs</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">virial</span><span class="p">,</span> <span class="n">mo_spin</span><span class="p">)</span> <span class="o">=</span> <span class="n">load_wfn_low</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+    <span class="c1"># Build the basis set and the permutation needed to regroup shells.</span>
+    <span class="n">obasis</span><span class="p">,</span> <span class="n">permutation</span> <span class="o">=</span> <span class="n">build_obasis</span><span class="p">(</span><span class="n">icenters</span><span class="p">,</span> <span class="n">type_assignments</span><span class="p">,</span> <span class="n">exponents</span><span class="p">,</span> <span class="n">lit</span><span class="p">)</span>
+    <span class="c1"># Extra dict to return.</span>
+    <span class="n">extra</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;virial_ratio&#39;</span><span class="p">:</span> <span class="n">virial</span><span class="p">}</span>
+    <span class="c1"># ----------------------------</span>
+    <span class="c1"># Build the molecular orbitals</span>
+    <span class="c1"># ----------------------------</span>
+    <span class="c1"># Re-order the mo coefficients.</span>
+    <span class="n">mo_coeffs</span> <span class="o">=</span> <span class="n">mo_coeffs</span><span class="p">[</span><span class="n">permutation</span><span class="p">]</span>
+    <span class="c1"># Fix normalization.</span>
+    <span class="n">mo_coeffs</span> <span class="o">/=</span> <span class="n">get_mocoeff_scales</span><span class="p">(</span><span class="n">obasis</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">norb</span> <span class="o">=</span> <span class="n">mo_coeffs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c1"># Determine norb_a,norb_b,norb_ab from mo_spin information.</span>
+    <span class="k">if</span> <span class="n">mo_spin</span><span class="o">.</span><span class="n">size</span><span class="p">:</span>
+        <span class="n">norb_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mo_spin</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">norb_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mo_spin</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">norb_ab</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mo_spin</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">norb_a</span> <span class="o">+</span> <span class="n">norb_b</span> <span class="o">+</span> <span class="n">norb_ab</span> <span class="o">!=</span> <span class="n">norb</span> <span class="ow">or</span> <span class="p">(</span><span class="n">norb_b</span> <span class="ow">and</span> <span class="n">norb_ab</span><span class="p">):</span>
+            <span class="n">lit</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Invalid orbital spin types.&quot;</span><span class="p">)</span>
+        <span class="n">extra</span><span class="p">[</span><span class="s1">&#39;mo_spin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mo_spin</span>
+    <span class="c1"># Determine norb_a,norb_b,norb_ab for restricted wave function by heuristic.</span>
+    <span class="k">elif</span> <span class="n">mo_occs</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">1.0</span><span class="p">:</span>
+        <span class="n">norb_a</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">norb_b</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">norb_ab</span> <span class="o">=</span> <span class="n">norb</span>
+    <span class="c1"># Determine norb_a,norb_b,norb_ab for unrestricted wave function by heuristic.</span>
+    <span class="c1"># This may still fail in some corner cases.</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">norb_a</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">norb_a</span> <span class="o">&lt;</span> <span class="n">mo_coeffs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+               <span class="ow">and</span> <span class="n">mo_energies</span><span class="p">[</span><span class="n">norb_a</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">mo_energies</span><span class="p">[</span><span class="n">norb_a</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+               <span class="ow">and</span> <span class="n">mo_occs</span><span class="p">[</span><span class="n">norb_a</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">mo_occs</span><span class="p">[</span><span class="n">norb_a</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+               <span class="ow">and</span> <span class="n">mo_numbers</span><span class="p">[</span><span class="n">norb_a</span><span class="p">]</span> <span class="o">==</span> <span class="n">mo_numbers</span><span class="p">[</span><span class="n">norb_a</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">norb_a</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">norb_b</span> <span class="o">=</span> <span class="n">norb</span> <span class="o">-</span> <span class="n">norb_a</span>
+        <span class="n">norb_ab</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># Make wavefunction.</span>
+    <span class="k">if</span> <span class="n">norb_ab</span><span class="p">:</span>
+        <span class="c1"># Restricted wavefunction.</span>
+        <span class="n">mo</span> <span class="o">=</span> <span class="n">MolecularOrbitals</span><span class="p">(</span>
+            <span class="s1">&#39;restricted&#39;</span><span class="p">,</span> <span class="n">norb_a</span> <span class="o">+</span> <span class="n">norb_ab</span><span class="p">,</span> <span class="n">norb_a</span> <span class="o">+</span> <span class="n">norb_ab</span><span class="p">,</span>
+            <span class="n">mo_occs</span><span class="p">,</span> <span class="n">mo_coeffs</span><span class="p">,</span> <span class="n">mo_energies</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Unrestricted wavefunction.</span>
+        <span class="n">mo</span> <span class="o">=</span> <span class="n">MolecularOrbitals</span><span class="p">(</span>
+            <span class="s1">&#39;unrestricted&#39;</span><span class="p">,</span> <span class="n">norb_a</span><span class="p">,</span> <span class="n">norb_b</span><span class="p">,</span>
+            <span class="n">mo_occs</span><span class="p">,</span> <span class="n">mo_coeffs</span><span class="p">,</span> <span class="n">mo_energies</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
+        <span class="s1">&#39;atcoords&#39;</span><span class="p">:</span> <span class="n">atcoords</span><span class="p">,</span>
+        <span class="s1">&#39;atnums&#39;</span><span class="p">:</span> <span class="n">atnums</span><span class="p">,</span>
+        <span class="s1">&#39;obasis&#39;</span><span class="p">:</span> <span class="n">obasis</span><span class="p">,</span>
+        <span class="s1">&#39;mo&#39;</span><span class="p">:</span> <span class="n">mo</span><span class="p">,</span>
+        <span class="s1">&#39;energy&#39;</span><span class="p">:</span> <span class="n">energy</span><span class="p">,</span>
+        <span class="s1">&#39;extra&#39;</span><span class="p">:</span> <span class="n">extra</span><span class="p">,</span>
+    <span class="p">}</span></div>
+
+
+<span class="k">def</span> <span class="nf">_format_helper_section</span><span class="p">(</span><span class="n">header</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">skip</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">spec</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">nline</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Return a format string for CENTRE_ASSIGMENTS, TYPE_ASSIGNMENTS, EXPONENTS lines.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">header</span><span class="p">[:</span><span class="n">skip</span><span class="p">]</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="n">skip</span><span class="p">)</span><span class="si">}{</span><span class="n">spec</span> <span class="o">*</span> <span class="n">nline</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_dump_helper_section</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">skip</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">step</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">nline</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Write a CENTRE_ASSIGNMENTS, TYPE_ASSIGNMENTS, or EXPONENTS section to file ``f``.&quot;&quot;&quot;</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">chunk</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:</span><span class="n">nline</span><span class="p">]</span>
+        <span class="n">n_chunk</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">fmt</span><span class="p">[:</span><span class="n">skip</span> <span class="o">+</span> <span class="n">n_chunk</span> <span class="o">*</span> <span class="n">step</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">chunk</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">n_chunk</span><span class="p">:]</span>
+
+
+<span class="c1"># FORMAT (16X,I7,13X,I7,11X,I9)</span>
+<span class="n">FMT_NUM</span> <span class="o">=</span> <span class="s1">&#39;GAUSSIAN        </span><span class="si">{0:7d}</span><span class="s1"> MOL ORBITALS</span><span class="si">{1:7d}</span><span class="s1"> PRIMITIVES</span><span class="si">{2:9d}</span><span class="s1"> NUCLEI&#39;</span>
+<span class="c1"># FORMAT (2X,A3,I3,11X,I3,2X,3F12.8,10X,F5.1)</span>
+<span class="n">FMT_ATM</span> <span class="o">=</span> <span class="s1">&#39;  </span><span class="si">{0:3s}{1:3d}</span><span class="s1">    (CENTRE</span><span class="si">{2:3d}</span><span class="s1">) </span><span class="si">{3:12.8f}{4:12.8f}{5:12.8f}</span><span class="s1">  CHARGE =</span><span class="si">{6:5.1f}</span><span class="s1">&#39;</span>
+<span class="c1"># FORMAT (2X,5I,8X,F3.1,16X,F13.7,15X,F12.6)</span>
+<span class="n">FMT_MOS</span> <span class="o">=</span> <span class="s1">&#39;MO</span><span class="si">{0:5d}</span><span class="s1">     MO </span><span class="si">{1:3.1f}</span><span class="s1">        OCC NO =</span><span class="si">{2:13.7f}</span><span class="s1">  ORB. ENERGY =</span><span class="si">{3:12.6f}</span><span class="s1">&#39;</span>
+<span class="c1"># FORMAT (17X,F20.12,18X,F13.8)</span>
+<span class="n">FMT_ENERGY</span> <span class="o">=</span> <span class="s1">&#39; TOTAL ENERGY =  </span><span class="si">{0:20.12f}</span><span class="s1"> THE VIRIAL(-V/T)=</span><span class="si">{1:13.8f}</span><span class="s1">&#39;</span>
+<span class="c1"># FORMAT (20X,20I3)</span>
+<span class="n">FMT_CNTR</span><span class="p">,</span> <span class="n">STEP_CNTR</span> <span class="o">=</span> <span class="n">_format_helper_section</span><span class="p">(</span><span class="s1">&#39;CENTRE ASSIGNMENTS&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{:3d}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="c1"># FORMAT (20X,20I3)</span>
+<span class="n">FMT_TYPE</span><span class="p">,</span> <span class="n">STEP_TYPE</span> <span class="o">=</span> <span class="n">_format_helper_section</span><span class="p">(</span><span class="s1">&#39;TYPE ASSIGNMENTS&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{:3d}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="c1"># FORMAT (10X,5E14.7)</span>
+<span class="n">FMT_EXPN</span><span class="p">,</span> <span class="n">STEP_EXPN</span> <span class="o">=</span> <span class="n">_format_helper_section</span><span class="p">(</span><span class="s1">&#39;EXPONENTS&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{:14.7E}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="c1"># FORMAT (5E16.8)</span>
+<span class="n">FMT_COEF</span><span class="p">,</span> <span class="n">STEP_COEF</span> <span class="o">=</span> <span class="n">_format_helper_section</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{:16.8E}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="c1"># FORMAT (40I2)</span>
+<span class="n">FMT_SPIN</span><span class="p">,</span> <span class="n">STEP_SPIN</span> <span class="o">=</span> <span class="n">_format_helper_section</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{:2d}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+<span class="c1"># Default .WFN title</span>
+<span class="n">DEFAULT_WFN_TTL</span> <span class="o">=</span> <span class="s2">&quot;WFN auto-generated by IOData&quot;</span>
+
+
+<div class="viewcode-block" id="dump_one"><a class="viewcode-back" href="../../../pyapi/iodata.formats.wfn.html#iodata.formats.wfn.dump_one">[docs]</a><span class="nd">@document_dump_one</span><span class="p">(</span><span class="s2">&quot;WFN&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;atcoords&#39;</span><span class="p">,</span> <span class="s1">&#39;atnums&#39;</span><span class="p">,</span> <span class="s1">&#39;energy&#39;</span><span class="p">,</span> <span class="s1">&#39;mo&#39;</span><span class="p">,</span> <span class="s1">&#39;obasis&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;extra&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">dump_one</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">IOData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Do not edit this docstring. It will be overwritten.&quot;&quot;&quot;</span>
+    <span class="c1"># get shells for the de-contracted basis</span>
+    <span class="n">shells</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">shell</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">obasis</span><span class="o">.</span><span class="n">shells</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">angmom</span><span class="p">,</span> <span class="n">kind</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">shell</span><span class="o">.</span><span class="n">angmoms</span><span class="p">,</span> <span class="n">shell</span><span class="o">.</span><span class="n">kinds</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">exponent</span><span class="p">,</span> <span class="n">coeff</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">shell</span><span class="o">.</span><span class="n">exponents</span><span class="p">,</span> <span class="n">shell</span><span class="o">.</span><span class="n">coeffs</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
+                <span class="k">if</span> <span class="n">kind</span> <span class="o">!=</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;WFN can be generated only for Cartesian MolecularBasis!&quot;</span><span class="p">)</span>
+                <span class="n">shells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Shell</span><span class="p">(</span><span class="n">shell</span><span class="o">.</span><span class="n">icenter</span><span class="p">,</span> <span class="p">[</span><span class="n">angmom</span><span class="p">],</span> <span class="p">[</span><span class="n">kind</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">exponent</span><span class="p">]),</span>
+                                    <span class="n">coeff</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+    <span class="c1"># make a new instance of MolecularBasis with de-contracted basis shells; ideally for WFN we</span>
+    <span class="c1"># want the primitive basis set, but IOData only supports shells.</span>
+    <span class="n">obasis</span> <span class="o">=</span> <span class="n">MolecularBasis</span><span class="p">(</span><span class="n">shells</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">obasis</span><span class="o">.</span><span class="n">conventions</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">obasis</span><span class="o">.</span><span class="n">primitive_normalization</span><span class="p">)</span>
+    <span class="c1"># expand mo.coeffs in the new basis by repeating de-contracted basis coefficients</span>
+    <span class="n">permutation</span><span class="p">,</span> <span class="n">signs</span> <span class="o">=</span> <span class="n">convert_conventions</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">obasis</span><span class="p">,</span> <span class="n">CONVENTIONS</span><span class="p">)</span>
+    <span class="n">raw_coeffs</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">coeffs</span><span class="p">[</span><span class="n">permutation</span><span class="p">]</span> <span class="o">*</span> <span class="n">signs</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">mo_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">obasis</span><span class="o">.</span><span class="n">nbasis</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">norb</span><span class="p">))</span>
+    <span class="n">index_mo_old</span><span class="p">,</span> <span class="n">index_mo_new</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="c1"># loop over the shells of the old basis</span>
+    <span class="k">for</span> <span class="n">shell</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">obasis</span><span class="o">.</span><span class="n">shells</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">angmom</span><span class="p">,</span> <span class="n">kind</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">shell</span><span class="o">.</span><span class="n">angmoms</span><span class="p">,</span> <span class="n">shell</span><span class="o">.</span><span class="n">kinds</span><span class="p">):</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">obasis</span><span class="o">.</span><span class="n">conventions</span><span class="p">[</span><span class="n">angmom</span><span class="p">,</span> <span class="n">kind</span><span class="p">])</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">raw_coeffs</span><span class="p">[</span><span class="n">index_mo_old</span><span class="p">:</span> <span class="n">index_mo_old</span> <span class="o">+</span> <span class="n">n</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shell</span><span class="o">.</span><span class="n">nprim</span><span class="p">):</span>
+                <span class="n">mo_coeffs</span><span class="p">[</span><span class="n">index_mo_new</span><span class="p">:</span> <span class="n">index_mo_new</span> <span class="o">+</span> <span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span>
+                <span class="n">index_mo_new</span> <span class="o">+=</span> <span class="n">n</span>
+            <span class="n">index_mo_old</span> <span class="o">+=</span> <span class="n">n</span>
+
+    <span class="c1"># fix MO coefficients</span>
+    <span class="c1"># 1) expansion coefficients in WFN correspond to un-normalized primitives, so the primitive</span>
+    <span class="c1"># normalization constants should be included in the MO coefficients. However, IOData stores</span>
+    <span class="c1"># normalized primitives (either L2 or L1 as recorded in MolecularBasis primitive types), so</span>
+    <span class="c1"># we need to multiply the MO coefficients by the primitive normalization constants</span>
+    <span class="n">scales</span> <span class="o">=</span> <span class="n">get_mocoeff_scales</span><span class="p">(</span><span class="n">obasis</span><span class="p">)</span>
+    <span class="c1"># 2) expansion coefficients in WFN represent the primitive basis coefficients, so contraction</span>
+    <span class="c1"># coefficients needs to be multiplied by the MO expansion coefficients.</span>
+    <span class="n">contractions</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">shell</span> <span class="ow">in</span> <span class="n">obasis</span><span class="o">.</span><span class="n">shells</span><span class="p">:</span>
+        <span class="n">contractions</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">shell</span><span class="o">.</span><span class="n">coeffs</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="p">[</span><span class="n">shell</span><span class="o">.</span><span class="n">nbasis</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+    <span class="n">contractions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">contractions</span><span class="p">)</span>
+
+    <span class="c1"># update MO coefficients to include primitives contraction coefficients &amp; normalization</span>
+    <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">mo_coeffs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="n">mo_coeffs</span><span class="p">[:,</span> <span class="n">index</span><span class="p">]</span> <span class="o">*=</span> <span class="n">contractions</span> <span class="o">*</span> <span class="n">scales</span>
+
+    <span class="c1"># Extract centre, type assignments and exponents from new obasis</span>
+    <span class="n">cntrs</span> <span class="o">=</span> <span class="p">[</span><span class="n">shell</span><span class="o">.</span><span class="n">icenter</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">shell</span> <span class="ow">in</span> <span class="n">obasis</span><span class="o">.</span><span class="n">shells</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shell</span><span class="o">.</span><span class="n">nbasis</span><span class="p">)]</span>
+    <span class="n">expns</span> <span class="o">=</span> <span class="p">[</span><span class="n">shell</span><span class="o">.</span><span class="n">exponents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">shell</span> <span class="ow">in</span> <span class="n">obasis</span><span class="o">.</span><span class="n">shells</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shell</span><span class="o">.</span><span class="n">nbasis</span><span class="p">)]</span>
+    <span class="n">angmom_prim</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">angmom</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">max</span><span class="p">([</span><span class="n">shell</span><span class="o">.</span><span class="n">angmoms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">shell</span> <span class="ow">in</span> <span class="n">obasis</span><span class="o">.</span><span class="n">shells</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">angmom_prim</span><span class="p">[</span><span class="n">angmom</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">count</span> <span class="o">+</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">obasis</span><span class="o">.</span><span class="n">conventions</span><span class="p">[</span><span class="n">angmom</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]))]</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">obasis</span><span class="o">.</span><span class="n">conventions</span><span class="p">[</span><span class="n">angmom</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span>
+    <span class="n">types</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">shell</span> <span class="ow">in</span> <span class="n">obasis</span><span class="o">.</span><span class="n">shells</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">angmom_prim</span><span class="p">[</span><span class="n">shell</span><span class="o">.</span><span class="n">angmoms</span><span class="p">[</span><span class="mi">0</span><span class="p">]]]</span>
+
+    <span class="c1"># Write header (title, # MOs, # primitives, # atoms)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">title</span> <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">title</span> <span class="k">else</span> <span class="n">DEFAULT_WFN_TTL</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">FMT_NUM</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">norb</span><span class="p">,</span> <span class="n">obasis</span><span class="o">.</span><span class="n">nbasis</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">natom</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+
+    <span class="c1"># Write atoms (symbol, atom #, centre #, x pos., y pos., z pos., charge)</span>
+    <span class="k">for</span> <span class="n">iatom</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">))</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">atnums</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">atcoords</span><span class="p">)):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">FMT_ATM</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">num2sym</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">iatom</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">iatom</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+
+    <span class="c1"># Write centre assignments, type assignments, exponents sections</span>
+    <span class="n">_dump_helper_section</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">cntrs</span><span class="p">,</span> <span class="n">FMT_CNTR</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">STEP_CNTR</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+    <span class="n">_dump_helper_section</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">types</span><span class="p">,</span> <span class="n">FMT_TYPE</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">STEP_TYPE</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+    <span class="n">_dump_helper_section</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">expns</span><span class="p">,</span> <span class="n">FMT_EXPN</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">STEP_EXPN</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+    <span class="c1"># Write MOs (mo #, occ #, energy)</span>
+    <span class="n">mo_iter</span> <span class="o">=</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">occs</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">energies</span><span class="p">,</span> <span class="n">mo_coeffs</span><span class="o">.</span><span class="n">transpose</span><span class="p">()))</span>
+    <span class="k">for</span> <span class="n">iorb</span><span class="p">,</span> <span class="p">(</span><span class="n">occ</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">coeffs</span><span class="p">)</span> <span class="ow">in</span> <span class="n">mo_iter</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">FMT_MOS</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">iorb</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">occ</span><span class="p">,</span> <span class="n">energy</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+        <span class="c1"># Write ``iorb``th coefficients section</span>
+        <span class="n">_dump_helper_section</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">coeffs</span><span class="p">,</span> <span class="n">FMT_COEF</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">STEP_COEF</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+    <span class="c1"># Write energy and virial coefficient</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;END DATA&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">FMT_ENERGY</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">energy</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">extra</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;virial_ratio&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)),</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+
+    <span class="c1"># Write MOSPIN extension section (optional)</span>
+    <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">extra</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mo_spin&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; $MOSPIN $END</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">_dump_helper_section</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">extra</span><span class="p">[</span><span class="s1">&#39;mo_spin&#39;</span><span class="p">],</span> <span class="n">FMT_SPIN</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">STEP_SPIN</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, The IODATA Development Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

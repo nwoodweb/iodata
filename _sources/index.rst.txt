@@ -1,0 +1,92 @@
+..
+    : IODATA is an input and output module for quantum chemistry.
+    :
+    : Copyright (C) 2011-2019 The IODATA Development Team
+    :
+    : This file is part of IODATA.
+    :
+    : IODATA is free software; you can redistribute it and/or
+    : modify it under the terms of the GNU General Public License
+    : as published by the Free Software Foundation; either version 3
+    : of the License, or (at your option) any later version.
+    :
+    : IODATA is distributed in the hope that it will be useful,
+    : but WITHOUT ANY WARRANTY; without even the implied warranty of
+    : MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    : GNU General Public License for more details.
+    :
+    : You should have received a copy of the GNU General Public License
+    : along with this program; if not, see <http://www.gnu.org/licenses/>
+    :
+    : --
+
+.. IOData documentation master file, created by
+   sphinx-quickstart on Thu Oct 11 04:00:40 2018.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Welcome to IOData's documentation!
+==================================
+
+IOData is a free and open-source Python library for parsing, storing, and
+converting various file formats commonly used by quantum chemistry,
+molecular dynamics, and plane-wave density-functional-theory software programs.
+It also supports a flexible framework for generating input files for various
+software packages.
+
+
+For the list of file formats that can be loaded or dumped by IOData, see
+:ref:`file_formats`. The two tables below summarize the file formats and
+features supported by IOData.
+
+======= ==========
+Code    Definition
+======= ==========
+**L**   loading is supported
+**D**   dumping is supported
+*(d)*   attribute may be derived from other attributes
+R       attribute is always read
+r       attribute is read if present
+W       attribute is always written
+w       attribute is is written if present
+======= ==========
+
+.. include:: formats_tab.inc
+
+
+User Documentation
+^^^^^^^^^^^^^^^^^^
+
+.. toctree::
+   :maxdepth: 2
+
+   install
+   getting_started
+   formats
+   basis
+   changelog
+   acknowledgments
+
+Developer Documentation
+^^^^^^^^^^^^^^^^^^^^^^^
+
+.. toctree::
+   :maxdepth: 2
+
+   contributing
+
+API Reference
+^^^^^^^^^^^^^
+
+.. toctree::
+   :maxdepth: 2
+
+   pyapi/modules
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

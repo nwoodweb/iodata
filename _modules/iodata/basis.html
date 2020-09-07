@@ -1,0 +1,579 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>iodata.basis &mdash; IOData  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/override.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["fast-preview.js"], "TeX": {"Macros": {"ket": ["{\\left\\vert { #1 } \\right\\rangle}", 1], "bra": ["{\\left\\langle { #1} \\right\\vert}", 1], "braket": ["{\\left\\langle {#1} \\mid { #2} \\right\\rangle}", 2], "ketbra": ["{\\left\\vert { #1 } \\right\\rangle\\left\\langle { #2} \\right\\vert}", 2], "ev": ["{\\left\\langle {#2} \\vert {#1} \\vert {#2} \\right\\rangle}", 2], "mel": ["{\\left\\langle{ #1 }\\right\\vert{ #2 }\\left\\vert{#3}\\right\\rangle}", 3]}}})</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> IOData
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../formats.html">Supported File Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basis.html">Basis set conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">IOData Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgments.html">Acknowledgments</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pyapi/modules.html">iodata</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">IOData</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>iodata.basis</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for iodata.basis</h1><div class="highlight"><pre>
+<span></span><span class="c1"># IODATA is an input and output module for quantum chemistry.</span>
+<span class="c1"># Copyright (C) 2011-2019 The IODATA Development Team</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of IODATA.</span>
+<span class="c1">#</span>
+<span class="c1"># IODATA is free software; you can redistribute it and/or</span>
+<span class="c1"># modify it under the terms of the GNU General Public License</span>
+<span class="c1"># as published by the Free Software Foundation; either version 3</span>
+<span class="c1"># of the License, or (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># IODATA is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program; if not, see &lt;http://www.gnu.org/licenses/&gt;</span>
+<span class="c1"># --</span>
+<span class="sd">&quot;&quot;&quot;Utility functions for working with basis sets.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
+<span class="kn">from</span> <span class="nn">numbers</span> <span class="kn">import</span> <span class="n">Integral</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">attr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">.attrutils</span> <span class="kn">import</span> <span class="n">validate_shape</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;angmom_sti&#39;</span><span class="p">,</span> <span class="s1">&#39;angmom_its&#39;</span><span class="p">,</span> <span class="s1">&#39;Shell&#39;</span><span class="p">,</span> <span class="s1">&#39;MolecularBasis&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;convert_convention_shell&#39;</span><span class="p">,</span> <span class="s1">&#39;convert_conventions&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;iter_cart_alphabet&#39;</span><span class="p">,</span> <span class="s1">&#39;HORTON2_CONVENTIONS&#39;</span><span class="p">,</span> <span class="s1">&#39;PSI4_CONVENTIONS&#39;</span><span class="p">]</span>
+
+<span class="n">ANGMOM_CHARS</span> <span class="o">=</span> <span class="s1">&#39;spdfghiklmnoqrtuvwxyzabce&#39;</span>
+
+
+<span class="k">def</span> <span class="nf">_alsolist</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Wrap a function to accepts also list as first argument and then return list.&quot;&quot;&quot;</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">firsts</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">firsts</span><span class="p">,</span> <span class="p">(</span><span class="n">Integral</span><span class="p">,</span> <span class="nb">str</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="n">firsts</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">f</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="k">for</span> <span class="n">first</span> <span class="ow">in</span> <span class="n">firsts</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+
+<div class="viewcode-block" id="angmom_sti"><a class="viewcode-back" href="../../pyapi/iodata.basis.html#iodata.basis.angmom_sti">[docs]</a><span class="nd">@_alsolist</span>
+<span class="k">def</span> <span class="nf">angmom_sti</span><span class="p">(</span><span class="n">char</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+    <span class="sd">&quot;&quot;&quot;Convert an angular momentum from string to integer format.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    char</span>
+<span class="sd">        Character representation of angular momentum, (s, p, d, ...)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    angmom</span>
+<span class="sd">        An integer representation of the angular momentum. If a list of str</span>
+<span class="sd">        char is given, a list of integers in returned.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">ANGMOM_CHARS</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">char</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="angmom_its"><a class="viewcode-back" href="../../pyapi/iodata.basis.html#iodata.basis.angmom_its">[docs]</a><span class="nd">@_alsolist</span>
+<span class="k">def</span> <span class="nf">angmom_its</span><span class="p">(</span><span class="n">angmom</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+    <span class="sd">&quot;&quot;&quot;Convert an angular momentum from integer to string representation.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    angmom</span>
+<span class="sd">        The integer representation of the angular momentum.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    char</span>
+<span class="sd">        The string representation of the angular momentum. If a list of integer</span>
+<span class="sd">        angmom is given, a list of str is returned.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">angmom</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Angmom cannot be negative.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ANGMOM_CHARS</span><span class="p">[</span><span class="n">angmom</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="Shell"><a class="viewcode-back" href="../../pyapi/iodata.basis.html#iodata.basis.Shell">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span><span class="p">(</span><span class="n">auto_attribs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">on_setattr</span><span class="o">=</span><span class="p">[</span><span class="n">attr</span><span class="o">.</span><span class="n">setters</span><span class="o">.</span><span class="n">validate</span><span class="p">,</span> <span class="n">attr</span><span class="o">.</span><span class="n">setters</span><span class="o">.</span><span class="n">convert</span><span class="p">])</span>
+<span class="k">class</span> <span class="nc">Shell</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A shell in a molecular basis representing (generalized) contractions with the same exponents.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    icenter</span>
+<span class="sd">        An integer index specifying the row in the atcoords array of IOData object.</span>
+<span class="sd">    angmoms</span>
+<span class="sd">        An integer array of angular momentum quantum numbers, non-negative, with</span>
+<span class="sd">        shape (ncon,).</span>
+<span class="sd">    kinds</span>
+<span class="sd">        List of strings describing the kind of contractions: &#39;c&#39; for Cartesian</span>
+<span class="sd">        and &#39;p&#39; for pure. Pure functions are only allowed for angmom&gt;1.</span>
+<span class="sd">        The length equals the number of contractions: len(angmoms)=ncon.</span>
+<span class="sd">    exponents</span>
+<span class="sd">        The array containing the exponents of the primitives, with shape (nprim,).</span>
+<span class="sd">    coeffs</span>
+<span class="sd">        The array containing the coefficients of the normalized primitives in each contraction;</span>
+<span class="sd">        shape = (nprim, ncon).</span>
+<span class="sd">        These coefficients assume that the primitives are L2 (orbitals) or L1</span>
+<span class="sd">        (densities) normalized, but contractions are not necessarily normalized.</span>
+<span class="sd">        (This depends on the code which generated the contractions.)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">icenter</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">angmoms</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">validator</span><span class="o">=</span><span class="n">validate_shape</span><span class="p">((</span><span class="s2">&quot;coeffs&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+    <span class="n">kinds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">validator</span><span class="o">=</span><span class="n">validate_shape</span><span class="p">((</span><span class="s2">&quot;coeffs&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+    <span class="n">exponents</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">validator</span><span class="o">=</span><span class="n">validate_shape</span><span class="p">((</span><span class="s2">&quot;coeffs&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
+    <span class="n">coeffs</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">validator</span><span class="o">=</span><span class="n">validate_shape</span><span class="p">((</span><span class="s2">&quot;exponents&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;kinds&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">nbasis</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>   <span class="c1"># noqa: D401</span>
+        <span class="sd">&quot;&quot;&quot;Number of basis functions (e.g. 3 for a P shell and 4 for an SP shell).&quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">angmom</span><span class="p">,</span> <span class="n">kind</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">angmoms</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kinds</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span>  <span class="c1"># Cartesian</span>
+                <span class="n">result</span> <span class="o">+=</span> <span class="p">((</span><span class="n">angmom</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">angmom</span> <span class="o">+</span> <span class="mi">2</span><span class="p">))</span> <span class="o">//</span> <span class="mi">2</span>
+            <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;p&#39;</span> <span class="ow">and</span> <span class="n">angmom</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">+=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">angmom</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Unknown shell kind </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1">; expected </span><span class="se">\&#39;</span><span class="s1">c</span><span class="se">\&#39;</span><span class="s1"> or </span><span class="se">\&#39;</span><span class="s1">p</span><span class="se">\&#39;</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">kind</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">nprim</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>   <span class="c1"># noqa: D401</span>
+        <span class="sd">&quot;&quot;&quot;Number of primitives, also known as the contraction length.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exponents</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ncon</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>   <span class="c1"># noqa: D401</span>
+        <span class="sd">&quot;&quot;&quot;Number of contractions. This is usually 1; e.g., it would be 2 for an SP shell.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">angmoms</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MolecularBasis"><a class="viewcode-back" href="../../pyapi/iodata.basis.html#iodata.basis.MolecularBasis">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span><span class="p">(</span><span class="n">auto_attribs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">on_setattr</span><span class="o">=</span><span class="p">[</span><span class="n">attr</span><span class="o">.</span><span class="n">setters</span><span class="o">.</span><span class="n">validate</span><span class="p">,</span> <span class="n">attr</span><span class="o">.</span><span class="n">setters</span><span class="o">.</span><span class="n">convert</span><span class="p">])</span>
+<span class="k">class</span> <span class="nc">MolecularBasis</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A complete molecular orbital or density basis set.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    shells</span>
+<span class="sd">        A list of objects of type Shell which can support generalized contractions.</span>
+<span class="sd">    conventions</span>
+<span class="sd">        A dictionary specifying the ordered basis functions for a given angular momentum and kind.</span>
+<span class="sd">        The key is a tuple of angular momentum integer and kind character (&#39;c&#39; for Cartesian</span>
+<span class="sd">        and &#39;p&#39; for pure/spherical) and the value is a list of basis function strings.</span>
+<span class="sd">        For example,</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            {</span>
+<span class="sd">                ### Conventions for Cartesian functions</span>
+<span class="sd">                # E.g., alphabetically ordered Cartesian functions.</span>
+<span class="sd">                (0, &#39;c&#39;): [&#39;1&#39;],</span>
+<span class="sd">                (1, &#39;c&#39;): [&#39;x&#39;, &#39;y&#39;, &#39;z&#39;],</span>
+<span class="sd">                (2, &#39;c&#39;): [&#39;xx&#39;, &#39;xy&#39;, &#39;xz&#39;, &#39;yy&#39;, &#39;yz&#39;, &#39;zz&#39;],</span>
+<span class="sd">                ### Conventions for pure functions.</span>
+<span class="sd">                # The notation is referring to real solid spherical harmonics.</span>
+<span class="sd">                # See https://en.wikipedia.org/wiki/Solid_harmonics#Real_form</span>
+<span class="sd">                # &#39;c{m}&#39; = solid harmonic containing cos(m phi)</span>
+<span class="sd">                # &#39;s{m}&#39; = solid harmonic containing sin(m phi)</span>
+<span class="sd">                # where m is the magnetic quantum number and phi is the</span>
+<span class="sd">                # azimuthal angle.</span>
+<span class="sd">                # For example, wikipedia-ordered real spherical harmonics,</span>
+<span class="sd">                # see https://en.wikipedia.org/wiki/Spherical_harmonics#Real_form</span>
+<span class="sd">                (2, &#39;p&#39;): [&#39;s2&#39;, &#39;s1&#39;, &#39;c0&#39;, &#39;c1&#39;, &#39;c2&#39;],</span>
+<span class="sd">                # Different quantum-chemistry codes may use incompatible</span>
+<span class="sd">                # orderings and sign conventions. E.g. Molden files written</span>
+<span class="sd">                # by ORCA use the following convention for pure f functions:</span>
+<span class="sd">                (3, &#39;p&#39;): [&#39;c0&#39;, &#39;c1&#39;, &#39;s1&#39;, &#39;c2&#39;, &#39;s2&#39;, &#39;-c3&#39;, &#39;-s3&#39;],</span>
+<span class="sd">                # Note that the minus sign in the last two basis functions</span>
+<span class="sd">                # denotes that the signs of these harmonics have been changed.</span>
+<span class="sd">            }</span>
+
+<span class="sd">        The basis function strings in the conventions dictionary are documented</span>
+<span class="sd">        in :ref:`basis_conventions`.</span>
+
+<span class="sd">    primitive_normalization</span>
+<span class="sd">        The normalization convention of primitives, which can be &#39;L2&#39; (orbitals) or &#39;L1&#39;</span>
+<span class="sd">        (densities) normalized.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">shells</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Shell</span><span class="p">]</span>
+    <span class="n">conventions</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
+    <span class="n">primitive_normalization</span><span class="p">:</span> <span class="nb">str</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">nbasis</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>   <span class="c1"># noqa: D401</span>
+        <span class="sd">&quot;&quot;&quot;Number of basis functions.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">shell</span><span class="o">.</span><span class="n">nbasis</span> <span class="k">for</span> <span class="n">shell</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">shells</span><span class="p">)</span>
+
+<div class="viewcode-block" id="MolecularBasis.get_segmented"><a class="viewcode-back" href="../../pyapi/iodata.basis.html#iodata.basis.MolecularBasis.get_segmented">[docs]</a>    <span class="k">def</span> <span class="nf">get_segmented</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Unroll generalized contractions.&quot;&quot;&quot;</span>
+        <span class="n">shells</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">shell</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">shells</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">angmom</span><span class="p">,</span> <span class="n">kind</span><span class="p">,</span> <span class="n">coeffs</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">shell</span><span class="o">.</span><span class="n">angmoms</span><span class="p">,</span> <span class="n">shell</span><span class="o">.</span><span class="n">kinds</span><span class="p">,</span> <span class="n">shell</span><span class="o">.</span><span class="n">coeffs</span><span class="o">.</span><span class="n">T</span><span class="p">):</span>
+                <span class="n">shells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Shell</span><span class="p">(</span><span class="n">shell</span><span class="o">.</span><span class="n">icenter</span><span class="p">,</span> <span class="p">[</span><span class="n">angmom</span><span class="p">],</span> <span class="p">[</span><span class="n">kind</span><span class="p">],</span>
+                                    <span class="n">shell</span><span class="o">.</span><span class="n">exponents</span><span class="p">,</span> <span class="n">coeffs</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+        <span class="c1"># pylint: disable=no-member</span>
+        <span class="k">return</span> <span class="n">attr</span><span class="o">.</span><span class="n">evolve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shells</span><span class="o">=</span><span class="n">shells</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="convert_convention_shell"><a class="viewcode-back" href="../../pyapi/iodata.basis.html#iodata.basis.convert_convention_shell">[docs]</a><span class="k">def</span> <span class="nf">convert_convention_shell</span><span class="p">(</span><span class="n">conv1</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">conv2</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> \
+        <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Return a permutation vector and sign changes to convert from 1 to 2.</span>
+
+<span class="sd">    The transformation from convention 1 to convention 2 can be done applying</span>
+<span class="sd">    the results of this function as follows:</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        vector2 = vector1[permutation]*signs</span>
+
+<span class="sd">    When using the option ``reverse=True``, one can use the results to convert</span>
+<span class="sd">    in the opposite sense:</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        vector1 = vector2[permutation]*signs</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    conv1, conv2</span>
+<span class="sd">        Two lists, with the same strings (in different order), where each string</span>
+<span class="sd">        may be prefixed with a &#39;-&#39;.</span>
+<span class="sd">    reverse:</span>
+<span class="sd">        When, true the conversion from 2 to 1 is returned.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    permutation</span>
+<span class="sd">        An integer array that permutes basis function from 1 to 2.</span>
+<span class="sd">    signs</span>
+<span class="sd">        Sign changes when going from 1 to 2, must be applied after permutation</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">conv1</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">conv2</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;conv1 and conv2 must contain the same number of elements.&#39;</span><span class="p">)</span>
+    <span class="c1"># Get signs from both</span>
+    <span class="n">signs1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">el1</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">el1</span> <span class="ow">in</span> <span class="n">conv1</span><span class="p">]</span>
+    <span class="n">signs2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">el2</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">el2</span> <span class="ow">in</span> <span class="n">conv2</span><span class="p">]</span>
+    <span class="c1"># Strip signs from both</span>
+    <span class="n">conv1</span> <span class="o">=</span> <span class="p">[</span><span class="n">el1</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">el1</span> <span class="ow">in</span> <span class="n">conv1</span><span class="p">]</span>
+    <span class="n">conv2</span> <span class="o">=</span> <span class="p">[</span><span class="n">el2</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">el2</span> <span class="ow">in</span> <span class="n">conv2</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">conv1</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">conv1</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Argument conv1 contains duplicates.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">conv2</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">conv2</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Argument conv2 contains duplicates.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">set</span><span class="p">(</span><span class="n">conv1</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">set</span><span class="p">(</span><span class="n">conv2</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Without the minus signs, conv1 and conv2 must contain &#39;</span>
+                        <span class="s1">&#39;the same elements. Got </span><span class="si">{}</span><span class="s1"> and </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">conv1</span><span class="p">,</span> <span class="n">conv2</span><span class="p">))</span>
+    <span class="c1"># Get the permutation</span>
+    <span class="k">if</span> <span class="n">reverse</span><span class="p">:</span>
+        <span class="n">permutation</span> <span class="o">=</span> <span class="p">[</span><span class="n">conv2</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">el1</span><span class="p">)</span> <span class="k">for</span> <span class="n">el1</span> <span class="ow">in</span> <span class="n">conv1</span><span class="p">]</span>
+        <span class="n">signs</span> <span class="o">=</span> <span class="p">[</span><span class="n">signs2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">sign1</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sign1</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">permutation</span><span class="p">,</span> <span class="n">signs1</span><span class="p">)]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">permutation</span> <span class="o">=</span> <span class="p">[</span><span class="n">conv1</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">el2</span><span class="p">)</span> <span class="k">for</span> <span class="n">el2</span> <span class="ow">in</span> <span class="n">conv2</span><span class="p">]</span>
+        <span class="n">signs</span> <span class="o">=</span> <span class="p">[</span><span class="n">signs1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">sign2</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sign2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">permutation</span><span class="p">,</span> <span class="n">signs2</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">permutation</span><span class="p">,</span> <span class="n">signs</span></div>
+
+
+<div class="viewcode-block" id="convert_conventions"><a class="viewcode-back" href="../../pyapi/iodata.basis.html#iodata.basis.convert_conventions">[docs]</a><span class="k">def</span> <span class="nf">convert_conventions</span><span class="p">(</span><span class="n">molbasis</span><span class="p">:</span> <span class="n">MolecularBasis</span><span class="p">,</span> <span class="n">new_conventions</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+                        <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Return a permutation vector and sign changes to convert from 1 to 2.</span>
+
+<span class="sd">    The transformation from molbasis.convention to the new convention can be done</span>
+<span class="sd">    applying the results of this function as follows:</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        vector2 = vector1[permutation]*signs</span>
+
+<span class="sd">    When using the option ``reverse=True``, one can use the results to convert</span>
+<span class="sd">    in the opposite sense:</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        vector1 = vector2[permutation]*signs</span>
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    molbasis</span>
+<span class="sd">        The description of a molecular basis set.</span>
+<span class="sd">    new_conventions</span>
+<span class="sd">        The new conventions for ordering and signs, to which data for the</span>
+<span class="sd">        orbital basis needs to be converted.</span>
+<span class="sd">    reverse:</span>
+<span class="sd">        When, true the conversion from 2 to 1 is returned.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    permutation</span>
+<span class="sd">        An integer array that permutes basis function from 1 to 2.</span>
+<span class="sd">    signs</span>
+<span class="sd">        Sign changes when going from 1 to 2, must be applied after permutation</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">permutation</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">signs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">shell</span> <span class="ow">in</span> <span class="n">molbasis</span><span class="o">.</span><span class="n">shells</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">angmom</span><span class="p">,</span> <span class="n">kind</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">shell</span><span class="o">.</span><span class="n">angmoms</span><span class="p">,</span> <span class="n">shell</span><span class="o">.</span><span class="n">kinds</span><span class="p">):</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">angmom</span><span class="p">,</span> <span class="n">kind</span><span class="p">)</span>
+            <span class="n">conv1</span> <span class="o">=</span> <span class="n">molbasis</span><span class="o">.</span><span class="n">conventions</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="n">conv2</span> <span class="o">=</span> <span class="n">new_conventions</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="n">shell_permutation</span><span class="p">,</span> <span class="n">shell_signs</span> <span class="o">=</span> <span class="n">convert_convention_shell</span><span class="p">(</span><span class="n">conv1</span><span class="p">,</span> <span class="n">conv2</span><span class="p">,</span> <span class="n">reverse</span><span class="p">)</span>
+            <span class="n">offset</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">permutation</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">shell_permutation</span><span class="p">:</span>
+                <span class="n">permutation</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span>
+            <span class="n">signs</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">shell_signs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">permutation</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">signs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="iter_cart_alphabet"><a class="viewcode-back" href="../../pyapi/iodata.basis.html#iodata.basis.iter_cart_alphabet">[docs]</a><span class="k">def</span> <span class="nf">iter_cart_alphabet</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Loop over powers of Cartesian basis functions in alphabetical order.</span>
+
+<span class="sd">    See https://theochem.github.io/horton/2.1.1/tech_ref_gaussian_basis.html</span>
+<span class="sd">    for details.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    n</span>
+<span class="sd">        The angular momentum, i.e. sum of Cartesian powers in this case.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">nx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">ny</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">nx</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">nz</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="n">nx</span> <span class="o">-</span> <span class="n">ny</span>
+            <span class="k">yield</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_default_conventions"><a class="viewcode-back" href="../../pyapi/iodata.basis.html#iodata.basis.get_default_conventions">[docs]</a><span class="k">def</span> <span class="nf">get_default_conventions</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Produce a conventions dictionary compatible with HORTON2.</span>
+
+<span class="sd">    Do not change this!!! This is also used by several file formats from other</span>
+<span class="sd">    QC codes who happen to follow the same conventions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">horton2</span> <span class="o">=</span> <span class="p">{(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">):</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">]}</span>
+    <span class="n">psi4</span> <span class="o">=</span> <span class="n">horton2</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">angmom</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">25</span><span class="p">):</span>
+        <span class="n">conv_cart</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="s1">&#39;x&#39;</span> <span class="o">*</span> <span class="n">nx</span> <span class="o">+</span> <span class="s1">&#39;y&#39;</span> <span class="o">*</span> <span class="n">ny</span> <span class="o">+</span> <span class="s1">&#39;z&#39;</span> <span class="o">*</span> <span class="n">nz</span>
+                         <span class="k">for</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span> <span class="ow">in</span> <span class="n">iter_cart_alphabet</span><span class="p">(</span><span class="n">angmom</span><span class="p">))</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">angmom</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)</span>
+        <span class="n">horton2</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">conv_cart</span>
+        <span class="n">psi4</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">conv_cart</span>
+        <span class="k">if</span> <span class="n">angmom</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">conv_pure</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;c0&#39;</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">absm</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">angmom</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">conv_pure</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;c</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">absm</span><span class="p">))</span>
+                <span class="n">conv_pure</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;s</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">absm</span><span class="p">))</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">angmom</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">)</span>
+            <span class="n">horton2</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">conv_pure</span>
+            <span class="n">psi4</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">conv_pure</span><span class="p">[:</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">conv_pure</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">conv_pure</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">horton2</span><span class="p">,</span> <span class="n">psi4</span></div>
+
+
+<span class="n">HORTON2_CONVENTIONS</span><span class="p">,</span> <span class="n">PSI4_CONVENTIONS</span> <span class="o">=</span> <span class="n">get_default_conventions</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, The IODATA Development Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

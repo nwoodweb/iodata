@@ -1,0 +1,8 @@
+iodata.formats.pdb module
+=========================
+
+.. automodule:: iodata.formats.pdb
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :inherited-members:

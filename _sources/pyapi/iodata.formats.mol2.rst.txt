@@ -1,0 +1,8 @@
+iodata.formats.mol2 module
+==========================
+
+.. automodule:: iodata.formats.mol2
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :inherited-members:

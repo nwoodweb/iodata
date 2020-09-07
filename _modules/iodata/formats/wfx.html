@@ -1,0 +1,723 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>iodata.formats.wfx &mdash; IOData  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/override.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["fast-preview.js"], "TeX": {"Macros": {"ket": ["{\\left\\vert { #1 } \\right\\rangle}", 1], "bra": ["{\\left\\langle { #1} \\right\\vert}", 1], "braket": ["{\\left\\langle {#1} \\mid { #2} \\right\\rangle}", 2], "ketbra": ["{\\left\\vert { #1 } \\right\\rangle\\left\\langle { #2} \\right\\vert}", 2], "ev": ["{\\left\\langle {#2} \\vert {#1} \\vert {#2} \\right\\rangle}", 2], "mel": ["{\\left\\langle{ #1 }\\right\\vert{ #2 }\\left\\vert{#3}\\right\\rangle}", 3]}}})</script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> IOData
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../formats.html">Supported File Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../basis.html">Basis set conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">IOData Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgments.html">Acknowledgments</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pyapi/modules.html">iodata</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">IOData</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>iodata.formats.wfx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for iodata.formats.wfx</h1><div class="highlight"><pre>
+<span></span><span class="c1"># IODATA is an input and output module for quantum chemistry.</span>
+<span class="c1"># Copyright (C) 2011-2019 The IODATA Development Team</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of IODATA.</span>
+<span class="c1">#</span>
+<span class="c1"># IODATA is free software; you can redistribute it and/or</span>
+<span class="c1"># modify it under the terms of the GNU General Public License</span>
+<span class="c1"># as published by the Free Software Foundation; either version 3</span>
+<span class="c1"># of the License, or (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># IODATA is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program; if not, see &lt;http://www.gnu.org/licenses/&gt;</span>
+<span class="c1"># --</span>
+<span class="sd">&quot;&quot;&quot;AIM/AIMAll WFX file format.</span>
+
+<span class="sd">See http://aim.tkgristmill.com/wfxformat.html</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TextIO</span><span class="p">,</span> <span class="n">Iterator</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">..docstrings</span> <span class="kn">import</span> <span class="n">document_load_one</span><span class="p">,</span> <span class="n">document_dump_one</span>
+<span class="kn">from</span> <span class="nn">..orbitals</span> <span class="kn">import</span> <span class="n">MolecularOrbitals</span>
+<span class="kn">from</span> <span class="nn">..periodic</span> <span class="kn">import</span> <span class="n">num2sym</span>
+<span class="kn">from</span> <span class="nn">..iodata</span> <span class="kn">import</span> <span class="n">IOData</span>
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="n">LineIterator</span>
+<span class="kn">from</span> <span class="nn">..basis</span> <span class="kn">import</span> <span class="n">MolecularBasis</span><span class="p">,</span> <span class="n">Shell</span><span class="p">,</span> <span class="n">convert_conventions</span>
+
+<span class="kn">from</span> <span class="nn">.wfn</span> <span class="kn">import</span> <span class="n">build_obasis</span><span class="p">,</span> <span class="n">get_mocoeff_scales</span><span class="p">,</span> <span class="n">CONVENTIONS</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">PATTERNS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;*.wfx&#39;</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">_wfx_labels</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Build labels for wfx parser.&quot;&quot;&quot;</span>
+    <span class="c1"># labels of various sections in WFX file grouped based on their data type</span>
+
+    <span class="c1"># section labels with string data types</span>
+    <span class="n">labels_str</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;&lt;Title&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;&lt;Keywords&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;keywords&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;&lt;Model&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;model_name&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="c1"># section labels with integer number data types</span>
+    <span class="n">labels_int</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;&lt;Number of Nuclei&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;num_atoms&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;&lt;Number of Occupied Molecular Orbitals&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;num_occ_mo&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;&lt;Number of Perturbations&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;num_perturbations&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;&lt;Number of Electrons&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;num_electrons&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;&lt;Number of Core Electrons&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;num_core_electrons&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;&lt;Number of Alpha Electrons&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;num_alpha_electron&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;&lt;Number of Beta Electrons&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;num_beta_electron&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;&lt;Number of Primitives&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;num_primitives&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;&lt;Electronic Spin Multiplicity&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;spin_multi&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="c1"># section labels with float number data types</span>
+    <span class="n">labels_float</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;&lt;Net Charge&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;charge&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;&lt;Energy = T + Vne + Vee + Vnn&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;energy&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;&lt;Virial Ratio (-V/T)&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;virial_ratio&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;&lt;Nuclear Virial of Energy-Gradient-Based Forces on Nuclei, W&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;nuc_viral&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;&lt;Full Virial Ratio, -(V - W)/T&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;full_virial_ratio&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="c1"># section labels with array of integer data types</span>
+    <span class="n">labels_array_int</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;&lt;Atomic Numbers&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;atnums&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;&lt;Primitive Centers&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;centers&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;&lt;Primitive Types&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;types&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;&lt;MO Numbers&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;mo_numbers&#39;</span><span class="p">,</span>  <span class="c1"># This is constructed in parse_wfx.</span>
+    <span class="p">}</span>
+    <span class="c1"># section labels with array of float data types</span>
+    <span class="n">labels_array_float</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;&lt;Nuclear Cartesian Coordinates&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;atcoords&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;&lt;Nuclear Charges&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;nuclear_charge&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;&lt;Primitive Exponents&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;exponents&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;&lt;Molecular Orbital Energies&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;mo_energies&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;&lt;Molecular Orbital Occupation Numbers&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;mo_occs&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;&lt;Molecular Orbital Primitive Coefficients&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;mo_coeffs&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="c1"># section labels with other data types</span>
+    <span class="n">labels_other</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;&lt;Nuclear Names&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;nuclear_names&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;&lt;Molecular Orbital Spin Types&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;mo_spins&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;&lt;Nuclear Cartesian Energy Gradients&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;nuclear_gradient&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="c1"># list of tags corresponding to required sections based on WFX format specifications</span>
+    <span class="n">required_tags</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">labels_str</span><span class="p">)</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">labels_int</span><span class="p">)</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">labels_float</span><span class="p">)</span>
+    <span class="n">required_tags</span> <span class="o">+=</span> <span class="nb">list</span><span class="p">(</span><span class="n">labels_array_float</span><span class="p">)</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">labels_array_int</span><span class="p">)</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">labels_other</span><span class="p">)</span>
+    <span class="c1"># remove tags corresponding to optional sections</span>
+    <span class="n">required_tags</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;&lt;Model&gt;&#39;</span><span class="p">)</span>
+    <span class="n">required_tags</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;&lt;Number of Core Electrons&gt;&#39;</span><span class="p">)</span>
+    <span class="n">required_tags</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;&lt;Electronic Spin Multiplicity&gt;&#39;</span><span class="p">)</span>
+    <span class="n">required_tags</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;&lt;Atomic Numbers&gt;&#39;</span><span class="p">)</span>
+    <span class="n">required_tags</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;&lt;Full Virial Ratio, -(V - W)/T&gt;&#39;</span><span class="p">)</span>
+    <span class="n">required_tags</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;&lt;Nuclear Virial of Energy-Gradient-Based Forces on Nuclei, W&gt;&#39;</span><span class="p">)</span>
+    <span class="n">required_tags</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;&lt;Nuclear Cartesian Energy Gradients&gt;&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">labels_str</span><span class="p">,</span> <span class="n">labels_int</span><span class="p">,</span> <span class="n">labels_float</span><span class="p">,</span> <span class="n">labels_array_int</span><span class="p">,</span> <span class="n">labels_array_float</span><span class="p">,</span>
+            <span class="n">labels_other</span><span class="p">,</span> <span class="n">required_tags</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="load_data_wfx"><a class="viewcode-back" href="../../../pyapi/iodata.formats.wfx.html#iodata.formats.wfx.load_data_wfx">[docs]</a><span class="k">def</span> <span class="nf">load_data_wfx</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Process loaded WFX data.&quot;&quot;&quot;</span>
+    <span class="c1"># get all section labels and required labels for WFX files</span>
+    <span class="n">lbs_str</span><span class="p">,</span> <span class="n">lbs_int</span><span class="p">,</span> <span class="n">lbs_float</span><span class="p">,</span> <span class="n">lbs_aint</span><span class="p">,</span> <span class="n">lbs_afloat</span><span class="p">,</span> <span class="n">lbs_other</span><span class="p">,</span> <span class="n">required_tags</span> <span class="o">=</span> <span class="n">_wfx_labels</span><span class="p">()</span>
+    <span class="c1"># load sections in WFX and check required tags exists</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">parse_wfx</span><span class="p">(</span><span class="n">lit</span><span class="p">,</span> <span class="n">required_tags</span><span class="p">)</span>
+
+    <span class="c1"># process raw data to convert them to proper type based on their label</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">lbs_str</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+            <span class="n">result</span><span class="p">[</span><span class="n">lbs_str</span><span class="p">[</span><span class="n">key</span><span class="p">]]</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">lbs_int</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+            <span class="n">result</span><span class="p">[</span><span class="n">lbs_int</span><span class="p">[</span><span class="n">key</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">lbs_float</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+            <span class="n">result</span><span class="p">[</span><span class="n">lbs_float</span><span class="p">[</span><span class="n">key</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">lbs_afloat</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">[</span><span class="n">lbs_afloat</span><span class="p">[</span><span class="n">key</span><span class="p">]]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">lbs_aint</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">[</span><span class="n">lbs_aint</span><span class="p">[</span><span class="n">key</span><span class="p">]]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">lbs_other</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">[</span><span class="n">lbs_other</span><span class="p">[</span><span class="n">key</span><span class="p">]]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Not recognized section label, skip </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+
+    <span class="c1"># reshape some arrays</span>
+    <span class="n">result</span><span class="p">[</span><span class="s1">&#39;atcoords&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;atcoords&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">result</span><span class="p">[</span><span class="s1">&#39;mo_coeffs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;mo_coeffs&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;num_primitives&#39;</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">)</span>
+    <span class="c1"># process nuclear gradient, if present</span>
+    <span class="k">if</span> <span class="s1">&#39;nuclear_gradient&#39;</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+        <span class="n">gradient_mix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">i</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;nuclear_gradient&#39;</span><span class="p">)])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">gradient_atoms</span> <span class="o">=</span> <span class="n">gradient_mix</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unicode_</span><span class="p">)</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;nuclear_names&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">atom</span><span class="p">)</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">gradient_atoms</span><span class="p">]</span>
+        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;atgradient&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;nuclear_names&#39;</span><span class="p">]),</span> <span class="mi">3</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;atgradient&#39;</span><span class="p">][</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">gradient_mix</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+    <span class="c1"># check keywords &amp; number of perturbations</span>
+    <span class="n">perturbation_check</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;GTO&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;GIAO&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;CGST&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">}</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;keywords&#39;</span><span class="p">]</span>
+    <span class="n">num</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;num_perturbations&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">perturbation_check</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">lit</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The keywords is </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">, but it should be either GTO, GIAO or CGST&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">num</span> <span class="o">!=</span> <span class="n">perturbation_check</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+        <span class="n">lit</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of perturbations of </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> is </span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s2">, expected </span><span class="si">{</span><span class="n">perturbation_check</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="parse_wfx"><a class="viewcode-back" href="../../../pyapi/iodata.formats.wfx.html#iodata.formats.wfx.parse_wfx">[docs]</a><span class="k">def</span> <span class="nf">parse_wfx</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">,</span> <span class="n">required_tags</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Load data in all sections existing in the given WFX file LineIterator.&quot;&quot;&quot;</span>
+    <span class="c1"># pylint: disable=too-many-branches</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">mo_start</span> <span class="o">=</span> <span class="s2">&quot;&lt;Molecular Orbital Primitive Coefficients&gt;&quot;</span>
+    <span class="n">section_start</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="c1"># get a new line</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="c1"># check whether line is the start of a section</span>
+        <span class="k">if</span> <span class="n">section_start</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;&lt;&quot;</span><span class="p">):</span>
+            <span class="c1"># set start &amp; end of the section and add it to data dictionary</span>
+            <span class="n">section_start</span> <span class="o">=</span> <span class="n">line</span>
+            <span class="k">if</span> <span class="n">section_start</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">lit</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Section with tag=</span><span class="si">{}</span><span class="s2"> is repeated!&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">section_start</span><span class="p">))</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">section_start</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">section_end</span> <span class="o">=</span> <span class="n">line</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+            <span class="c1"># special handling of &lt;Molecular Orbital Primitive Coefficients&gt; section</span>
+            <span class="k">if</span> <span class="n">section_start</span> <span class="o">==</span> <span class="n">mo_start</span><span class="p">:</span>
+                <span class="n">data</span><span class="p">[</span><span class="s1">&#39;&lt;MO Numbers&gt;&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># check whether line is the (correct) end of the section</span>
+        <span class="k">elif</span> <span class="n">section_start</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;&lt;/&quot;</span><span class="p">):</span>
+            <span class="c1"># In some cases, closing tags have a different number of spaces. 8-[</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="n">section_end</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+                <span class="n">lit</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Expecting line </span><span class="si">{}</span><span class="s2"> but got </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">section_end</span><span class="p">,</span> <span class="n">line</span><span class="p">))</span>
+            <span class="c1"># reset section_start variable to signal that section ended</span>
+            <span class="n">section_start</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="c1"># handle &lt;MO Number&gt; line under &lt;Molecular Orbital Primitive Coefficients&gt; section</span>
+        <span class="k">elif</span> <span class="n">section_start</span> <span class="o">==</span> <span class="n">mo_start</span> <span class="ow">and</span> <span class="n">line</span> <span class="o">==</span> <span class="s1">&#39;&lt;MO Number&gt;&#39;</span><span class="p">:</span>
+            <span class="c1"># add MO Number to list</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;&lt;MO Numbers&gt;&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+            <span class="c1"># skip &#39;&lt;/MO Number&gt;&#39; line</span>
+            <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+        <span class="c1"># add section content to the corresponding list in data dictionary</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">section_start</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+    <span class="c1"># check if last section was closed</span>
+    <span class="k">if</span> <span class="n">section_start</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">lit</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Section </span><span class="si">{}</span><span class="s2"> is not closed at end of file.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">section_start</span><span class="p">))</span>
+    <span class="c1"># check required section tags</span>
+    <span class="k">if</span> <span class="n">required_tags</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">section_tag</span> <span class="ow">in</span> <span class="n">required_tags</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">section_tag</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">lit</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Section </span><span class="si">{</span><span class="n">section_tag</span><span class="si">}</span><span class="s1"> is missing from loaded WFX data.&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span></div>
+
+
+<div class="viewcode-block" id="load_one"><a class="viewcode-back" href="../../../pyapi/iodata.formats.wfx.html#iodata.formats.wfx.load_one">[docs]</a><span class="nd">@document_load_one</span><span class="p">(</span><span class="s2">&quot;WFX&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;atcoords&#39;</span><span class="p">,</span> <span class="s1">&#39;atgradient&#39;</span><span class="p">,</span> <span class="s1">&#39;atnums&#39;</span><span class="p">,</span> <span class="s1">&#39;energy&#39;</span><span class="p">,</span>
+                           <span class="s1">&#39;extra&#39;</span><span class="p">,</span> <span class="s1">&#39;mo&#39;</span><span class="p">,</span> <span class="s1">&#39;obasis&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">load_one</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Do not edit this docstring. It will be overwritten.&quot;&quot;&quot;</span>
+    <span class="c1"># get data contained in WFX file with the proper type &amp; shape</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">load_data_wfx</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+
+    <span class="c1"># Build molecular basis</span>
+    <span class="c1"># ---------------------</span>
+    <span class="c1"># build molecular basis and permutation needed to regroup shells</span>
+    <span class="n">obasis</span><span class="p">,</span> <span class="n">permutation</span> <span class="o">=</span> <span class="n">build_obasis</span><span class="p">(</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;centers&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;types&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;exponents&#39;</span><span class="p">],</span> <span class="n">lit</span><span class="p">)</span>
+
+    <span class="c1"># Build molecular orbitals</span>
+    <span class="c1"># ------------------------</span>
+    <span class="c1"># re-order MO coefficients because the loaded expansion coefficients from WFX typically</span>
+    <span class="c1"># corresponds to basis sets grouped based on their type; that is, all MO coefficients of px</span>
+    <span class="c1"># basis functions are listed together first, then MO coefficients of py basis functions, and</span>
+    <span class="c1"># finally MO coefficients of pz (the same is true for higher angular momentum). However, IOData</span>
+    <span class="c1"># stores basis shells (instead of basis functions), so the p shell with angmom=1 represents</span>
+    <span class="c1"># the px, py, pz basis functions. These shells are used by MolecularBasis (obasis) in</span>
+    <span class="c1"># constructing the basis function. If that is the case for the loaded MO coefficients from WFX,</span>
+    <span class="c1"># they need to be permuted to match obasis expansion of basis set (i.e. to appear in shells).</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_coeffs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_coeffs&#39;</span><span class="p">][</span><span class="n">permutation</span><span class="p">]</span>
+    <span class="c1"># fix normalization because the loaded expansion coefficients from WFX corresponds to</span>
+    <span class="c1"># un-normalized primitives for each normalized MO (which means the primitive normalization</span>
+    <span class="c1"># constants has been included in the MO coefficients). However, IOData expects normalized</span>
+    <span class="c1"># primitives (either L2 or L1 as recorded in MolecularBasis primitive types), so we need to</span>
+    <span class="c1"># divide the MO coefficients by the primitive normalization constants to have them correspond</span>
+    <span class="c1"># to expansion coefficients for normalized primitives. Here, we assume primitives are</span>
+    <span class="c1"># L2-normalized (as stored in obasis.primitive_normalization) which is used in scaling MO</span>
+    <span class="c1"># coefficients to be stored in MolecularOrbitals instance.</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_coeffs&#39;</span><span class="p">]</span> <span class="o">/=</span> <span class="n">get_mocoeff_scales</span><span class="p">(</span><span class="n">obasis</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># process mo_spins and convert it into restricted or unrestricted &amp; count alpha/beta orbitals</span>
+    <span class="c1"># we do not using the &lt;Model&gt; section for this because it is not guaranteed to be present</span>
+
+    <span class="c1"># check whether restricted case with &quot;Alpha and Beta&quot; in mo_spins</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="s2">&quot;and&quot;</span> <span class="ow">in</span> <span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_spins&#39;</span><span class="p">]):</span>
+        <span class="c1"># count number of alpha &amp; beta molecular orbitals</span>
+        <span class="n">norbb</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_spins&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;Alpha and Beta&quot;</span><span class="p">)</span>
+        <span class="n">norba</span> <span class="o">=</span> <span class="n">norbb</span> <span class="o">+</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_spins&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;Alpha&quot;</span><span class="p">)</span>
+        <span class="c1"># check that mo_spin list contains no surprises</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_spins&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="p">[</span><span class="s2">&quot;Alpha and Beta&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">norbb</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;Alpha&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">norba</span> <span class="o">-</span> <span class="n">norbb</span><span class="p">):</span>
+            <span class="n">lit</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Unsupported &lt;Molecular Orbital Spin Types&gt; values.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">norba</span> <span class="o">!=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_coeffs&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">lit</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Number of orbitals inconsistent with orbital spin types.&quot;</span><span class="p">)</span>
+        <span class="c1"># create molecular orbitals, which requires knowing the number of alpha and beta molecular</span>
+        <span class="c1"># orbitals. These are expected to be the same for &#39;restricted&#39; case, however, the number of</span>
+        <span class="c1"># Alpha/Beta counts might not be the same for the restricted WFX (e.g., restricted</span>
+        <span class="c1"># open-shell calculations that do not print virtual orbitals), so it is safer to use</span>
+        <span class="c1"># `norba` to denote number of both alpha and beta orbitals in MolecularOrbitals.</span>
+        <span class="c1"># See orbitals.py for details to see how number of orbitals are dealt with.</span>
+        <span class="c1"># For restricted wavefunctions, IOData uses the</span>
+        <span class="c1"># occupation numbers to identify the spin types. IOData also has different</span>
+        <span class="c1"># conventions for norba and norbb, see orbitals.py for details.</span>
+        <span class="n">mo</span> <span class="o">=</span> <span class="n">MolecularOrbitals</span><span class="p">(</span>
+            <span class="s2">&quot;restricted&quot;</span><span class="p">,</span> <span class="n">norba</span><span class="p">,</span> <span class="n">norba</span><span class="p">,</span>  <span class="c1"># This is not a typo!</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_occs&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_coeffs&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_energies&#39;</span><span class="p">],</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="c1"># unrestricted case with &quot;Alpha&quot; and &quot;Beta&quot; in mo_spins</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">norba</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_spins&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;Alpha&quot;</span><span class="p">)</span>
+        <span class="n">norbb</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_spins&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;Beta&quot;</span><span class="p">)</span>
+        <span class="c1"># check that mo_spin list contains no surprises</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_spins&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="p">[</span><span class="s2">&quot;Alpha&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">norba</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;Beta&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">norbb</span><span class="p">:</span>
+            <span class="n">lit</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Unsupported molecular orbital spin types.&quot;</span><span class="p">)</span>
+        <span class="c1"># check that number of orbitals match number of MO coefficients</span>
+        <span class="k">if</span> <span class="n">norba</span> <span class="o">+</span> <span class="n">norbb</span> <span class="o">!=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_coeffs&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">lit</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Number of orbitals inconsistent with orbital spin types.&quot;</span><span class="p">)</span>
+        <span class="c1"># Create orbitals. For unrestricted wavefunctions, IOData uses the same</span>
+        <span class="c1"># conventions as WFX.</span>
+        <span class="n">mo</span> <span class="o">=</span> <span class="n">MolecularOrbitals</span><span class="p">(</span>
+            <span class="s2">&quot;unrestricted&quot;</span><span class="p">,</span> <span class="n">norba</span><span class="p">,</span> <span class="n">norbb</span><span class="p">,</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_occs&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_coeffs&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_energies&#39;</span><span class="p">],</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="c1"># prepare WFX-specific data for IOData</span>
+    <span class="n">extra_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;keywords&#39;</span><span class="p">,</span> <span class="s1">&#39;model_name&#39;</span><span class="p">,</span> <span class="s1">&#39;num_perturbations&#39;</span><span class="p">,</span> <span class="s1">&#39;num_core_electrons&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;spin_multi&#39;</span><span class="p">,</span> <span class="s1">&#39;virial_ratio&#39;</span><span class="p">,</span> <span class="s1">&#39;nuc_viral&#39;</span><span class="p">,</span> <span class="s1">&#39;full_virial_ratio&#39;</span><span class="p">,</span> <span class="s1">&#39;mo_spin&#39;</span><span class="p">]</span>
+    <span class="n">extra</span> <span class="o">=</span> <span class="p">{</span><span class="n">label</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">extra_labels</span><span class="p">}</span>
+    <span class="n">extra</span><span class="p">[</span><span class="s2">&quot;permutations&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">permutation</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;atcoords&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;atcoords&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;atgradient&#39;</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;atgradient&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;atnums&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;atnums&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;atcorenums&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;nuclear_charge&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;energy&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;extra&#39;</span><span class="p">:</span> <span class="n">extra</span><span class="p">,</span>
+        <span class="s1">&#39;mo&#39;</span><span class="p">:</span> <span class="n">mo</span><span class="p">,</span>
+        <span class="s1">&#39;obasis&#39;</span><span class="p">:</span> <span class="n">obasis</span><span class="p">,</span>
+        <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">],</span>
+    <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="dump_one"><a class="viewcode-back" href="../../../pyapi/iodata.formats.wfx.html#iodata.formats.wfx.dump_one">[docs]</a><span class="nd">@document_dump_one</span><span class="p">(</span><span class="s2">&quot;WFX&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;atcoords&#39;</span><span class="p">,</span> <span class="s1">&#39;atnums&#39;</span><span class="p">,</span> <span class="s1">&#39;atcorenums&#39;</span><span class="p">,</span> <span class="s1">&#39;mo&#39;</span><span class="p">,</span> <span class="s1">&#39;obasis&#39;</span><span class="p">,</span> <span class="s1">&#39;charge&#39;</span><span class="p">],</span>
+                   <span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;energy&#39;</span><span class="p">,</span> <span class="s1">&#39;spinpol&#39;</span><span class="p">,</span> <span class="s1">&#39;lot&#39;</span><span class="p">,</span> <span class="s1">&#39;atgradient&#39;</span><span class="p">,</span> <span class="s1">&#39;extra&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">dump_one</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">IOData</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Do not edit this docstring. It will be overwritten.&quot;&quot;&quot;</span>
+    <span class="c1"># pylint: disable=too-many-branches,too-many-statements</span>
+    <span class="c1"># get all tags/labels that can be written into a WFX file</span>
+    <span class="n">lbs_str</span><span class="p">,</span> <span class="n">lbs_int</span><span class="p">,</span> <span class="n">lbs_float</span><span class="p">,</span> <span class="n">lbs_aint</span><span class="p">,</span> <span class="n">lbs_afloat</span><span class="p">,</span> <span class="n">lbs_other</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">_wfx_labels</span><span class="p">()</span>
+    <span class="c1"># put all labels in one dictionary and flip key and value for easier use</span>
+    <span class="n">lbs</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">lbs_str</span><span class="p">,</span> <span class="o">**</span><span class="n">lbs_int</span><span class="p">,</span> <span class="o">**</span><span class="n">lbs_float</span><span class="p">,</span> <span class="o">**</span><span class="n">lbs_aint</span><span class="p">,</span> <span class="o">**</span><span class="n">lbs_afloat</span><span class="p">,</span> <span class="o">**</span><span class="n">lbs_other</span><span class="p">}</span>
+    <span class="n">lbs</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">lbs</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+    <span class="c1"># de-contract data.obasis</span>
+    <span class="c1"># -----------------------</span>
+    <span class="c1"># get shells for the de-contracted basis</span>
+    <span class="n">shells</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">shell</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">obasis</span><span class="o">.</span><span class="n">shells</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">angmom</span><span class="p">,</span> <span class="n">kind</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">shell</span><span class="o">.</span><span class="n">angmoms</span><span class="p">,</span> <span class="n">shell</span><span class="o">.</span><span class="n">kinds</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">exponent</span><span class="p">,</span> <span class="n">coeff</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">shell</span><span class="o">.</span><span class="n">exponents</span><span class="p">,</span> <span class="n">shell</span><span class="o">.</span><span class="n">coeffs</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
+                <span class="k">if</span> <span class="n">kind</span> <span class="o">!=</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;WFX can be generated only for Cartesian MolecularBasis!&quot;</span><span class="p">)</span>
+                <span class="n">shells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Shell</span><span class="p">(</span><span class="n">shell</span><span class="o">.</span><span class="n">icenter</span><span class="p">,</span> <span class="p">[</span><span class="n">angmom</span><span class="p">],</span> <span class="p">[</span><span class="n">kind</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">exponent</span><span class="p">]),</span>
+                                    <span class="n">coeff</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+    <span class="c1"># make a new instance of MolecularBasis with de-contracted basis shells; ideally for WFX we</span>
+    <span class="c1"># want the primitive basis set, but IOData only supports shells.</span>
+    <span class="n">obasis</span> <span class="o">=</span> <span class="n">MolecularBasis</span><span class="p">(</span><span class="n">shells</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">obasis</span><span class="o">.</span><span class="n">conventions</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">obasis</span><span class="o">.</span><span class="n">primitive_normalization</span><span class="p">)</span>
+
+    <span class="c1"># expand mo.coeffs in de-contracted basis primitives</span>
+    <span class="c1"># --------------------------------------------------</span>
+    <span class="c1"># expand mo.coeffs in the new basis by repeating de-contracted basis coefficients</span>
+    <span class="n">permutation</span><span class="p">,</span> <span class="n">signs</span> <span class="o">=</span> <span class="n">convert_conventions</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">obasis</span><span class="p">,</span> <span class="n">CONVENTIONS</span><span class="p">)</span>
+    <span class="n">raw_coeffs</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">coeffs</span><span class="p">[</span><span class="n">permutation</span><span class="p">]</span> <span class="o">*</span> <span class="n">signs</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">mo_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">obasis</span><span class="o">.</span><span class="n">nbasis</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">norb</span><span class="p">))</span>
+    <span class="n">index_mo_old</span><span class="p">,</span> <span class="n">index_mo_new</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="c1"># loop over the shells of the old basis</span>
+    <span class="k">for</span> <span class="n">shell</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">obasis</span><span class="o">.</span><span class="n">shells</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">angmom</span><span class="p">,</span> <span class="n">kind</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">shell</span><span class="o">.</span><span class="n">angmoms</span><span class="p">,</span> <span class="n">shell</span><span class="o">.</span><span class="n">kinds</span><span class="p">):</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">obasis</span><span class="o">.</span><span class="n">conventions</span><span class="p">[</span><span class="n">angmom</span><span class="p">,</span> <span class="n">kind</span><span class="p">])</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">raw_coeffs</span><span class="p">[</span><span class="n">index_mo_old</span><span class="p">:</span> <span class="n">index_mo_old</span> <span class="o">+</span> <span class="n">n</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shell</span><span class="o">.</span><span class="n">nprim</span><span class="p">):</span>
+                <span class="n">mo_coeffs</span><span class="p">[</span><span class="n">index_mo_new</span><span class="p">:</span> <span class="n">index_mo_new</span> <span class="o">+</span> <span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span>
+                <span class="n">index_mo_new</span> <span class="o">+=</span> <span class="n">n</span>
+            <span class="n">index_mo_old</span> <span class="o">+=</span> <span class="n">n</span>
+    <span class="c1"># fix MO coefficients</span>
+    <span class="c1"># 1) expansion coefficients in WFX correspond to un-normalized primitives, so the primitive</span>
+    <span class="c1"># normalization constants should be included in the MO coefficients. However, IOData stores</span>
+    <span class="c1"># normalized primitives (either L2 or L1 as recorded in MolecularBasis primitive types), so</span>
+    <span class="c1"># we need to multiply the MO coefficients by the primitive normalization constants</span>
+    <span class="n">scales</span> <span class="o">=</span> <span class="n">get_mocoeff_scales</span><span class="p">(</span><span class="n">obasis</span><span class="p">)</span>
+    <span class="c1"># 2) expansion coefficients in WFX represent the primitive basis coefficients, so contraction</span>
+    <span class="c1"># coefficients needs to be multiplied by the MO expansion coefficients.</span>
+    <span class="n">contractions</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">shell</span> <span class="ow">in</span> <span class="n">obasis</span><span class="o">.</span><span class="n">shells</span><span class="p">:</span>
+        <span class="n">contractions</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">shell</span><span class="o">.</span><span class="n">coeffs</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="p">[</span><span class="n">shell</span><span class="o">.</span><span class="n">nbasis</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+    <span class="n">contractions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">contractions</span><span class="p">)</span>
+    <span class="c1"># update MO coefficients to include primitives contraction coefficients &amp; normalization</span>
+    <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">mo_coeffs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="n">mo_coeffs</span><span class="p">[:,</span> <span class="n">index</span><span class="p">]</span> <span class="o">*=</span> <span class="n">contractions</span> <span class="o">*</span> <span class="n">scales</span>
+
+    <span class="c1"># write title &amp; keywords</span>
+    <span class="n">_write_xml_single</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="n">lbs</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">],</span> <span class="n">info</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">title</span> <span class="ow">or</span> <span class="s1">&#39;&lt;Created with IOData&gt;&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">_write_xml_single</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="n">lbs</span><span class="p">[</span><span class="s2">&quot;keywords&quot;</span><span class="p">],</span> <span class="n">info</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">extra</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;keywords&quot;</span><span class="p">,</span> <span class="s2">&quot;GTO&quot;</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+
+    <span class="c1"># write number of nuclei &amp; number of primitives</span>
+    <span class="n">_write_xml_single</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="n">lbs</span><span class="p">[</span><span class="s2">&quot;num_atoms&quot;</span><span class="p">],</span> <span class="n">info</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">natom</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">_write_xml_single</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="n">lbs</span><span class="p">[</span><span class="s2">&quot;num_primitives&quot;</span><span class="p">],</span> <span class="n">info</span><span class="o">=</span><span class="n">obasis</span><span class="o">.</span><span class="n">nbasis</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+
+    <span class="c1"># write number of occupied molecular orbitals</span>
+    <span class="c1"># in practice wfx prints the total number of MO, even though the section title specifies</span>
+    <span class="c1"># &quot;Number of Occupied Molecular Orbitals&quot;, which is different from total number of MO when</span>
+    <span class="c1"># you print virtual orbitals in wfx file.</span>
+    <span class="n">_write_xml_single</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="n">lbs</span><span class="p">[</span><span class="s2">&quot;num_occ_mo&quot;</span><span class="p">],</span> <span class="n">info</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">occs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+
+    <span class="c1"># write number of perturbations</span>
+    <span class="n">_write_xml_single</span><span class="p">(</span><span class="n">lbs</span><span class="p">[</span><span class="s2">&quot;num_perturbations&quot;</span><span class="p">],</span> <span class="n">data</span><span class="o">.</span><span class="n">extra</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;num_perturbations&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+
+    <span class="c1"># write nuclear names, atomic numbers, and nuclear charges</span>
+    <span class="c1"># add ghost atom, represented by Bq and atomic number 0</span>
+    <span class="n">num2sym</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;Bq&#39;</span><span class="p">})</span>
+    <span class="n">nuclear_names</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="n">num2sym</span><span class="p">[</span><span class="n">num</span><span class="p">]</span><span class="si">}{</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">atcorenums</span><span class="p">)]</span>
+    <span class="n">_write_xml_iterator</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="n">lbs</span><span class="p">[</span><span class="s2">&quot;nuclear_names&quot;</span><span class="p">],</span> <span class="n">info</span><span class="o">=</span><span class="n">nuclear_names</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">_write_xml_iterator</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="n">lbs</span><span class="p">[</span><span class="s2">&quot;atnums&quot;</span><span class="p">],</span> <span class="n">info</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">atnums</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">_write_xml_iterator_scientific</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="n">lbs</span><span class="p">[</span><span class="s2">&quot;nuclear_charge&quot;</span><span class="p">],</span> <span class="n">info</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">atcorenums</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+
+    <span class="c1"># write nuclear cartesian coordinates</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&lt;Nuclear Cartesian Coordinates&gt;&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">atcoords</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{: ,.14E}</span><span class="s1"> </span><span class="si">{: ,.14E}</span><span class="s1"> </span><span class="si">{: ,.14E}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&lt;/Nuclear Cartesian Coordinates&gt;&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+
+    <span class="c1"># write net charge, number of electrons, number of alpha electrons, and number beta electrons</span>
+    <span class="n">_write_xml_single_scientific</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="n">lbs</span><span class="p">[</span><span class="s2">&quot;charge&quot;</span><span class="p">],</span> <span class="n">info</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">charge</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">_write_xml_single</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="n">lbs</span><span class="p">[</span><span class="s2">&quot;num_electrons&quot;</span><span class="p">],</span> <span class="n">info</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">nelec</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+    <span class="c1"># wfx expects integer values for number of alpha/beta electrons but int rounds down the float</span>
+    <span class="c1"># so round is used before turning it to integer to get the correct number.</span>
+    <span class="n">_write_xml_single</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="n">lbs</span><span class="p">[</span><span class="s2">&quot;num_alpha_electron&quot;</span><span class="p">],</span> <span class="n">info</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">occsa</span><span class="p">))),</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">_write_xml_single</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="n">lbs</span><span class="p">[</span><span class="s2">&quot;num_beta_electron&quot;</span><span class="p">],</span> <span class="n">info</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">occsb</span><span class="p">))),</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+
+    <span class="c1"># write electronic spin multiplicity and model (both optional)</span>
+    <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">spinpol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_write_xml_single</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="n">lbs</span><span class="p">[</span><span class="s2">&quot;spin_multi&quot;</span><span class="p">],</span> <span class="n">info</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">spinpol</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">lot</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_write_xml_single</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="n">lbs</span><span class="p">[</span><span class="s2">&quot;model_name&quot;</span><span class="p">],</span> <span class="n">info</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">lot</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+
+    <span class="c1"># write primitive centers</span>
+    <span class="n">prim_centers</span> <span class="o">=</span> <span class="p">[</span><span class="n">shell</span><span class="o">.</span><span class="n">icenter</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">shell</span> <span class="ow">in</span> <span class="n">obasis</span><span class="o">.</span><span class="n">shells</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shell</span><span class="o">.</span><span class="n">nbasis</span><span class="p">)]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&lt;Primitive Centers&gt;&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">prim_centers</span><span class="p">),</span> <span class="mi">10</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;</span><span class="si">{:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">prim_centers</span><span class="p">[</span><span class="n">j</span><span class="p">:</span><span class="n">j</span> <span class="o">+</span> <span class="mi">10</span><span class="p">]]),</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&lt;/Primitive Centers&gt;&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+
+    <span class="c1"># write primitive types</span>
+    <span class="n">angmom_prim</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">angmom</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">max</span><span class="p">([</span><span class="n">shell</span><span class="o">.</span><span class="n">angmoms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">shell</span> <span class="ow">in</span> <span class="n">obasis</span><span class="o">.</span><span class="n">shells</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">angmom_prim</span><span class="p">[</span><span class="n">angmom</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">count</span> <span class="o">+</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">obasis</span><span class="o">.</span><span class="n">conventions</span><span class="p">[</span><span class="n">angmom</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]))]</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">obasis</span><span class="o">.</span><span class="n">conventions</span><span class="p">[</span><span class="n">angmom</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span>
+    <span class="n">prim_types</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">shell</span> <span class="ow">in</span> <span class="n">obasis</span><span class="o">.</span><span class="n">shells</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">angmom_prim</span><span class="p">[</span><span class="n">shell</span><span class="o">.</span><span class="n">angmoms</span><span class="p">[</span><span class="mi">0</span><span class="p">]]]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&lt;Primitive Types&gt;&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">prim_types</span><span class="p">),</span> <span class="mi">10</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;</span><span class="si">{:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">prim_types</span><span class="p">[</span><span class="n">j</span><span class="p">:</span><span class="n">j</span> <span class="o">+</span> <span class="mi">10</span><span class="p">]]),</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&lt;/Primitive Types&gt;&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+
+    <span class="c1"># write primitive exponents</span>
+    <span class="n">exponents</span> <span class="o">=</span> <span class="p">[</span><span class="n">shell</span><span class="o">.</span><span class="n">exponents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">shell</span> <span class="ow">in</span> <span class="n">obasis</span><span class="o">.</span><span class="n">shells</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shell</span><span class="o">.</span><span class="n">nbasis</span><span class="p">)]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&lt;Primitive Exponents&gt;&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">exponents</span><span class="p">),</span> <span class="mi">4</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;</span><span class="si">{: ,.14E}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">exponents</span><span class="p">[</span><span class="n">j</span><span class="p">:</span><span class="n">j</span> <span class="o">+</span> <span class="mi">4</span><span class="p">]]),</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&lt;/Primitive Exponents&gt;&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+
+    <span class="c1"># write molecular orbital occupation numbers</span>
+    <span class="n">_write_xml_iterator_scientific</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="n">lbs</span><span class="p">[</span><span class="s2">&quot;mo_occs&quot;</span><span class="p">],</span> <span class="n">info</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">occs</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+
+    <span class="c1"># write molecular orbital energies</span>
+    <span class="n">_write_xml_iterator_scientific</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="n">lbs</span><span class="p">[</span><span class="s2">&quot;mo_energies&quot;</span><span class="p">],</span> <span class="n">info</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">energies</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+
+    <span class="c1"># write molecular orbital spin types</span>
+    <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;restricted&#39;</span><span class="p">:</span>
+        <span class="n">mo_spin</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Alpha and Beta &#39;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">occs</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">mo_spin</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Alpha&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">occsa</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;Beta&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">occsb</span><span class="p">)</span>
+    <span class="n">_write_xml_iterator</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="n">lbs</span><span class="p">[</span><span class="s2">&quot;mo_spins&quot;</span><span class="p">],</span> <span class="n">info</span><span class="o">=</span><span class="n">mo_spin</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+
+    <span class="c1"># write MO primitive coefficients</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&lt;Molecular Orbital Primitive Coefficients&gt;&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">mo</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">occs</span><span class="p">)):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&lt;MO Number&gt;&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">mo</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&lt;/MO Number&gt;&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">obasis</span><span class="o">.</span><span class="n">nbasis</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;</span><span class="si">{: ,.14E}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">mo_coeffs</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="n">mo</span><span class="p">][</span><span class="n">j</span><span class="p">:</span><span class="n">j</span> <span class="o">+</span> <span class="mi">4</span><span class="p">]]),</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&lt;/Molecular Orbital Primitive Coefficients&gt;&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+
+    <span class="c1"># write energy and virial ratio; use &#39; NAN&#39; when None (not available)</span>
+    <span class="n">_write_xml_single_scientific</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="n">lbs</span><span class="p">[</span><span class="s2">&quot;energy&quot;</span><span class="p">],</span> <span class="n">info</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">energy</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">_write_xml_single_scientific</span><span class="p">(</span><span class="n">lbs</span><span class="p">[</span><span class="s2">&quot;virial_ratio&quot;</span><span class="p">],</span> <span class="n">data</span><span class="o">.</span><span class="n">extra</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;virial_ratio&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">),</span> <span class="n">f</span><span class="p">)</span>
+
+    <span class="c1"># write nuclear Cartesian energy gradients (optional)</span>
+    <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">atgradient</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">nuc_cart_energy_grad</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">nuclear_names</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">atgradient</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&lt;Nuclear Cartesian Energy Gradients&gt;&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">nuc_cart_energy_grad</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">atom</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;</span><span class="si">{: ,.14E}</span><span class="s1"> </span><span class="si">{: ,.14E}</span><span class="s1"> </span><span class="si">{: ,.14E}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">atom</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">atom</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+                                                                  <span class="n">atom</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]),</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&lt;/Nuclear Cartesian Energy Gradients&gt;&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+
+    <span class="c1"># nuclear virial of energy-gradient-based forces on nuclei (optional)</span>
+    <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">extra</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;nuc_viral&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_write_xml_single_scientific</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="n">lbs</span><span class="p">[</span><span class="s2">&quot;nuc_viral&quot;</span><span class="p">],</span> <span class="n">info</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">extra</span><span class="p">[</span><span class="s2">&quot;nuc_viral&quot;</span><span class="p">],</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+
+    <span class="c1"># write full virial ratio (optional)</span>
+    <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">extra</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;full_virial_ratio&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_write_xml_single_scientific</span><span class="p">(</span><span class="n">lbs</span><span class="p">[</span><span class="s2">&quot;full_virial_ratio&quot;</span><span class="p">],</span> <span class="n">data</span><span class="o">.</span><span class="n">extra</span><span class="p">[</span><span class="s2">&quot;full_virial_ratio&quot;</span><span class="p">],</span> <span class="n">f</span><span class="p">)</span>
+
+    <span class="c1"># number of core electrons (optional)</span>
+    <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">extra</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;num_core_electrons&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_write_xml_single</span><span class="p">(</span><span class="n">lbs</span><span class="p">[</span><span class="s2">&quot;num_core_electrons&quot;</span><span class="p">],</span> <span class="n">data</span><span class="o">.</span><span class="n">extra</span><span class="p">[</span><span class="s2">&quot;num_core_electrons&quot;</span><span class="p">],</span> <span class="n">f</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">_write_xml_single</span><span class="p">(</span><span class="n">tag</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">info</span><span class="p">:</span> <span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">file</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Write header, tail and the data between them into the file.&quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">file</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">file</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&lt;/&#39;</span> <span class="o">+</span> <span class="n">tag</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;&lt;&#39;</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">file</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_write_xml_single_scientific</span><span class="p">(</span><span class="n">tag</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">info</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Write header, tail and the data between them into the file.&quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">file</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{: ,.14E}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">info</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">file</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&lt;/&#39;</span> <span class="o">+</span> <span class="n">tag</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;&lt;&#39;</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">file</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_write_xml_iterator</span><span class="p">(</span><span class="n">tag</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">info</span><span class="p">:</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Write list of arrays to file.&quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">file</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">info_line</span> <span class="ow">in</span> <span class="n">info</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">info_line</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">file</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&lt;/&#39;</span> <span class="o">+</span> <span class="n">tag</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;&lt;&#39;</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">file</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_write_xml_iterator_scientific</span><span class="p">(</span><span class="n">tag</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">info</span><span class="p">:</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Write list of arrays to file.&quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">file</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">info_line</span> <span class="ow">in</span> <span class="n">info</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{: ,.14E}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">info_line</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">file</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&lt;/&#39;</span> <span class="o">+</span> <span class="n">tag</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;&lt;&#39;</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">file</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, The IODATA Development Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

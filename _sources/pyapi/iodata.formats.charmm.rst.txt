@@ -1,0 +1,8 @@
+iodata.formats.charmm module
+============================
+
+.. automodule:: iodata.formats.charmm
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :inherited-members:

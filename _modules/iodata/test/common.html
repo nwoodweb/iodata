@@ -1,0 +1,403 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>iodata.test.common &mdash; IOData  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/override.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["fast-preview.js"], "TeX": {"Macros": {"ket": ["{\\left\\vert { #1 } \\right\\rangle}", 1], "bra": ["{\\left\\langle { #1} \\right\\vert}", 1], "braket": ["{\\left\\langle {#1} \\mid { #2} \\right\\rangle}", 2], "ketbra": ["{\\left\\vert { #1 } \\right\\rangle\\left\\langle { #2} \\right\\vert}", 2], "ev": ["{\\left\\langle {#2} \\vert {#1} \\vert {#2} \\right\\rangle}", 2], "mel": ["{\\left\\langle{ #1 }\\right\\vert{ #2 }\\left\\vert{#3}\\right\\rangle}", 3]}}})</script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> IOData
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../formats.html">Supported File Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../basis.html">Basis set conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">IOData Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgments.html">Acknowledgments</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pyapi/modules.html">iodata</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">IOData</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>iodata.test.common</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for iodata.test.common</h1><div class="highlight"><pre>
+<span></span><span class="c1"># IODATA is an input and output module for quantum chemistry.</span>
+<span class="c1"># Copyright (C) 2011-2019 The IODATA Development Team</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of IODATA.</span>
+<span class="c1">#</span>
+<span class="c1"># IODATA is free software; you can redistribute it and/or</span>
+<span class="c1"># modify it under the terms of the GNU General Public License</span>
+<span class="c1"># as published by the Free Software Foundation; either version 3</span>
+<span class="c1"># of the License, or (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># IODATA is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program; if not, see &lt;http://www.gnu.org/licenses/&gt;</span>
+<span class="c1"># --</span>
+<span class="sd">&quot;&quot;&quot;Utilities for unit tests.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">contextmanager</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy.testing</span> <span class="kn">import</span> <span class="n">assert_equal</span><span class="p">,</span> <span class="n">assert_allclose</span>
+<span class="kn">import</span> <span class="nn">pytest</span>
+
+<span class="kn">from</span> <span class="nn">..api</span> <span class="kn">import</span> <span class="n">load_one</span>
+<span class="kn">from</span> <span class="nn">..overlap</span> <span class="kn">import</span> <span class="n">compute_overlap</span>
+<span class="kn">from</span> <span class="nn">..basis</span> <span class="kn">import</span> <span class="n">convert_conventions</span>
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="n">FileFormatWarning</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">importlib_resources</span> <span class="kn">import</span> <span class="n">path</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">importlib.resources</span> <span class="kn">import</span> <span class="n">path</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;compute_mulliken_charges&#39;</span><span class="p">,</span> <span class="s1">&#39;compute_1rdm&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;compare_mols&#39;</span><span class="p">,</span> <span class="s1">&#39;check_orthonormal&#39;</span><span class="p">,</span> <span class="s1">&#39;load_one_warning&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="compute_1rdm"><a class="viewcode-back" href="../../../pyapi/iodata.test.common.html#iodata.test.common.compute_1rdm">[docs]</a><span class="k">def</span> <span class="nf">compute_1rdm</span><span class="p">(</span><span class="n">iodata</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute 1-RDM.&quot;&quot;&quot;</span>
+    <span class="n">coeffs</span><span class="p">,</span> <span class="n">occs</span> <span class="o">=</span> <span class="n">iodata</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">coeffs</span><span class="p">,</span> <span class="n">iodata</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">occs</span>
+    <span class="n">dm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">coeffs</span> <span class="o">*</span> <span class="n">occs</span><span class="p">,</span> <span class="n">coeffs</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dm</span></div>
+
+
+<div class="viewcode-block" id="compute_mulliken_charges"><a class="viewcode-back" href="../../../pyapi/iodata.test.common.html#iodata.test.common.compute_mulliken_charges">[docs]</a><span class="k">def</span> <span class="nf">compute_mulliken_charges</span><span class="p">(</span><span class="n">iodata</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute Mulliken charges.&quot;&quot;&quot;</span>
+    <span class="n">dm</span> <span class="o">=</span> <span class="n">compute_1rdm</span><span class="p">(</span><span class="n">iodata</span><span class="p">)</span>
+    <span class="n">ov</span> <span class="o">=</span> <span class="n">compute_overlap</span><span class="p">(</span><span class="n">iodata</span><span class="o">.</span><span class="n">obasis</span><span class="p">,</span> <span class="n">iodata</span><span class="o">.</span><span class="n">atcoords</span><span class="p">)</span>
+    <span class="c1"># compute basis function population matrix</span>
+    <span class="n">bp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">dm</span><span class="p">,</span> <span class="n">ov</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># find basis functions center</span>
+    <span class="n">basis_center</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">shell</span> <span class="ow">in</span> <span class="n">iodata</span><span class="o">.</span><span class="n">obasis</span><span class="o">.</span><span class="n">shells</span><span class="p">:</span>
+        <span class="n">basis_center</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">shell</span><span class="o">.</span><span class="n">icenter</span><span class="p">]</span> <span class="o">*</span> <span class="n">shell</span><span class="o">.</span><span class="n">nbasis</span><span class="p">)</span>
+    <span class="n">basis_center</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">basis_center</span><span class="p">)</span>
+    <span class="c1"># compute atomic populations</span>
+    <span class="n">populations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">bp</span><span class="p">[</span><span class="n">basis_center</span> <span class="o">==</span> <span class="n">index</span><span class="p">])</span>
+                            <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iodata</span><span class="o">.</span><span class="n">natom</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="n">iodata</span><span class="o">.</span><span class="n">atcorenums</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">populations</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="truncated_file"><a class="viewcode-back" href="../../../pyapi/iodata.test.common.html#iodata.test.common.truncated_file">[docs]</a><span class="nd">@contextmanager</span>
+<span class="k">def</span> <span class="nf">truncated_file</span><span class="p">(</span><span class="n">fn_orig</span><span class="p">,</span> <span class="n">nline</span><span class="p">,</span> <span class="n">nadd</span><span class="p">,</span> <span class="n">tmpdir</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Make a temporary truncated copy of a file.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fn_orig : str</span>
+<span class="sd">        The file to be truncated.</span>
+<span class="sd">    nline : int</span>
+<span class="sd">        The number of lines to retain.</span>
+<span class="sd">    nadd : int</span>
+<span class="sd">        The number of empty lines to add.</span>
+<span class="sd">    tmpdir : str</span>
+<span class="sd">        A temporary directory where the truncated file is stored.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fn_truncated</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/truncated_</span><span class="si">%i</span><span class="s1">_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span>
+        <span class="n">tmpdir</span><span class="p">,</span> <span class="n">nline</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">fn_orig</span><span class="p">))</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fn_orig</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_orig</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">fn_truncated</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_truncated</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">counter</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">f_orig</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">counter</span> <span class="o">&gt;=</span> <span class="n">nline</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="n">f_truncated</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nadd</span><span class="p">):</span>
+            <span class="n">f_truncated</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">yield</span> <span class="n">fn_truncated</span></div>
+
+
+<div class="viewcode-block" id="compare_mols"><a class="viewcode-back" href="../../../pyapi/iodata.test.common.html#iodata.test.common.compare_mols">[docs]</a><span class="k">def</span> <span class="nf">compare_mols</span><span class="p">(</span><span class="n">mol1</span><span class="p">,</span> <span class="n">mol2</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1.0e-8</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compare two IOData objects.&quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="n">mol1</span><span class="o">.</span><span class="n">title</span> <span class="o">==</span> <span class="n">mol2</span><span class="o">.</span><span class="n">title</span>
+    <span class="n">assert_equal</span><span class="p">(</span><span class="n">mol1</span><span class="o">.</span><span class="n">atnums</span><span class="p">,</span> <span class="n">mol2</span><span class="o">.</span><span class="n">atnums</span><span class="p">)</span>
+    <span class="n">assert_equal</span><span class="p">(</span><span class="n">mol1</span><span class="o">.</span><span class="n">atcorenums</span><span class="p">,</span> <span class="n">mol2</span><span class="o">.</span><span class="n">atcorenums</span><span class="p">)</span>
+    <span class="n">assert_allclose</span><span class="p">(</span><span class="n">mol1</span><span class="o">.</span><span class="n">atcoords</span><span class="p">,</span> <span class="n">mol2</span><span class="o">.</span><span class="n">atcoords</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">)</span>
+    <span class="c1"># orbital basis</span>
+    <span class="k">if</span> <span class="n">mol1</span><span class="o">.</span><span class="n">obasis</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># compare dictionaries</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">mol1</span><span class="o">.</span><span class="n">obasis</span><span class="o">.</span><span class="n">shells</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">mol2</span><span class="o">.</span><span class="n">obasis</span><span class="o">.</span><span class="n">shells</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">shell1</span><span class="p">,</span> <span class="n">shell2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">mol1</span><span class="o">.</span><span class="n">obasis</span><span class="o">.</span><span class="n">shells</span><span class="p">,</span> <span class="n">mol2</span><span class="o">.</span><span class="n">obasis</span><span class="o">.</span><span class="n">shells</span><span class="p">):</span>
+            <span class="k">assert</span> <span class="n">shell1</span><span class="o">.</span><span class="n">icenter</span> <span class="o">==</span> <span class="n">shell2</span><span class="o">.</span><span class="n">icenter</span>
+            <span class="n">assert_equal</span><span class="p">(</span><span class="n">shell1</span><span class="o">.</span><span class="n">angmoms</span><span class="p">,</span> <span class="n">shell2</span><span class="o">.</span><span class="n">angmoms</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="n">shell1</span><span class="o">.</span><span class="n">kinds</span> <span class="o">==</span> <span class="n">shell2</span><span class="o">.</span><span class="n">kinds</span>
+            <span class="n">assert_allclose</span><span class="p">(</span><span class="n">shell1</span><span class="o">.</span><span class="n">exponents</span><span class="p">,</span> <span class="n">shell2</span><span class="o">.</span><span class="n">exponents</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="n">rtol</span><span class="p">)</span>
+            <span class="n">assert_allclose</span><span class="p">(</span><span class="n">shell1</span><span class="o">.</span><span class="n">coeffs</span><span class="p">,</span> <span class="n">shell2</span><span class="o">.</span><span class="n">coeffs</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="n">rtol</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">mol1</span><span class="o">.</span><span class="n">obasis</span><span class="o">.</span><span class="n">primitive_normalization</span> <span class="o">==</span> <span class="n">mol2</span><span class="o">.</span><span class="n">obasis</span><span class="o">.</span><span class="n">primitive_normalization</span>
+        <span class="c1"># compute and compare Mulliken charges</span>
+        <span class="n">charges1</span> <span class="o">=</span> <span class="n">compute_mulliken_charges</span><span class="p">(</span><span class="n">mol1</span><span class="p">)</span>
+        <span class="n">charges2</span> <span class="o">=</span> <span class="n">compute_mulliken_charges</span><span class="p">(</span><span class="n">mol2</span><span class="p">)</span>
+        <span class="n">assert_allclose</span><span class="p">(</span><span class="n">charges1</span><span class="p">,</span> <span class="n">charges2</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="n">rtol</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="n">mol2</span><span class="o">.</span><span class="n">obasis</span> <span class="ow">is</span> <span class="kc">None</span>
+    <span class="c1"># wfn</span>
+    <span class="n">perm</span><span class="p">,</span> <span class="n">sgn</span> <span class="o">=</span> <span class="n">convert_conventions</span><span class="p">(</span><span class="n">mol1</span><span class="o">.</span><span class="n">obasis</span><span class="p">,</span> <span class="n">mol2</span><span class="o">.</span><span class="n">obasis</span><span class="o">.</span><span class="n">conventions</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">mol1</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="n">mol2</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">kind</span>
+    <span class="n">assert_allclose</span><span class="p">(</span><span class="n">mol1</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">occs</span><span class="p">,</span> <span class="n">mol2</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">occs</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="n">rtol</span><span class="p">)</span>
+    <span class="n">assert_allclose</span><span class="p">(</span><span class="n">mol1</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">coeffs</span><span class="p">[</span><span class="n">perm</span><span class="p">]</span> <span class="o">*</span> <span class="n">sgn</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">mol2</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">coeffs</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="n">rtol</span><span class="p">)</span>
+    <span class="n">assert_allclose</span><span class="p">(</span><span class="n">mol1</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">energies</span><span class="p">,</span> <span class="n">mol2</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">energies</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="n">rtol</span><span class="p">)</span>
+    <span class="n">assert_equal</span><span class="p">(</span><span class="n">mol1</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">irreps</span><span class="p">,</span> <span class="n">mol2</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">irreps</span><span class="p">)</span>
+    <span class="c1"># operators and density matrices</span>
+    <span class="n">cases</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;one_ints&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;olp&#39;</span><span class="p">,</span> <span class="s1">&#39;kin_ao&#39;</span><span class="p">,</span> <span class="s1">&#39;na_ao&#39;</span><span class="p">]),</span>
+        <span class="p">(</span><span class="s1">&#39;two_ints&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;er_ao&#39;</span><span class="p">]),</span>
+        <span class="p">(</span><span class="s1">&#39;one_rdms&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;scf&#39;</span><span class="p">,</span> <span class="s1">&#39;scf_spin&#39;</span><span class="p">,</span> <span class="s1">&#39;post_scf&#39;</span><span class="p">,</span> <span class="s1">&#39;post_scf_spin&#39;</span><span class="p">]),</span>
+    <span class="p">]</span>
+    <span class="k">for</span> <span class="n">attrname</span><span class="p">,</span> <span class="n">keys</span> <span class="ow">in</span> <span class="n">cases</span><span class="p">:</span>
+        <span class="n">d1</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">mol1</span><span class="p">,</span> <span class="n">attrname</span><span class="p">)</span>
+        <span class="n">d2</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">mol2</span><span class="p">,</span> <span class="n">attrname</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">d1</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">d2</span>
+                <span class="n">matrix1</span> <span class="o">=</span> <span class="n">d1</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                <span class="n">matrix1</span> <span class="o">=</span> <span class="n">matrix1</span><span class="p">[</span><span class="n">perm</span><span class="p">]</span> <span class="o">*</span> <span class="n">sgn</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">matrix1</span> <span class="o">=</span> <span class="n">matrix1</span><span class="p">[:,</span> <span class="n">perm</span><span class="p">]</span> <span class="o">*</span> <span class="n">sgn</span>
+                <span class="n">matrix2</span> <span class="o">=</span> <span class="n">d2</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_equal</span><span class="p">(</span><span class="n">matrix1</span><span class="p">,</span> <span class="n">matrix2</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">d2</span></div>
+
+
+<div class="viewcode-block" id="check_orthonormal"><a class="viewcode-back" href="../../../pyapi/iodata.test.common.html#iodata.test.common.check_orthonormal">[docs]</a><span class="k">def</span> <span class="nf">check_orthonormal</span><span class="p">(</span><span class="n">mo_coeffs</span><span class="p">,</span> <span class="n">ao_overlap</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Check that molecular orbitals are orthogonal and normalized.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    mo_coeffs : np.ndarray, shape=(nbasis, mo_count)</span>
+<span class="sd">        Molecular orbital coefficients.</span>
+<span class="sd">    ao_overlap : np.ndarray, shape=(nbasis, nbasis)</span>
+<span class="sd">        Atomic orbital overlap matrix.</span>
+<span class="sd">    atol : float</span>
+<span class="sd">        Absolute tolerance in deviation from identity matrix.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># compute MO overlap &amp; number of MO orbitals</span>
+    <span class="n">mo_overlap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">mo_coeffs</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">ao_overlap</span><span class="p">,</span> <span class="n">mo_coeffs</span><span class="p">))</span>
+    <span class="n">mo_count</span> <span class="o">=</span> <span class="n">mo_coeffs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Molecular orbitals are not orthonormal!&#39;</span>
+    <span class="n">assert_allclose</span><span class="p">(</span><span class="n">mo_overlap</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">mo_count</span><span class="p">),</span>
+                    <span class="n">rtol</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">,</span> <span class="n">err_msg</span><span class="o">=</span><span class="n">message</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="load_one_warning"><a class="viewcode-back" href="../../../pyapi/iodata.test.common.html#iodata.test.common.load_one_warning">[docs]</a><span class="k">def</span> <span class="nf">load_one_warning</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">match</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Call load_one, catching expected FileFormatWarning.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filename</span>
+<span class="sd">        The file in the unit test data directory to load.</span>
+<span class="sd">    fmt</span>
+<span class="sd">        The name of the file format module to use. When not given, it is guessed</span>
+<span class="sd">        from the filename.</span>
+<span class="sd">    match</span>
+<span class="sd">        When given, loading the file is expected to raise a warning whose</span>
+<span class="sd">        message string contains match.</span>
+<span class="sd">    **kwargs</span>
+<span class="sd">        Keyword arguments are passed on to the format-specific load_one function.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    out</span>
+<span class="sd">        The instance of IOData with data loaded from the input files.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">path</span><span class="p">(</span><span class="s1">&#39;iodata.test.data&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">fn</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">match</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">load_one</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">fn</span><span class="p">),</span> <span class="n">fmt</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">warns</span><span class="p">(</span><span class="n">FileFormatWarning</span><span class="p">,</span> <span class="n">match</span><span class="o">=</span><span class="n">match</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">load_one</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">fn</span><span class="p">),</span> <span class="n">fmt</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, The IODATA Development Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,596 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>iodata.basis module &mdash; IOData  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/override.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["fast-preview.js"], "TeX": {"Macros": {"ket": ["{\\left\\vert { #1 } \\right\\rangle}", 1], "bra": ["{\\left\\langle { #1} \\right\\vert}", 1], "braket": ["{\\left\\langle {#1} \\mid { #2} \\right\\rangle}", 2], "ketbra": ["{\\left\\vert { #1 } \\right\\rangle\\left\\langle { #2} \\right\\vert}", 2], "ev": ["{\\left\\langle {#2} \\vert {#1} \\vert {#2} \\right\\rangle}", 2], "mel": ["{\\left\\langle{ #1 }\\right\\vert{ #2 }\\left\\vert{#3}\\right\\rangle}", 3]}}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="iodata.docstrings module" href="iodata.docstrings.html" />
+    <link rel="prev" title="iodata.attrutils module" href="iodata.attrutils.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> IOData
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../formats.html">Supported File Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basis.html">Basis set conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">IOData Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgments.html">Acknowledgments</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">iodata</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="iodata.html">iodata package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="iodata.html#subpackages">Subpackages</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="iodata.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="iodata.api.html">iodata.api module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.attrutils.html">iodata.attrutils module</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">iodata.basis module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.docstrings.html">iodata.docstrings module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.iodata.html">iodata.iodata module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.orbitals.html">iodata.orbitals module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.overlap.html">iodata.overlap module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.overlap_cartpure.html">iodata.overlap_cartpure module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.periodic.html">iodata.periodic module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.utils.html">iodata.utils module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.version.html">iodata.version module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="iodata.html#module-iodata">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">IOData</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="modules.html">iodata</a> &raquo;</li>
+        
+          <li><a href="iodata.html">iodata package</a> &raquo;</li>
+        
+      <li>iodata.basis module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/pyapi/iodata.basis.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-iodata.basis">
+<span id="iodata-basis-module"></span><h1>iodata.basis module<a class="headerlink" href="#module-iodata.basis" title="Permalink to this headline">¶</a></h1>
+<p>Utility functions for working with basis sets.</p>
+<dl class="py class">
+<dt id="iodata.basis.MolecularBasis">
+<em class="property">class </em><code class="sig-name descname">MolecularBasis</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">shells</span></em>, <em class="sig-param"><span class="n">conventions</span></em>, <em class="sig-param"><span class="n">primitive_normalization</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iodata/basis.html#MolecularBasis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iodata.basis.MolecularBasis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A complete molecular orbital or density basis set.</p>
+<dl class="py attribute">
+<dt id="iodata.basis.MolecularBasis.shells">
+<code class="sig-name descname">shells</code><a class="headerlink" href="#iodata.basis.MolecularBasis.shells" title="Permalink to this definition">¶</a></dt>
+<dd><p>A list of objects of type Shell which can support generalized contractions.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.basis.MolecularBasis.conventions">
+<code class="sig-name descname">conventions</code><a class="headerlink" href="#iodata.basis.MolecularBasis.conventions" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dictionary specifying the ordered basis functions for a given angular momentum and kind.
+The key is a tuple of angular momentum integer and kind character (‘c’ for Cartesian
+and ‘p’ for pure/spherical) and the value is a list of basis function strings.
+For example,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="c1">### Conventions for Cartesian functions</span>
+    <span class="c1"># E.g., alphabetically ordered Cartesian functions.</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">):</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">],</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">):</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">],</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">):</span> <span class="p">[</span><span class="s1">&#39;xx&#39;</span><span class="p">,</span> <span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="s1">&#39;xz&#39;</span><span class="p">,</span> <span class="s1">&#39;yy&#39;</span><span class="p">,</span> <span class="s1">&#39;yz&#39;</span><span class="p">,</span> <span class="s1">&#39;zz&#39;</span><span class="p">],</span>
+    <span class="c1">### Conventions for pure functions.</span>
+    <span class="c1"># The notation is referring to real solid spherical harmonics.</span>
+    <span class="c1"># See https://en.wikipedia.org/wiki/Solid_harmonics#Real_form</span>
+    <span class="c1"># &#39;c{m}&#39; = solid harmonic containing cos(m phi)</span>
+    <span class="c1"># &#39;s{m}&#39; = solid harmonic containing sin(m phi)</span>
+    <span class="c1"># where m is the magnetic quantum number and phi is the</span>
+    <span class="c1"># azimuthal angle.</span>
+    <span class="c1"># For example, wikipedia-ordered real spherical harmonics,</span>
+    <span class="c1"># see https://en.wikipedia.org/wiki/Spherical_harmonics#Real_form</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">):</span> <span class="p">[</span><span class="s1">&#39;s2&#39;</span><span class="p">,</span> <span class="s1">&#39;s1&#39;</span><span class="p">,</span> <span class="s1">&#39;c0&#39;</span><span class="p">,</span> <span class="s1">&#39;c1&#39;</span><span class="p">,</span> <span class="s1">&#39;c2&#39;</span><span class="p">],</span>
+    <span class="c1"># Different quantum-chemistry codes may use incompatible</span>
+    <span class="c1"># orderings and sign conventions. E.g. Molden files written</span>
+    <span class="c1"># by ORCA use the following convention for pure f functions:</span>
+    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">):</span> <span class="p">[</span><span class="s1">&#39;c0&#39;</span><span class="p">,</span> <span class="s1">&#39;c1&#39;</span><span class="p">,</span> <span class="s1">&#39;s1&#39;</span><span class="p">,</span> <span class="s1">&#39;c2&#39;</span><span class="p">,</span> <span class="s1">&#39;s2&#39;</span><span class="p">,</span> <span class="s1">&#39;-c3&#39;</span><span class="p">,</span> <span class="s1">&#39;-s3&#39;</span><span class="p">],</span>
+    <span class="c1"># Note that the minus sign in the last two basis functions</span>
+    <span class="c1"># denotes that the signs of these harmonics have been changed.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The basis function strings in the conventions dictionary are documented
+in <a class="reference internal" href="../basis.html#basis-conventions"><span class="std std-ref">Basis set conventions</span></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.basis.MolecularBasis.primitive_normalization">
+<code class="sig-name descname">primitive_normalization</code><a class="headerlink" href="#iodata.basis.MolecularBasis.primitive_normalization" title="Permalink to this definition">¶</a></dt>
+<dd><p>The normalization convention of primitives, which can be ‘L2’ (orbitals) or ‘L1’
+(densities) normalized.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="iodata.basis.MolecularBasis.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">shells</span></em>, <em class="sig-param"><span class="n">conventions</span></em>, <em class="sig-param"><span class="n">primitive_normalization</span></em><span class="sig-paren">)</span><a class="headerlink" href="#iodata.basis.MolecularBasis.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method generated by attrs for class MolecularBasis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="id0">
+<code class="sig-name descname">conventions</code><em class="property">: Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">]</span></em><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="iodata.basis.MolecularBasis.get_segmented">
+<code class="sig-name descname">get_segmented</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iodata/basis.html#MolecularBasis.get_segmented"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iodata.basis.MolecularBasis.get_segmented" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unroll generalized contractions.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="iodata.basis.MolecularBasis.nbasis">
+<em class="property">property </em><code class="sig-name descname">nbasis</code><a class="headerlink" href="#iodata.basis.MolecularBasis.nbasis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of basis functions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="id1">
+<code class="sig-name descname">primitive_normalization</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><a class="headerlink" href="#id1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id2">
+<code class="sig-name descname">shells</code><em class="property">: List<span class="p">[</span><a class="reference internal" href="#iodata.basis.Shell" title="iodata.basis.Shell">iodata.basis.Shell</a><span class="p">]</span></em><a class="headerlink" href="#id2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="iodata.basis.Shell">
+<em class="property">class </em><code class="sig-name descname">Shell</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">icenter</span></em>, <em class="sig-param"><span class="n">angmoms</span></em>, <em class="sig-param"><span class="n">kinds</span></em>, <em class="sig-param"><span class="n">exponents</span></em>, <em class="sig-param"><span class="n">coeffs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iodata/basis.html#Shell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iodata.basis.Shell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A shell in a molecular basis representing (generalized) contractions with the same exponents.</p>
+<dl class="py attribute">
+<dt id="iodata.basis.Shell.icenter">
+<code class="sig-name descname">icenter</code><a class="headerlink" href="#iodata.basis.Shell.icenter" title="Permalink to this definition">¶</a></dt>
+<dd><p>An integer index specifying the row in the atcoords array of IOData object.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.basis.Shell.angmoms">
+<code class="sig-name descname">angmoms</code><a class="headerlink" href="#iodata.basis.Shell.angmoms" title="Permalink to this definition">¶</a></dt>
+<dd><p>An integer array of angular momentum quantum numbers, non-negative, with
+shape (ncon,).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.basis.Shell.kinds">
+<code class="sig-name descname">kinds</code><a class="headerlink" href="#iodata.basis.Shell.kinds" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of strings describing the kind of contractions: ‘c’ for Cartesian
+and ‘p’ for pure. Pure functions are only allowed for angmom&gt;1.
+The length equals the number of contractions: len(angmoms)=ncon.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.basis.Shell.exponents">
+<code class="sig-name descname">exponents</code><a class="headerlink" href="#iodata.basis.Shell.exponents" title="Permalink to this definition">¶</a></dt>
+<dd><p>The array containing the exponents of the primitives, with shape (nprim,).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.basis.Shell.coeffs">
+<code class="sig-name descname">coeffs</code><a class="headerlink" href="#iodata.basis.Shell.coeffs" title="Permalink to this definition">¶</a></dt>
+<dd><p>The array containing the coefficients of the normalized primitives in each contraction;
+shape = (nprim, ncon).
+These coefficients assume that the primitives are L2 (orbitals) or L1
+(densities) normalized, but contractions are not necessarily normalized.
+(This depends on the code which generated the contractions.)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="iodata.basis.Shell.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">icenter</span></em>, <em class="sig-param"><span class="n">angmoms</span></em>, <em class="sig-param"><span class="n">kinds</span></em>, <em class="sig-param"><span class="n">exponents</span></em>, <em class="sig-param"><span class="n">coeffs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#iodata.basis.Shell.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method generated by attrs for class Shell.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="id3">
+<code class="sig-name descname">angmoms</code><em class="property">: List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">]</span></em><a class="headerlink" href="#id3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id4">
+<code class="sig-name descname">coeffs</code><em class="property">: numpy.ndarray</em><a class="headerlink" href="#id4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id5">
+<code class="sig-name descname">exponents</code><em class="property">: numpy.ndarray</em><a class="headerlink" href="#id5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id6">
+<code class="sig-name descname">icenter</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></em><a class="headerlink" href="#id6" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id7">
+<code class="sig-name descname">kinds</code><em class="property">: List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">]</span></em><a class="headerlink" href="#id7" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="iodata.basis.Shell.nbasis">
+<em class="property">property </em><code class="sig-name descname">nbasis</code><a class="headerlink" href="#iodata.basis.Shell.nbasis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of basis functions (e.g. 3 for a P shell and 4 for an SP shell).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="iodata.basis.Shell.ncon">
+<em class="property">property </em><code class="sig-name descname">ncon</code><a class="headerlink" href="#iodata.basis.Shell.ncon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of contractions. This is usually 1; e.g., it would be 2 for an SP shell.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="iodata.basis.Shell.nprim">
+<em class="property">property </em><code class="sig-name descname">nprim</code><a class="headerlink" href="#iodata.basis.Shell.nprim" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of primitives, also known as the contraction length.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="iodata.basis.angmom_its">
+<code class="sig-name descname">angmom_its</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">angmom</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iodata/basis.html#angmom_its"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iodata.basis.angmom_its" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert an angular momentum from integer to string representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>angmom</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]]) – The integer representation of the angular momentum.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The string representation of the angular momentum. If a list of integer
+angmom is given, a list of str is returned.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>char</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="iodata.basis.angmom_sti">
+<code class="sig-name descname">angmom_sti</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">char</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iodata/basis.html#angmom_sti"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iodata.basis.angmom_sti" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert an angular momentum from string to integer format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>char</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]) – Character representation of angular momentum, (s, p, d, …)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An integer representation of the angular momentum. If a list of str
+char is given, a list of integers in returned.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>angmom</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="iodata.basis.convert_convention_shell">
+<code class="sig-name descname">convert_convention_shell</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">conv1</span></em>, <em class="sig-param"><span class="n">conv2</span></em>, <em class="sig-param"><span class="n">reverse</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iodata/basis.html#convert_convention_shell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iodata.basis.convert_convention_shell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a permutation vector and sign changes to convert from 1 to 2.</p>
+<p>The transformation from convention 1 to convention 2 can be done applying
+the results of this function as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">vector2</span> <span class="o">=</span> <span class="n">vector1</span><span class="p">[</span><span class="n">permutation</span><span class="p">]</span><span class="o">*</span><span class="n">signs</span>
+</pre></div>
+</div>
+<p>When using the option <code class="docutils literal notranslate"><span class="pre">reverse=True</span></code>, one can use the results to convert
+in the opposite sense:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">vector1</span> <span class="o">=</span> <span class="n">vector2</span><span class="p">[</span><span class="n">permutation</span><span class="p">]</span><span class="o">*</span><span class="n">signs</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>conv1</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – Two lists, with the same strings (in different order), where each string
+may be prefixed with a ‘-‘.</p></li>
+<li><p><strong>conv2</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – Two lists, with the same strings (in different order), where each string
+may be prefixed with a ‘-‘.</p></li>
+<li><p><strong>reverse</strong> – When, true the conversion from 2 to 1 is returned.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><em>permutation</em> – An integer array that permutes basis function from 1 to 2.</p></li>
+<li><p><em>signs</em> – Sign changes when going from 1 to 2, must be applied after permutation</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="iodata.basis.convert_conventions">
+<code class="sig-name descname">convert_conventions</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">molbasis</span></em>, <em class="sig-param"><span class="n">new_conventions</span></em>, <em class="sig-param"><span class="n">reverse</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iodata/basis.html#convert_conventions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iodata.basis.convert_conventions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a permutation vector and sign changes to convert from 1 to 2.</p>
+<p>The transformation from molbasis.convention to the new convention can be done
+applying the results of this function as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">vector2</span> <span class="o">=</span> <span class="n">vector1</span><span class="p">[</span><span class="n">permutation</span><span class="p">]</span><span class="o">*</span><span class="n">signs</span>
+</pre></div>
+</div>
+<p>When using the option <code class="docutils literal notranslate"><span class="pre">reverse=True</span></code>, one can use the results to convert
+in the opposite sense:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">vector1</span> <span class="o">=</span> <span class="n">vector2</span><span class="p">[</span><span class="n">permutation</span><span class="p">]</span><span class="o">*</span><span class="n">signs</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>molbasis</strong> (<a class="reference internal" href="#iodata.basis.MolecularBasis" title="iodata.basis.MolecularBasis"><code class="xref py py-class docutils literal notranslate"><span class="pre">MolecularBasis</span></code></a>) – The description of a molecular basis set.</p></li>
+<li><p><strong>new_conventions</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]) – The new conventions for ordering and signs, to which data for the
+orbital basis needs to be converted.</p></li>
+<li><p><strong>reverse</strong> – When, true the conversion from 2 to 1 is returned.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><em>permutation</em> – An integer array that permutes basis function from 1 to 2.</p></li>
+<li><p><em>signs</em> – Sign changes when going from 1 to 2, must be applied after permutation</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="iodata.basis.get_default_conventions">
+<code class="sig-name descname">get_default_conventions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iodata/basis.html#get_default_conventions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iodata.basis.get_default_conventions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Produce a conventions dictionary compatible with HORTON2.</p>
+<p>Do not change this!!! This is also used by several file formats from other
+QC codes who happen to follow the same conventions.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="iodata.basis.iter_cart_alphabet">
+<code class="sig-name descname">iter_cart_alphabet</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iodata/basis.html#iter_cart_alphabet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iodata.basis.iter_cart_alphabet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loop over powers of Cartesian basis functions in alphabetical order.</p>
+<p>See <a class="reference external" href="https://theochem.github.io/horton/2.1.1/tech_ref_gaussian_basis.html">https://theochem.github.io/horton/2.1.1/tech_ref_gaussian_basis.html</a>
+for details.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – The angular momentum, i.e. sum of Cartesian powers in this case.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="iodata.docstrings.html" class="btn btn-neutral float-right" title="iodata.docstrings module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="iodata.attrutils.html" class="btn btn-neutral float-left" title="iodata.attrutils module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, The IODATA Development Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

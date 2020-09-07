@@ -1,0 +1,852 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Supported File Formats &mdash; IOData  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/override.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["fast-preview.js"], "TeX": {"Macros": {"ket": ["{\\left\\vert { #1 } \\right\\rangle}", 1], "bra": ["{\\left\\langle { #1} \\right\\vert}", 1], "braket": ["{\\left\\langle {#1} \\mid { #2} \\right\\rangle}", 2], "ketbra": ["{\\left\\vert { #1 } \\right\\rangle\\left\\langle { #2} \\right\\vert}", 2], "ev": ["{\\left\\langle {#2} \\vert {#1} \\vert {#2} \\right\\rangle}", 2], "mel": ["{\\left\\langle{ #1 }\\right\\vert{ #2 }\\left\\vert{#3}\\right\\rangle}", 3]}}})</script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Basis set conventions" href="basis.html" />
+    <link rel="prev" title="Getting Started" href="getting_started.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> IOData
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Supported File Formats</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#charmm-crd-file-format-charmm">CHARMM crd file format (<code class="docutils literal notranslate"><span class="pre">charmm</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-charmm-load-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.charmm.load_one()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#vasp-5-chgcar-file-format-chgcar">VASP 5 CHGCAR file format (<code class="docutils literal notranslate"><span class="pre">chgcar</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-chgcar-load-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.chgcar.load_one()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#cp2k-atom-output-file-format-cp2klog">CP2K ATOM output file format (<code class="docutils literal notranslate"><span class="pre">cp2klog</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-cp2klog-load-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.cp2klog.load_one()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#gaussian-cube-file-format-cube">Gaussian Cube file format (<code class="docutils literal notranslate"><span class="pre">cube</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-cube-load-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.cube.load_one()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-cube-dump-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.cube.dump_one()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#extended-xyz-file-format-extxyz">Extended XYZ file format (<code class="docutils literal notranslate"><span class="pre">extxyz</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-extxyz-load-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.extxyz.load_one()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-extxyz-load-many"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.extxyz.load_many()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#gaussian-fchk-file-format-fchk">Gaussian FCHK file format (<code class="docutils literal notranslate"><span class="pre">fchk</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-fchk-load-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.fchk.load_one()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-fchk-dump-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.fchk.dump_one()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-fchk-load-many"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.fchk.load_many()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#molpro-2012-fcidump-file-format-fcidump">Molpro 2012 FCIDUMP file format (<code class="docutils literal notranslate"><span class="pre">fcidump</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#notes">Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-fcidump-load-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.fcidump.load_one()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-fcidump-dump-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.fcidump.dump_one()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#gamess-punch-file-format-gamess">GAMESS punch file format (<code class="docutils literal notranslate"><span class="pre">gamess</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-gamess-load-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.gamess.load_one()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#gaussian-log-file-format-gaussianlog">Gaussian Log file format (<code class="docutils literal notranslate"><span class="pre">gaussianlog</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-gaussianlog-load-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.gaussianlog.load_one()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#gromacs-gro-file-format-gromacs">GROMACS gro file format (<code class="docutils literal notranslate"><span class="pre">gromacs</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-gromacs-load-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.gromacs.load_one()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-gromacs-load-many"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.gromacs.load_many()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#vasp-5-locpot-file-format-locpot">VASP 5 LOCPOT file format (<code class="docutils literal notranslate"><span class="pre">locpot</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-locpot-load-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.locpot.load_one()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mol2-file-format-mol2">MOL2 file format (<code class="docutils literal notranslate"><span class="pre">mol2</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-mol2-load-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.mol2.load_one()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-mol2-dump-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.mol2.dump_one()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-mol2-load-many"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.mol2.load_many()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-mol2-dump-many"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.mol2.dump_many()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#molden-file-format-molden">Molden file format (<code class="docutils literal notranslate"><span class="pre">molden</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-molden-load-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.molden.load_one()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-molden-dump-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.molden.dump_one()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#molekel-file-format-molekel">Molekel file format (<code class="docutils literal notranslate"><span class="pre">molekel</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-molekel-load-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.molekel.load_one()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-molekel-dump-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.molekel.dump_one()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#orca-output-file-format-orcalog">Orca output file format (<code class="docutils literal notranslate"><span class="pre">orcalog</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-orcalog-load-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.orcalog.load_one()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pdb-file-format-pdb">PDB file format (<code class="docutils literal notranslate"><span class="pre">pdb</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-pdb-load-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.pdb.load_one()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-pdb-dump-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.pdb.dump_one()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-pdb-load-many"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.pdb.load_many()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-pdb-dump-many"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.pdb.dump_many()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#vasp-5-poscar-file-format-poscar">VASP 5 POSCAR file format (<code class="docutils literal notranslate"><span class="pre">poscar</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-poscar-load-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.poscar.load_one()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-poscar-dump-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.poscar.dump_one()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#q-chem-log-file-format-qchemlog">Q-Chem Log file format (<code class="docutils literal notranslate"><span class="pre">qchemlog</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-qchemlog-load-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.qchemlog.load_one()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sdf-file-format-sdf">SDF file format (<code class="docutils literal notranslate"><span class="pre">sdf</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-sdf-load-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.sdf.load_one()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-sdf-dump-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.sdf.dump_one()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-sdf-load-many"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.sdf.load_many()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-sdf-dump-many"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.sdf.dump_many()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#gaussian-gamess-us-wfn-file-format-wfn">Gaussian/GAMESS-US WFN file format (<code class="docutils literal notranslate"><span class="pre">wfn</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-wfn-load-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.wfn.load_one()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-wfn-dump-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.wfn.dump_one()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#aim-aimall-wfx-file-format-wfx">AIM/AIMAll WFX file format (<code class="docutils literal notranslate"><span class="pre">wfx</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-wfx-load-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.wfx.load_one()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-wfx-dump-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.wfx.dump_one()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#xyz-file-format-xyz">XYZ file format (<code class="docutils literal notranslate"><span class="pre">xyz</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-xyz-load-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.xyz.load_one()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-xyz-dump-one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.xyz.dump_one()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-xyz-load-many"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.xyz.load_many()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iodata-formats-xyz-dump-many"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.xyz.dump_many()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="basis.html">Basis set conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">IOData Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acknowledgments.html">Acknowledgments</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pyapi/modules.html">iodata</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">IOData</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Supported File Formats</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/formats.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="supported-file-formats">
+<span id="file-formats"></span><h1>Supported File Formats<a class="headerlink" href="#supported-file-formats" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="charmm-crd-file-format-charmm">
+<span id="format-charmm"></span><h2>CHARMM crd file format (<code class="docutils literal notranslate"><span class="pre">charmm</span></code>)<a class="headerlink" href="#charmm-crd-file-format-charmm" title="Permalink to this headline">¶</a></h2>
+<p>CHARMM coordinate files contain information about the location of each atom in Cartesian space.
+The format of the ASCII (CARD) CHARMM coordinate files is: Title line(s), number of atoms in file
+and the coordinate lines (one for each atom in the file).</p>
+<p>The coordinate lines contain specific information about each atom.
+These have the following structure: Atom number (sequential), residue number
+(specified relative to first residue in the PSF), residue name, atom type, x-coordinate,
+y-coordinate, z-coordinate, segment identifier, residue identifier and a weighting array value.</p>
+<p>Filename patterns:  <code class="docutils literal notranslate"><span class="pre">*.crd</span></code></p>
+<div class="section" id="iodata-formats-charmm-load-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.charmm.html#iodata.formats.charmm.load_one" title="iodata.formats.charmm.load_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.charmm.load_one()</span></code></a><a class="headerlink" href="#iodata-formats-charmm-load-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Always loads <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atffparams</span></code>, <code class="docutils literal notranslate"><span class="pre">atmasses</span></code>, <code class="docutils literal notranslate"><span class="pre">extra</span></code></p></li>
+<li><p>May load <code class="docutils literal notranslate"><span class="pre">title</span></code></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="vasp-5-chgcar-file-format-chgcar">
+<span id="format-chgcar"></span><h2>VASP 5 CHGCAR file format (<code class="docutils literal notranslate"><span class="pre">chgcar</span></code>)<a class="headerlink" href="#vasp-5-chgcar-file-format-chgcar" title="Permalink to this headline">¶</a></h2>
+<p>This format is used by <a class="reference external" href="https://www.vasp.at/">VASP 5.X</a> and
+<a class="reference external" href="http://jp-minerals.org/vesta/en/">VESTA</a>.</p>
+<p>Note that even though the <code class="docutils literal notranslate"><span class="pre">CHGCAR</span></code> and <code class="docutils literal notranslate"><span class="pre">LOCPOT</span></code> files look very similar, they require
+different conversions to atomic units.</p>
+<p>Filename patterns:  <code class="docutils literal notranslate"><span class="pre">CHGCAR*</span></code>, <code class="docutils literal notranslate"><span class="pre">AECCAR*</span></code></p>
+<div class="section" id="iodata-formats-chgcar-load-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.chgcar.html#iodata.formats.chgcar.load_one" title="iodata.formats.chgcar.load_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.chgcar.load_one()</span></code></a><a class="headerlink" href="#iodata-formats-chgcar-load-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Always loads <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">cellvecs</span></code>, <code class="docutils literal notranslate"><span class="pre">cube</span></code>, <code class="docutils literal notranslate"><span class="pre">title</span></code></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="cp2k-atom-output-file-format-cp2klog">
+<span id="format-cp2klog"></span><h2>CP2K ATOM output file format (<code class="docutils literal notranslate"><span class="pre">cp2klog</span></code>)<a class="headerlink" href="#cp2k-atom-output-file-format-cp2klog" title="Permalink to this headline">¶</a></h2>
+<p>Filename patterns:  <code class="docutils literal notranslate"><span class="pre">*.cp2k.out</span></code></p>
+<div class="section" id="iodata-formats-cp2klog-load-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.cp2klog.html#iodata.formats.cp2klog.load_one" title="iodata.formats.cp2klog.load_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.cp2klog.load_one()</span></code></a><a class="headerlink" href="#iodata-formats-cp2klog-load-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Always loads <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atcorenums</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">energy</span></code>, <code class="docutils literal notranslate"><span class="pre">mo</span></code>, <code class="docutils literal notranslate"><span class="pre">obasis</span></code></p></li>
+</ul>
+<p>This function assumes that the following subsections are present in the CP2K
+ATOM input file, in the section <code class="docutils literal notranslate"><span class="pre">ATOM%PRINT</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&amp;PRINT
+  &amp;POTENTIAL
+  &amp;END POTENTIAL
+  &amp;BASIS_SET
+  &amp;END BASIS_SET
+  &amp;ORBITALS
+  &amp;END ORBITALS
+&amp;END PRINT
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="gaussian-cube-file-format-cube">
+<span id="format-cube"></span><h2>Gaussian Cube file format (<code class="docutils literal notranslate"><span class="pre">cube</span></code>)<a class="headerlink" href="#gaussian-cube-file-format-cube" title="Permalink to this headline">¶</a></h2>
+<p>Cube files are generated by various QC codes these days, including
+<a class="reference external" href="http://www.gaussian.com/">Gaussian</a>, <a class="reference external" href="http://www.cp2k.org/">CP2K</a>,
+<a class="reference external" href="https://wiki.fysik.dtu.dk/gpaw/">GPAW</a>, <a class="reference external" href="http://www.q-chem.com/">Q-Chem</a>, …</p>
+<p>Note that the second column in the geometry specification of the cube file is interpreted
+as the effective core charges.</p>
+<p>Filename patterns:  <code class="docutils literal notranslate"><span class="pre">*.cube</span></code>, <code class="docutils literal notranslate"><span class="pre">*.cub</span></code></p>
+<div class="section" id="iodata-formats-cube-load-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.cube.html#iodata.formats.cube.load_one" title="iodata.formats.cube.load_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.cube.load_one()</span></code></a><a class="headerlink" href="#iodata-formats-cube-load-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Always loads <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atcorenums</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">cellvecs</span></code>, <code class="docutils literal notranslate"><span class="pre">cube</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="iodata-formats-cube-dump-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.cube.html#iodata.formats.cube.dump_one" title="iodata.formats.cube.dump_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.cube.dump_one()</span></code></a><a class="headerlink" href="#iodata-formats-cube-dump-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Requires <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">cube</span></code></p></li>
+<li><p>May dump <code class="docutils literal notranslate"><span class="pre">title</span></code>, <code class="docutils literal notranslate"><span class="pre">atcorenums</span></code></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="extended-xyz-file-format-extxyz">
+<span id="format-extxyz"></span><h2>Extended XYZ file format (<code class="docutils literal notranslate"><span class="pre">extxyz</span></code>)<a class="headerlink" href="#extended-xyz-file-format-extxyz" title="Permalink to this headline">¶</a></h2>
+<p>The extended XYZ file format is defined in the
+<a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/io/formatoptions.html#xyz">ASE documentation</a>.</p>
+<p>Usually, the different frames in a trajectory describe different geometries of the same
+molecule, with atoms in the same order. The <code class="docutils literal notranslate"><span class="pre">load_many</span></code> function below can also
+handle an XYZ with different molecules, e.g. a molecular database.</p>
+<p>Filename patterns:  <code class="docutils literal notranslate"><span class="pre">*.extxyz</span></code></p>
+<div class="section" id="iodata-formats-extxyz-load-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.extxyz.html#iodata.formats.extxyz.load_one" title="iodata.formats.extxyz.load_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.extxyz.load_one()</span></code></a><a class="headerlink" href="#iodata-formats-extxyz-load-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Always loads <code class="docutils literal notranslate"><span class="pre">title</span></code></p></li>
+<li><p>May load <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atgradient</span></code>, <code class="docutils literal notranslate"><span class="pre">atmasses</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">cellvecs</span></code>, <code class="docutils literal notranslate"><span class="pre">charge</span></code>, <code class="docutils literal notranslate"><span class="pre">energy</span></code>, <code class="docutils literal notranslate"><span class="pre">extra</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="iodata-formats-extxyz-load-many">
+<h3><a class="reference internal" href="pyapi/iodata.formats.extxyz.html#iodata.formats.extxyz.load_many" title="iodata.formats.extxyz.load_many"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.extxyz.load_many()</span></code></a><a class="headerlink" href="#iodata-formats-extxyz-load-many" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Always loads <code class="docutils literal notranslate"><span class="pre">title</span></code></p></li>
+<li><p>May load <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atgradient</span></code>, <code class="docutils literal notranslate"><span class="pre">atmasses</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">cellvecs</span></code>, <code class="docutils literal notranslate"><span class="pre">charge</span></code>, <code class="docutils literal notranslate"><span class="pre">energy</span></code>, <code class="docutils literal notranslate"><span class="pre">extra</span></code></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="gaussian-fchk-file-format-fchk">
+<span id="format-fchk"></span><h2>Gaussian FCHK file format (<code class="docutils literal notranslate"><span class="pre">fchk</span></code>)<a class="headerlink" href="#gaussian-fchk-file-format-fchk" title="Permalink to this headline">¶</a></h2>
+<p>Filename patterns:  <code class="docutils literal notranslate"><span class="pre">*.fchk</span></code>, <code class="docutils literal notranslate"><span class="pre">*.fch</span></code></p>
+<div class="section" id="iodata-formats-fchk-load-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.fchk.html#iodata.formats.fchk.load_one" title="iodata.formats.fchk.load_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.fchk.load_one()</span></code></a><a class="headerlink" href="#iodata-formats-fchk-load-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Always loads <code class="docutils literal notranslate"><span class="pre">atcharges</span></code>, <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">atcorenums</span></code>, <code class="docutils literal notranslate"><span class="pre">energy</span></code>, <code class="docutils literal notranslate"><span class="pre">lot</span></code>, <code class="docutils literal notranslate"><span class="pre">mo</span></code>, <code class="docutils literal notranslate"><span class="pre">obasis</span></code>, <code class="docutils literal notranslate"><span class="pre">obasis_name</span></code>, <code class="docutils literal notranslate"><span class="pre">run_type</span></code>, <code class="docutils literal notranslate"><span class="pre">title</span></code></p></li>
+<li><p>May load <code class="docutils literal notranslate"><span class="pre">atfrozen</span></code>, <code class="docutils literal notranslate"><span class="pre">atgradient</span></code>, <code class="docutils literal notranslate"><span class="pre">athessian</span></code>, <code class="docutils literal notranslate"><span class="pre">atmasses</span></code>, <code class="docutils literal notranslate"><span class="pre">one_rdms</span></code>, <code class="docutils literal notranslate"><span class="pre">extra</span></code>, <code class="docutils literal notranslate"><span class="pre">moments</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="iodata-formats-fchk-dump-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.fchk.html#iodata.formats.fchk.dump_one" title="iodata.formats.fchk.dump_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.fchk.dump_one()</span></code></a><a class="headerlink" href="#iodata-formats-fchk-dump-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Requires <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">atcorenums</span></code></p></li>
+<li><p>May dump <code class="docutils literal notranslate"><span class="pre">atcharges</span></code>, <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atfrozen</span></code>, <code class="docutils literal notranslate"><span class="pre">atgradient</span></code>, <code class="docutils literal notranslate"><span class="pre">athessian</span></code>, <code class="docutils literal notranslate"><span class="pre">atmasses</span></code>, <code class="docutils literal notranslate"><span class="pre">charge</span></code>, <code class="docutils literal notranslate"><span class="pre">energy</span></code>, <code class="docutils literal notranslate"><span class="pre">lot</span></code>, <code class="docutils literal notranslate"><span class="pre">mo</span></code>, <code class="docutils literal notranslate"><span class="pre">one_rdms</span></code>, <code class="docutils literal notranslate"><span class="pre">obasis_name</span></code>, <code class="docutils literal notranslate"><span class="pre">extra</span></code>, <code class="docutils literal notranslate"><span class="pre">moments</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="iodata-formats-fchk-load-many">
+<h3><a class="reference internal" href="pyapi/iodata.formats.fchk.html#iodata.formats.fchk.load_many" title="iodata.formats.fchk.load_many"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.fchk.load_many()</span></code></a><a class="headerlink" href="#iodata-formats-fchk-load-many" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Always loads <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atgradient</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">atcorenums</span></code>, <code class="docutils literal notranslate"><span class="pre">energy</span></code>, <code class="docutils literal notranslate"><span class="pre">extra</span></code>, <code class="docutils literal notranslate"><span class="pre">title</span></code></p></li>
+</ul>
+<p>Trajectories from a Gaussian optimization, relaxed scan or IRC calculation are written in
+groups of frames, called “points” in the Gaussian world, e.g. to discrimininate between
+different values of the constraint in a relaxed geometry. In most cases, e.g. IRC or
+conventional optimization, there is only one “point”. Within one “point”, one can have
+multiple geometries and their properties. This information is stored in the <code class="docutils literal notranslate"><span class="pre">extra</span></code>
+attribute:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ipoint</span></code> is the counter for a point</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">npoint</span></code> is the total number of points.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">istep</span></code> is the counter within one “point”</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nstep</span></code> is the total number of geometries within in a “point”.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">reaction_coordinate</span></code> is only present in case of an IRC calculation.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="molpro-2012-fcidump-file-format-fcidump">
+<span id="format-fcidump"></span><h2>Molpro 2012 FCIDUMP file format (<code class="docutils literal notranslate"><span class="pre">fcidump</span></code>)<a class="headerlink" href="#molpro-2012-fcidump-file-format-fcidump" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><p>This function works only for restricted wave-functions.</p></li>
+<li><p>One- and two-electron integrals are stored in chemists’ notation in an FCIDUMP file,
+while IOData internally uses Physicist’s notation.</p></li>
+<li><p>Keep in mind that the FCIDUMP format changed in MOLPRO 2012, so files generated with
+older versions are not supported.</p></li>
+</ol>
+<p>Filename patterns:  <code class="docutils literal notranslate"><span class="pre">*FCIDUMP*</span></code></p>
+</div>
+<div class="section" id="iodata-formats-fcidump-load-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.fcidump.html#iodata.formats.fcidump.load_one" title="iodata.formats.fcidump.load_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.fcidump.load_one()</span></code></a><a class="headerlink" href="#iodata-formats-fcidump-load-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Always loads <code class="docutils literal notranslate"><span class="pre">core_energy</span></code>, <code class="docutils literal notranslate"><span class="pre">one_ints</span></code>, <code class="docutils literal notranslate"><span class="pre">nelec</span></code>, <code class="docutils literal notranslate"><span class="pre">spinpol</span></code>, <code class="docutils literal notranslate"><span class="pre">two_ints</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="iodata-formats-fcidump-dump-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.fcidump.html#iodata.formats.fcidump.dump_one" title="iodata.formats.fcidump.dump_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.fcidump.dump_one()</span></code></a><a class="headerlink" href="#iodata-formats-fcidump-dump-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Requires <code class="docutils literal notranslate"><span class="pre">one_ints</span></code>, <code class="docutils literal notranslate"><span class="pre">two_ints</span></code></p></li>
+<li><p>May dump <code class="docutils literal notranslate"><span class="pre">core_energy</span></code>, <code class="docutils literal notranslate"><span class="pre">nelec</span></code>, <code class="docutils literal notranslate"><span class="pre">spinpol</span></code></p></li>
+</ul>
+<p>The dictionary <code class="docutils literal notranslate"><span class="pre">one_ints</span></code> must contain a field <code class="docutils literal notranslate"><span class="pre">core_mo</span></code>. Similarly, <code class="docutils literal notranslate"><span class="pre">two_ints</span></code> must
+contain <code class="docutils literal notranslate"><span class="pre">two_mo</span></code>.</p>
+</div>
+</div>
+<div class="section" id="gamess-punch-file-format-gamess">
+<span id="format-gamess"></span><h2>GAMESS punch file format (<code class="docutils literal notranslate"><span class="pre">gamess</span></code>)<a class="headerlink" href="#gamess-punch-file-format-gamess" title="Permalink to this headline">¶</a></h2>
+<p>Filename patterns:  <code class="docutils literal notranslate"><span class="pre">*.dat</span></code></p>
+<div class="section" id="iodata-formats-gamess-load-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.gamess.html#iodata.formats.gamess.load_one" title="iodata.formats.gamess.load_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.gamess.load_one()</span></code></a><a class="headerlink" href="#iodata-formats-gamess-load-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Always loads <code class="docutils literal notranslate"><span class="pre">title</span></code>, <code class="docutils literal notranslate"><span class="pre">energy</span></code>, <code class="docutils literal notranslate"><span class="pre">grot</span></code>, <code class="docutils literal notranslate"><span class="pre">atgradient</span></code>, <code class="docutils literal notranslate"><span class="pre">athessian</span></code>, <code class="docutils literal notranslate"><span class="pre">atmasses</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">atcoords</span></code></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="gaussian-log-file-format-gaussianlog">
+<span id="format-gaussianlog"></span><h2>Gaussian Log file format (<code class="docutils literal notranslate"><span class="pre">gaussianlog</span></code>)<a class="headerlink" href="#gaussian-log-file-format-gaussianlog" title="Permalink to this headline">¶</a></h2>
+<p>To write out the integrals in a Gaussian log file, which can be loaded with this module,
+you need to use the following Gaussian command line:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scf</span><span class="p">(</span><span class="n">conventional</span><span class="p">)</span> <span class="n">iop</span><span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">33</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span> <span class="n">extralinks</span><span class="o">=</span><span class="n">l316</span> <span class="n">iop</span><span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">27</span><span class="o">=</span><span class="mi">999</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Filename patterns:  <code class="docutils literal notranslate"><span class="pre">*.log</span></code></p>
+<div class="section" id="iodata-formats-gaussianlog-load-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.gaussianlog.html#iodata.formats.gaussianlog.load_one" title="iodata.formats.gaussianlog.load_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.gaussianlog.load_one()</span></code></a><a class="headerlink" href="#iodata-formats-gaussianlog-load-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Always loads</p></li>
+<li><p>May load <code class="docutils literal notranslate"><span class="pre">one_ints</span></code>, <code class="docutils literal notranslate"><span class="pre">two_ints</span></code></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="gromacs-gro-file-format-gromacs">
+<span id="format-gromacs"></span><h2>GROMACS gro file format (<code class="docutils literal notranslate"><span class="pre">gromacs</span></code>)<a class="headerlink" href="#gromacs-gro-file-format-gromacs" title="Permalink to this headline">¶</a></h2>
+<p>Files with the gro file extension contain a molecular structure in Gromos87 format.
+GROMACS gro files can be used as trajectory by simply concatenating files.</p>
+<p><a class="reference external" href="http://manual.gromacs.org/current/reference-manual/file-formats.html#gro">http://manual.gromacs.org/current/reference-manual/file-formats.html#gro</a></p>
+<p>Filename patterns:  <code class="docutils literal notranslate"><span class="pre">*.gro</span></code></p>
+<div class="section" id="iodata-formats-gromacs-load-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.gromacs.html#iodata.formats.gromacs.load_one" title="iodata.formats.gromacs.load_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.gromacs.load_one()</span></code></a><a class="headerlink" href="#iodata-formats-gromacs-load-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Always loads <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atffparams</span></code>, <code class="docutils literal notranslate"><span class="pre">cellvecs</span></code>, <code class="docutils literal notranslate"><span class="pre">extra</span></code>, <code class="docutils literal notranslate"><span class="pre">title</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="iodata-formats-gromacs-load-many">
+<h3><a class="reference internal" href="pyapi/iodata.formats.gromacs.html#iodata.formats.gromacs.load_many" title="iodata.formats.gromacs.load_many"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.gromacs.load_many()</span></code></a><a class="headerlink" href="#iodata-formats-gromacs-load-many" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Always loads <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atffparams</span></code>, <code class="docutils literal notranslate"><span class="pre">cellvecs</span></code>, <code class="docutils literal notranslate"><span class="pre">extra</span></code>, <code class="docutils literal notranslate"><span class="pre">title</span></code></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="vasp-5-locpot-file-format-locpot">
+<span id="format-locpot"></span><h2>VASP 5 LOCPOT file format (<code class="docutils literal notranslate"><span class="pre">locpot</span></code>)<a class="headerlink" href="#vasp-5-locpot-file-format-locpot" title="Permalink to this headline">¶</a></h2>
+<p>This format is used by <a class="reference external" href="https://www.vasp.at/">VASP 5.X</a> and
+<a class="reference external" href="http://jp-minerals.org/vesta/en/">VESTA</a>.</p>
+<p>Note that even though the <code class="docutils literal notranslate"><span class="pre">CHGCAR</span></code> and <code class="docutils literal notranslate"><span class="pre">LOCPOT</span></code> files look very similar, they require
+different conversions to atomic units.</p>
+<p>Filename patterns:  <code class="docutils literal notranslate"><span class="pre">LOCPOT*</span></code></p>
+<div class="section" id="iodata-formats-locpot-load-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.locpot.html#iodata.formats.locpot.load_one" title="iodata.formats.locpot.load_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.locpot.load_one()</span></code></a><a class="headerlink" href="#iodata-formats-locpot-load-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Always loads <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">cellvecs</span></code>, <code class="docutils literal notranslate"><span class="pre">cube</span></code>, <code class="docutils literal notranslate"><span class="pre">title</span></code></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="mol2-file-format-mol2">
+<span id="format-mol2"></span><h2>MOL2 file format (<code class="docutils literal notranslate"><span class="pre">mol2</span></code>)<a class="headerlink" href="#mol2-file-format-mol2" title="Permalink to this headline">¶</a></h2>
+<p>There are different formats of mol2 files. Here the compatibility with AMBER software
+was the main objective to write out files with atomic charges used by antechamber.</p>
+<p>Filename patterns:  <code class="docutils literal notranslate"><span class="pre">*.mol2</span></code></p>
+<div class="section" id="iodata-formats-mol2-load-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.mol2.html#iodata.formats.mol2.load_one" title="iodata.formats.mol2.load_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.mol2.load_one()</span></code></a><a class="headerlink" href="#iodata-formats-mol2-load-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Always loads <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">atcharges</span></code>, <code class="docutils literal notranslate"><span class="pre">atffparams</span></code></p></li>
+<li><p>May load <code class="docutils literal notranslate"><span class="pre">title</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="iodata-formats-mol2-dump-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.mol2.html#iodata.formats.mol2.dump_one" title="iodata.formats.mol2.dump_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.mol2.dump_one()</span></code></a><a class="headerlink" href="#iodata-formats-mol2-dump-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Requires <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code></p></li>
+<li><p>May dump <code class="docutils literal notranslate"><span class="pre">atcharges</span></code>, <code class="docutils literal notranslate"><span class="pre">atffparams</span></code>, <code class="docutils literal notranslate"><span class="pre">title</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="iodata-formats-mol2-load-many">
+<h3><a class="reference internal" href="pyapi/iodata.formats.mol2.html#iodata.formats.mol2.load_many" title="iodata.formats.mol2.load_many"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.mol2.load_many()</span></code></a><a class="headerlink" href="#iodata-formats-mol2-load-many" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Always loads <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">atcharges</span></code>, <code class="docutils literal notranslate"><span class="pre">atffparams</span></code></p></li>
+<li><p>May load <code class="docutils literal notranslate"><span class="pre">title</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="iodata-formats-mol2-dump-many">
+<h3><a class="reference internal" href="pyapi/iodata.formats.mol2.html#iodata.formats.mol2.dump_many" title="iodata.formats.mol2.dump_many"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.mol2.dump_many()</span></code></a><a class="headerlink" href="#iodata-formats-mol2-dump-many" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Requires <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">atcharges</span></code></p></li>
+<li><p>May dump <code class="docutils literal notranslate"><span class="pre">title</span></code></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="molden-file-format-molden">
+<span id="format-molden"></span><h2>Molden file format (<code class="docutils literal notranslate"><span class="pre">molden</span></code>)<a class="headerlink" href="#molden-file-format-molden" title="Permalink to this headline">¶</a></h2>
+<p>Many QC codes can write out Molden files, e.g. <a class="reference external" href="https://www.molpro.net/">Molpro</a>,
+<a class="reference external" href="https://sites.google.com/site/orcainputlibrary/">Orca</a>, <a class="reference external" href="http://www.psicode.org/">PSI4</a>,
+<a class="reference external" href="http://www.cmbi.ru.nl/molden/">Molden</a>, <a class="reference external" href="http://www.turbomole.com/">Turbomole</a>. Keep
+in mind that several of these write incorrect versions of the file format, but these
+errors are corrected when loading them with IOData.</p>
+<p>Filename patterns:  <code class="docutils literal notranslate"><span class="pre">*.molden.input</span></code>, <code class="docutils literal notranslate"><span class="pre">*.molden</span></code></p>
+<div class="section" id="iodata-formats-molden-load-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.molden.html#iodata.formats.molden.load_one" title="iodata.formats.molden.load_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.molden.load_one()</span></code></a><a class="headerlink" href="#iodata-formats-molden-load-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Always loads <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">atcorenums</span></code>, <code class="docutils literal notranslate"><span class="pre">mo</span></code>, <code class="docutils literal notranslate"><span class="pre">obasis</span></code></p></li>
+<li><p>May load <code class="docutils literal notranslate"><span class="pre">title</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="iodata-formats-molden-dump-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.molden.html#iodata.formats.molden.dump_one" title="iodata.formats.molden.dump_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.molden.dump_one()</span></code></a><a class="headerlink" href="#iodata-formats-molden-dump-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Requires <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">mo</span></code>, <code class="docutils literal notranslate"><span class="pre">obasis</span></code></p></li>
+<li><p>May dump <code class="docutils literal notranslate"><span class="pre">atcorenums</span></code>, <code class="docutils literal notranslate"><span class="pre">title</span></code></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="molekel-file-format-molekel">
+<span id="format-molekel"></span><h2>Molekel file format (<code class="docutils literal notranslate"><span class="pre">molekel</span></code>)<a class="headerlink" href="#molekel-file-format-molekel" title="Permalink to this headline">¶</a></h2>
+<p>This format is used by two programs:
+<a class="reference external" href="http://ugovaretto.github.io/molekel/wiki/pmwiki.php/Main/HomePage.html">Molekel</a> and
+<a class="reference external" href="https://sites.google.com/site/orcainputlibrary/">Orca</a>.</p>
+<p>Filename patterns:  <code class="docutils literal notranslate"><span class="pre">*.mkl</span></code></p>
+<div class="section" id="iodata-formats-molekel-load-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.molekel.html#iodata.formats.molekel.load_one" title="iodata.formats.molekel.load_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.molekel.load_one()</span></code></a><a class="headerlink" href="#iodata-formats-molekel-load-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Always loads <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">mo</span></code>, <code class="docutils literal notranslate"><span class="pre">obasis</span></code></p></li>
+<li><p>May load <code class="docutils literal notranslate"><span class="pre">atcharges</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="iodata-formats-molekel-dump-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.molekel.html#iodata.formats.molekel.dump_one" title="iodata.formats.molekel.dump_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.molekel.dump_one()</span></code></a><a class="headerlink" href="#iodata-formats-molekel-dump-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Requires <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">mo</span></code>, <code class="docutils literal notranslate"><span class="pre">obasis</span></code></p></li>
+<li><p>May dump <code class="docutils literal notranslate"><span class="pre">atcharges</span></code></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="orca-output-file-format-orcalog">
+<span id="format-orcalog"></span><h2>Orca output file format (<code class="docutils literal notranslate"><span class="pre">orcalog</span></code>)<a class="headerlink" href="#orca-output-file-format-orcalog" title="Permalink to this headline">¶</a></h2>
+<p>Filename patterns:  <code class="docutils literal notranslate"><span class="pre">*.out</span></code></p>
+<div class="section" id="iodata-formats-orcalog-load-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.orcalog.html#iodata.formats.orcalog.load_one" title="iodata.formats.orcalog.load_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.orcalog.load_one()</span></code></a><a class="headerlink" href="#iodata-formats-orcalog-load-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Always loads <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">energy</span></code>, <code class="docutils literal notranslate"><span class="pre">moments</span></code>, <code class="docutils literal notranslate"><span class="pre">extra</span></code></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="pdb-file-format-pdb">
+<span id="format-pdb"></span><h2>PDB file format (<code class="docutils literal notranslate"><span class="pre">pdb</span></code>)<a class="headerlink" href="#pdb-file-format-pdb" title="Permalink to this headline">¶</a></h2>
+<p>There are different formats of pdb files. The convention used here is the
+last updated one and is described in this link:
+<a class="reference external" href="http://www.wwpdb.org/documentation/file-format-content/format33/v3.3.html">http://www.wwpdb.org/documentation/file-format-content/format33/v3.3.html</a></p>
+<p>Filename patterns:  <code class="docutils literal notranslate"><span class="pre">*.pdb</span></code></p>
+<div class="section" id="iodata-formats-pdb-load-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.pdb.html#iodata.formats.pdb.load_one" title="iodata.formats.pdb.load_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.pdb.load_one()</span></code></a><a class="headerlink" href="#iodata-formats-pdb-load-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Always loads <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">atffparams</span></code>, <code class="docutils literal notranslate"><span class="pre">extra</span></code></p></li>
+<li><p>May load <code class="docutils literal notranslate"><span class="pre">title</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="iodata-formats-pdb-dump-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.pdb.html#iodata.formats.pdb.dump_one" title="iodata.formats.pdb.dump_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.pdb.dump_one()</span></code></a><a class="headerlink" href="#iodata-formats-pdb-dump-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Requires <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">extra</span></code></p></li>
+<li><p>May dump <code class="docutils literal notranslate"><span class="pre">atffparams</span></code>, <code class="docutils literal notranslate"><span class="pre">title</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="iodata-formats-pdb-load-many">
+<h3><a class="reference internal" href="pyapi/iodata.formats.pdb.html#iodata.formats.pdb.load_many" title="iodata.formats.pdb.load_many"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.pdb.load_many()</span></code></a><a class="headerlink" href="#iodata-formats-pdb-load-many" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Always loads <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">atffparams</span></code>, <code class="docutils literal notranslate"><span class="pre">extra</span></code></p></li>
+<li><p>May load <code class="docutils literal notranslate"><span class="pre">title</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="iodata-formats-pdb-dump-many">
+<h3><a class="reference internal" href="pyapi/iodata.formats.pdb.html#iodata.formats.pdb.dump_many" title="iodata.formats.pdb.dump_many"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.pdb.dump_many()</span></code></a><a class="headerlink" href="#iodata-formats-pdb-dump-many" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Requires <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">extra</span></code></p></li>
+<li><p>May dump <code class="docutils literal notranslate"><span class="pre">atffparams</span></code>, <code class="docutils literal notranslate"><span class="pre">title</span></code></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="vasp-5-poscar-file-format-poscar">
+<span id="format-poscar"></span><h2>VASP 5 POSCAR file format (<code class="docutils literal notranslate"><span class="pre">poscar</span></code>)<a class="headerlink" href="#vasp-5-poscar-file-format-poscar" title="Permalink to this headline">¶</a></h2>
+<p>This format is used by <a class="reference external" href="https://www.vasp.at/">VASP 5.X</a> and
+<a class="reference external" href="http://jp-minerals.org/vesta/en/">VESTA</a>.</p>
+<p>Filename patterns:  <code class="docutils literal notranslate"><span class="pre">POSCAR*</span></code></p>
+<div class="section" id="iodata-formats-poscar-load-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.poscar.html#iodata.formats.poscar.load_one" title="iodata.formats.poscar.load_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.poscar.load_one()</span></code></a><a class="headerlink" href="#iodata-formats-poscar-load-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Always loads <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">cellvecs</span></code>, <code class="docutils literal notranslate"><span class="pre">title</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="iodata-formats-poscar-dump-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.poscar.html#iodata.formats.poscar.dump_one" title="iodata.formats.poscar.dump_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.poscar.dump_one()</span></code></a><a class="headerlink" href="#iodata-formats-poscar-dump-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Requires <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">cellvecs</span></code></p></li>
+<li><p>May dump <code class="docutils literal notranslate"><span class="pre">title</span></code></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="q-chem-log-file-format-qchemlog">
+<span id="format-qchemlog"></span><h2>Q-Chem Log file format (<code class="docutils literal notranslate"><span class="pre">qchemlog</span></code>)<a class="headerlink" href="#q-chem-log-file-format-qchemlog" title="Permalink to this headline">¶</a></h2>
+<p>This module will load Q-Chem log file into IODATA.</p>
+<p>Filename patterns:  <code class="docutils literal notranslate"><span class="pre">*.qchemlog</span></code></p>
+<div class="section" id="iodata-formats-qchemlog-load-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.qchemlog.html#iodata.formats.qchemlog.load_one" title="iodata.formats.qchemlog.load_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.qchemlog.load_one()</span></code></a><a class="headerlink" href="#iodata-formats-qchemlog-load-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Always loads <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atmasses</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">energy</span></code>, <code class="docutils literal notranslate"><span class="pre">g_rot</span></code>, <code class="docutils literal notranslate"><span class="pre">mo</span></code>, <code class="docutils literal notranslate"><span class="pre">lot</span></code>, <code class="docutils literal notranslate"><span class="pre">obasis_name</span></code>, <code class="docutils literal notranslate"><span class="pre">run_type</span></code>, <code class="docutils literal notranslate"><span class="pre">extra</span></code></p></li>
+<li><p>May load <code class="docutils literal notranslate"><span class="pre">athessian</span></code></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="sdf-file-format-sdf">
+<span id="format-sdf"></span><h2>SDF file format (<code class="docutils literal notranslate"><span class="pre">sdf</span></code>)<a class="headerlink" href="#sdf-file-format-sdf" title="Permalink to this headline">¶</a></h2>
+<p>Usually, the different frames in a trajectory describe different geometries of the same
+molecule, with atoms in the same order. The <code class="docutils literal notranslate"><span class="pre">load_many</span></code> and <code class="docutils literal notranslate"><span class="pre">dump_many</span></code> functions
+below can also handle an SDF file with different molecules, e.g. a molecular database.</p>
+<p>Filename patterns:  <code class="docutils literal notranslate"><span class="pre">*.sdf</span></code></p>
+<div class="section" id="iodata-formats-sdf-load-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.sdf.html#iodata.formats.sdf.load_one" title="iodata.formats.sdf.load_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.sdf.load_one()</span></code></a><a class="headerlink" href="#iodata-formats-sdf-load-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Always loads <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">title</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="iodata-formats-sdf-dump-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.sdf.html#iodata.formats.sdf.dump_one" title="iodata.formats.sdf.dump_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.sdf.dump_one()</span></code></a><a class="headerlink" href="#iodata-formats-sdf-dump-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Requires <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code></p></li>
+<li><p>May dump <code class="docutils literal notranslate"><span class="pre">title</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="iodata-formats-sdf-load-many">
+<h3><a class="reference internal" href="pyapi/iodata.formats.sdf.html#iodata.formats.sdf.load_many" title="iodata.formats.sdf.load_many"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.sdf.load_many()</span></code></a><a class="headerlink" href="#iodata-formats-sdf-load-many" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Always loads <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">title</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="iodata-formats-sdf-dump-many">
+<h3><a class="reference internal" href="pyapi/iodata.formats.sdf.html#iodata.formats.sdf.dump_many" title="iodata.formats.sdf.dump_many"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.sdf.dump_many()</span></code></a><a class="headerlink" href="#iodata-formats-sdf-dump-many" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Requires <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code></p></li>
+<li><p>May dump <code class="docutils literal notranslate"><span class="pre">title</span></code></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="gaussian-gamess-us-wfn-file-format-wfn">
+<span id="format-wfn"></span><h2>Gaussian/GAMESS-US WFN file format (<code class="docutils literal notranslate"><span class="pre">wfn</span></code>)<a class="headerlink" href="#gaussian-gamess-us-wfn-file-format-wfn" title="Permalink to this headline">¶</a></h2>
+<p>Only use this format if the program that generated it does not offer any alternatives that
+HORTON can load. The WFN format has the disadvantage that it cannot represent contractions
+and therefore expands all orbitals into a decontracted basis. This makes the
+post-processing less efficient compared to formats that do support contractions of
+Gaussian functions.</p>
+<p>Filename patterns:  <code class="docutils literal notranslate"><span class="pre">*.wfn</span></code></p>
+<div class="section" id="iodata-formats-wfn-load-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.wfn.html#iodata.formats.wfn.load_one" title="iodata.formats.wfn.load_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.wfn.load_one()</span></code></a><a class="headerlink" href="#iodata-formats-wfn-load-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Always loads <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">energy</span></code>, <code class="docutils literal notranslate"><span class="pre">mo</span></code>, <code class="docutils literal notranslate"><span class="pre">obasis</span></code>, <code class="docutils literal notranslate"><span class="pre">title</span></code>, <code class="docutils literal notranslate"><span class="pre">extra</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="iodata-formats-wfn-dump-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.wfn.html#iodata.formats.wfn.dump_one" title="iodata.formats.wfn.dump_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.wfn.dump_one()</span></code></a><a class="headerlink" href="#iodata-formats-wfn-dump-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Requires <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">energy</span></code>, <code class="docutils literal notranslate"><span class="pre">mo</span></code>, <code class="docutils literal notranslate"><span class="pre">obasis</span></code>, <code class="docutils literal notranslate"><span class="pre">title</span></code>, <code class="docutils literal notranslate"><span class="pre">extra</span></code></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="aim-aimall-wfx-file-format-wfx">
+<span id="format-wfx"></span><h2>AIM/AIMAll WFX file format (<code class="docutils literal notranslate"><span class="pre">wfx</span></code>)<a class="headerlink" href="#aim-aimall-wfx-file-format-wfx" title="Permalink to this headline">¶</a></h2>
+<p>See <a class="reference external" href="http://aim.tkgristmill.com/wfxformat.html">http://aim.tkgristmill.com/wfxformat.html</a></p>
+<p>Filename patterns:  <code class="docutils literal notranslate"><span class="pre">*.wfx</span></code></p>
+<div class="section" id="iodata-formats-wfx-load-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.wfx.html#iodata.formats.wfx.load_one" title="iodata.formats.wfx.load_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.wfx.load_one()</span></code></a><a class="headerlink" href="#iodata-formats-wfx-load-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Always loads <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atgradient</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">energy</span></code>, <code class="docutils literal notranslate"><span class="pre">extra</span></code>, <code class="docutils literal notranslate"><span class="pre">mo</span></code>, <code class="docutils literal notranslate"><span class="pre">obasis</span></code>, <code class="docutils literal notranslate"><span class="pre">title</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="iodata-formats-wfx-dump-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.wfx.html#iodata.formats.wfx.dump_one" title="iodata.formats.wfx.dump_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.wfx.dump_one()</span></code></a><a class="headerlink" href="#iodata-formats-wfx-dump-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Requires <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">atcorenums</span></code>, <code class="docutils literal notranslate"><span class="pre">mo</span></code>, <code class="docutils literal notranslate"><span class="pre">obasis</span></code>, <code class="docutils literal notranslate"><span class="pre">charge</span></code></p></li>
+<li><p>May dump <code class="docutils literal notranslate"><span class="pre">title</span></code>, <code class="docutils literal notranslate"><span class="pre">energy</span></code>, <code class="docutils literal notranslate"><span class="pre">spinpol</span></code>, <code class="docutils literal notranslate"><span class="pre">lot</span></code>, <code class="docutils literal notranslate"><span class="pre">atgradient</span></code>, <code class="docutils literal notranslate"><span class="pre">extra</span></code></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="xyz-file-format-xyz">
+<span id="format-xyz"></span><h2>XYZ file format (<code class="docutils literal notranslate"><span class="pre">xyz</span></code>)<a class="headerlink" href="#xyz-file-format-xyz" title="Permalink to this headline">¶</a></h2>
+<p>Usually, the different frames in a trajectory describe different geometries of the same
+molecule, with atoms in the same order. The <code class="docutils literal notranslate"><span class="pre">load_many</span></code> and <code class="docutils literal notranslate"><span class="pre">dump_many</span></code> functions
+below can also handle an XYZ with different molecules, e.g. a molecular database.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">load_*</span></code> and <code class="docutils literal notranslate"><span class="pre">dump_*</span></code> functions all accept the optional argument
+<code class="docutils literal notranslate"><span class="pre">atom_columns</span></code>. This argument fixes the meaning of the columns to be loaded
+from or dumped to an XYZ file. The following example defines, in addition to the
+conventional columns, also a column with atomic charges and three columns with
+atomic forces.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">atom_columns</span> <span class="o">=</span> <span class="n">iodata</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">xyz</span><span class="o">.</span><span class="n">DEFAULT_ATOM_COLUMNS</span> <span class="o">+</span> <span class="p">[</span>
+    <span class="c1"># Atomic charges are stored in a dictionary atcharges and they key</span>
+    <span class="c1"># refers to the name of the partitioning method.</span>
+    <span class="p">(</span><span class="s2">&quot;atcharges&quot;</span><span class="p">,</span> <span class="s2">&quot;mulliken&quot;</span><span class="p">,</span> <span class="p">(),</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{:10.5f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">),</span>
+    <span class="c1"># Note that in IOData, the energy gradient is stored, which contains the</span>
+    <span class="c1"># negative forces.</span>
+    <span class="p">(</span><span class="s2">&quot;atgradient&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,),</span> <span class="nb">float</span><span class="p">,</span>
+     <span class="p">(</span><span class="k">lambda</span> <span class="n">word</span><span class="p">:</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="n">word</span><span class="p">)),</span>
+     <span class="p">(</span><span class="k">lambda</span> <span class="n">value</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{:15.10f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">-</span><span class="n">value</span><span class="p">)))</span>
+<span class="p">]</span>
+
+<span class="n">mol</span> <span class="o">=</span> <span class="n">load_one</span><span class="p">(</span><span class="s2">&quot;test.xyz&quot;</span><span class="p">,</span> <span class="n">atom_columns</span><span class="o">=</span><span class="n">atom_columns</span><span class="p">)</span>
+<span class="c1"># The following attributes are present:</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">atnums</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">atcoords</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">atcharges</span><span class="p">[</span><span class="s2">&quot;mulliken&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">atgradient</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>When defining <code class="docutils literal notranslate"><span class="pre">atom_columns</span></code>, no columns can be skipped, such that all
+information loaded from a file can also be written back out when dumping it.</p>
+<p>Filename patterns:  <code class="docutils literal notranslate"><span class="pre">*.xyz</span></code></p>
+<div class="section" id="iodata-formats-xyz-load-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.xyz.html#iodata.formats.xyz.load_one" title="iodata.formats.xyz.load_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.xyz.load_one()</span></code></a><a class="headerlink" href="#iodata-formats-xyz-load-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Always loads <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">title</span></code></p></li>
+<li><p>Keyword arguments <code class="docutils literal notranslate"><span class="pre">atom_columns</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="iodata-formats-xyz-dump-one">
+<h3><a class="reference internal" href="pyapi/iodata.formats.xyz.html#iodata.formats.xyz.dump_one" title="iodata.formats.xyz.dump_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.xyz.dump_one()</span></code></a><a class="headerlink" href="#iodata-formats-xyz-dump-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Requires <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code></p></li>
+<li><p>May dump <code class="docutils literal notranslate"><span class="pre">title</span></code></p></li>
+<li><p>Keyword arguments <code class="docutils literal notranslate"><span class="pre">atom_columns</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="iodata-formats-xyz-load-many">
+<h3><a class="reference internal" href="pyapi/iodata.formats.xyz.html#iodata.formats.xyz.load_many" title="iodata.formats.xyz.load_many"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.xyz.load_many()</span></code></a><a class="headerlink" href="#iodata-formats-xyz-load-many" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Always loads <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">title</span></code></p></li>
+<li><p>Keyword arguments <code class="docutils literal notranslate"><span class="pre">atom_columns</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="iodata-formats-xyz-dump-many">
+<h3><a class="reference internal" href="pyapi/iodata.formats.xyz.html#iodata.formats.xyz.dump_many" title="iodata.formats.xyz.dump_many"><code class="xref py py-func docutils literal notranslate"><span class="pre">iodata.formats.xyz.dump_many()</span></code></a><a class="headerlink" href="#iodata-formats-xyz-dump-many" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Requires <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code></p></li>
+<li><p>May dump <code class="docutils literal notranslate"><span class="pre">title</span></code></p></li>
+<li><p>Keyword arguments <code class="docutils literal notranslate"><span class="pre">atom_columns</span></code></p></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="basis.html" class="btn btn-neutral float-right" title="Basis set conventions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="getting_started.html" class="btn btn-neutral float-left" title="Getting Started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, The IODATA Development Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

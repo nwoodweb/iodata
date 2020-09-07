@@ -1,0 +1,355 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>iodata.formats.gaussianlog &mdash; IOData  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/override.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["fast-preview.js"], "TeX": {"Macros": {"ket": ["{\\left\\vert { #1 } \\right\\rangle}", 1], "bra": ["{\\left\\langle { #1} \\right\\vert}", 1], "braket": ["{\\left\\langle {#1} \\mid { #2} \\right\\rangle}", 2], "ketbra": ["{\\left\\vert { #1 } \\right\\rangle\\left\\langle { #2} \\right\\vert}", 2], "ev": ["{\\left\\langle {#2} \\vert {#1} \\vert {#2} \\right\\rangle}", 2], "mel": ["{\\left\\langle{ #1 }\\right\\vert{ #2 }\\left\\vert{#3}\\right\\rangle}", 3]}}})</script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> IOData
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../formats.html">Supported File Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../basis.html">Basis set conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">IOData Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgments.html">Acknowledgments</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pyapi/modules.html">iodata</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">IOData</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>iodata.formats.gaussianlog</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for iodata.formats.gaussianlog</h1><div class="highlight"><pre>
+<span></span><span class="c1"># IODATA is an input and output module for quantum chemistry.</span>
+<span class="c1"># Copyright (C) 2011-2019 The IODATA Development Team</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of IODATA.</span>
+<span class="c1">#</span>
+<span class="c1"># IODATA is free software; you can redistribute it and/or</span>
+<span class="c1"># modify it under the terms of the GNU General Public License</span>
+<span class="c1"># as published by the Free Software Foundation; either version 3</span>
+<span class="c1"># of the License, or (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># IODATA is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program; if not, see &lt;http://www.gnu.org/licenses/&gt;</span>
+<span class="c1"># --</span>
+<span class="sd">&quot;&quot;&quot;Gaussian Log file format.</span>
+
+<span class="sd">To write out the integrals in a Gaussian log file, which can be loaded with this module,</span>
+<span class="sd">you need to use the following Gaussian command line:</span>
+
+<span class="sd">.. code-block ::</span>
+
+<span class="sd">    scf(conventional) iop(3/33=5) extralinks=l316 iop(3/27=999)</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">..docstrings</span> <span class="kn">import</span> <span class="n">document_load_one</span>
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="n">set_four_index_element</span><span class="p">,</span> <span class="n">LineIterator</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+<span class="n">PATTERNS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;*.log&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="load_one"><a class="viewcode-back" href="../../../pyapi/iodata.formats.gaussianlog.html#iodata.formats.gaussianlog.load_one">[docs]</a><span class="nd">@document_load_one</span><span class="p">(</span><span class="s2">&quot;Gaussian Log&quot;</span><span class="p">,</span> <span class="p">[],</span> <span class="p">[</span><span class="s1">&#39;one_ints&#39;</span><span class="p">,</span> <span class="s1">&#39;two_ints&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">load_one</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Do not edit this docstring. It will be overwritten.&quot;&quot;&quot;</span>
+    <span class="c1"># First get the line with the number of orbital basis functions</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lit</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;    NBasis =&#39;</span><span class="p">):</span>
+            <span class="n">nbasis</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">12</span><span class="p">:</span><span class="mi">18</span><span class="p">])</span>
+            <span class="k">break</span>
+
+    <span class="c1"># Then load the two- and four-index operators. This part is written such</span>
+    <span class="c1"># that it does not make any assumptions about the order in which these</span>
+    <span class="c1"># operators are printed.</span>
+    <span class="n">one_ints</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">two_ints</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot; Normal termination of Gaussian&quot;</span><span class="p">):</span>
+            <span class="k">break</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39; *** Overlap ***&#39;</span><span class="p">):</span>
+            <span class="n">one_ints</span><span class="p">[</span><span class="s1">&#39;olp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_load_twoindex_g09</span><span class="p">(</span><span class="n">lit</span><span class="p">,</span> <span class="n">nbasis</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39; *** Kinetic Energy ***&#39;</span><span class="p">):</span>
+            <span class="n">one_ints</span><span class="p">[</span><span class="s1">&#39;kin_ao&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_load_twoindex_g09</span><span class="p">(</span><span class="n">lit</span><span class="p">,</span> <span class="n">nbasis</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39; ***** Potential Energy *****&#39;</span><span class="p">):</span>
+            <span class="n">one_ints</span><span class="p">[</span><span class="s1">&#39;na_ao&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_load_twoindex_g09</span><span class="p">(</span><span class="n">lit</span><span class="p">,</span> <span class="n">nbasis</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39; *** Dumping Two-Electron integrals ***&#39;</span><span class="p">):</span>
+            <span class="n">two_ints</span><span class="p">[</span><span class="s1">&#39;er_ao&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_load_fourindex_g09</span><span class="p">(</span><span class="n">lit</span><span class="p">,</span> <span class="n">nbasis</span><span class="p">)</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="n">one_ints</span><span class="p">:</span>
+        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;one_ints&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">one_ints</span>
+    <span class="k">if</span> <span class="n">two_ints</span><span class="p">:</span>
+        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;two_ints&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">two_ints</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<span class="k">def</span> <span class="nf">_load_twoindex_g09</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">,</span> <span class="n">nbasis</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Load a two-index operator from a GAUSSIAN LOG file format.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    lit</span>
+<span class="sd">        The line iterator to read the data from.</span>
+<span class="sd">    nbasis</span>
+<span class="sd">        The number of atomic orbital basis functions.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    out</span>
+<span class="sd">        The output (nbasis, nbasis) array of operator.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nbasis</span><span class="p">,</span> <span class="n">nbasis</span><span class="p">))</span>
+    <span class="n">block_counter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">block_counter</span> <span class="o">&lt;</span> <span class="n">nbasis</span><span class="p">:</span>
+        <span class="c1"># skip the header line</span>
+        <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+        <span class="c1"># determine the number of rows in this part</span>
+        <span class="n">nrow</span> <span class="o">=</span> <span class="n">nbasis</span> <span class="o">-</span> <span class="n">block_counter</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nrow</span><span class="p">):</span>
+            <span class="n">words</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">:]</span>
+            <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">word</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">words</span><span class="p">):</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">word</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">))</span>
+                <span class="n">result</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">block_counter</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="n">block_counter</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+                <span class="n">result</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="n">block_counter</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="n">block_counter</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="n">block_counter</span> <span class="o">+=</span> <span class="mi">5</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">_load_fourindex_g09</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">,</span> <span class="n">nbasis</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Load a four-index operator from a GAUSSIAN LOG file.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    lit</span>
+<span class="sd">        The line iterator to read the data from.</span>
+<span class="sd">    nbasis</span>
+<span class="sd">        The number of atomic orbital basis functions.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    out</span>
+<span class="sd">        The (nbasis, nbasis, nbasis, nbasis) array of operator.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nbasis</span><span class="p">,</span> <span class="n">nbasis</span><span class="p">,</span> <span class="n">nbasis</span><span class="p">,</span> <span class="n">nbasis</span><span class="p">))</span>
+    <span class="c1"># Skip first six lines</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+        <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+    <span class="c1"># Start reading elements until a line is encountered that does not start</span>
+    <span class="c1"># with &#39; I=&#39;</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lit</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39; I=&#39;</span><span class="p">):</span>
+            <span class="k">break</span>
+        <span class="c1"># print line[3:7], line[9:13], line[15:19], line[21:25], line[28:].replace(&#39;D&#39;, &#39;E&#39;)</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">7</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="mi">13</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">15</span><span class="p">:</span><span class="mi">19</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">21</span><span class="p">:</span><span class="mi">25</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">29</span><span class="p">:]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">))</span>
+        <span class="c1"># Gaussian uses the chemists notation for the 4-center indexes. IOdata</span>
+        <span class="c1"># uses the physicists notation.</span>
+        <span class="n">set_four_index_element</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, The IODATA Development Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

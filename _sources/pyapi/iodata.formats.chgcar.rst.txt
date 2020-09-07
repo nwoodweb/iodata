@@ -1,0 +1,8 @@
+iodata.formats.chgcar module
+============================
+
+.. automodule:: iodata.formats.chgcar
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :inherited-members:

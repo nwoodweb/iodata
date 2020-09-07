@@ -1,0 +1,40 @@
+iodata.formats package
+======================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   iodata.formats.charmm
+   iodata.formats.chgcar
+   iodata.formats.cp2klog
+   iodata.formats.cube
+   iodata.formats.extxyz
+   iodata.formats.fchk
+   iodata.formats.fcidump
+   iodata.formats.gamess
+   iodata.formats.gaussianlog
+   iodata.formats.gromacs
+   iodata.formats.locpot
+   iodata.formats.mol2
+   iodata.formats.molden
+   iodata.formats.molekel
+   iodata.formats.orcalog
+   iodata.formats.pdb
+   iodata.formats.poscar
+   iodata.formats.qchemlog
+   iodata.formats.sdf
+   iodata.formats.wfn
+   iodata.formats.wfx
+   iodata.formats.xyz
+
+Module contents
+---------------
+
+.. automodule:: iodata.formats
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :inherited-members:

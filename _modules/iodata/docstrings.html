@@ -1,0 +1,485 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>iodata.docstrings &mdash; IOData  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/override.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["fast-preview.js"], "TeX": {"Macros": {"ket": ["{\\left\\vert { #1 } \\right\\rangle}", 1], "bra": ["{\\left\\langle { #1} \\right\\vert}", 1], "braket": ["{\\left\\langle {#1} \\mid { #2} \\right\\rangle}", 2], "ketbra": ["{\\left\\vert { #1 } \\right\\rangle\\left\\langle { #2} \\right\\vert}", 2], "ev": ["{\\left\\langle {#2} \\vert {#1} \\vert {#2} \\right\\rangle}", 2], "mel": ["{\\left\\langle{ #1 }\\right\\vert{ #2 }\\left\\vert{#3}\\right\\rangle}", 3]}}})</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> IOData
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../formats.html">Supported File Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basis.html">Basis set conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">IOData Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgments.html">Acknowledgments</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pyapi/modules.html">iodata</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">IOData</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>iodata.docstrings</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for iodata.docstrings</h1><div class="highlight"><pre>
+<span></span><span class="c1"># IODATA is an input and output module for quantum chemistry.</span>
+<span class="c1"># Copyright (C) 2011-2019 The IODATA Development Team</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of IODATA.</span>
+<span class="c1">#</span>
+<span class="c1"># IODATA is free software; you can redistribute it and/or</span>
+<span class="c1"># modify it under the terms of the GNU General Public License</span>
+<span class="c1"># as published by the Free Software Foundation; either version 3</span>
+<span class="c1"># of the License, or (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># IODATA is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program; if not, see &lt;http://www.gnu.org/licenses/&gt;</span>
+<span class="c1"># --</span>
+<span class="c1"># pylint: disable=dangerous-default-value</span>
+<span class="sd">&quot;&quot;&quot;Docstring decorators for file format implementations.&quot;&quot;&quot;</span>
+
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;document_load_one&#39;</span><span class="p">,</span> <span class="s1">&#39;document_load_many&#39;</span><span class="p">,</span> <span class="s1">&#39;document_dump_one&#39;</span><span class="p">,</span> <span class="s1">&#39;document_dump_many&#39;</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">_document_load</span><span class="p">(</span><span class="n">template</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">guaranteed</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">ifpresent</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                   <span class="n">kwdocs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">notes</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="n">ifpresent</span> <span class="o">=</span> <span class="n">ifpresent</span> <span class="ow">or</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">ifpresent</span><span class="p">:</span>
+            <span class="n">ifpresent_sentence</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="s2">&quot; The following may be loaded if present in the file: </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;``</span><span class="si">{}</span><span class="s2">``&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">ifpresent</span><span class="p">)))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ifpresent_sentence</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">func</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">fmt</span><span class="o">=</span><span class="n">fmt</span><span class="p">,</span>
+            <span class="n">guaranteed</span><span class="o">=</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;``</span><span class="si">{}</span><span class="s2">``&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">guaranteed</span><span class="p">),</span>
+            <span class="n">ifpresent</span><span class="o">=</span><span class="n">ifpresent_sentence</span><span class="p">,</span>
+            <span class="n">kwdocs</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="se">\n</span><span class="s2">    </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">docu</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">))</span>
+                             <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">docu</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">kwdocs</span><span class="o">.</span><span class="n">items</span><span class="p">())),</span>
+            <span class="n">notes</span><span class="o">=</span><span class="p">(</span><span class="n">notes</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="n">func</span><span class="o">.</span><span class="n">fmt</span> <span class="o">=</span> <span class="n">fmt</span>
+        <span class="n">func</span><span class="o">.</span><span class="n">guaranteed</span> <span class="o">=</span> <span class="n">guaranteed</span>
+        <span class="n">func</span><span class="o">.</span><span class="n">ifpresent</span> <span class="o">=</span> <span class="n">ifpresent</span>
+        <span class="n">func</span><span class="o">.</span><span class="n">kwdocs</span> <span class="o">=</span> <span class="n">kwdocs</span>
+        <span class="n">func</span><span class="o">.</span><span class="n">notes</span> <span class="o">=</span> <span class="n">notes</span>
+        <span class="k">return</span> <span class="n">func</span>
+    <span class="k">return</span> <span class="n">decorator</span>
+
+
+<span class="n">LOAD_ONE_DOC_TEMPLATE</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">Load a single frame from a </span><span class="si">{fmt}</span><span class="s2"> file.</span>
+
+<span class="s2">Parameters</span>
+<span class="s2">----------</span>
+<span class="s2">lit</span>
+<span class="s2">    The line iterator to read the data from.</span>
+<span class="si">{kwdocs}</span><span class="s2"></span>
+<span class="s2">Returns</span>
+<span class="s2">-------</span>
+<span class="s2">data</span>
+<span class="s2">    A dictionary with IOData attributes. The following attributes are guaranteed to be</span>
+<span class="s2">    loaded: </span><span class="si">{guaranteed}</span><span class="s2">.</span><span class="si">{ifpresent}</span><span class="s2"></span>
+
+<span class="s2">Notes</span>
+<span class="s2">-----</span>
+
+<span class="si">{notes}</span><span class="s2"></span>
+
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="document_load_one"><a class="viewcode-back" href="../../pyapi/iodata.docstrings.html#iodata.docstrings.document_load_one">[docs]</a><span class="k">def</span> <span class="nf">document_load_one</span><span class="p">(</span><span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">guaranteed</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">ifpresent</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                      <span class="n">kwdocs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">notes</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Decorate a load_one function to generate a docstring.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fmt</span>
+<span class="sd">        The name of the file format.</span>
+<span class="sd">    guaranteed</span>
+<span class="sd">        A list of IOData attributes this format can certainly read.</span>
+<span class="sd">    ifpresent</span>
+<span class="sd">        A list of IOData attributes this format reads of present in the file.</span>
+<span class="sd">    kwdocs</span>
+<span class="sd">        A dictionary with documentation for keyword arguments. Each key is a</span>
+<span class="sd">        keyword argument name and the corresponding value is text explaining the</span>
+<span class="sd">        argument.</span>
+<span class="sd">    notes</span>
+<span class="sd">        Additional information to be added to the docstring.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    decorator</span>
+<span class="sd">        A decorator function.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_document_load</span><span class="p">(</span><span class="n">LOAD_ONE_DOC_TEMPLATE</span><span class="p">,</span> <span class="n">fmt</span><span class="p">,</span> <span class="n">guaranteed</span><span class="p">,</span> <span class="n">ifpresent</span><span class="p">,</span> <span class="n">kwdocs</span><span class="p">,</span> <span class="n">notes</span><span class="p">)</span></div>
+
+
+<span class="n">LOAD_MANY_DOC_TEMPLATE</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">Load multiple frame from a </span><span class="si">{fmt}</span><span class="s2"> file.</span>
+
+<span class="s2">Parameters</span>
+<span class="s2">----------</span>
+<span class="s2">lit</span>
+<span class="s2">    The line iterator to read the data from.</span>
+
+<span class="s2">Yields</span>
+<span class="s2">------</span>
+<span class="s2">data</span>
+<span class="s2">    A dictionary with IOData attributes. The following attribtues are guaranteed to be</span>
+<span class="s2">    loaded: </span><span class="si">{guaranteed}</span><span class="s2">.</span><span class="si">{ifpresent}</span><span class="s2"></span>
+<span class="si">{kwdocs}</span><span class="s2"></span>
+<span class="s2">Notes</span>
+<span class="s2">-----</span>
+
+<span class="si">{notes}</span><span class="s2"></span>
+
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="document_load_many"><a class="viewcode-back" href="../../pyapi/iodata.docstrings.html#iodata.docstrings.document_load_many">[docs]</a><span class="k">def</span> <span class="nf">document_load_many</span><span class="p">(</span><span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">guaranteed</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">ifpresent</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                       <span class="n">kwdocs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">notes</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Decorate a load_many function to generate a docstring.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fmt</span>
+<span class="sd">        The name of the file format.</span>
+<span class="sd">    guaranteed</span>
+<span class="sd">        A list of IOData attributes this format can certainly read.</span>
+<span class="sd">    ifpresent</span>
+<span class="sd">        A list of IOData attributes this format reads of present in the file.</span>
+<span class="sd">    kwdocs</span>
+<span class="sd">        A dictionary with documentation for keyword arguments. Each key is a</span>
+<span class="sd">        keyword argument name and the corresponding value is text explaining the</span>
+<span class="sd">        argument.</span>
+<span class="sd">    notes</span>
+<span class="sd">        Additional information to be added to the docstring.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    decorator</span>
+<span class="sd">        A decorator function.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_document_load</span><span class="p">(</span><span class="n">LOAD_ONE_DOC_TEMPLATE</span><span class="p">,</span> <span class="n">fmt</span><span class="p">,</span> <span class="n">guaranteed</span><span class="p">,</span> <span class="n">ifpresent</span><span class="p">,</span> <span class="n">kwdocs</span><span class="p">,</span> <span class="n">notes</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">_document_dump</span><span class="p">(</span><span class="n">template</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">required</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">optional</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                   <span class="n">kwdocs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">notes</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="n">optional</span> <span class="o">=</span> <span class="n">optional</span> <span class="ow">or</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">optional</span><span class="p">:</span>
+            <span class="n">optional_sentence</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="s2">&quot; If the following attributes are present, they are also dumped &quot;</span>
+                <span class="s2">&quot;into the file: </span><span class="si">{}</span><span class="s2">.&quot;</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;``</span><span class="si">{}</span><span class="s2">``&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">optional</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">optional_sentence</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">func</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">fmt</span><span class="o">=</span><span class="n">fmt</span><span class="p">,</span>
+            <span class="n">required</span><span class="o">=</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;``</span><span class="si">{}</span><span class="s2">``&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">required</span><span class="p">),</span>
+            <span class="n">optional</span><span class="o">=</span><span class="n">optional_sentence</span><span class="p">,</span>
+            <span class="n">kwdocs</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="se">\n</span><span class="s2">    </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">docu</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">))</span>
+                             <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">docu</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">kwdocs</span><span class="o">.</span><span class="n">items</span><span class="p">())),</span>
+            <span class="n">notes</span><span class="o">=</span><span class="n">notes</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">func</span><span class="o">.</span><span class="n">fmt</span> <span class="o">=</span> <span class="n">fmt</span>
+        <span class="n">func</span><span class="o">.</span><span class="n">required</span> <span class="o">=</span> <span class="n">required</span>
+        <span class="n">func</span><span class="o">.</span><span class="n">optional</span> <span class="o">=</span> <span class="n">optional</span>
+        <span class="n">func</span><span class="o">.</span><span class="n">kwdocs</span> <span class="o">=</span> <span class="n">kwdocs</span>
+        <span class="n">func</span><span class="o">.</span><span class="n">notes</span> <span class="o">=</span> <span class="n">notes</span>
+        <span class="k">return</span> <span class="n">func</span>
+    <span class="k">return</span> <span class="n">decorator</span>
+
+
+<span class="n">DUMP_ONE_DOC_TEMPLATE</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">Dump a single frame into a </span><span class="si">{fmt}</span><span class="s2"> file.</span>
+
+<span class="s2">Parameters</span>
+<span class="s2">----------</span>
+<span class="s2">f</span>
+<span class="s2">    A writeable file object.</span>
+<span class="s2">data</span>
+<span class="s2">    An IOData instance which must have the following attributes initialized:</span>
+<span class="s2">    </span><span class="si">{required}</span><span class="s2">.</span><span class="si">{optional}</span><span class="s2"></span>
+<span class="si">{kwdocs}</span><span class="s2"></span>
+<span class="s2">Notes</span>
+<span class="s2">-----</span>
+
+<span class="si">{notes}</span><span class="s2"></span>
+
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="document_dump_one"><a class="viewcode-back" href="../../pyapi/iodata.docstrings.html#iodata.docstrings.document_dump_one">[docs]</a><span class="k">def</span> <span class="nf">document_dump_one</span><span class="p">(</span><span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">required</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">optional</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                      <span class="n">kwdocs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">notes</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Decorate a dump_one function to generate a docstring.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fmt</span>
+<span class="sd">        The name of the file format.</span>
+<span class="sd">    required</span>
+<span class="sd">        A list of mandatory IOData attributes needed to write the file.</span>
+<span class="sd">    optional</span>
+<span class="sd">        A list of optional IOData attributes which can be include when writing the file.</span>
+<span class="sd">    kwdocs</span>
+<span class="sd">        A dictionary with documentation for keyword arguments. Each key is a</span>
+<span class="sd">        keyword argument name and the corresponding value is text explaining the</span>
+<span class="sd">        argument.</span>
+<span class="sd">    notes</span>
+<span class="sd">        Additional information to be added to the docstring.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    decorator</span>
+<span class="sd">        A decorator function.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_document_dump</span><span class="p">(</span><span class="n">DUMP_ONE_DOC_TEMPLATE</span><span class="p">,</span> <span class="n">fmt</span><span class="p">,</span> <span class="n">required</span><span class="p">,</span> <span class="n">optional</span><span class="p">,</span> <span class="n">kwdocs</span><span class="p">,</span> <span class="n">notes</span><span class="p">)</span></div>
+
+
+<span class="n">DUMP_MANY_DOC_TEMPLATE</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">Dump multiple frames into a </span><span class="si">{fmt}</span><span class="s2"> file.</span>
+
+<span class="s2">Parameters</span>
+<span class="s2">----------</span>
+<span class="s2">f</span>
+<span class="s2">    A writeable file object.</span>
+<span class="s2">data</span>
+<span class="s2">    An IOData instance which must have the following attributes initialized:</span>
+<span class="s2">    </span><span class="si">{required}</span><span class="s2">.</span><span class="si">{optional}</span><span class="s2"></span>
+<span class="si">{kwdocs}</span><span class="s2"></span>
+
+<span class="si">{notes}</span><span class="s2"></span>
+
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="document_dump_many"><a class="viewcode-back" href="../../pyapi/iodata.docstrings.html#iodata.docstrings.document_dump_many">[docs]</a><span class="k">def</span> <span class="nf">document_dump_many</span><span class="p">(</span><span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">required</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">optional</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                       <span class="n">kwdocs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">notes</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Decorate a dump_many function to generate a docstring.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fmt</span>
+<span class="sd">        The name of the file format.</span>
+<span class="sd">    required</span>
+<span class="sd">        A list of mandatory IOData attributes needed to write the file.</span>
+<span class="sd">    optional</span>
+<span class="sd">        A list of optional IOData attributes which can be include when writing the file.</span>
+<span class="sd">    kwdocs</span>
+<span class="sd">        A dictionary with documentation for keyword arguments. Each key is a</span>
+<span class="sd">        keyword argument name and the corresponding value is text explaining the</span>
+<span class="sd">        argument.</span>
+<span class="sd">    notes</span>
+<span class="sd">        Additional information to be added to the docstring.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    decorator</span>
+<span class="sd">        A decorator function.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_document_dump</span><span class="p">(</span><span class="n">DUMP_MANY_DOC_TEMPLATE</span><span class="p">,</span> <span class="n">fmt</span><span class="p">,</span> <span class="n">required</span><span class="p">,</span> <span class="n">optional</span><span class="p">,</span> <span class="n">kwdocs</span><span class="p">,</span> <span class="n">notes</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, The IODATA Development Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

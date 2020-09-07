@@ -1,0 +1,1194 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Welcome to IOData’s documentation! &mdash; IOData  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/override.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["fast-preview.js"], "TeX": {"Macros": {"ket": ["{\\left\\vert { #1 } \\right\\rangle}", 1], "bra": ["{\\left\\langle { #1} \\right\\vert}", 1], "braket": ["{\\left\\langle {#1} \\mid { #2} \\right\\rangle}", 2], "ketbra": ["{\\left\\vert { #1 } \\right\\rangle\\left\\langle { #2} \\right\\vert}", 2], "ev": ["{\\left\\langle {#2} \\vert {#1} \\vert {#2} \\right\\rangle}", 2], "mel": ["{\\left\\langle{ #1 }\\right\\vert{ #2 }\\left\\vert{#3}\\right\\rangle}", 3]}}})</script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="install.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home" alt="Documentation Home"> IOData
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="formats.html">Supported File Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basis.html">Basis set conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">IOData Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acknowledgments.html">Acknowledgments</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pyapi/modules.html">iodata</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">IOData</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Welcome to IOData’s documentation!</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="welcome-to-iodata-s-documentation">
+<h1>Welcome to IOData’s documentation!<a class="headerlink" href="#welcome-to-iodata-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>IOData is a free and open-source Python library for parsing, storing, and
+converting various file formats commonly used by quantum chemistry,
+molecular dynamics, and plane-wave density-functional-theory software programs.
+It also supports a flexible framework for generating input files for various
+software packages.</p>
+<p>For the list of file formats that can be loaded or dumped by IOData, see
+<a class="reference internal" href="formats.html#file-formats"><span class="std std-ref">Supported File Formats</span></a>. The two tables below summarize the file formats and
+features supported by IOData.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 87%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>L</strong></p></td>
+<td><p>loading is supported</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>D</strong></p></td>
+<td><p>dumping is supported</p></td>
+</tr>
+<tr class="row-even"><td><p><em>(d)</em></p></td>
+<td><p>attribute may be derived from other attributes</p></td>
+</tr>
+<tr class="row-odd"><td><p>R</p></td>
+<td><p>attribute is always read</p></td>
+</tr>
+<tr class="row-even"><td><p>r</p></td>
+<td><p>attribute is read if present</p></td>
+</tr>
+<tr class="row-odd"><td><p>W</p></td>
+<td><p>attribute is always written</p></td>
+</tr>
+<tr class="row-even"><td><p>w</p></td>
+<td><p>attribute is is written if present</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 4%" />
+<col style="width: 5%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 5%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 5%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 5%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p><a class="reference internal" href="formats.html#format-fchk"><span class="std std-ref">fchk</span></a>: LD</p></th>
+<th class="head"><p><a class="reference internal" href="formats.html#format-qchemlog"><span class="std std-ref">qchemlog</span></a>: L</p></th>
+<th class="head"><p><a class="reference internal" href="formats.html#format-extxyz"><span class="std std-ref">extxyz</span></a>: L</p></th>
+<th class="head"><p><a class="reference internal" href="formats.html#format-wfx"><span class="std std-ref">wfx</span></a>: LD</p></th>
+<th class="head"><p><a class="reference internal" href="formats.html#format-gamess"><span class="std std-ref">gamess</span></a>: L</p></th>
+<th class="head"><p><a class="reference internal" href="formats.html#format-wfn"><span class="std std-ref">wfn</span></a>: LD</p></th>
+<th class="head"><p><a class="reference internal" href="formats.html#format-molden"><span class="std std-ref">molden</span></a>: LD</p></th>
+<th class="head"><p><a class="reference internal" href="formats.html#format-cp2klog"><span class="std std-ref">cp2klog</span></a>: L</p></th>
+<th class="head"><p><a class="reference internal" href="formats.html#format-pdb"><span class="std std-ref">pdb</span></a>: LD</p></th>
+<th class="head"><p><a class="reference internal" href="formats.html#format-orcalog"><span class="std std-ref">orcalog</span></a>: L</p></th>
+<th class="head"><p><a class="reference internal" href="formats.html#format-molekel"><span class="std std-ref">molekel</span></a>: LD</p></th>
+<th class="head"><p><a class="reference internal" href="formats.html#format-mol2"><span class="std std-ref">mol2</span></a>: LD</p></th>
+<th class="head"><p><a class="reference internal" href="formats.html#format-locpot"><span class="std std-ref">locpot</span></a>: L</p></th>
+<th class="head"><p><a class="reference internal" href="formats.html#format-gromacs"><span class="std std-ref">gromacs</span></a>: L</p></th>
+<th class="head"><p><a class="reference internal" href="formats.html#format-fcidump"><span class="std std-ref">fcidump</span></a>: LD</p></th>
+<th class="head"><p><a class="reference internal" href="formats.html#format-cube"><span class="std std-ref">cube</span></a>: LD</p></th>
+<th class="head"><p><a class="reference internal" href="formats.html#format-chgcar"><span class="std std-ref">chgcar</span></a>: L</p></th>
+<th class="head"><p><a class="reference internal" href="formats.html#format-charmm"><span class="std std-ref">charmm</span></a>: L</p></th>
+<th class="head"><p><a class="reference internal" href="formats.html#format-poscar"><span class="std std-ref">poscar</span></a>: LD</p></th>
+<th class="head"><p><a class="reference internal" href="formats.html#format-xyz"><span class="std std-ref">xyz</span></a>: LD</p></th>
+<th class="head"><p><a class="reference internal" href="formats.html#format-sdf"><span class="std std-ref">sdf</span></a>: LD</p></th>
+<th class="head"><p><a class="reference internal" href="formats.html#format-gaussianlog"><span class="std std-ref">gaussianlog</span></a>: L</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id0" title="iodata.iodata.IOData.atcharges"><code class="xref py py-attr docutils literal notranslate"><span class="pre">atcharges</span></code></a></p></td>
+<td><p>Rw</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>rw</p></td>
+<td><p>Rw</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id1" title="iodata.iodata.IOData.atcoords"><code class="xref py py-attr docutils literal notranslate"><span class="pre">atcoords</span></code></a></p></td>
+<td><p>Rw</p></td>
+<td><p>R</p></td>
+<td><p>r</p></td>
+<td><p>RW</p></td>
+<td><p>R</p></td>
+<td><p>RW</p></td>
+<td><p>RW</p></td>
+<td><p>R</p></td>
+<td><p>RW</p></td>
+<td><p>R</p></td>
+<td><p>RW</p></td>
+<td><p>RW</p></td>
+<td><p>R</p></td>
+<td><p>R</p></td>
+<td><p>.</p></td>
+<td><p>RW</p></td>
+<td><p>R</p></td>
+<td><p>R</p></td>
+<td><p>RW</p></td>
+<td><p>RW</p></td>
+<td><p>RW</p></td>
+<td><p>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id2" title="iodata.iodata.IOData.atcorenums"><code class="xref py py-attr docutils literal notranslate"><span class="pre">atcorenums</span></code></a> <em>(d)</em></p></td>
+<td><p>RW</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>W</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>Rw</p></td>
+<td><p>R</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>Rw</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id3" title="iodata.iodata.IOData.atffparams"><code class="xref py py-attr docutils literal notranslate"><span class="pre">atffparams</span></code></a></p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>Rw</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>Rw</p></td>
+<td><p>.</p></td>
+<td><p>R</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>R</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id4" title="iodata.iodata.IOData.atfrozen"><code class="xref py py-attr docutils literal notranslate"><span class="pre">atfrozen</span></code></a></p></td>
+<td><p>rw</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id5" title="iodata.iodata.IOData.atgradient"><code class="xref py py-attr docutils literal notranslate"><span class="pre">atgradient</span></code></a></p></td>
+<td><p>rw</p></td>
+<td><p>.</p></td>
+<td><p>r</p></td>
+<td><p>Rw</p></td>
+<td><p>R</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id6" title="iodata.iodata.IOData.athessian"><code class="xref py py-attr docutils literal notranslate"><span class="pre">athessian</span></code></a></p></td>
+<td><p>rw</p></td>
+<td><p>r</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>R</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id7" title="iodata.iodata.IOData.atmasses"><code class="xref py py-attr docutils literal notranslate"><span class="pre">atmasses</span></code></a></p></td>
+<td><p>rw</p></td>
+<td><p>R</p></td>
+<td><p>r</p></td>
+<td><p>.</p></td>
+<td><p>R</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>R</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id8" title="iodata.iodata.IOData.atnums"><code class="xref py py-attr docutils literal notranslate"><span class="pre">atnums</span></code></a></p></td>
+<td><p>RW</p></td>
+<td><p>R</p></td>
+<td><p>r</p></td>
+<td><p>RW</p></td>
+<td><p>R</p></td>
+<td><p>RW</p></td>
+<td><p>RW</p></td>
+<td><p>R</p></td>
+<td><p>RW</p></td>
+<td><p>R</p></td>
+<td><p>RW</p></td>
+<td><p>RW</p></td>
+<td><p>R</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>RW</p></td>
+<td><p>R</p></td>
+<td><p>.</p></td>
+<td><p>RW</p></td>
+<td><p>RW</p></td>
+<td><p>RW</p></td>
+<td><p>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id9" title="iodata.iodata.IOData.basisdef"><code class="xref py py-attr docutils literal notranslate"><span class="pre">basisdef</span></code></a></p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id10" title="iodata.iodata.IOData.bonds"><code class="xref py py-attr docutils literal notranslate"><span class="pre">bonds</span></code></a></p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id11" title="iodata.iodata.IOData.cellvecs"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cellvecs</span></code></a></p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>r</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>R</p></td>
+<td><p>R</p></td>
+<td><p>.</p></td>
+<td><p>R</p></td>
+<td><p>R</p></td>
+<td><p>.</p></td>
+<td><p>RW</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id12" title="iodata.iodata.IOData.charge"><code class="xref py py-attr docutils literal notranslate"><span class="pre">charge</span></code></a> <em>(d)</em></p></td>
+<td><p>w</p></td>
+<td><p>.</p></td>
+<td><p>r</p></td>
+<td><p>W</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id13" title="iodata.iodata.IOData.core_energy"><code class="xref py py-attr docutils literal notranslate"><span class="pre">core_energy</span></code></a></p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>Rw</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id14" title="iodata.iodata.IOData.cube"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cube</span></code></a></p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>R</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>RW</p></td>
+<td><p>R</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id15" title="iodata.iodata.IOData.energy"><code class="xref py py-attr docutils literal notranslate"><span class="pre">energy</span></code></a></p></td>
+<td><p>Rw</p></td>
+<td><p>R</p></td>
+<td><p>r</p></td>
+<td><p>Rw</p></td>
+<td><p>R</p></td>
+<td><p>RW</p></td>
+<td><p>.</p></td>
+<td><p>R</p></td>
+<td><p>.</p></td>
+<td><p>R</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id16" title="iodata.iodata.IOData.extcharges"><code class="xref py py-attr docutils literal notranslate"><span class="pre">extcharges</span></code></a></p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id17" title="iodata.iodata.IOData.extra"><code class="xref py py-attr docutils literal notranslate"><span class="pre">extra</span></code></a></p></td>
+<td><p>rw</p></td>
+<td><p>R</p></td>
+<td><p>r</p></td>
+<td><p>Rw</p></td>
+<td><p>.</p></td>
+<td><p>RW</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>RW</p></td>
+<td><p>R</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>R</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>R</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id18" title="iodata.iodata.IOData.g_rot"><code class="xref py py-attr docutils literal notranslate"><span class="pre">g_rot</span></code></a></p></td>
+<td><p>.</p></td>
+<td><p>R</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id19" title="iodata.iodata.IOData.lot"><code class="xref py py-attr docutils literal notranslate"><span class="pre">lot</span></code></a></p></td>
+<td><p>Rw</p></td>
+<td><p>R</p></td>
+<td><p>.</p></td>
+<td><p>w</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id20" title="iodata.iodata.IOData.mo"><code class="xref py py-attr docutils literal notranslate"><span class="pre">mo</span></code></a></p></td>
+<td><p>Rw</p></td>
+<td><p>R</p></td>
+<td><p>.</p></td>
+<td><p>RW</p></td>
+<td><p>.</p></td>
+<td><p>RW</p></td>
+<td><p>RW</p></td>
+<td><p>R</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>RW</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id21" title="iodata.iodata.IOData.moments"><code class="xref py py-attr docutils literal notranslate"><span class="pre">moments</span></code></a></p></td>
+<td><p>rw</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>R</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#iodata.iodata.IOData.natom" title="iodata.iodata.IOData.natom"><code class="xref py py-attr docutils literal notranslate"><span class="pre">natom</span></code></a> <em>(d)</em></p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id22" title="iodata.iodata.IOData.nelec"><code class="xref py py-attr docutils literal notranslate"><span class="pre">nelec</span></code></a> <em>(d)</em></p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>Rw</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id23" title="iodata.iodata.IOData.obasis"><code class="xref py py-attr docutils literal notranslate"><span class="pre">obasis</span></code></a></p></td>
+<td><p>R</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>RW</p></td>
+<td><p>.</p></td>
+<td><p>RW</p></td>
+<td><p>RW</p></td>
+<td><p>R</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>RW</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id24" title="iodata.iodata.IOData.obasis_name"><code class="xref py py-attr docutils literal notranslate"><span class="pre">obasis_name</span></code></a></p></td>
+<td><p>Rw</p></td>
+<td><p>R</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id25" title="iodata.iodata.IOData.one_ints"><code class="xref py py-attr docutils literal notranslate"><span class="pre">one_ints</span></code></a></p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>RW</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>r</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id26" title="iodata.iodata.IOData.one_rdms"><code class="xref py py-attr docutils literal notranslate"><span class="pre">one_rdms</span></code></a></p></td>
+<td><p>rw</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id27" title="iodata.iodata.IOData.run_type"><code class="xref py py-attr docutils literal notranslate"><span class="pre">run_type</span></code></a></p></td>
+<td><p>R</p></td>
+<td><p>R</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id28" title="iodata.iodata.IOData.spinpol"><code class="xref py py-attr docutils literal notranslate"><span class="pre">spinpol</span></code></a> <em>(d)</em></p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>w</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>Rw</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id29" title="iodata.iodata.IOData.title"><code class="xref py py-attr docutils literal notranslate"><span class="pre">title</span></code></a></p></td>
+<td><p>R</p></td>
+<td><p>.</p></td>
+<td><p>R</p></td>
+<td><p>Rw</p></td>
+<td><p>R</p></td>
+<td><p>RW</p></td>
+<td><p>rw</p></td>
+<td><p>.</p></td>
+<td><p>rw</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>rw</p></td>
+<td><p>R</p></td>
+<td><p>R</p></td>
+<td><p>.</p></td>
+<td><p>w</p></td>
+<td><p>R</p></td>
+<td><p>r</p></td>
+<td><p>Rw</p></td>
+<td><p>Rw</p></td>
+<td><p>Rw</p></td>
+<td><p>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id30" title="iodata.iodata.IOData.two_ints"><code class="xref py py-attr docutils literal notranslate"><span class="pre">two_ints</span></code></a></p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>RW</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>r</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pyapi/iodata.iodata.html#id31" title="iodata.iodata.IOData.two_rdms"><code class="xref py py-attr docutils literal notranslate"><span class="pre">two_rdms</span></code></a></p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+<td><p>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="user-documentation">
+<h2>User Documentation<a class="headerlink" href="#user-documentation" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#script-usage">Script usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#code-usage">Code usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="formats.html">Supported File Formats</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="formats.html#charmm-crd-file-format-charmm">CHARMM crd file format (<code class="docutils literal notranslate"><span class="pre">charmm</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html#vasp-5-chgcar-file-format-chgcar">VASP 5 CHGCAR file format (<code class="docutils literal notranslate"><span class="pre">chgcar</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html#cp2k-atom-output-file-format-cp2klog">CP2K ATOM output file format (<code class="docutils literal notranslate"><span class="pre">cp2klog</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html#gaussian-cube-file-format-cube">Gaussian Cube file format (<code class="docutils literal notranslate"><span class="pre">cube</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html#extended-xyz-file-format-extxyz">Extended XYZ file format (<code class="docutils literal notranslate"><span class="pre">extxyz</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html#gaussian-fchk-file-format-fchk">Gaussian FCHK file format (<code class="docutils literal notranslate"><span class="pre">fchk</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html#molpro-2012-fcidump-file-format-fcidump">Molpro 2012 FCIDUMP file format (<code class="docutils literal notranslate"><span class="pre">fcidump</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html#gamess-punch-file-format-gamess">GAMESS punch file format (<code class="docutils literal notranslate"><span class="pre">gamess</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html#gaussian-log-file-format-gaussianlog">Gaussian Log file format (<code class="docutils literal notranslate"><span class="pre">gaussianlog</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html#gromacs-gro-file-format-gromacs">GROMACS gro file format (<code class="docutils literal notranslate"><span class="pre">gromacs</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html#vasp-5-locpot-file-format-locpot">VASP 5 LOCPOT file format (<code class="docutils literal notranslate"><span class="pre">locpot</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html#mol2-file-format-mol2">MOL2 file format (<code class="docutils literal notranslate"><span class="pre">mol2</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html#molden-file-format-molden">Molden file format (<code class="docutils literal notranslate"><span class="pre">molden</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html#molekel-file-format-molekel">Molekel file format (<code class="docutils literal notranslate"><span class="pre">molekel</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html#orca-output-file-format-orcalog">Orca output file format (<code class="docutils literal notranslate"><span class="pre">orcalog</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html#pdb-file-format-pdb">PDB file format (<code class="docutils literal notranslate"><span class="pre">pdb</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html#vasp-5-poscar-file-format-poscar">VASP 5 POSCAR file format (<code class="docutils literal notranslate"><span class="pre">poscar</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html#q-chem-log-file-format-qchemlog">Q-Chem Log file format (<code class="docutils literal notranslate"><span class="pre">qchemlog</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html#sdf-file-format-sdf">SDF file format (<code class="docutils literal notranslate"><span class="pre">sdf</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html#gaussian-gamess-us-wfn-file-format-wfn">Gaussian/GAMESS-US WFN file format (<code class="docutils literal notranslate"><span class="pre">wfn</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html#aim-aimall-wfx-file-format-wfx">AIM/AIMAll WFX file format (<code class="docutils literal notranslate"><span class="pre">wfx</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html#xyz-file-format-xyz">XYZ file format (<code class="docutils literal notranslate"><span class="pre">xyz</span></code>)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="basis.html">Basis set conventions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="basis.html#gaussian-basis-functions">Gaussian basis functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basis.html#the-conventions-attribute">The <code class="docutils literal notranslate"><span class="pre">conventions</span></code> attribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basis.html#notes-on-other-conventions">Notes on other conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basis.html#transformation-from-cartesian-to-pure-functions">Transformation from Cartesian to pure functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">IOData Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acknowledgments.html">Acknowledgments</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="developer-documentation">
+<h2>Developer Documentation<a class="headerlink" href="#developer-documentation" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#general-recommendations">General recommendations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#adding-new-file-formats">Adding new file formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#github-work-flow">Github work flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#notes-on-attrs">Notes on attrs</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pyapi/modules.html">iodata</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyapi/iodata.html">iodata package</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="install.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, The IODATA Development Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

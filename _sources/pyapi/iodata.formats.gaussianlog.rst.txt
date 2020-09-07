@@ -1,0 +1,8 @@
+iodata.formats.gaussianlog module
+=================================
+
+.. automodule:: iodata.formats.gaussianlog
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :inherited-members:

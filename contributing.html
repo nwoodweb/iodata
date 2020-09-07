@@ -1,0 +1,579 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Contributing &mdash; IOData  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/override.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["fast-preview.js"], "TeX": {"Macros": {"ket": ["{\\left\\vert { #1 } \\right\\rangle}", 1], "bra": ["{\\left\\langle { #1} \\right\\vert}", 1], "braket": ["{\\left\\langle {#1} \\mid { #2} \\right\\rangle}", 2], "ketbra": ["{\\left\\vert { #1 } \\right\\rangle\\left\\langle { #2} \\right\\vert}", 2], "ev": ["{\\left\\langle {#2} \\vert {#1} \\vert {#2} \\right\\rangle}", 2], "mel": ["{\\left\\langle{ #1 }\\right\\vert{ #2 }\\left\\vert{#3}\\right\\rangle}", 3]}}})</script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="iodata" href="pyapi/modules.html" />
+    <link rel="prev" title="Acknowledgments" href="acknowledgments.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> IOData
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="formats.html">Supported File Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basis.html">Basis set conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">IOData Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acknowledgments.html">Acknowledgments</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#general-recommendations">General recommendations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adding-new-file-formats">Adding new file formats</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#load-one-function-reading-a-single-iodata-object-from-a-file"><code class="docutils literal notranslate"><span class="pre">load_one</span></code> function: reading a single IOData object from a file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dump-one-functions-writing-a-single-iodata-object-to-a-file"><code class="docutils literal notranslate"><span class="pre">dump_one</span></code> functions: writing a single IOData object to a file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#load-many-function-reading-multiple-iodata-objects-from-a-single-file"><code class="docutils literal notranslate"><span class="pre">load_many</span></code> function: reading multiple IOData objects from a single file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dump-many-function-writing-multiple-iodata-objects-to-a-single-file"><code class="docutils literal notranslate"><span class="pre">dump_many</span></code> function: writing multiple IOData objects to a single file</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#github-work-flow">Github work flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#notes-on-attrs">Notes on attrs</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pyapi/modules.html">iodata</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">IOData</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Contributing</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/contributing.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="contributing">
+<span id="id1"></span><h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h1>
+<p>We’d love you to contribute. Here are some practical hints to help out.</p>
+<p>This document assumes you are familiar with <a class="reference external" href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Python_(programming_language)">Python</a>.</p>
+<div class="section" id="general-recommendations">
+<h2>General recommendations<a class="headerlink" href="#general-recommendations" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Please, be careful with tools like autopep8, black or yapf. They may result in
+a massive number of changes, making pull requests harder to review. Also, when
+using them, use a maximum line length of 100. To avoid confusion, only clean
+up the code you are working on. A safer option is to use
+<code class="docutils literal notranslate"><span class="pre">cardboardlint</span> <span class="pre">-F</span> <span class="pre">-r</span> <span class="pre">master</span></code>. This will only clean code where you have
+already made changes.</p></li>
+<li><p>Do not add module-level <code class="docutils literal notranslate"><span class="pre">pylint:</span> <span class="pre">disable=...</span></code> lines, except for the
+<code class="docutils literal notranslate"><span class="pre">no-member</span></code> warning in the unit test modules. When adding pylint exception,
+place them as locally as possible and make sure they are justified.</p></li>
+<li><p>Use <a class="reference external" href="https://docs.python.org/3/library/typing.html">type hinting</a> to document the types of function (and method) arguments
+and return values. This is not yet consistently done throughout IOData at the
+moment, but it would be helpful to do so in future pull requests. Avoid using
+strings to postpone the evaluation of the type. (See <a class="reference external" href="https://www.python.org/dev/peps/pep-0563/">PEP 0563</a> for more
+details on postponed type annotation.)</p></li>
+<li><p>In unit testing, use <code class="docutils literal notranslate"><span class="pre">np.testing.assert_allclose</span></code> and
+<code class="docutils literal notranslate"><span class="pre">np.testing.assert_equal</span></code> for comparing floating-point and integer numpy
+arrays respectively. <code class="docutils literal notranslate"><span class="pre">np.testing.assert_allclose</span></code> can also be used for
+comparing floating point scalars. In all other cases (not involving floating
+point numbers), the simple <code class="docutils literal notranslate"><span class="pre">assert</span> <span class="pre">a</span> <span class="pre">==</span> <span class="pre">b</span></code> works equally well and is more
+readable.</p></li>
+<li><p>IOData always uses atomic units internally. See <a class="reference internal" href="getting_started.html#units"><span class="std std-ref">Unit conversion</span></a> for details.</p></li>
+</ul>
+</div>
+<div class="section" id="adding-new-file-formats">
+<h2>Adding new file formats<a class="headerlink" href="#adding-new-file-formats" title="Permalink to this headline">¶</a></h2>
+<p>Each file format is implemented in a module of the package <code class="docutils literal notranslate"><span class="pre">iodata.formats</span></code>.
+These modules all follow the same API. Please consult existing formats for some
+guidance, e.g. the <a class="reference internal" href="pyapi/iodata.formats.xyz.html#module-iodata.formats.xyz" title="iodata.formats.xyz"><code class="xref py py-mod docutils literal notranslate"><span class="pre">iodata.formats.xyz</span></code></a> is a simple but complete
+example. From the following list, <code class="docutils literal notranslate"><span class="pre">PATTERNS</span></code> and one of the functions must
+be implemented:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PATTERNS</span> <span class="pre">=</span> <span class="pre">[</span> <span class="pre">...</span> <span class="pre">]</span></code>: a list of glob patterns used to recognize file formats
+from the file names. This is used to select the correct module from
+<code class="docutils literal notranslate"><span class="pre">iodata.formats</span></code> in functions in <code class="docutils literal notranslate"><span class="pre">iodata.api</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">load_one</span></code>: load a single IOData object.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dump_one</span></code>: dump a single IOData object.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">load_many</span></code>: load multiple IOData objects (iterator) from a single file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dump_many</span></code>: dump multiple IOData objects (iterator) to a single file.</p></li>
+</ul>
+<div class="section" id="load-one-function-reading-a-single-iodata-object-from-a-file">
+<h3><code class="docutils literal notranslate"><span class="pre">load_one</span></code> function: reading a single IOData object from a file<a class="headerlink" href="#load-one-function-reading-a-single-iodata-object-from-a-file" title="Permalink to this headline">¶</a></h3>
+<p>In order to read from a new file format, the module must contain a <code class="docutils literal notranslate"><span class="pre">load_one</span></code>
+function with the following signature:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@document_load_one</span><span class="p">(</span><span class="s2">&quot;format&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;list&#39;</span><span class="p">,</span> <span class="s1">&#39;of&#39;</span><span class="p">,</span> <span class="s1">&#39;guaranteed&#39;</span><span class="p">,</span> <span class="s1">&#39;attributes&#39;</span><span class="p">],</span>
+                   <span class="p">[</span><span class="s1">&#39;list&#39;</span><span class="p">,</span> <span class="s1">&#39;of&#39;</span><span class="p">,</span> <span class="s1">&#39;attributes&#39;</span><span class="p">,</span> <span class="s1">&#39;which&#39;</span><span class="p">,</span> <span class="s1">&#39;may&#39;</span><span class="p">,</span> <span class="s1">&#39;be&#39;</span><span class="p">,</span> <span class="s1">&#39;read&#39;</span><span class="p">],</span>
+                   <span class="n">notes</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">load_one</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Do not edit this docstring. It will be overwritten.&quot;&quot;&quot;</span>
+    <span class="c1"># Actual code to read the file</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">LineIterator</span></code> instance provides a convenient interface for reading files
+and can be found in <code class="docutils literal notranslate"><span class="pre">iodata.utils</span></code>. As a rule of thumb, always use
+<code class="docutils literal notranslate"><span class="pre">next(lit)</span></code> to read a new line from the file. You can use this iterator in
+a few ways:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># When you need to read one line.</span>
+<span class="n">line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+
+<span class="c1"># When sections appear in a file in fixed order, you can use helper functions.</span>
+<span class="n">data1</span> <span class="o">=</span> <span class="n">_load_helper_section1</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+<span class="n">data2</span> <span class="o">=</span> <span class="n">_load_helper_section2</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+
+<span class="c1"># When you intend to read everything in a file (not for trajectories).</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lit</span><span class="p">:</span>
+    <span class="c1"># do something with line.</span>
+
+<span class="c1"># When you just need to read a section.</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lit</span><span class="p">:</span>
+    <span class="c1"># do something with line</span>
+    <span class="k">if</span> <span class="n">done_with_section</span><span class="p">:</span>
+        <span class="k">break</span>
+
+<span class="c1"># When you need a fixed numbers of lines, say 10.</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+
+<span class="c1"># More complex example, in which you detect several sections and call other</span>
+<span class="c1"># functions to parse those sections. The code is not sensitive to the</span>
+<span class="c1"># order of the sections.</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">end_pattern</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="k">elif</span> <span class="n">line</span> <span class="o">==</span> <span class="s1">&#39;section1&#39;</span><span class="p">:</span>
+        <span class="n">data1</span> <span class="o">=</span> <span class="n">_load_helper_section1</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">line</span> <span class="o">==</span> <span class="s1">&#39;section2&#39;</span><span class="p">:</span>
+        <span class="n">data2</span> <span class="o">=</span> <span class="n">_load_helper_section2</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+
+<span class="c1"># Same as above, but reading till end of file. You cannot use a for loop</span>
+<span class="c1"># when multiple lines must be read in one iteration.</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="k">if</span> <span class="n">end_pattern</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="k">elif</span> <span class="n">line</span> <span class="o">==</span> <span class="s1">&#39;section1&#39;</span><span class="p">:</span>
+        <span class="n">data1</span> <span class="o">=</span> <span class="n">_load_helper_section1</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">line</span> <span class="o">==</span> <span class="s1">&#39;section2&#39;</span><span class="p">:</span>
+        <span class="n">data2</span> <span class="o">=</span> <span class="n">_load_helper_section2</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In some cases, one may have to push back a line because it was read too early.
+For example, in the Molden format, this is sometimes unavoidable. When needed
+you can <em>push back</em> the line for later reading with <code class="docutils literal notranslate"><span class="pre">lit.back(line)</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># When you just need to read a section</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lit</span><span class="p">:</span>
+    <span class="c1"># do something with line</span>
+    <span class="k">if</span> <span class="n">done_with_section</span><span class="p">:</span>
+        <span class="c1"># only now it becomes clear that you&#39;ve read one line to far</span>
+        <span class="n">lit</span><span class="o">.</span><span class="n">back</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+        <span class="k">break</span>
+</pre></div>
+</div>
+<p>When you encounter a file-format error while reading the file, call
+<code class="docutils literal notranslate"><span class="pre">lit.error(msg)</span></code>, where <code class="docutils literal notranslate"><span class="pre">msg</span></code> is a short message describing the problem.
+The error appearing on screen will automatically also contain the filename
+and line number.</p>
+</div>
+<div class="section" id="dump-one-functions-writing-a-single-iodata-object-to-a-file">
+<h3><code class="docutils literal notranslate"><span class="pre">dump_one</span></code> functions: writing a single IOData object to a file<a class="headerlink" href="#dump-one-functions-writing-a-single-iodata-object-to-a-file" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">dump_one</span></code> functions are conceptually simpler: they just receive an open
+file object and an <code class="docutils literal notranslate"><span class="pre">IOData</span></code> instance as arguments, and should write the data
+to the open file.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@document_dump_one</span><span class="p">(</span><span class="s2">&quot;format&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;guaranteed&#39;</span><span class="p">,</span> <span class="s1">&#39;attributes&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;optional&#39;</span><span class="p">,</span> <span class="s1">&#39;attribtues&#39;</span><span class="p">],</span> <span class="n">notes</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">dump_one</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">IOData</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Do not edit this docstring. It will be overwritten.&quot;&quot;&quot;</span>
+    <span class="c1"># code to write data to f.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="load-many-function-reading-multiple-iodata-objects-from-a-single-file">
+<h3><code class="docutils literal notranslate"><span class="pre">load_many</span></code> function: reading multiple IOData objects from a single file<a class="headerlink" href="#load-many-function-reading-multiple-iodata-objects-from-a-single-file" title="Permalink to this headline">¶</a></h3>
+<p>This function works essentially in the same way as <code class="docutils literal notranslate"><span class="pre">load_one</span></code>, but can load
+multiple molecules. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@document_load_many</span><span class="p">(</span><span class="s2">&quot;XYZ&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;atcoords&#39;</span><span class="p">,</span> <span class="s1">&#39;atnums&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">load_many</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Do not edit this docstring. It will be overwritten.&quot;&quot;&quot;</span>
+    <span class="c1"># XYZ Trajectory files are a simple concatenation of individual XYZ files,&#39;</span>
+    <span class="c1"># making it travial to load many frames.</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">load_one</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+            <span class="k">return</span>
+</pre></div>
+</div>
+<p>The XYZ trajectory format is simply a concatenation of individual XYZ files,
+such that one can use the load_one function to read a single frame. In some
+file formats, more complicated approaches are needed. In any case, one must
+use the <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword for every frame read from a file.</p>
+</div>
+<div class="section" id="dump-many-function-writing-multiple-iodata-objects-to-a-single-file">
+<h3><code class="docutils literal notranslate"><span class="pre">dump_many</span></code> function: writing multiple IOData objects to a single file<a class="headerlink" href="#dump-many-function-writing-multiple-iodata-objects-to-a-single-file" title="Permalink to this headline">¶</a></h3>
+<p>Also <code class="docutils literal notranslate"><span class="pre">dump_many</span></code> is very similar to <code class="docutils literal notranslate"><span class="pre">dump_one</span></code>, but just takes an iterator
+over multiple IOData instances as argument. It is expected to write all of these
+to a single open file object. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@document_dump_many</span><span class="p">(</span><span class="s2">&quot;XYZ&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;atcoords&#39;</span><span class="p">,</span> <span class="s1">&#39;atnums&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">dump_many</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">,</span> <span class="n">datas</span><span class="p">:</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">IOData</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;Do not edit this docstring. It will be overwritten.&quot;&quot;&quot;</span>
+    <span class="c1"># Similar to load_many, this is relatively easy.</span>
+    <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">datas</span><span class="p">:</span>
+        <span class="n">dump_one</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Also here, we take advantage of the simple structure of the XYZ trajectory
+format, i.e. the simple concatenation of individual XYZ files. For other
+formats, this could become more complicated.</p>
+</div>
+</div>
+<div class="section" id="github-work-flow">
+<h2>Github work flow<a class="headerlink" href="#github-work-flow" title="Permalink to this headline">¶</a></h2>
+<p>Before diving into technicalities: if you intend to make major changes, beyond
+fixing bugs and small functionality improvements, please open a Github issue
+first, so we can discuss before coding. Please explain what you intend to
+accomplish and why. That often saves a lot of time and trouble in the long run.</p>
+<p>Use the issue to plan your changes. Try to solve only one problem at a time,
+instead of fixing several issues and adding different features in a single shot.
+Small changes are easier to handle, also for the reviewer in the last step
+below.</p>
+<p>Mention in the corresponding issue when you are working on it. “Claim” the issue
+to avoid duplicate efforts.</p>
+<ol class="arabic">
+<li><p>Check your GitHub settings and your local git configuration:</p>
+<ul>
+<li><p>If you don’t have an SSH key pair yet, create one with the following
+terminal command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh-keygen -t rsa -b <span class="m">4096</span> -C <span class="s2">&quot;your_email@example.com&quot;</span>
+</pre></div>
+</div>
+<p>A suitable name for this key would be <code class="docutils literal notranslate"><span class="pre">id_rsa_github</span></code>.
+An empty pass phrase is convenient and should be fine.
+This will generate a private and a public key in <code class="docutils literal notranslate"><span class="pre">${HOME}/.ssh</span></code>.</p>
+</li>
+<li><p>Upload your <em>public</em> SSH key to <a class="reference external" href="https://github.com/settings/keys">https://github.com/settings/keys</a>.
+This is a single long line in <code class="docutils literal notranslate"><span class="pre">id_rsa_github.pub</span></code>, which you can
+copy-paste into the browser.</p></li>
+<li><p>Configure SSH to use this key pair for authentication when pushing
+branches to Github. Add the following to your <code class="docutils literal notranslate"><span class="pre">.ssh/config</span></code> file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Host</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span>
+    <span class="n">Hostname</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span>
+    <span class="n">ForwardX11</span> <span class="n">no</span>
+    <span class="n">IdentityFile</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">your_user_name</span><span class="o">/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa_github</span>
+</pre></div>
+</div>
+<p>(Make sure you have the correct path to the private key file.)</p>
+</li>
+<li><p>Configure git to use the name and e-mail address tied to your Github account:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git config --global user.name <span class="s2">&quot;Your Name&quot;</span>
+git config --global user.email <span class="s2">&quot;youremail@yourdomain.com&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>Install Roberto, which is the driver for our CI setup. It can also replicate
+the continuous integration on your local machine, which makes it easier to
+prepare a passable pull request. See <a class="reference external" href="https://theochem.github.io/roberto/">https://theochem.github.io/roberto/</a>.</p></li>
+<li><p>Make a fork of the project, using the Github “fork” feature.</p></li>
+<li><p>Clone the original repository on your local machine and enter the directory</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone git@github.com:theochem/iodata.git
+<span class="nb">cd</span> iodata
+</pre></div>
+</div>
+</li>
+<li><p>Add your fork as a second remote to your local repository, for which we will
+use the short name <code class="docutils literal notranslate"><span class="pre">mine</span></code> below, but any short name is fine:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git remote add mine git@github.com:&lt;your-github-account&gt;/iodata.git
+</pre></div>
+</div>
+</li>
+<li><p>Make a new branch, with a name that hints at the purpose of your
+modification:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout -b new-feature
+</pre></div>
+</div>
+</li>
+<li><p>Make changes to the source. Please, make it easy for others to understand
+your code. Also, add tests that verify your code works as intended.
+Rules of thumb:</p>
+<ul class="simple">
+<li><p>Write transparent code, e.g. self-explaining variable names.</p></li>
+<li><p>Add comments to passages that are not easy to understand at first glance.</p></li>
+<li><p>Write docstrings explaining the API.</p></li>
+<li><p>Add unit tests when feasible.</p></li>
+</ul>
+</li>
+<li><p>Commit your changes with a meaningful commit message. The first line is a
+short summary, written in the imperative mood. Optionally, this can be
+followed by an empty line and a longer description.</p>
+<p>If you feel the summary line is too short to describe what you did, it
+may be better to split your changes into multiple commits.</p>
+</li>
+<li><p>Run Roberto and fix all problems it reports. Either one of the following
+should work</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rob                 <span class="c1"># Normal case</span>
+python3 -m roberto  <span class="c1"># Only if your PATH is not set correctly</span>
+</pre></div>
+</div>
+<p>Style issues, failing tests and packaging issues should all be detected at
+this stage.</p>
+</li>
+<li><p>Push your branch to your forked repository on Github:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git push mine -u new-feature
+</pre></div>
+</div>
+<p>A link should be printed on screen, which will take the next step for you.</p>
+</li>
+<li><p>Make a pull request from your branch <cite>new-feature</cite> in your forked repository
+to the <cite>master</cite> branch in the original repository.</p></li>
+<li><p>Wait for the tests on Travis-CI to complete. These should pass. Also
+coverage analysis will be shown, but this is merely indicative. Normally,
+someone should review your pull request in a few days. Ideally, the review
+results in minor corrections at worst. We’ll do our best to avoid larger
+problems in step 1.</p></li>
+</ol>
+</div>
+<div class="section" id="notes-on-attrs">
+<h2>Notes on attrs<a class="headerlink" href="#notes-on-attrs" title="Permalink to this headline">¶</a></h2>
+<p>IOData uses the <a class="reference external" href="https://www.attrs.org/en/stable/">attrs</a> library, not to be confused with the <a class="reference external" href="https://github.com/denis-ryzhkov/attr">attr</a> library,
+for classes representing data loaded from files: <code class="docutils literal notranslate"><span class="pre">IOData</span></code>, <code class="docutils literal notranslate"><span class="pre">MolecularBasis</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Shell</span></code>, <code class="docutils literal notranslate"><span class="pre">MolecularOrbitals</span></code> and <code class="docutils literal notranslate"><span class="pre">Cube</span></code>. This enables basic attribute
+validation, which eliminates potentially silly bugs.
+(See <code class="docutils literal notranslate"><span class="pre">iodata/attrutils.py</span></code> and the usage of <code class="docutils literal notranslate"><span class="pre">validate_shape</span></code> in all those
+classes.)</p>
+<p>The following <code class="docutils literal notranslate"><span class="pre">attrs</span></code> functions could be convenient when working with these
+classes:</p>
+<ul>
+<li><p>The data can be turned into plain Python data types with the <code class="docutils literal notranslate"><span class="pre">attr.asdict</span></code>
+function. Make sure you add the <code class="docutils literal notranslate"><span class="pre">retain_collection_types=True</span></code> option, to
+avoid the following issue: <a class="reference external" href="https://github.com/python-attrs/attrs/issues/646">https://github.com/python-attrs/attrs/issues/646</a>
+For example.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">iodata</span> <span class="kn">import</span> <span class="n">load_one</span>
+<span class="kn">import</span> <span class="nn">attr</span>
+<span class="n">iodata</span> <span class="o">=</span> <span class="n">load_one</span><span class="p">(</span><span class="s2">&quot;example.xyz&quot;</span><span class="p">)</span>
+<span class="n">fields</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">asdict</span><span class="p">(</span><span class="n">iodata</span><span class="p">,</span> <span class="n">retain_collection_types</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A similar <code class="docutils literal notranslate"><span class="pre">astuple</span></code> function works as you would expect.</p>
+</li>
+<li><p>A <a class="reference external" href="https://docs.python.org/3/library/copy.html?highlight=shallow">shallow copy</a> with a few modified attributes can be created with the
+evolve method, which is a wrapper for <code class="docutils literal notranslate"><span class="pre">attr.evolve</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">iodata</span> <span class="kn">import</span> <span class="n">load_one</span>
+<span class="kn">import</span> <span class="nn">attr</span>
+<span class="n">iodata1</span> <span class="o">=</span> <span class="n">load_one</span><span class="p">(</span><span class="s2">&quot;example.xyz&quot;</span><span class="p">)</span>
+<span class="n">iodata2</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">evolve</span><span class="p">(</span><span class="n">iodata1</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;another title&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The usage of evolve becomes mandatory when you want to change two or more
+attributes whose shape need to be consistent. For example, the following
+would fail:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">iodata</span> <span class="kn">import</span> <span class="n">IOData</span>
+<span class="n">iodata</span> <span class="o">=</span> <span class="n">IOData</span><span class="p">(</span><span class="n">atnums</span><span class="o">=</span><span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="n">atcoords</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="c1"># The next line will fail because the size of atnums and atcoords</span>
+<span class="c1"># becomes inconsistent.</span>
+<span class="n">iodata</span><span class="o">.</span><span class="n">atnums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+<span class="n">iodata</span><span class="o">.</span><span class="n">atcoords</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>The following code, which has the same intent, does work:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>   <span class="kn">from</span> <span class="nn">iodata</span> <span class="kn">import</span> <span class="n">IOData</span>
+   <span class="kn">import</span> <span class="nn">attr</span>
+   <span class="n">iodata1</span> <span class="o">=</span> <span class="n">IOData</span><span class="p">(</span><span class="n">atnums</span><span class="o">=</span><span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="n">atcoords</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+   <span class="n">iodata2</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">evolve</span><span class="p">(</span>
+       <span class="n">iodata1</span><span class="p">,</span>
+       <span class="n">atnums</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+       <span class="n">atcoords</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span>
+   <span class="p">)</span>
+
+<span class="n">For</span> <span class="n">brevity</span><span class="p">,</span> <span class="n">lists</span> <span class="p">(</span><span class="n">of</span> <span class="n">lists</span><span class="p">)</span> <span class="n">were</span> <span class="n">used</span> <span class="ow">in</span> <span class="n">these</span> <span class="n">examples</span><span class="o">.</span> <span class="n">These</span> <span class="n">are</span> <span class="n">always</span>
+<span class="n">converted</span> <span class="n">to</span> <span class="n">arrays</span> <span class="n">by</span> <span class="n">the</span> <span class="n">constructor</span> <span class="ow">or</span> <span class="n">when</span> <span class="n">assigning</span> <span class="n">them</span> <span class="n">to</span> <span class="n">attributes</span><span class="o">.</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pyapi/modules.html" class="btn btn-neutral float-right" title="iodata" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="acknowledgments.html" class="btn btn-neutral float-left" title="Acknowledgments" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, The IODATA Development Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+iodata.orbitals module
+======================
+
+.. automodule:: iodata.orbitals
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :inherited-members:

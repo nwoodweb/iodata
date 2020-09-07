@@ -1,0 +1,38 @@
+iodata package
+==============
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   iodata.formats
+   iodata.test
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   iodata.api
+   iodata.attrutils
+   iodata.basis
+   iodata.docstrings
+   iodata.iodata
+   iodata.orbitals
+   iodata.overlap
+   iodata.overlap_cartpure
+   iodata.periodic
+   iodata.utils
+   iodata.version
+
+Module contents
+---------------
+
+.. automodule:: iodata
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :inherited-members:

@@ -1,0 +1,355 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>iodata.formats.pdb &mdash; IOData  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/override.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["fast-preview.js"], "TeX": {"Macros": {"ket": ["{\\left\\vert { #1 } \\right\\rangle}", 1], "bra": ["{\\left\\langle { #1} \\right\\vert}", 1], "braket": ["{\\left\\langle {#1} \\mid { #2} \\right\\rangle}", 2], "ketbra": ["{\\left\\vert { #1 } \\right\\rangle\\left\\langle { #2} \\right\\vert}", 2], "ev": ["{\\left\\langle {#2} \\vert {#1} \\vert {#2} \\right\\rangle}", 2], "mel": ["{\\left\\langle{ #1 }\\right\\vert{ #2 }\\left\\vert{#3}\\right\\rangle}", 3]}}})</script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> IOData
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../formats.html">Supported File Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../basis.html">Basis set conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">IOData Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgments.html">Acknowledgments</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pyapi/modules.html">iodata</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">IOData</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>iodata.formats.pdb</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for iodata.formats.pdb</h1><div class="highlight"><pre>
+<span></span><span class="c1"># IODATA is an input and output module for quantum chemistry.</span>
+<span class="c1"># Copyright (C) 2011-2019 The IODATA Development Team</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of IODATA.</span>
+<span class="c1">#</span>
+<span class="c1"># IODATA is free software; you can redistribute it and/or</span>
+<span class="c1"># modify it under the terms of the GNU General Public License</span>
+<span class="c1"># as published by the Free Software Foundation; either version 3</span>
+<span class="c1"># of the License, or (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># IODATA is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program; if not, see &lt;http://www.gnu.org/licenses/&gt;</span>
+<span class="c1"># --</span>
+<span class="sd">&quot;&quot;&quot;PDB file format.</span>
+
+<span class="sd">There are different formats of pdb files. The convention used here is the</span>
+<span class="sd">last updated one and is described in this link:</span>
+<span class="sd">http://www.wwpdb.org/documentation/file-format-content/format33/v3.3.html</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TextIO</span><span class="p">,</span> <span class="n">Iterator</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">..docstrings</span> <span class="kn">import</span> <span class="p">(</span><span class="n">document_load_one</span><span class="p">,</span> <span class="n">document_load_many</span><span class="p">,</span> <span class="n">document_dump_one</span><span class="p">,</span>
+                          <span class="n">document_dump_many</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">..iodata</span> <span class="kn">import</span> <span class="n">IOData</span>
+<span class="kn">from</span> <span class="nn">..periodic</span> <span class="kn">import</span> <span class="n">sym2num</span><span class="p">,</span> <span class="n">num2sym</span>
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="n">angstrom</span><span class="p">,</span> <span class="n">LineIterator</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+<span class="n">PATTERNS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;*.pdb&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="load_one"><a class="viewcode-back" href="../../../pyapi/iodata.formats.pdb.html#iodata.formats.pdb.load_one">[docs]</a><span class="nd">@document_load_one</span><span class="p">(</span><span class="s2">&quot;PDB&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;atcoords&#39;</span><span class="p">,</span> <span class="s1">&#39;atnums&#39;</span><span class="p">,</span> <span class="s1">&#39;atffparams&#39;</span><span class="p">,</span> <span class="s1">&#39;extra&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">load_one</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Do not edit this docstring. It will be overwritten.&quot;&quot;&quot;</span>
+    <span class="n">nums</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">resnums</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">coords</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">bfactor</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">occupancy</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">attypes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">restypes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">molecule_found</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">end_reached</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;PDB file from IOData&quot;</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="c1"># If the PDB file has a title replace it.</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;TITLE&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;COMPND&quot;</span><span class="p">):</span>
+            <span class="n">title</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">10</span><span class="p">:]</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;ATOM&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;HETATM&quot;</span><span class="p">):</span>
+            <span class="c1"># Try reading element from position 77:78 referenced in pdb format</span>
+            <span class="c1"># (76:78 due to python string slicing)</span>
+            <span class="n">words</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">76</span><span class="p">:</span><span class="mi">78</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">words</span><span class="p">:</span>
+                <span class="c1"># If not guess it from the atom type</span>
+                <span class="n">words</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">12</span><span class="p">:</span><span class="mi">16</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="c1"># get atomic number and residue number</span>
+            <span class="n">symbol</span> <span class="o">=</span> <span class="n">words</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
+            <span class="n">nums</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sym2num</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="n">sym2num</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">symbol</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="kc">None</span><span class="p">)))</span>
+            <span class="n">resnums</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">23</span><span class="p">:</span><span class="mi">26</span><span class="p">]))</span>
+            <span class="c1"># add x, y, and z</span>
+            <span class="n">coords</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">30</span><span class="p">:</span><span class="mi">38</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">38</span><span class="p">:</span><span class="mi">46</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">46</span><span class="p">:</span><span class="mi">54</span><span class="p">])])</span>
+            <span class="c1"># get other properties</span>
+            <span class="n">occupancy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">54</span><span class="p">:</span><span class="mi">60</span><span class="p">]))</span>
+            <span class="n">bfactor</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">60</span><span class="p">:</span><span class="mi">66</span><span class="p">]))</span>
+            <span class="n">attypes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">12</span><span class="p">:</span><span class="mi">16</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+            <span class="n">restypes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">17</span><span class="p">:</span><span class="mi">20</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+            <span class="n">molecule_found</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;END&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">molecule_found</span><span class="p">:</span>
+            <span class="n">end_reached</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">break</span>
+    <span class="k">if</span> <span class="n">molecule_found</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="n">lit</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Molecule could not be read!&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">end_reached</span><span class="p">:</span>
+        <span class="n">lit</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;The END is not found, but the parsed data is returned!&quot;</span><span class="p">)</span>
+
+    <span class="n">atffparams</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;attypes&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">attypes</span><span class="p">),</span> <span class="s2">&quot;restypes&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">restypes</span><span class="p">),</span>
+                  <span class="s2">&quot;resnums&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">resnums</span><span class="p">)}</span>
+    <span class="n">extra</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;occupancy&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">occupancy</span><span class="p">),</span> <span class="s2">&quot;bfactor&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">bfactor</span><span class="p">)}</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;atcoords&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span> <span class="o">*</span> <span class="n">angstrom</span><span class="p">,</span>
+        <span class="s1">&#39;atnums&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">nums</span><span class="p">),</span>
+        <span class="s1">&#39;atffparams&#39;</span><span class="p">:</span> <span class="n">atffparams</span><span class="p">,</span>
+        <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
+        <span class="s1">&#39;extra&#39;</span><span class="p">:</span> <span class="n">extra</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="load_many"><a class="viewcode-back" href="../../../pyapi/iodata.formats.pdb.html#iodata.formats.pdb.load_many">[docs]</a><span class="nd">@document_load_many</span><span class="p">(</span><span class="s2">&quot;PDB&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;atcoords&#39;</span><span class="p">,</span> <span class="s1">&#39;atnums&#39;</span><span class="p">,</span> <span class="s1">&#39;atffparams&#39;</span><span class="p">,</span> <span class="s1">&#39;extra&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">load_many</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Do not edit this docstring. It will be overwritten.&quot;&quot;&quot;</span>
+    <span class="c1"># PDB files with more molecules are a simple concatenation of individual PDB files,&#39;</span>
+    <span class="c1"># making it trivial to load many frames.</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">load_one</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
+            <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="dump_one"><a class="viewcode-back" href="../../../pyapi/iodata.formats.pdb.html#iodata.formats.pdb.dump_one">[docs]</a><span class="nd">@document_dump_one</span><span class="p">(</span><span class="s2">&quot;PDB&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;atcoords&#39;</span><span class="p">,</span> <span class="s1">&#39;atnums&#39;</span><span class="p">,</span> <span class="s1">&#39;extra&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;atffparams&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">dump_one</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">IOData</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Do not edit this docstring. It will be overwritten.&quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s2">&quot;TITLE     &quot;</span> <span class="o">+</span> <span class="n">data</span><span class="o">.</span><span class="n">title</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;TITLE      Created with IOData&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">attypes</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">atffparams</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;attypes&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">restypes</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">atffparams</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;restypes&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">resnums</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">atffparams</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;resnums&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">occupancy</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">extra</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;occupancy&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">bfactor</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">extra</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;bfactor&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">natom</span><span class="p">):</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">num2sym</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">atnums</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+        <span class="n">resnum</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="n">resnums</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">resnums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">atcoords</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">angstrom</span>
+        <span class="n">occ</span> <span class="o">=</span> <span class="mf">1.00</span> <span class="k">if</span> <span class="n">occupancy</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">occupancy</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="mf">0.00</span> <span class="k">if</span> <span class="n">bfactor</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">bfactor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">attype</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="k">if</span> <span class="n">attypes</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">attypes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">restype</span> <span class="o">=</span> <span class="s2">&quot;XXX&quot;</span> <span class="k">if</span> <span class="n">restypes</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">restypes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">out1</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">:</span><span class="s1">&gt;5d</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">attype</span><span class="si">:</span><span class="s1">&lt;4s</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">restype</span><span class="si">:</span><span class="s1">3s</span><span class="si">}</span><span class="s1"> A</span><span class="si">{</span><span class="n">resnum</span><span class="si">:</span><span class="s1">&gt;4d</span><span class="si">}</span><span class="s1">    &#39;</span>
+        <span class="n">out2</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s1">8.3f</span><span class="si">}{</span><span class="n">y</span><span class="si">:</span><span class="s1">8.3f</span><span class="si">}{</span><span class="n">z</span><span class="si">:</span><span class="s1">8.3f</span><span class="si">}{</span><span class="n">occ</span><span class="si">:</span><span class="s1">6.2f</span><span class="si">}{</span><span class="n">b</span><span class="si">:</span><span class="s1">6.2f</span><span class="si">}{</span><span class="n">n</span><span class="si">:</span><span class="s1">&gt;12s</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ATOM  &quot;</span> <span class="o">+</span> <span class="n">out1</span> <span class="o">+</span> <span class="n">out2</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;END&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="dump_many"><a class="viewcode-back" href="../../../pyapi/iodata.formats.pdb.html#iodata.formats.pdb.dump_many">[docs]</a><span class="nd">@document_dump_many</span><span class="p">(</span><span class="s2">&quot;PDB&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;atcoords&#39;</span><span class="p">,</span> <span class="s1">&#39;atnums&#39;</span><span class="p">,</span> <span class="s1">&#39;extra&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;atffparams&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">dump_many</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">,</span> <span class="n">datas</span><span class="p">:</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">IOData</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;Do not edit this docstring. It will be overwritten.&quot;&quot;&quot;</span>
+    <span class="c1"># Similar to load_many, this is relatively easy.</span>
+    <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">datas</span><span class="p">:</span>
+        <span class="n">dump_one</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, The IODATA Development Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

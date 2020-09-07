@@ -1,0 +1,8 @@
+iodata.formats.wfx module
+=========================
+
+.. automodule:: iodata.formats.wfx
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :inherited-members:

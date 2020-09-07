@@ -1,0 +1,575 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>iodata.formats.qchemlog &mdash; IOData  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/override.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["fast-preview.js"], "TeX": {"Macros": {"ket": ["{\\left\\vert { #1 } \\right\\rangle}", 1], "bra": ["{\\left\\langle { #1} \\right\\vert}", 1], "braket": ["{\\left\\langle {#1} \\mid { #2} \\right\\rangle}", 2], "ketbra": ["{\\left\\vert { #1 } \\right\\rangle\\left\\langle { #2} \\right\\vert}", 2], "ev": ["{\\left\\langle {#2} \\vert {#1} \\vert {#2} \\right\\rangle}", 2], "mel": ["{\\left\\langle{ #1 }\\right\\vert{ #2 }\\left\\vert{#3}\\right\\rangle}", 3]}}})</script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> IOData
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../formats.html">Supported File Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../basis.html">Basis set conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">IOData Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgments.html">Acknowledgments</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pyapi/modules.html">iodata</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">IOData</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>iodata.formats.qchemlog</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for iodata.formats.qchemlog</h1><div class="highlight"><pre>
+<span></span><span class="c1"># IODATA is an input and output module for quantum chemistry.</span>
+<span class="c1"># Copyright (C) 2011-2019 The IODATA Development Team</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of IODATA.</span>
+<span class="c1">#</span>
+<span class="c1"># IODATA is free software; you can redistribute it and/or</span>
+<span class="c1"># modify it under the terms of the GNU General Public License</span>
+<span class="c1"># as published by the Free Software Foundation; either version 3</span>
+<span class="c1"># of the License, or (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># IODATA is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program; if not, see &lt;http://www.gnu.org/licenses/&gt;</span>
+<span class="c1"># --</span>
+<span class="sd">&quot;&quot;&quot;Q-Chem Log file format.</span>
+
+<span class="sd">This module will load Q-Chem log file into IODATA.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">..docstrings</span> <span class="kn">import</span> <span class="n">document_load_one</span>
+<span class="kn">from</span> <span class="nn">..orbitals</span> <span class="kn">import</span> <span class="n">MolecularOrbitals</span>
+<span class="kn">from</span> <span class="nn">..periodic</span> <span class="kn">import</span> <span class="n">sym2num</span>
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="n">LineIterator</span><span class="p">,</span> <span class="n">kcalmol</span><span class="p">,</span> <span class="n">calmol</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">PATTERNS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;*.qchemlog&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="load_one"><a class="viewcode-back" href="../../../pyapi/iodata.formats.qchemlog.html#iodata.formats.qchemlog.load_one">[docs]</a><span class="nd">@document_load_one</span><span class="p">(</span><span class="s2">&quot;qchemlog&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;atcoords&#39;</span><span class="p">,</span> <span class="s1">&#39;atmasses&#39;</span><span class="p">,</span> <span class="s1">&#39;atnums&#39;</span><span class="p">,</span> <span class="s1">&#39;energy&#39;</span><span class="p">,</span> <span class="s1">&#39;g_rot&#39;</span><span class="p">,</span>
+                                <span class="s1">&#39;mo&#39;</span><span class="p">,</span> <span class="s1">&#39;lot&#39;</span><span class="p">,</span> <span class="s1">&#39;obasis_name&#39;</span><span class="p">,</span> <span class="s1">&#39;run_type&#39;</span><span class="p">,</span> <span class="s1">&#39;extra&#39;</span><span class="p">],</span>
+                   <span class="p">[</span><span class="s1">&#39;athessian&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">load_one</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Do not edit this docstring. It will be overwritten.&quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">load_qchemlog_low</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+
+    <span class="c1"># add these labels if they are loaded</span>
+    <span class="n">result_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;atcoords&#39;</span><span class="p">,</span> <span class="s1">&#39;atmasses&#39;</span><span class="p">,</span> <span class="s1">&#39;atnums&#39;</span><span class="p">,</span> <span class="s1">&#39;energy&#39;</span><span class="p">,</span> <span class="s1">&#39;g_rot&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;run_type&#39;</span><span class="p">,</span> <span class="s1">&#39;athessian&#39;</span><span class="p">,</span> <span class="s1">&#39;lot&#39;</span><span class="p">,</span> <span class="s1">&#39;obasis_name&#39;</span><span class="p">]</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">label</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">result_labels</span> <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">label</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">}</span>
+
+    <span class="c1"># mulliken charges</span>
+    <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mulliken_charges&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">result</span><span class="p">[</span><span class="s2">&quot;atcharges&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;mulliken&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;mulliken_charges&quot;</span><span class="p">]}</span>
+
+    <span class="c1"># build molecular orbitals</span>
+    <span class="c1"># ------------------------</span>
+    <span class="c1"># restricted case</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;unrestricted&#39;</span><span class="p">]:</span>
+        <span class="n">mo_energies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_a_occ&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_a_vir&#39;</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">mo_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;nbasis&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;norba&#39;</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+        <span class="n">mo_occs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">mo_coeffs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">mo_occs</span><span class="p">[:</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;alpha_elec&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="n">mo_occs</span><span class="p">[:</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;beta_elec&#39;</span><span class="p">]]</span> <span class="o">+=</span> <span class="mf">1.0</span>
+        <span class="n">mo</span> <span class="o">=</span> <span class="n">MolecularOrbitals</span><span class="p">(</span><span class="s2">&quot;restricted&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;norba&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;norba&#39;</span><span class="p">],</span>
+                               <span class="n">mo_occs</span><span class="p">,</span> <span class="n">mo_coeffs</span><span class="p">,</span> <span class="n">mo_energies</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="c1"># unrestricted case</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">mo_energies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_a_occ&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_a_vir&#39;</span><span class="p">],</span>
+                                      <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_b_occ&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_b_vir&#39;</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">mo_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;nbasis&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;norba&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;norbb&#39;</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+        <span class="n">mo_occs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">mo_coeffs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="c1"># number of alpha &amp; beta electrons and number of alpha molecular orbitals</span>
+        <span class="n">na</span><span class="p">,</span> <span class="n">nb</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;alpha_elec&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;beta_elec&#39;</span><span class="p">]</span>
+        <span class="n">na_mo</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_a_occ&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_a_vir&#39;</span><span class="p">])</span>
+        <span class="n">mo_occs</span><span class="p">[:</span><span class="n">na</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="n">mo_occs</span><span class="p">[</span><span class="n">na_mo</span><span class="p">:</span> <span class="n">na_mo</span> <span class="o">+</span> <span class="n">nb</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="n">mo</span> <span class="o">=</span> <span class="n">MolecularOrbitals</span><span class="p">(</span><span class="s2">&quot;unrestricted&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;norba&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;norbb&#39;</span><span class="p">],</span>
+                               <span class="n">mo_occs</span><span class="p">,</span> <span class="n">mo_coeffs</span><span class="p">,</span> <span class="n">mo_energies</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">result</span><span class="p">[</span><span class="s1">&#39;mo&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mo</span>
+
+    <span class="c1"># moments</span>
+    <span class="n">moments</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="s1">&#39;dipole&#39;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="n">moments</span><span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;dipole&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="s1">&#39;quadrupole&#39;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="c1"># Convert to alphabetical ordering: xx, xy, xz, yy, yz, zz</span>
+        <span class="n">moments</span><span class="p">[(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;quadrupole&#39;</span><span class="p">][[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]</span>
+    <span class="k">if</span> <span class="n">moments</span><span class="p">:</span>
+        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;moments&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">moments</span>
+
+    <span class="c1"># extra dictionary</span>
+    <span class="c1"># ----------------</span>
+    <span class="c1"># add labels to extra dictionary if they are loaded</span>
+    <span class="n">extra_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;spin_multi&#39;</span><span class="p">,</span> <span class="s1">&#39;nuclear_repulsion_energy&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;polarizability_tensor&#39;</span><span class="p">,</span> <span class="s1">&#39;imaginary_freq&#39;</span><span class="p">,</span> <span class="s1">&#39;vib_energy&#39;</span><span class="p">]</span>
+    <span class="n">extra</span> <span class="o">=</span> <span class="p">{</span><span class="n">label</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">extra_labels</span> <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">label</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">}</span>
+    <span class="c1"># if present, convert vibrational energy from kcal/mol to &quot;atomic units + K&quot;</span>
+    <span class="k">if</span> <span class="s1">&#39;vib_energy&#39;</span> <span class="ow">in</span> <span class="n">extra</span><span class="p">:</span>
+        <span class="n">extra</span><span class="p">[</span><span class="s1">&#39;vib_energy&#39;</span><span class="p">]</span> <span class="o">*=</span> <span class="n">kcalmol</span>
+
+    <span class="c1"># if present, convert enthalpy terms from kcal/mol to &quot;atomic units + K&quot;</span>
+    <span class="k">if</span> <span class="s1">&#39;enthalpy_dict&#39;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="n">extra</span><span class="p">[</span><span class="s1">&#39;enthalpy_dict&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="o">*</span> <span class="n">kcalmol</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;enthalpy_dict&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+    <span class="c1"># if present, convert entropy terms from cal/mol.K to &quot;atomic units + Kalvin&quot;</span>
+    <span class="k">if</span> <span class="s1">&#39;entropy_dict&#39;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="n">extra</span><span class="p">[</span><span class="s1">&#39;entropy_dict&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="o">*</span> <span class="n">calmol</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;entropy_dict&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+    <span class="n">result</span><span class="p">[</span><span class="s1">&#39;extra&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">extra</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="load_qchemlog_low"><a class="viewcode-back" href="../../../pyapi/iodata.formats.qchemlog.html#iodata.formats.qchemlog.load_qchemlog_low">[docs]</a><span class="k">def</span> <span class="nf">load_qchemlog_low</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Load the information from Q-Chem log file.&quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+            <span class="c1"># Read until the end of the file.</span>
+            <span class="k">break</span>
+
+        <span class="c1"># get the atomic information</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;$molecule&#39;</span><span class="p">):</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;atnums&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;atcoords&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_helper_atoms</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;natom&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;atnums&#39;</span><span class="p">])</span>
+        <span class="c1"># job specifications</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;$rem&#39;</span><span class="p">):</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">_helper_job</span><span class="p">(</span><span class="n">lit</span><span class="p">))</span>
+        <span class="c1"># standard nuclear orientation</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Standard Nuclear Orientation (Angstroms)&#39;</span><span class="p">):</span>
+            <span class="c1"># atnums, alpha_elec, beta_elec, nbasis, nuclear_replusion_energy, energy, atcoords</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;alpha_elec&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;beta_elec&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;nbasis&#39;</span><span class="p">],</span> \
+                <span class="n">data</span><span class="p">[</span><span class="s1">&#39;nuclear_repulsion_energy&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">],</span> <span class="n">_</span> <span class="o">=</span> <span class="n">_helper_electron</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+        <span class="c1"># orbital energies</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Orbital Energies (a.u.)&#39;</span><span class="p">):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">_helper_orbital_energies</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_a_occ&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_b_occ&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_a_vir&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_b_vir&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
+            <span class="c1"># compute number of alpha and beta molecular orbitals</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;norba&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_a_occ&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_a_vir&#39;</span><span class="p">])</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;norbb&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_b_occ&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;mo_b_vir&#39;</span><span class="p">])</span>
+        <span class="c1"># mulliken charges</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Ground-State Mulliken Net Atomic Charges&#39;</span><span class="p">):</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mulliken_charges&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_helper_mulliken</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+        <span class="c1">#  cartesian multipole moments</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Cartesian Multipole Moments&#39;</span><span class="p">):</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;dipole&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;quadrupole&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;dipole_tol&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_helper_dipole_moments</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+        <span class="c1"># polarizability matrix</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Polarizability Matrix (a.u.)&#39;</span><span class="p">):</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;polarizability_tensor&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_helper_polar</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+        <span class="c1"># hessian matrix</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Hessian of the SCF Energy&#39;</span><span class="p">):</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;athessian&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_helper_hessian</span><span class="p">(</span><span class="n">lit</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;natom&#39;</span><span class="p">])</span>
+        <span class="c1"># vibrational analysis</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;**                       VIBRATIONAL ANALYSIS&#39;</span><span class="p">):</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;imaginary_freq&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;vib_energy&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;atmasses&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_helper_vibrational</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+        <span class="c1"># rotational symmetry number</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Rotational Symmetry Number&#39;</span><span class="p">):</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;g_rot&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;enthalpy_dict&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;entropy_dict&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_helper_thermo</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">data</span></div>
+
+
+<span class="k">def</span> <span class="nf">_helper_atoms</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Load list of coordinates from an Q-Chem log output file format.&quot;&quot;&quot;</span>
+    <span class="c1"># Skip line with net charge and spin multiplicity</span>
+    <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+    <span class="c1"># atomic numbers and atomic coordinates (in Angstrom)</span>
+    <span class="n">atom_symbols</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">atcoords</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lit</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;$end&#39;</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">atom_symbols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">atcoords</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">:]])</span>
+    <span class="n">atnums</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">sym2num</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">atom_symbols</span><span class="p">])</span>
+    <span class="n">atcoords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">atcoords</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">atnums</span><span class="p">,</span> <span class="n">atcoords</span>
+
+
+<span class="k">def</span> <span class="nf">_helper_job</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Load job specifications from Q-Chem log out file format.&quot;&quot;&quot;</span>
+    <span class="n">data_rem</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lit</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;$end&#39;</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="c1"># parse job type section; some sections might not be available</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;jobtype&#39;</span><span class="p">):</span>
+            <span class="n">data_rem</span><span class="p">[</span><span class="s1">&#39;run_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;method&#39;</span><span class="p">):</span>
+            <span class="n">data_rem</span><span class="p">[</span><span class="s1">&#39;lot&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;unrestricted&#39;</span><span class="p">):</span>
+            <span class="n">data_rem</span><span class="p">[</span><span class="s1">&#39;unrestricted&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;basis&#39;</span><span class="p">):</span>
+            <span class="n">data_rem</span><span class="p">[</span><span class="s1">&#39;obasis_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;symmetry&#39;</span><span class="p">):</span>
+            <span class="n">data_rem</span><span class="p">[</span><span class="s1">&#39;symm&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">data_rem</span>
+
+
+<span class="k">def</span> <span class="nf">_helper_electron</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Load electron information from Q-Chem log out file format.&quot;&quot;&quot;</span>
+    <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+    <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+    <span class="n">atom_symbols</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">atcoords</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lit</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;-------------&#39;</span><span class="p">):</span>
+            <span class="k">break</span>
+        <span class="c1"># print(line.strip())</span>
+        <span class="n">atom_symbols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">atcoords</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">2</span><span class="p">:]])</span>
+    <span class="n">atnums</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">sym2num</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">atom_symbols</span><span class="p">])</span>
+    <span class="n">atcoords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">atcoords</span><span class="p">)</span>
+    <span class="c1"># nuclear_replusion_energy = float(re.findall(&#39;\d+\.\d+&#39;, next(line).strip())[-2])</span>
+    <span class="n">nuclear_replusion_energy</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+    <span class="c1"># number of num alpha electron and beta elections</span>
+    <span class="n">alpha_elec</span><span class="p">,</span> <span class="n">beta_elec</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\d&#39;</span><span class="p">,</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">())]</span>
+    <span class="c1"># number of basis</span>
+    <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+    <span class="n">nbasis</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">3</span><span class="p">])</span>
+    <span class="c1"># total energy</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lit</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Total energy in the final basis set&#39;</span><span class="p">):</span>
+            <span class="k">break</span>
+    <span class="n">energy</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">atnums</span><span class="p">,</span> <span class="n">alpha_elec</span><span class="p">,</span> <span class="n">beta_elec</span><span class="p">,</span> <span class="n">nbasis</span><span class="p">,</span> <span class="n">nuclear_replusion_energy</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">atcoords</span>
+
+
+<span class="k">def</span> <span class="nf">_helper_orbital_energies</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Load occupied and virtual orbital energies.&quot;&quot;&quot;</span>
+    <span class="c1"># alpha occupied MOs</span>
+    <span class="n">mo_a_occupied</span> <span class="o">=</span> <span class="n">_helper_section</span><span class="p">(</span><span class="s1">&#39;-- Occupied --&#39;</span><span class="p">,</span> <span class="s1">&#39;-- Virtual --&#39;</span><span class="p">,</span> <span class="n">lit</span><span class="p">,</span> <span class="n">backward</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># alpha unoccupied MOs</span>
+    <span class="n">mo_a_unoccupied</span> <span class="o">=</span> <span class="n">_helper_section</span><span class="p">(</span><span class="s1">&#39;-- Virtual --&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">lit</span><span class="p">,</span> <span class="n">backward</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="c1"># beta occupied MOs</span>
+    <span class="n">mo_b_occupied</span> <span class="o">=</span> <span class="n">_helper_section</span><span class="p">(</span><span class="s1">&#39;-- Occupied --&#39;</span><span class="p">,</span> <span class="s1">&#39;-- Virtual --&#39;</span><span class="p">,</span> <span class="n">lit</span><span class="p">,</span> <span class="n">backward</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># beta unoccupied MOs</span>
+    <span class="n">mo_b_unoccupied</span> <span class="o">=</span> <span class="n">_helper_section</span><span class="p">(</span><span class="s1">&#39;-- Virtual --&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">62</span><span class="p">,</span> <span class="n">lit</span><span class="p">,</span> <span class="n">backward</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">mo_a_occupied</span><span class="p">,</span> <span class="n">mo_b_occupied</span><span class="p">,</span> <span class="n">mo_a_unoccupied</span><span class="p">,</span> <span class="n">mo_b_unoccupied</span>
+
+
+<span class="k">def</span> <span class="nf">_helper_section</span><span class="p">(</span><span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">,</span> <span class="n">backward</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Load data between starting and ending strings.&quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lit</span><span class="p">:</span>
+        <span class="n">line_str</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">line_str</span> <span class="o">==</span> <span class="n">start</span><span class="p">:</span>
+            <span class="k">break</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lit</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">!=</span> <span class="n">end</span><span class="p">:</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">break</span>
+    <span class="k">if</span> <span class="n">backward</span><span class="p">:</span>
+        <span class="n">lit</span><span class="o">.</span><span class="n">back</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_helper_mulliken</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Load mulliken net atomic charges.&quot;&quot;&quot;</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;------&#39;</span><span class="p">):</span>
+            <span class="k">break</span>
+    <span class="n">mulliken_charges</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lit</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;--------&#39;</span><span class="p">):</span>
+            <span class="k">break</span>
+        <span class="n">mulliken_charges</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mulliken_charges</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_helper_dipole_moments</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Load cartesian multiple moments.&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lit</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Dipole Moment (Debye)&#39;</span><span class="p">):</span>
+            <span class="k">break</span>
+    <span class="c1"># parse dipole moment (only load the float numbers)</span>
+    <span class="n">dipole</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">dipole</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">dipole</span><span class="p">)</span> <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">dipole</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dipole</span><span class="p">)</span> <span class="k">if</span> <span class="n">idx</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="c1"># parse total dipole moment</span>
+    <span class="n">dipole_tol</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="c1"># parse quadrupole moment</span>
+    <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+    <span class="n">quadrupole</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">quadrupole</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+    <span class="n">quadrupole</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">dipole</span><span class="p">)</span> <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">dipole</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">quadrupole</span><span class="p">)</span> <span class="k">if</span> <span class="n">idx</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">dipole</span><span class="p">,</span> <span class="n">quadrupole</span><span class="p">,</span> <span class="n">dipole_tol</span>
+
+
+<span class="k">def</span> <span class="nf">_helper_polar</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Load polarizability matrix.&quot;&quot;&quot;</span>
+    <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+    <span class="n">polarizability_tensor</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lit</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Calculating analytic Hessian&#39;</span><span class="p">):</span>
+            <span class="k">break</span>
+        <span class="n">polarizability_tensor</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">:])</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">polarizability_tensor</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_helper_hessian</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">,</span> <span class="n">natoms</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Load hessian matrix.&quot;&quot;&quot;</span>
+    <span class="c1"># hessian in Cartesian coordinates, shape(3 * natom, 3 * natom)</span>
+    <span class="n">col_idx</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
+    <span class="n">hessian</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">natoms</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="n">natoms</span> <span class="o">*</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lit</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;****************&#39;</span><span class="p">):</span>
+            <span class="k">break</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;            &#39;</span><span class="p">):</span>
+            <span class="n">line_list</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="n">row_idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="n">hessian</span><span class="p">[</span><span class="n">row_idx</span><span class="p">,</span> <span class="n">col_idx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span><span class="n">col_idx</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">line_list</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">col_idx</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">hessian</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_helper_vibrational</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Load vibrational analysis.&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lit</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;This Molecule has&#39;</span><span class="p">):</span>
+            <span class="k">break</span>
+    <span class="c1"># pylint: disable= W0631</span>
+    <span class="n">imaginary_freq</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">3</span><span class="p">])</span>
+    <span class="n">vib_energy</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+    <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+    <span class="n">atmasses</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lit</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Molecular Mass:&#39;</span><span class="p">):</span>
+            <span class="k">break</span>
+        <span class="n">atmasses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">atmasses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">atmasses</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">imaginary_freq</span><span class="p">,</span> <span class="n">vib_energy</span><span class="p">,</span> <span class="n">atmasses</span>
+
+
+<span class="k">def</span> <span class="nf">_helper_thermo</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Load thermodynamics properties.&quot;&quot;&quot;</span>
+    <span class="n">enthalpy_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">entropy_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lit</span><span class="p">:</span>
+        <span class="n">line_str</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">line_str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Archival summary:&#39;</span><span class="p">):</span>
+            <span class="k">break</span>
+        <span class="k">if</span> <span class="n">line_str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Translational Enthalpy&#39;</span><span class="p">):</span>
+            <span class="n">enthalpy_dict</span><span class="p">[</span><span class="s1">&#39;trans_enthalpy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line_str</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">line_str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Rotational Enthalpy&#39;</span><span class="p">):</span>
+            <span class="n">enthalpy_dict</span><span class="p">[</span><span class="s1">&#39;rot_enthalpy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line_str</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">line_str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Vibrational Enthalpy&#39;</span><span class="p">):</span>
+            <span class="n">enthalpy_dict</span><span class="p">[</span><span class="s1">&#39;vib_enthalpy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line_str</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">line_str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Total Enthalpy&#39;</span><span class="p">):</span>
+            <span class="n">enthalpy_dict</span><span class="p">[</span><span class="s1">&#39;enthalpy_total&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line_str</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">line_str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Translational Entropy&#39;</span><span class="p">):</span>
+            <span class="n">entropy_dict</span><span class="p">[</span><span class="s1">&#39;trans_entropy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line_str</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">line_str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Rotational Entropy&#39;</span><span class="p">):</span>
+            <span class="n">entropy_dict</span><span class="p">[</span><span class="s1">&#39;rot_entropy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line_str</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">line_str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Vibrational Entropy&#39;</span><span class="p">):</span>
+            <span class="n">entropy_dict</span><span class="p">[</span><span class="s1">&#39;vib_entropy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line_str</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">line_str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Total Entropy&#39;</span><span class="p">):</span>
+            <span class="n">entropy_dict</span><span class="p">[</span><span class="s1">&#39;entropy_total&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line_str</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">enthalpy_dict</span><span class="p">,</span> <span class="n">entropy_dict</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, The IODATA Development Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

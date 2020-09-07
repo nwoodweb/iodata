@@ -1,0 +1,400 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>iodata.api &mdash; IOData  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/override.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["fast-preview.js"], "TeX": {"Macros": {"ket": ["{\\left\\vert { #1 } \\right\\rangle}", 1], "bra": ["{\\left\\langle { #1} \\right\\vert}", 1], "braket": ["{\\left\\langle {#1} \\mid { #2} \\right\\rangle}", 2], "ketbra": ["{\\left\\vert { #1 } \\right\\rangle\\left\\langle { #2} \\right\\vert}", 2], "ev": ["{\\left\\langle {#2} \\vert {#1} \\vert {#2} \\right\\rangle}", 2], "mel": ["{\\left\\langle{ #1 }\\right\\vert{ #2 }\\left\\vert{#3}\\right\\rangle}", 3]}}})</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> IOData
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../formats.html">Supported File Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basis.html">Basis set conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">IOData Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgments.html">Acknowledgments</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pyapi/modules.html">iodata</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">IOData</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>iodata.api</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for iodata.api</h1><div class="highlight"><pre>
+<span></span><span class="c1"># IODATA is an input and output module for quantum chemistry.</span>
+<span class="c1"># Copyright (C) 2011-2019 The IODATA Development Team</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of IODATA.</span>
+<span class="c1">#</span>
+<span class="c1"># IODATA is free software; you can redistribute it and/or</span>
+<span class="c1"># modify it under the terms of the GNU General Public License</span>
+<span class="c1"># as published by the Free Software Foundation; either version 3</span>
+<span class="c1"># of the License, or (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># IODATA is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program; if not, see &lt;http://www.gnu.org/licenses/&gt;</span>
+<span class="c1"># --</span>
+<span class="sd">&quot;&quot;&quot;Functions to be used by end users.&quot;&quot;&quot;</span>
+
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Iterator</span>
+<span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">ModuleType</span>
+<span class="kn">from</span> <span class="nn">fnmatch</span> <span class="kn">import</span> <span class="n">fnmatch</span>
+<span class="kn">from</span> <span class="nn">pkgutil</span> <span class="kn">import</span> <span class="n">iter_modules</span>
+<span class="kn">from</span> <span class="nn">importlib</span> <span class="kn">import</span> <span class="n">import_module</span>
+
+<span class="kn">from</span> <span class="nn">.iodata</span> <span class="kn">import</span> <span class="n">IOData</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">LineIterator</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;load_one&#39;</span><span class="p">,</span> <span class="s1">&#39;load_many&#39;</span><span class="p">,</span> <span class="s1">&#39;dump_one&#39;</span><span class="p">,</span> <span class="s1">&#39;dump_many&#39;</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">_find_format_modules</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Return all file-format modules found with importlib.&quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">module_info</span> <span class="ow">in</span> <span class="n">iter_modules</span><span class="p">(</span><span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;iodata.formats&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">__path__</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">module_info</span><span class="o">.</span><span class="n">ispkg</span><span class="p">:</span>
+            <span class="n">format_module</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;iodata.formats.&#39;</span> <span class="o">+</span> <span class="n">module_info</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">format_module</span><span class="p">,</span> <span class="s1">&#39;PATTERNS&#39;</span><span class="p">):</span>
+                <span class="n">result</span><span class="p">[</span><span class="n">module_info</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">format_module</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="n">FORMAT_MODULES</span> <span class="o">=</span> <span class="n">_find_format_modules</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">_select_format_module</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">attrname</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ModuleType</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Find a file format module with the requested attribute name.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filename</span>
+<span class="sd">        The file to load or dump.</span>
+<span class="sd">    attrname</span>
+<span class="sd">        The required atrtibute of the file format module.</span>
+<span class="sd">    fmt</span>
+<span class="sd">        The name of the file format module to use. When not given, it is guessed</span>
+<span class="sd">        from the filename.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    format_module</span>
+<span class="sd">        The module implementing the required file format.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">basename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">fmt</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">format_module</span> <span class="ow">in</span> <span class="n">FORMAT_MODULES</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">fnmatch</span><span class="p">(</span><span class="n">basename</span><span class="p">,</span> <span class="n">pattern</span><span class="p">)</span> <span class="k">for</span> <span class="n">pattern</span> <span class="ow">in</span> <span class="n">format_module</span><span class="o">.</span><span class="n">PATTERNS</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">format_module</span><span class="p">,</span> <span class="n">attrname</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="n">format_module</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">FORMAT_MODULES</span><span class="p">[</span><span class="n">fmt</span><span class="p">]</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Could not find file format with feature </span><span class="si">{}</span><span class="s1"> for file </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">attrname</span><span class="p">,</span> <span class="n">filename</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="load_one"><a class="viewcode-back" href="../../pyapi/iodata.api.html#iodata.api.load_one">[docs]</a><span class="k">def</span> <span class="nf">load_one</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IOData</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Load data from a file.</span>
+
+<span class="sd">    This function uses the extension or prefix of the filename to determine the</span>
+<span class="sd">    file format. When the file format is detected, a specialized load function</span>
+<span class="sd">    is called for the heavy lifting.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filename</span>
+<span class="sd">        The file to load data from.</span>
+<span class="sd">    fmt</span>
+<span class="sd">        The name of the file format module to use. When not given, it is guessed</span>
+<span class="sd">        from the filename.</span>
+<span class="sd">    **kwargs</span>
+<span class="sd">        Keyword arguments are passed on to the format-specific load_one function.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    out</span>
+<span class="sd">        The instance of IOData with data loaded from the input files.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">format_module</span> <span class="o">=</span> <span class="n">_select_format_module</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;load_one&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="p">)</span>
+    <span class="n">lit</span> <span class="o">=</span> <span class="n">LineIterator</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">IOData</span><span class="p">(</span><span class="o">**</span><span class="n">format_module</span><span class="o">.</span><span class="n">load_one</span><span class="p">(</span><span class="n">lit</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+        <span class="n">lit</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;File ended before all data was read.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="load_many"><a class="viewcode-back" href="../../pyapi/iodata.api.html#iodata.api.load_many">[docs]</a><span class="k">def</span> <span class="nf">load_many</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">IOData</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Load multiple IOData instances from a file.</span>
+
+<span class="sd">    This function uses the extension or prefix of the filename to determine the</span>
+<span class="sd">    file format. When the file format is detected, a specialized load function</span>
+<span class="sd">    is called for the heavy lifting.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filename</span>
+<span class="sd">        The file to load data from.</span>
+<span class="sd">    fmt</span>
+<span class="sd">        The name of the file format module to use. When not given, it is guessed</span>
+<span class="sd">        from the filename.</span>
+<span class="sd">    **kwargs</span>
+<span class="sd">        Keyword arguments are passed on to the format-specific load_many function.</span>
+
+<span class="sd">    Yields</span>
+<span class="sd">    ------</span>
+<span class="sd">    out</span>
+<span class="sd">        An instance of IOData with data for one frame loaded for the file.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">format_module</span> <span class="o">=</span> <span class="n">_select_format_module</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;load_many&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="p">)</span>
+    <span class="n">lit</span> <span class="o">=</span> <span class="n">LineIterator</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">format_module</span><span class="o">.</span><span class="n">load_many</span><span class="p">(</span><span class="n">lit</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">IOData</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+            <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="dump_one"><a class="viewcode-back" href="../../pyapi/iodata.api.html#iodata.api.dump_one">[docs]</a><span class="k">def</span> <span class="nf">dump_one</span><span class="p">(</span><span class="n">iodata</span><span class="p">:</span> <span class="n">IOData</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Write data to a file.</span>
+
+<span class="sd">    This routine uses the extension or prefix of the filename to determine</span>
+<span class="sd">    the file format. For each file format, a specialized function is</span>
+<span class="sd">    called that does the real work.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    iodata</span>
+<span class="sd">        The object containing the data to be written.</span>
+<span class="sd">    filename</span>
+<span class="sd">        The file to write the data to.</span>
+<span class="sd">    fmt</span>
+<span class="sd">        The name of the file format module to use. When not given, it is guessed</span>
+<span class="sd">        from the filename.</span>
+<span class="sd">    **kwargs</span>
+<span class="sd">        Keyword arguments are passed on to the format-specific dump_one function.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">format_module</span> <span class="o">=</span> <span class="n">_select_format_module</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;dump_one&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">format_module</span><span class="o">.</span><span class="n">dump_one</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">iodata</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="dump_many"><a class="viewcode-back" href="../../pyapi/iodata.api.html#iodata.api.dump_many">[docs]</a><span class="k">def</span> <span class="nf">dump_many</span><span class="p">(</span><span class="n">iodatas</span><span class="p">:</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">IOData</span><span class="p">],</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Write multiple IOData instances to a file.</span>
+
+<span class="sd">    This routine uses the extension or prefix of the filename to determine</span>
+<span class="sd">    the file format. For each file format, a specialized function is</span>
+<span class="sd">    called that does the real work.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    iodatas</span>
+<span class="sd">        An iterator over IOData instances.</span>
+<span class="sd">    filename : str</span>
+<span class="sd">        The file to write the data to.</span>
+<span class="sd">    fmt</span>
+<span class="sd">        The name of the file format module to use.</span>
+<span class="sd">    **kwargs</span>
+<span class="sd">        Keyword arguments are passed on to the format-specific dump_many function.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">format_module</span> <span class="o">=</span> <span class="n">_select_format_module</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;dump_many&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">format_module</span><span class="o">.</span><span class="n">dump_many</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">iodatas</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, The IODATA Development Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

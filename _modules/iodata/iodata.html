@@ -1,0 +1,552 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>iodata.iodata &mdash; IOData  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/override.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["fast-preview.js"], "TeX": {"Macros": {"ket": ["{\\left\\vert { #1 } \\right\\rangle}", 1], "bra": ["{\\left\\langle { #1} \\right\\vert}", 1], "braket": ["{\\left\\langle {#1} \\mid { #2} \\right\\rangle}", 2], "ketbra": ["{\\left\\vert { #1 } \\right\\rangle\\left\\langle { #2} \\right\\vert}", 2], "ev": ["{\\left\\langle {#2} \\vert {#1} \\vert {#2} \\right\\rangle}", 2], "mel": ["{\\left\\langle{ #1 }\\right\\vert{ #2 }\\left\\vert{#3}\\right\\rangle}", 3]}}})</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> IOData
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../formats.html">Supported File Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basis.html">Basis set conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">IOData Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgments.html">Acknowledgments</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pyapi/modules.html">iodata</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">IOData</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>iodata.iodata</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for iodata.iodata</h1><div class="highlight"><pre>
+<span></span><span class="c1"># IODATA is an input and output module for quantum chemistry.</span>
+<span class="c1"># Copyright (C) 2011-2019 The IODATA Development Team</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of IODATA.</span>
+<span class="c1">#</span>
+<span class="c1"># IODATA is free software; you can redistribute it and/or</span>
+<span class="c1"># modify it under the terms of the GNU General Public License</span>
+<span class="c1"># as published by the Free Software Foundation; either version 3</span>
+<span class="c1"># of the License, or (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># IODATA is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program; if not, see &lt;http://www.gnu.org/licenses/&gt;</span>
+<span class="c1"># --</span>
+<span class="sd">&quot;&quot;&quot;Module for handling input/output from different file formats.&quot;&quot;&quot;</span>
+
+
+<span class="kn">import</span> <span class="nn">attr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">.attrutils</span> <span class="kn">import</span> <span class="n">convert_array_to</span><span class="p">,</span> <span class="n">validate_shape</span>
+<span class="kn">from</span> <span class="nn">.basis</span> <span class="kn">import</span> <span class="n">MolecularBasis</span>
+<span class="kn">from</span> <span class="nn">.orbitals</span> <span class="kn">import</span> <span class="n">MolecularOrbitals</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">Cube</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;IOData&#39;</span><span class="p">]</span>
+
+
+<span class="c1"># pylint: disable=too-many-instance-attributes</span>
+<div class="viewcode-block" id="IOData"><a class="viewcode-back" href="../../pyapi/iodata.iodata.html#iodata.iodata.IOData">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span><span class="p">(</span><span class="n">auto_attribs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">on_setattr</span><span class="o">=</span><span class="p">[</span><span class="n">attr</span><span class="o">.</span><span class="n">setters</span><span class="o">.</span><span class="n">validate</span><span class="p">,</span> <span class="n">attr</span><span class="o">.</span><span class="n">setters</span><span class="o">.</span><span class="n">convert</span><span class="p">])</span>
+<span class="k">class</span> <span class="nc">IOData</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A container class for data loaded from (or to be written to) a file.</span>
+
+<span class="sd">    In principle, the constructor accepts any keyword argument, which is</span>
+<span class="sd">    stored as an attribute. All attributes are optional. Attributes can be</span>
+<span class="sd">    set are removed after the IOData instance is constructed. The following</span>
+<span class="sd">    attributes are supported by at least one of the io formats:</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    atcharges</span>
+<span class="sd">        A dictionary where keys are names of charge definitions and values are</span>
+<span class="sd">        arrays with atomic charges (size N).</span>
+<span class="sd">    atcoords</span>
+<span class="sd">        A (N, 3) float array with Cartesian coordinates of the atoms.</span>
+<span class="sd">    atcorenums</span>
+<span class="sd">        A (N,) float array with pseudo-potential core charges. The matrix</span>
+<span class="sd">        elements corresponding to ghost atoms are zero.</span>
+<span class="sd">    atffparams</span>
+<span class="sd">        A dictionary with arrays of atomic force field parameters (typically</span>
+<span class="sd">        non-bonded). Keys include &#39;charges&#39;, &#39;vdw_radii&#39;, &#39;sigmas&#39;, &#39;epsilons&#39;,</span>
+<span class="sd">        &#39;alphas&#39; (atomic polarizabilities), &#39;c6s&#39;, &#39;c8s&#39;, &#39;c10s&#39;, &#39;buck_as&#39;,</span>
+<span class="sd">        &#39;buck_bs&#39;, &#39;lj_as&#39;, &#39;core_charges&#39;, &#39;valence_charges&#39;, &#39;valence_widths&#39;,</span>
+<span class="sd">        etc. Not all of them have to be present, depending on the use case.</span>
+<span class="sd">    atfrozen</span>
+<span class="sd">        A (N,) bool array with frozen atoms. (All atoms are free if this</span>
+<span class="sd">        attribute is not set.)</span>
+<span class="sd">    atgradient</span>
+<span class="sd">        A (N, 3) float array with the first derivatives of the energy w.r.t.</span>
+<span class="sd">        Cartesian atomic displacements.</span>
+<span class="sd">    athessian</span>
+<span class="sd">        A (3*N, 3*N) array containing the energy Hessian w.r.t Cartesian atomic</span>
+<span class="sd">        displacements.</span>
+<span class="sd">    atmasses</span>
+<span class="sd">        A (N,) float array with atomic masses</span>
+<span class="sd">    atnums</span>
+<span class="sd">        A (N,) int vector with the atomic numbers.</span>
+<span class="sd">    basisdef</span>
+<span class="sd">        A basis set definition, i.e. a dictionary whose keys are symbols (of</span>
+<span class="sd">        chemical elements), atomic numbers (similar to previous, str to make</span>
+<span class="sd">        distinction with following) or an atom index (integer referring to a</span>
+<span class="sd">        specific atom in a molecule). The format of the values is to be decided</span>
+<span class="sd">        when implementing a load function for basis set definitions.</span>
+<span class="sd">    bonds</span>
+<span class="sd">        An (nbond, 3) array with the list of covalent bonds. Each row represents</span>
+<span class="sd">        one bond and consists of three integers: first atom index (starting</span>
+<span class="sd">        from zero), second atom index &amp; an optional bond type (0: not known, 1:</span>
+<span class="sd">        single, 2: double, 3: triple, 4: conjugated).</span>
+<span class="sd">    cellvecs</span>
+<span class="sd">        A (NP, 3) array containing the (real-space) cell vectors describing</span>
+<span class="sd">        periodic boundary conditions. A single vector corresponds to a 1D cell,</span>
+<span class="sd">        e.g. for a wire. Two vectors describe a 2D cell, e.g. for a membrane.</span>
+<span class="sd">        Three vectors describe a 3D cell, e.g. a crystalline solid.</span>
+<span class="sd">    charge</span>
+<span class="sd">        The net charge of the system. When possible, this is derived from</span>
+<span class="sd">        atcorenums and nelec.</span>
+<span class="sd">    core_energy</span>
+<span class="sd">        The Hartree-Fock energy due to the core orbitals</span>
+<span class="sd">    cube</span>
+<span class="sd">        An instance of Cube, describing the volumetric data from a cube (or</span>
+<span class="sd">        similar) file.</span>
+<span class="sd">    energy</span>
+<span class="sd">        The total energy (electronic + nn)</span>
+<span class="sd">    extcharges</span>
+<span class="sd">        Array with values of external charges, with shape (nextcharge, 4). First</span>
+<span class="sd">        three columns for Cartesian X, Y and Z coordinates, last column for the</span>
+<span class="sd">        actual charge.</span>
+<span class="sd">    extra</span>
+<span class="sd">        A dictionary with additional data loaded from a file. Any data which</span>
+<span class="sd">        cannot be assigned to the other attributes belongs here. It may be</span>
+<span class="sd">        decided in future to move some of the results from this dictionary to</span>
+<span class="sd">        IOData attributes, with a more final name.</span>
+<span class="sd">    g_rot</span>
+<span class="sd">        The rotational symmetry number of the molecule.</span>
+<span class="sd">    lot</span>
+<span class="sd">        The level of theory used to compute the orbitals (and other properties).</span>
+<span class="sd">    mo</span>
+<span class="sd">        An instance of MolecularOrbitals.</span>
+<span class="sd">    moments</span>
+<span class="sd">        A dictionary with electrostatic multipole moments. Keys are (angmom,</span>
+<span class="sd">        kind) tuples where angmom is an integer for the angular momentum and</span>
+<span class="sd">        kind is &#39;c&#39; for Cartesian or &#39;p&#39; for pure functions (only for angmom &gt;=</span>
+<span class="sd">        2). The corresponding values are 1D numpy arrays. The order of the</span>
+<span class="sd">        components of the multipole moments follows the HORTON2_CONVENTIONS from</span>
+<span class="sd">        iodata/basis.py</span>
+<span class="sd">    nelec</span>
+<span class="sd">        The number of electrons.</span>
+<span class="sd">    obasis</span>
+<span class="sd">        An OrderedDict containing parameters to instantiate a GOBasis class.</span>
+<span class="sd">    obasis_name</span>
+<span class="sd">        A name or DOI describing the basis set used for the orbitals in the</span>
+<span class="sd">        mo attribute (if applicable). Should be consistent with</span>
+<span class="sd">        www.basissetexchange.org.</span>
+<span class="sd">    one_ints</span>
+<span class="sd">        Dictionary where keys are names and values are numpy arrays with</span>
+<span class="sd">        one-body operators, typically integrals of a one-body operator</span>
+<span class="sd">        with a pair of (Gaussian) basis functions. Names can start with ``olp``</span>
+<span class="sd">        (overlap), ``kin`` (kinetic energy), ``na`` (nuclear attraction),</span>
+<span class="sd">        ``core`` (core hamiltonian), etc. When relevant, these names must have a</span>
+<span class="sd">        suffix ``_ao`` or ``_mo`` to clarify in which basis the integrals are</span>
+<span class="sd">        computed. ``_ao`` is used to denote integrals in a non-orthogonal</span>
+<span class="sd">        (atomic orbital) basis. ``_mo`` is used to denote an orthogonal</span>
+<span class="sd">        (molecular orbital) basis. For the overlap integrals, this suffix can be</span>
+<span class="sd">        omitted because it is only useful to compute them in the atomic-orbital</span>
+<span class="sd">        basis.</span>
+<span class="sd">    one_rdms</span>
+<span class="sd">        Dictionary where keys are names and values are one-particle density</span>
+<span class="sd">        matrices. Names can be ``scf``, ``post_scf``, ``scf_spin``,</span>
+<span class="sd">        ``post_scf_spin``. These matrices are always expressed in the AO basis.</span>
+<span class="sd">    run_type</span>
+<span class="sd">        The type of calculation that lead to the results stored in IOData, which</span>
+<span class="sd">        must be one of the following: &#39;energy&#39;, &#39;energy_force&#39;, &#39;opt&#39;, &#39;scan&#39;,</span>
+<span class="sd">        &#39;freq&#39; or None.</span>
+<span class="sd">    spinpol</span>
+<span class="sd">        The spin polarization. By default, its value is derived from the</span>
+<span class="sd">        molecular orbitals (mo attribute), as abs(nalpha - nbeta). In this case,</span>
+<span class="sd">        spinpol cannot be set. When no molecular orbitals are present, this</span>
+<span class="sd">        attribute can be set.</span>
+<span class="sd">    title</span>
+<span class="sd">         A suitable name for the data.</span>
+<span class="sd">    two_ints</span>
+<span class="sd">        Dictionary where keys are names and values are numpy arrays with</span>
+<span class="sd">        two-body operators, typically integrals of two-body operator</span>
+<span class="sd">        with four of (Gaussian) basis functions. Names can start with ``er``</span>
+<span class="sd">        (electron repulsion) or ``two`` (general pairswise interaction). When</span>
+<span class="sd">        relevant, these names must have a suffix ``_ao`` or ``_mo`` to clarify</span>
+<span class="sd">        in which basis the integrals are computed, see one_ints for more</span>
+<span class="sd">        details. Array indexes are in physicist&#39;s notation.</span>
+<span class="sd">    two_rdms</span>
+<span class="sd">        Dictionary where keys are names and values are two-particle density</span>
+<span class="sd">        matrices. Names can be ``post_scf`` or ``post_scf_spin``. These matrices</span>
+<span class="sd">        are always expressed in the AO basis. Array indexes are in physicist&#39;s</span>
+<span class="sd">        notation.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">atcharges</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">atcoords</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">converter</span><span class="o">=</span><span class="n">convert_array_to</span><span class="p">(</span><span class="nb">float</span><span class="p">),</span>
+        <span class="n">validator</span><span class="o">=</span><span class="n">attr</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">optional</span><span class="p">(</span><span class="n">validate_shape</span><span class="p">(</span><span class="s1">&#39;natom&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+    <span class="n">_atcorenums</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">converter</span><span class="o">=</span><span class="n">convert_array_to</span><span class="p">(</span><span class="nb">float</span><span class="p">),</span>
+        <span class="n">validator</span><span class="o">=</span><span class="n">attr</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">optional</span><span class="p">(</span><span class="n">validate_shape</span><span class="p">(</span><span class="s1">&#39;natom&#39;</span><span class="p">)))</span>
+    <span class="n">atffparams</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">atfrozen</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">converter</span><span class="o">=</span><span class="n">convert_array_to</span><span class="p">(</span><span class="nb">bool</span><span class="p">),</span>
+        <span class="n">validator</span><span class="o">=</span><span class="n">attr</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">optional</span><span class="p">(</span><span class="n">validate_shape</span><span class="p">(</span><span class="s1">&#39;natom&#39;</span><span class="p">)))</span>
+    <span class="n">atgradient</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">converter</span><span class="o">=</span><span class="n">convert_array_to</span><span class="p">(</span><span class="nb">float</span><span class="p">),</span>
+        <span class="n">validator</span><span class="o">=</span><span class="n">attr</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">optional</span><span class="p">(</span><span class="n">validate_shape</span><span class="p">(</span><span class="s1">&#39;natom&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+    <span class="n">athessian</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">converter</span><span class="o">=</span><span class="n">convert_array_to</span><span class="p">(</span><span class="nb">float</span><span class="p">),</span>
+        <span class="n">validator</span><span class="o">=</span><span class="n">attr</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">optional</span><span class="p">(</span><span class="n">validate_shape</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)))</span>
+    <span class="n">atmasses</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">converter</span><span class="o">=</span><span class="n">convert_array_to</span><span class="p">(</span><span class="nb">float</span><span class="p">),</span>
+        <span class="n">validator</span><span class="o">=</span><span class="n">attr</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">optional</span><span class="p">(</span><span class="n">validate_shape</span><span class="p">(</span><span class="s1">&#39;natom&#39;</span><span class="p">)))</span>
+    <span class="n">atnums</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">converter</span><span class="o">=</span><span class="n">convert_array_to</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span>
+        <span class="n">validator</span><span class="o">=</span><span class="n">attr</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">optional</span><span class="p">(</span><span class="n">validate_shape</span><span class="p">(</span><span class="s1">&#39;natom&#39;</span><span class="p">)))</span>
+    <span class="n">basisdef</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">bonds</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">converter</span><span class="o">=</span><span class="n">convert_array_to</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span>
+        <span class="n">validator</span><span class="o">=</span><span class="n">attr</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">optional</span><span class="p">(</span><span class="n">validate_shape</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+    <span class="n">cellvecs</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">converter</span><span class="o">=</span><span class="n">convert_array_to</span><span class="p">(</span><span class="nb">float</span><span class="p">),</span>
+        <span class="n">validator</span><span class="o">=</span><span class="n">attr</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">optional</span><span class="p">(</span><span class="n">validate_shape</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+    <span class="n">_charge</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">core_energy</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">cube</span><span class="p">:</span> <span class="n">Cube</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">energy</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">extcharges</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">converter</span><span class="o">=</span><span class="n">convert_array_to</span><span class="p">(</span><span class="nb">float</span><span class="p">),</span>
+        <span class="n">validator</span><span class="o">=</span><span class="n">attr</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">optional</span><span class="p">(</span><span class="n">validate_shape</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">4</span><span class="p">)))</span>
+    <span class="n">extra</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">g_rot</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">lot</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">mo</span><span class="p">:</span> <span class="n">MolecularOrbitals</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">moments</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">_nelec</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">obasis</span><span class="p">:</span> <span class="n">MolecularBasis</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">obasis_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">one_ints</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">one_rdms</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">run_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">_spinpol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">two_ints</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">two_rdms</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">__attrs_post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Trigger setter to acchieve consistency in properties</span>
+        <span class="c1"># atcorenums, nelec, charge, spinmult. This is needed because the</span>
+        <span class="c1"># attr constructor bypasses the setters. See</span>
+        <span class="c1"># https://www.attrs.org/en/stable/init.html#private-attributes</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_atcorenums</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">atcorenums</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_atcorenums</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_charge</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">charge</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_charge</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nelec</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nelec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nelec</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spinpol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">spinpol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spinpol</span>
+
+    <span class="c1"># Public interfaces to private attributes</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">atcorenums</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return effective core charges.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_atcorenums</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">atnums</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># Known bug in pylint. See</span>
+            <span class="c1"># https://stackoverflow.com/questions/47972143/using-attr-with-pylint</span>
+            <span class="c1"># https://github.com/PyCQA/pylint/issues/1694</span>
+            <span class="c1"># pylint: disable=no-member</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">atcorenums</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">atnums</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_atcorenums</span>
+
+    <span class="nd">@atcorenums</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">atcorenums</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atcorenums</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">atcorenums</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nelec</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_atcorenums</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># Set _charge because charge can no longer be derived from</span>
+                <span class="c1"># atcorenums and nelec.</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_charge</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_atcorenums</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">nelec</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_atcorenums</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_charge</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># _charge is treated as the dependent one, while atcorenums and</span>
+                <span class="c1"># nelec are treated as independent.</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nelec</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="c1"># Switch to storing _nelec.</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_nelec</span> <span class="o">=</span> <span class="n">atcorenums</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_charge</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_charge</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_atcorenums</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">atcorenums</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">charge</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return the net charge of the system.&quot;&quot;&quot;</span>
+        <span class="c1"># The internal _charge is used only if it cannot be derived.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">atcorenums</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">nelec</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_charge</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">atcorenums</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">nelec</span>
+
+    <span class="nd">@charge</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">charge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">charge</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="c1"># The internal _charge is used only if atcorenums is None.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">atcorenums</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_charge</span> <span class="o">=</span> <span class="n">charge</span>
+        <span class="k">elif</span> <span class="n">charge</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nelec</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nelec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">atcorenums</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">-</span> <span class="n">charge</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">natom</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return the number of atoms.&quot;&quot;&quot;</span>
+        <span class="n">natom</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">atcoords</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">natom</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atcoords</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_atcorenums</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">natom</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_atcorenums</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">atgradient</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">natom</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atgradient</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">atfrozen</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">natom</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atfrozen</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">atmasses</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">natom</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atmasses</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">atnums</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">natom</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atnums</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">natom</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">nelec</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return the number of electrons.&quot;&quot;&quot;</span>
+        <span class="c1"># When the molecular orbitals are present, they determine the number</span>
+        <span class="c1"># of electrons. Only when mo is absent, we use a stored value.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mo</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">nelec</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nelec</span>
+
+    <span class="nd">@nelec</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">nelec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nelec</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mo</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_nelec</span> <span class="o">=</span> <span class="n">nelec</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;nelec cannot be set when orbitals are present.&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">spinpol</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return the spin polarization.</span>
+
+<span class="sd">        Warning: for restricted wavefunctions, it is assumed that an occupation</span>
+<span class="sd">        number in ]0, 2[ implies spin polarizaiton, which may not always be a</span>
+<span class="sd">        valid assumption.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mo</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">spinpol</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spinpol</span>
+
+    <span class="nd">@spinpol</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">spinpol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spinpol</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="c1"># When the molecular orbitals are present, they determine the spin</span>
+        <span class="c1"># polarization. Only when mo is absent, we use a stored value.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mo</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_spinpol</span> <span class="o">=</span> <span class="n">spinpol</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;spinpol cannot be set when orbitals are present.&quot;</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, The IODATA Development Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

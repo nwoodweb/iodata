@@ -1,0 +1,963 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>iodata.formats.molden &mdash; IOData  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/override.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["fast-preview.js"], "TeX": {"Macros": {"ket": ["{\\left\\vert { #1 } \\right\\rangle}", 1], "bra": ["{\\left\\langle { #1} \\right\\vert}", 1], "braket": ["{\\left\\langle {#1} \\mid { #2} \\right\\rangle}", 2], "ketbra": ["{\\left\\vert { #1 } \\right\\rangle\\left\\langle { #2} \\right\\vert}", 2], "ev": ["{\\left\\langle {#2} \\vert {#1} \\vert {#2} \\right\\rangle}", 2], "mel": ["{\\left\\langle{ #1 }\\right\\vert{ #2 }\\left\\vert{#3}\\right\\rangle}", 3]}}})</script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> IOData
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../formats.html">Supported File Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../basis.html">Basis set conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">IOData Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgments.html">Acknowledgments</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pyapi/modules.html">iodata</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">IOData</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>iodata.formats.molden</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for iodata.formats.molden</h1><div class="highlight"><pre>
+<span></span><span class="c1"># IODATA is an input and output module for quantum chemistry.</span>
+<span class="c1"># Copyright (C) 2011-2019 The IODATA Development Team</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of IODATA.</span>
+<span class="c1">#</span>
+<span class="c1"># IODATA is free software; you can redistribute it and/or</span>
+<span class="c1"># modify it under the terms of the GNU General Public License</span>
+<span class="c1"># as published by the Free Software Foundation; either version 3</span>
+<span class="c1"># of the License, or (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># IODATA is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program; if not, see &lt;http://www.gnu.org/licenses/&gt;</span>
+<span class="c1"># --</span>
+<span class="sd">&quot;&quot;&quot;Molden file format.</span>
+
+<span class="sd">Many QC codes can write out Molden files, e.g. `Molpro &lt;https://www.molpro.net/&gt;`_,</span>
+<span class="sd">`Orca &lt;https://sites.google.com/site/orcainputlibrary/&gt;`_, `PSI4 &lt;http://www.psicode.org/&gt;`_,</span>
+<span class="sd">`Molden &lt;http://www.cmbi.ru.nl/molden/&gt;`_, `Turbomole &lt;http://www.turbomole.com/&gt;`_. Keep</span>
+<span class="sd">in mind that several of these write incorrect versions of the file format, but these</span>
+<span class="sd">errors are corrected when loading them with IOData.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">TextIO</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+
+<span class="kn">import</span> <span class="nn">attr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">..basis</span> <span class="kn">import</span> <span class="p">(</span><span class="n">angmom_its</span><span class="p">,</span> <span class="n">angmom_sti</span><span class="p">,</span> <span class="n">MolecularBasis</span><span class="p">,</span> <span class="n">Shell</span><span class="p">,</span>
+                     <span class="n">convert_conventions</span><span class="p">,</span> <span class="n">HORTON2_CONVENTIONS</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">..docstrings</span> <span class="kn">import</span> <span class="n">document_load_one</span><span class="p">,</span> <span class="n">document_dump_one</span>
+<span class="kn">from</span> <span class="nn">..iodata</span> <span class="kn">import</span> <span class="n">IOData</span>
+<span class="kn">from</span> <span class="nn">..periodic</span> <span class="kn">import</span> <span class="n">sym2num</span><span class="p">,</span> <span class="n">num2sym</span>
+<span class="kn">from</span> <span class="nn">..orbitals</span> <span class="kn">import</span> <span class="n">MolecularOrbitals</span>
+<span class="kn">from</span> <span class="nn">..overlap</span> <span class="kn">import</span> <span class="n">compute_overlap</span><span class="p">,</span> <span class="n">gob_cart_normalization</span>
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="n">angstrom</span><span class="p">,</span> <span class="n">LineIterator</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+<span class="n">PATTERNS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;*.molden.input&#39;</span><span class="p">,</span> <span class="s1">&#39;*.molden&#39;</span><span class="p">]</span>
+
+<span class="c1"># From the Molden format documentation:</span>
+<span class="c1">#    5D: D 0, D+1, D-1, D+2, D-2</span>
+<span class="c1">#    6D: xx, yy, zz, xy, xz, yz</span>
+<span class="c1">#</span>
+<span class="c1">#    7F: F 0, F+1, F-1, F+2, F-2, F+3, F-3</span>
+<span class="c1">#   10F: xxx, yyy, zzz, xyy, xxy, xxz, xzz, yzz, yyz, xyz</span>
+<span class="c1">#</span>
+<span class="c1">#    9G: G 0, G+1, G-1, G+2, G-2, G+3, G-3, G+4, G-4</span>
+<span class="c1">#   15G: xxxx yyyy zzzz xxxy xxxz yyyx yyyz zzzx zzzy,</span>
+<span class="c1">#        xxyy xxzz yyzz xxyz yyxz zzxy</span>
+
+<span class="n">CONVENTIONS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">):</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">],</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">):</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">],</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">):</span> <span class="n">HORTON2_CONVENTIONS</span><span class="p">[(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">)],</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">):</span> <span class="p">[</span><span class="s1">&#39;xx&#39;</span><span class="p">,</span> <span class="s1">&#39;yy&#39;</span><span class="p">,</span> <span class="s1">&#39;zz&#39;</span><span class="p">,</span> <span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="s1">&#39;xz&#39;</span><span class="p">,</span> <span class="s1">&#39;yz&#39;</span><span class="p">],</span>
+    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">):</span> <span class="n">HORTON2_CONVENTIONS</span><span class="p">[(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">)],</span>
+    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">):</span> <span class="p">[</span><span class="s1">&#39;xxx&#39;</span><span class="p">,</span> <span class="s1">&#39;yyy&#39;</span><span class="p">,</span> <span class="s1">&#39;zzz&#39;</span><span class="p">,</span> <span class="s1">&#39;xyy&#39;</span><span class="p">,</span> <span class="s1">&#39;xxy&#39;</span><span class="p">,</span> <span class="s1">&#39;xxz&#39;</span><span class="p">,</span> <span class="s1">&#39;xzz&#39;</span><span class="p">,</span> <span class="s1">&#39;yzz&#39;</span><span class="p">,</span> <span class="s1">&#39;yyz&#39;</span><span class="p">,</span> <span class="s1">&#39;xyz&#39;</span><span class="p">],</span>
+    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">):</span> <span class="n">HORTON2_CONVENTIONS</span><span class="p">[(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">)],</span>
+    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">):</span> <span class="p">[</span><span class="s1">&#39;xxxx&#39;</span><span class="p">,</span> <span class="s1">&#39;yyyy&#39;</span><span class="p">,</span> <span class="s1">&#39;zzzz&#39;</span><span class="p">,</span> <span class="s1">&#39;xxxy&#39;</span><span class="p">,</span> <span class="s1">&#39;xxxz&#39;</span><span class="p">,</span> <span class="s1">&#39;xyyy&#39;</span><span class="p">,</span> <span class="s1">&#39;yyyz&#39;</span><span class="p">,</span> <span class="s1">&#39;xzzz&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;yzzz&#39;</span><span class="p">,</span> <span class="s1">&#39;xxyy&#39;</span><span class="p">,</span> <span class="s1">&#39;xxzz&#39;</span><span class="p">,</span> <span class="s1">&#39;yyzz&#39;</span><span class="p">,</span> <span class="s1">&#39;xxyz&#39;</span><span class="p">,</span> <span class="s1">&#39;xyyz&#39;</span><span class="p">,</span> <span class="s1">&#39;xyzz&#39;</span><span class="p">],</span>
+    <span class="c1"># H fubnctions are not officially supported by the Molden format but PSI4</span>
+    <span class="c1"># and ORCA write out such files anyway.</span>
+    <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">):</span> <span class="n">HORTON2_CONVENTIONS</span><span class="p">[(</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">)],</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="load_one"><a class="viewcode-back" href="../../../pyapi/iodata.formats.molden.html#iodata.formats.molden.load_one">[docs]</a><span class="nd">@document_load_one</span><span class="p">(</span><span class="s2">&quot;Molden&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;atcoords&#39;</span><span class="p">,</span> <span class="s1">&#39;atnums&#39;</span><span class="p">,</span> <span class="s1">&#39;atcorenums&#39;</span><span class="p">,</span> <span class="s1">&#39;mo&#39;</span><span class="p">,</span> <span class="s1">&#39;obasis&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">load_one</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Do not edit this docstring. It will be overwritten.&quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">_load_low</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+    <span class="n">_fix_molden_from_buggy_codes</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">lit</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<span class="c1"># pylint: disable=too-many-branches,too-many-statements</span>
+<span class="k">def</span> <span class="nf">_load_low</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Load data from a MOLDEN input file format, without trying to fix errors.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    lit</span>
+<span class="sd">        The line iterator to read the data from.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    out</span>
+<span class="sd">        output dictionary containing ``atcoords``, ``atnums``, ``atcorenums``,</span>
+<span class="sd">        ``obasis``, ``mo`` &amp; ``signs`` keys and corresponding values. It may contain</span>
+<span class="sd">        ``title`` key and its corresponding value as well.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pure_angmoms</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([])</span>
+    <span class="n">atnums</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">atcoords</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">obasis</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">coeffsa</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">energiesa</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">occsa</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">coeffsb</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">energiesb</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">occsb</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">line</span> <span class="o">!=</span> <span class="s1">&#39;[Molden Format]</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">:</span>
+        <span class="n">lit</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Molden header not found&#39;</span><span class="p">)</span>
+    <span class="c1"># The order of sections, denoted by &quot;[...]&quot;, is not fixed in the Molden</span>
+    <span class="c1"># format, so we need a loop that checks for all possible sections at</span>
+    <span class="c1"># each iteration. If needed, the contents of the section is read.</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+            <span class="c1"># This means we continue reading till the end of the file.</span>
+            <span class="c1"># There is no real way to know when a Molden file has ended, other</span>
+            <span class="c1"># than reaching the end of the file.</span>
+            <span class="k">break</span>
+        <span class="c1"># settings for pure or Cartesian shells.</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;[5d]&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;[5d7f]&#39;</span><span class="p">):</span>
+            <span class="n">pure_angmoms</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">pure_angmoms</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;[7f]&#39;</span><span class="p">):</span>
+            <span class="n">pure_angmoms</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;[5d10f]&#39;</span><span class="p">):</span>
+            <span class="n">pure_angmoms</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;[9g]&#39;</span><span class="p">):</span>
+            <span class="n">pure_angmoms</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+            <span class="c1"># H functions are not part of the Molden standard but the</span>
+            <span class="c1"># following line is compatible with files containing H functions</span>
+            <span class="c1"># writen by PSI4 and ORCA.</span>
+            <span class="n">pure_angmoms</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+        <span class="c1"># title</span>
+        <span class="k">elif</span> <span class="n">line</span> <span class="o">==</span> <span class="s1">&#39;[title]&#39;</span><span class="p">:</span>
+            <span class="n">title</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="c1"># atoms</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;[atoms]&#39;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="s1">&#39;au&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="n">cunit</span> <span class="o">=</span> <span class="mf">1.0</span>
+            <span class="k">elif</span> <span class="s1">&#39;angs&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="n">cunit</span> <span class="o">=</span> <span class="n">angstrom</span>
+            <span class="n">atnums</span><span class="p">,</span> <span class="n">atcorenums</span><span class="p">,</span> <span class="n">atcoords</span> <span class="o">=</span> <span class="n">_load_helper_atoms</span><span class="p">(</span><span class="n">lit</span><span class="p">,</span> <span class="n">cunit</span><span class="p">)</span>
+        <span class="c1"># we only support Gaussian-type orbitals (gto&#39;s)</span>
+        <span class="k">elif</span> <span class="n">line</span> <span class="o">==</span> <span class="s1">&#39;[gto]&#39;</span><span class="p">:</span>
+            <span class="n">obasis</span> <span class="o">=</span> <span class="n">_load_helper_obasis</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">line</span> <span class="o">==</span> <span class="s1">&#39;[sto]&#39;</span><span class="p">:</span>
+            <span class="n">lit</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Slater-type orbitals are not supported by IODATA.&#39;</span><span class="p">)</span>
+        <span class="c1"># molecular-orbital coefficients.</span>
+        <span class="k">elif</span> <span class="n">line</span> <span class="o">==</span> <span class="s1">&#39;[mo]&#39;</span><span class="p">:</span>
+            <span class="n">data_alpha</span><span class="p">,</span> <span class="n">data_beta</span> <span class="o">=</span> <span class="n">_load_helper_coeffs</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+            <span class="n">occsa</span><span class="p">,</span> <span class="n">coeffsa</span><span class="p">,</span> <span class="n">energiesa</span><span class="p">,</span> <span class="n">irrepsa</span> <span class="o">=</span> <span class="n">data_alpha</span>
+            <span class="n">occsb</span><span class="p">,</span> <span class="n">coeffsb</span><span class="p">,</span> <span class="n">energiesb</span><span class="p">,</span> <span class="n">irrepsb</span> <span class="o">=</span> <span class="n">data_beta</span>
+
+    <span class="c1"># Assign pure and Cartesian correctly. This needs to be done after reading</span>
+    <span class="c1"># because the tags for pure functions may come after the basis set.</span>
+    <span class="k">for</span> <span class="n">shell</span> <span class="ow">in</span> <span class="n">obasis</span><span class="o">.</span><span class="n">shells</span><span class="p">:</span>
+        <span class="c1"># Code only has to work for segmented contractions</span>
+        <span class="k">if</span> <span class="n">shell</span><span class="o">.</span><span class="n">angmoms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">pure_angmoms</span><span class="p">:</span>
+            <span class="n">shell</span><span class="o">.</span><span class="n">kinds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;p&#39;</span>
+
+    <span class="k">if</span> <span class="n">coeffsb</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">coeffsa</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">obasis</span><span class="o">.</span><span class="n">nbasis</span><span class="p">:</span>
+            <span class="n">lit</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Number of alpha orbital coefficients does not match the size of the basis.&quot;</span><span class="p">)</span>
+        <span class="n">mo</span> <span class="o">=</span> <span class="n">MolecularOrbitals</span><span class="p">(</span>
+            <span class="s1">&#39;restricted&#39;</span><span class="p">,</span> <span class="n">coeffsa</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">coeffsa</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+            <span class="n">occsa</span><span class="p">,</span> <span class="n">coeffsa</span><span class="p">,</span> <span class="n">energiesa</span><span class="p">,</span> <span class="n">irrepsa</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">coeffsb</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">obasis</span><span class="o">.</span><span class="n">nbasis</span><span class="p">:</span>
+            <span class="n">lit</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Number of beta orbital coefficients does not match the size of the basis.&quot;</span><span class="p">)</span>
+        <span class="n">mo</span> <span class="o">=</span> <span class="n">MolecularOrbitals</span><span class="p">(</span>
+            <span class="s1">&#39;unrestricted&#39;</span><span class="p">,</span> <span class="n">coeffsa</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">coeffsb</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">occsa</span><span class="p">,</span> <span class="n">occsb</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">coeffsa</span><span class="p">,</span> <span class="n">coeffsb</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">energiesa</span><span class="p">,</span> <span class="n">energiesb</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+            <span class="n">irrepsa</span> <span class="o">+</span> <span class="n">irrepsb</span><span class="p">)</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;atcoords&#39;</span><span class="p">:</span> <span class="n">atcoords</span><span class="p">,</span>
+        <span class="s1">&#39;atnums&#39;</span><span class="p">:</span> <span class="n">atnums</span><span class="p">,</span>
+        <span class="s1">&#39;obasis&#39;</span><span class="p">:</span> <span class="n">obasis</span><span class="p">,</span>
+        <span class="s1">&#39;mo&#39;</span><span class="p">:</span> <span class="n">mo</span><span class="p">,</span>
+        <span class="s1">&#39;atcorenums&#39;</span><span class="p">:</span> <span class="n">atcorenums</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="n">title</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">title</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">_load_helper_atoms</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">,</span> <span class="n">cunit</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> \
+        <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Load element numbers and coordinates.&quot;&quot;&quot;</span>
+    <span class="n">atnums</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">atcorenums</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">atcoords</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lit</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">words</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">6</span><span class="p">:</span>
+            <span class="c1"># Go back to previous line and stop</span>
+            <span class="n">lit</span><span class="o">.</span><span class="n">back</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            <span class="k">break</span>
+        <span class="n">atnums</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sym2num</span><span class="p">[</span><span class="n">words</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="p">()])</span>
+        <span class="n">atcorenums</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+        <span class="n">atcoords</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="mi">4</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="mi">5</span><span class="p">])])</span>
+    <span class="n">atnums</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">atnums</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+    <span class="n">atcorenums</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">atcorenums</span><span class="p">)</span>
+    <span class="n">atcoords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">atcoords</span><span class="p">)</span> <span class="o">*</span> <span class="n">cunit</span>
+    <span class="k">return</span> <span class="n">atnums</span><span class="p">,</span> <span class="n">atcorenums</span><span class="p">,</span> <span class="n">atcoords</span>
+
+
+<span class="k">def</span> <span class="nf">_load_helper_obasis</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MolecularBasis</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Load the orbital basis.&quot;&quot;&quot;</span>
+    <span class="n">shells</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span>
+        <span class="n">words</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="c1"># Normally a new atom section begins with one or two integers,</span>
+        <span class="c1"># of which the second is zero if present. If not, we are done</span>
+        <span class="c1"># and have to push one line back.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">words</span> <span class="ow">and</span> <span class="n">words</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()):</span>
+            <span class="n">lit</span><span class="o">.</span><span class="n">back</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            <span class="k">break</span>
+        <span class="n">icenter</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="c1"># Loop over all shells until reaching an empty line</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">words</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">words</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="c1"># Read a new shell</span>
+            <span class="n">angmom</span> <span class="o">=</span> <span class="n">angmom_sti</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">nprim</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">exponents</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nprim</span><span class="p">)</span>
+            <span class="n">coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nprim</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">iprim</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nprim</span><span class="p">):</span>
+                <span class="n">words</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                <span class="n">exponents</span><span class="p">[</span><span class="n">iprim</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">))</span>
+                <span class="n">coeffs</span><span class="p">[</span><span class="n">iprim</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">))</span>
+            <span class="c1"># Unless changed later, all shells are assumed to be Cartesian.</span>
+            <span class="n">shells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Shell</span><span class="p">(</span><span class="n">icenter</span><span class="p">,</span> <span class="p">[</span><span class="n">angmom</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">],</span> <span class="n">exponents</span><span class="p">,</span> <span class="n">coeffs</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">MolecularBasis</span><span class="p">(</span><span class="n">shells</span><span class="p">,</span> <span class="n">CONVENTIONS</span><span class="p">,</span> <span class="s1">&#39;L2&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_load_helper_coeffs</span><span class="p">(</span><span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Load the orbital coefficients.&quot;&quot;&quot;</span>
+    <span class="n">occsa</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">coeffsa</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">energiesa</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">irrepsa</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">occsb</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">coeffsb</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">energiesb</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">irrepsb</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">lit</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+            <span class="c1"># We have no proper way to check when a Molden file has ended, so</span>
+            <span class="c1"># we must anticipate for it here.</span>
+            <span class="k">break</span>
+        <span class="c1"># An empty line means we are done</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="c1"># An bracket also means we are done and a new section has started.</span>
+        <span class="c1"># Other parts of the parser may need this section line, so we push it</span>
+        <span class="c1"># back.</span>
+        <span class="k">if</span> <span class="s1">&#39;[&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+            <span class="n">lit</span><span class="o">.</span><span class="n">back</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            <span class="k">break</span>
+        <span class="c1"># prepare array with orbital coefficients</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">lit</span><span class="o">.</span><span class="n">back</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lit</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">lit</span><span class="o">.</span><span class="n">back</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+                <span class="k">break</span>
+            <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)</span>
+            <span class="n">info</span><span class="p">[</span><span class="n">key</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="n">occ</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;occup&#39;</span><span class="p">])</span>
+        <span class="n">col</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">energy</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;ene&#39;</span><span class="p">])</span>
+        <span class="n">irrep</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sym&#39;</span><span class="p">,</span> <span class="s1">&#39;??&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="c1"># store column of coefficients, i.e. one orbital, energy and occ</span>
+        <span class="k">if</span> <span class="n">info</span><span class="p">[</span><span class="s1">&#39;spin&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span>
+            <span class="n">occsa</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">occ</span><span class="p">)</span>
+            <span class="n">coeffsa</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+            <span class="n">energiesa</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">energy</span><span class="p">)</span>
+            <span class="n">irrepsa</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">irrep</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">occsb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">occ</span><span class="p">)</span>
+            <span class="n">coeffsb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+            <span class="n">energiesb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">energy</span><span class="p">)</span>
+            <span class="n">irrepsb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">irrep</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lit</span><span class="p">:</span>
+            <span class="n">words</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">words</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+                <span class="c1"># The line does not look like an index with an orbital coefficient.</span>
+                <span class="c1"># Time to stop and put the line back</span>
+                <span class="n">lit</span><span class="o">.</span><span class="n">back</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+                <span class="k">break</span>
+            <span class="n">col</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+    <span class="n">coeffsa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">coeffsa</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">energiesa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">energiesa</span><span class="p">)</span>
+    <span class="n">occsa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">occsa</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">coeffsb</span><span class="p">:</span>
+        <span class="n">coeffsb</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">energiesb</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">occsb</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">coeffsb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">coeffsb</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">energiesb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">energiesb</span><span class="p">)</span>
+        <span class="n">occsb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">occsb</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">occsa</span><span class="p">,</span> <span class="n">coeffsa</span><span class="p">,</span> <span class="n">energiesa</span><span class="p">,</span> <span class="n">irrepsa</span><span class="p">),</span> <span class="p">(</span><span class="n">occsb</span><span class="p">,</span> <span class="n">coeffsb</span><span class="p">,</span> <span class="n">energiesb</span><span class="p">,</span> <span class="n">irrepsb</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_is_normalized_properly</span><span class="p">(</span><span class="n">obasis</span><span class="p">:</span> <span class="n">MolecularBasis</span><span class="p">,</span> <span class="n">atcoords</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+                            <span class="n">orb_alpha</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">orb_beta</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+                            <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-4</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Test the normalization of the occupied and virtual orbitals.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    obasis</span>
+<span class="sd">        A dictionary containing the parameters of the GOBasis class.</span>
+<span class="sd">    atcoords</span>
+<span class="sd">        The atomic Cartesian coordinates, shape = (natom, 3).</span>
+<span class="sd">    orb_alpha</span>
+<span class="sd">        The alpha orbitals coefficients</span>
+<span class="sd">    orb_beta</span>
+<span class="sd">        The beta orbitals (may be None).</span>
+<span class="sd">    threshold</span>
+<span class="sd">        When the maximal error on the norm is large than the threshold,</span>
+<span class="sd">        the function returns False. True is returned otherwise.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Compute the overlap matrix. Unfortunately, we have to recalculate it at</span>
+    <span class="c1"># every attempt because also the primitive normalization may differ in</span>
+    <span class="c1"># different cases.</span>
+    <span class="n">olp</span> <span class="o">=</span> <span class="n">compute_overlap</span><span class="p">(</span><span class="n">obasis</span><span class="p">,</span> <span class="n">atcoords</span><span class="p">)</span>
+
+    <span class="c1"># Convenient code for debugging files coming from crappy QC codes.</span>
+    <span class="c1"># np.set_printoptions(linewidth=5000, precision=2, suppress=True, threshold=100000)</span>
+    <span class="c1"># coeffs = orb_alpha._coeffs</span>
+    <span class="c1"># if permutation is not None:</span>
+    <span class="c1">#     coeffs = coeffs[permutation].copy()</span>
+    <span class="c1"># if signs is not None:</span>
+    <span class="c1">#     coeffs = coeffs*signs.reshape(-1, 1)</span>
+    <span class="c1"># print np.dot(coeffs.T, np.dot(olp._array, coeffs))</span>
+    <span class="c1"># print</span>
+
+    <span class="c1"># Convert the orbitals to the conventions of the overlap matrix.</span>
+    <span class="c1"># permutation, signs = convert_conventions(obasis, HORTON2_CONVENTIONS)</span>
+    <span class="n">orbs</span> <span class="o">=</span> <span class="p">[</span><span class="n">orb_alpha</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">orb_beta</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">orbs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">orb_beta</span><span class="p">)</span>
+    <span class="c1"># Compute the norm of each occupied and virtual orbital. Keep track of</span>
+    <span class="c1"># the largest deviation from unity</span>
+    <span class="n">error_max</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">for</span> <span class="n">orb</span> <span class="ow">in</span> <span class="n">orbs</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">iorb</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">orb</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="n">vec</span> <span class="o">=</span> <span class="n">orb</span><span class="p">[:,</span> <span class="n">iorb</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">olp</span><span class="p">,</span> <span class="n">vec</span><span class="p">))</span>
+            <span class="c1"># print(iorb, norm)</span>
+            <span class="n">error_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">error_max</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">norm</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="c1"># final judgement</span>
+    <span class="k">return</span> <span class="n">error_max</span> <span class="o">&lt;=</span> <span class="n">threshold</span>
+
+
+<span class="k">def</span> <span class="nf">_fix_obasis_orca</span><span class="p">(</span><span class="n">obasis</span><span class="p">:</span> <span class="n">MolecularBasis</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MolecularBasis</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Return a new MolecularBasis correcting for errors from ORCA.</span>
+
+<span class="sd">    Orca has different normalization conventions for the primitives and also</span>
+<span class="sd">    different sign conventions for some of the pure functions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">orca_conventions</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">):</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">],</span>
+        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">):</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">],</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">):</span> <span class="p">[</span><span class="s1">&#39;c0&#39;</span><span class="p">,</span> <span class="s1">&#39;c1&#39;</span><span class="p">,</span> <span class="s1">&#39;s1&#39;</span><span class="p">,</span> <span class="s1">&#39;c2&#39;</span><span class="p">,</span> <span class="s1">&#39;s2&#39;</span><span class="p">],</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">):</span> <span class="p">[</span><span class="s1">&#39;xx&#39;</span><span class="p">,</span> <span class="s1">&#39;yy&#39;</span><span class="p">,</span> <span class="s1">&#39;zz&#39;</span><span class="p">,</span> <span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="s1">&#39;xz&#39;</span><span class="p">,</span> <span class="s1">&#39;yz&#39;</span><span class="p">],</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">):</span> <span class="p">[</span><span class="s1">&#39;c0&#39;</span><span class="p">,</span> <span class="s1">&#39;c1&#39;</span><span class="p">,</span> <span class="s1">&#39;s1&#39;</span><span class="p">,</span> <span class="s1">&#39;c2&#39;</span><span class="p">,</span> <span class="s1">&#39;s2&#39;</span><span class="p">,</span> <span class="s1">&#39;-c3&#39;</span><span class="p">,</span> <span class="s1">&#39;-s3&#39;</span><span class="p">],</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">):</span> <span class="p">[</span><span class="s1">&#39;xxx&#39;</span><span class="p">,</span> <span class="s1">&#39;yyy&#39;</span><span class="p">,</span> <span class="s1">&#39;zzz&#39;</span><span class="p">,</span> <span class="s1">&#39;xyy&#39;</span><span class="p">,</span> <span class="s1">&#39;xxy&#39;</span><span class="p">,</span> <span class="s1">&#39;xxz&#39;</span><span class="p">,</span> <span class="s1">&#39;xzz&#39;</span><span class="p">,</span> <span class="s1">&#39;yzz&#39;</span><span class="p">,</span> <span class="s1">&#39;yyz&#39;</span><span class="p">,</span> <span class="s1">&#39;xyz&#39;</span><span class="p">],</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">):</span> <span class="p">[</span><span class="s1">&#39;c0&#39;</span><span class="p">,</span> <span class="s1">&#39;c1&#39;</span><span class="p">,</span> <span class="s1">&#39;s1&#39;</span><span class="p">,</span> <span class="s1">&#39;c2&#39;</span><span class="p">,</span> <span class="s1">&#39;s2&#39;</span><span class="p">,</span> <span class="s1">&#39;-c3&#39;</span><span class="p">,</span> <span class="s1">&#39;-s3&#39;</span><span class="p">,</span> <span class="s1">&#39;-c4&#39;</span><span class="p">,</span> <span class="s1">&#39;-s4&#39;</span><span class="p">],</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">):</span> <span class="p">[</span><span class="s1">&#39;xxxx&#39;</span><span class="p">,</span> <span class="s1">&#39;yyyy&#39;</span><span class="p">,</span> <span class="s1">&#39;zzzz&#39;</span><span class="p">,</span> <span class="s1">&#39;xxxy&#39;</span><span class="p">,</span> <span class="s1">&#39;xxxz&#39;</span><span class="p">,</span> <span class="s1">&#39;xyyy&#39;</span><span class="p">,</span> <span class="s1">&#39;yyyz&#39;</span><span class="p">,</span> <span class="s1">&#39;xzzz&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39;yzzz&#39;</span><span class="p">,</span> <span class="s1">&#39;xxyy&#39;</span><span class="p">,</span> <span class="s1">&#39;xxzz&#39;</span><span class="p">,</span> <span class="s1">&#39;yyzz&#39;</span><span class="p">,</span> <span class="s1">&#39;xxyz&#39;</span><span class="p">,</span> <span class="s1">&#39;xyyz&#39;</span><span class="p">,</span> <span class="s1">&#39;xyzz&#39;</span><span class="p">],</span>
+        <span class="c1"># H functions are not officialy supported by Molden, but this is how</span>
+        <span class="c1"># ORCA writes Molden files anyway:</span>
+        <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">):</span> <span class="p">[</span><span class="s1">&#39;c0&#39;</span><span class="p">,</span> <span class="s1">&#39;c1&#39;</span><span class="p">,</span> <span class="s1">&#39;s1&#39;</span><span class="p">,</span> <span class="s1">&#39;c2&#39;</span><span class="p">,</span> <span class="s1">&#39;s2&#39;</span><span class="p">,</span> <span class="s1">&#39;-c3&#39;</span><span class="p">,</span> <span class="s1">&#39;-s3&#39;</span><span class="p">,</span> <span class="s1">&#39;-c4&#39;</span><span class="p">,</span> <span class="s1">&#39;-s4&#39;</span><span class="p">,</span> <span class="s1">&#39;c5&#39;</span><span class="p">,</span> <span class="s1">&#39;s5&#39;</span><span class="p">],</span>
+    <span class="p">}</span>
+    <span class="n">fixed_shells</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">shell</span> <span class="ow">in</span> <span class="n">obasis</span><span class="o">.</span><span class="n">shells</span><span class="p">:</span>
+        <span class="n">fixed_shell</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">shell</span><span class="p">)</span>
+        <span class="n">fixed_shells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fixed_shell</span><span class="p">)</span>
+        <span class="c1"># We can safely assume segmented shells.</span>
+        <span class="n">angmom</span> <span class="o">=</span> <span class="n">shell</span><span class="o">.</span><span class="n">angmoms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">kind</span> <span class="o">=</span> <span class="n">shell</span><span class="o">.</span><span class="n">kinds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">iprim</span><span class="p">,</span> <span class="n">exponent</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">shell</span><span class="o">.</span><span class="n">exponents</span><span class="p">):</span>
+            <span class="c1"># Default 1.0: do not to correct anything, unless we know how to correct.</span>
+            <span class="n">correction</span> <span class="o">=</span> <span class="mf">1.0</span>
+            <span class="k">if</span> <span class="n">angmom</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">correction</span> <span class="o">=</span> <span class="n">gob_cart_normalization</span><span class="p">(</span><span class="n">exponent</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span>
+            <span class="k">elif</span> <span class="n">angmom</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">correction</span> <span class="o">=</span> <span class="n">gob_cart_normalization</span><span class="p">(</span><span class="n">exponent</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span>
+            <span class="k">elif</span> <span class="n">angmom</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;p&#39;</span><span class="p">:</span>
+                <span class="n">correction</span> <span class="o">=</span> <span class="n">gob_cart_normalization</span><span class="p">(</span><span class="n">exponent</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span>
+            <span class="k">elif</span> <span class="n">angmom</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;p&#39;</span><span class="p">:</span>
+                <span class="n">correction</span> <span class="o">=</span> <span class="n">gob_cart_normalization</span><span class="p">(</span><span class="n">exponent</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+            <span class="k">elif</span> <span class="n">angmom</span> <span class="o">==</span> <span class="mi">4</span> <span class="ow">and</span> <span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;p&#39;</span><span class="p">:</span>
+                <span class="n">correction</span> <span class="o">=</span> <span class="n">gob_cart_normalization</span><span class="p">(</span><span class="n">exponent</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+            <span class="k">elif</span> <span class="n">angmom</span> <span class="o">==</span> <span class="mi">5</span> <span class="ow">and</span> <span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;p&#39;</span><span class="p">:</span>
+                <span class="n">correction</span> <span class="o">=</span> <span class="n">gob_cart_normalization</span><span class="p">(</span><span class="n">exponent</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span>
+            <span class="k">if</span> <span class="n">correction</span> <span class="o">!=</span> <span class="mf">1.0</span><span class="p">:</span>
+                <span class="n">fixed_shell</span><span class="o">.</span><span class="n">coeffs</span><span class="p">[</span><span class="n">iprim</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">/=</span> <span class="n">correction</span>
+            <span class="n">iprim</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">MolecularBasis</span><span class="p">(</span><span class="n">fixed_shells</span><span class="p">,</span> <span class="n">orca_conventions</span><span class="p">,</span> <span class="n">obasis</span><span class="o">.</span><span class="n">primitive_normalization</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_fix_obasis_psi4</span><span class="p">(</span><span class="n">obasis</span><span class="p">:</span> <span class="n">MolecularBasis</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">MolecularBasis</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Return a new MolecularBasis correcting for errors from PSI4 &lt;= 1.0.</span>
+
+<span class="sd">    Old PSI4 version used a different normalization of the primitives.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fixed_shells</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">corrected</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">for</span> <span class="n">shell</span> <span class="ow">in</span> <span class="n">obasis</span><span class="o">.</span><span class="n">shells</span><span class="p">:</span>
+        <span class="c1"># We can safely assume segmented shells.</span>
+        <span class="n">fixed_shell</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">shell</span><span class="p">)</span>
+        <span class="n">fixed_shells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fixed_shell</span><span class="p">)</span>
+        <span class="n">angmom</span> <span class="o">=</span> <span class="n">shell</span><span class="o">.</span><span class="n">angmoms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">kind</span> <span class="o">=</span> <span class="n">shell</span><span class="o">.</span><span class="n">kinds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">iprim</span><span class="p">,</span> <span class="n">exponent</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">shell</span><span class="o">.</span><span class="n">exponents</span><span class="p">):</span>
+            <span class="c1"># Default 1.0: do not to correct anything, unless we know how to correct.</span>
+            <span class="n">correction</span> <span class="o">=</span> <span class="mf">1.0</span>
+            <span class="k">if</span> <span class="n">angmom</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">correction</span> <span class="o">=</span> <span class="n">gob_cart_normalization</span><span class="p">(</span><span class="n">exponent</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span>
+            <span class="k">elif</span> <span class="n">angmom</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">correction</span> <span class="o">=</span> <span class="n">gob_cart_normalization</span><span class="p">(</span><span class="n">exponent</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span>
+            <span class="k">elif</span> <span class="n">angmom</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;p&#39;</span><span class="p">:</span>
+                <span class="n">correction</span> <span class="o">=</span> <span class="n">gob_cart_normalization</span><span class="p">(</span><span class="n">exponent</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">angmom</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;p&#39;</span><span class="p">:</span>
+                <span class="n">correction</span> <span class="o">=</span> <span class="n">gob_cart_normalization</span><span class="p">(</span><span class="n">exponent</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">15.0</span><span class="p">)</span>
+            <span class="c1"># elif angmom == 4 and kind == &#39;p&#39;: ##  ! Not tested</span>
+            <span class="c1">#     correction = gob_cart_normalization(exponent, np.array([2, 1, 1]))/np.sqrt(105.0)</span>
+            <span class="k">if</span> <span class="n">correction</span> <span class="o">!=</span> <span class="mf">1.0</span><span class="p">:</span>
+                <span class="n">corrected</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">fixed_shell</span><span class="o">.</span><span class="n">coeffs</span><span class="p">[</span><span class="n">iprim</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">/=</span> <span class="n">correction</span>
+    <span class="k">if</span> <span class="n">corrected</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">MolecularBasis</span><span class="p">(</span><span class="n">fixed_shells</span><span class="p">,</span> <span class="n">obasis</span><span class="o">.</span><span class="n">conventions</span><span class="p">,</span> <span class="n">obasis</span><span class="o">.</span><span class="n">primitive_normalization</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">None</span>
+
+
+<span class="k">def</span> <span class="nf">_fix_obasis_turbomole</span><span class="p">(</span><span class="n">obasis</span><span class="p">:</span> <span class="n">MolecularBasis</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">MolecularBasis</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Return a new MolecularBasis correcting for errors from turbomole.</span>
+
+<span class="sd">    Turbomole uses a different normalization of the primitives.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fixed_shells</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">corrected</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">for</span> <span class="n">shell</span> <span class="ow">in</span> <span class="n">obasis</span><span class="o">.</span><span class="n">shells</span><span class="p">:</span>
+        <span class="c1"># We can safely assume segmented shells.</span>
+        <span class="n">fixed_shell</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">shell</span><span class="p">)</span>
+        <span class="n">fixed_shells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fixed_shell</span><span class="p">)</span>
+        <span class="n">angmom</span> <span class="o">=</span> <span class="n">shell</span><span class="o">.</span><span class="n">angmoms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">kind</span> <span class="o">=</span> <span class="n">shell</span><span class="o">.</span><span class="n">kinds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">iprim</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shell</span><span class="o">.</span><span class="n">nprim</span><span class="p">):</span>
+            <span class="c1"># Default 1.0: do not to correct anything, unless we know how to correct.</span>
+            <span class="n">correction</span> <span class="o">=</span> <span class="mf">1.0</span>
+            <span class="k">if</span> <span class="n">angmom</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span>
+                <span class="n">correction</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">angmom</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span>
+                <span class="n">correction</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">15.0</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">angmom</span> <span class="o">==</span> <span class="mi">4</span> <span class="ow">and</span> <span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span>
+                <span class="n">correction</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">105.0</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">correction</span> <span class="o">!=</span> <span class="mf">1.0</span><span class="p">:</span>
+                <span class="n">corrected</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">fixed_shell</span><span class="o">.</span><span class="n">coeffs</span><span class="p">[</span><span class="n">iprim</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">/=</span> <span class="n">correction</span>
+    <span class="k">if</span> <span class="n">corrected</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">MolecularBasis</span><span class="p">(</span><span class="n">fixed_shells</span><span class="p">,</span> <span class="n">obasis</span><span class="o">.</span><span class="n">conventions</span><span class="p">,</span> <span class="n">obasis</span><span class="o">.</span><span class="n">primitive_normalization</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">None</span>
+
+
+<span class="k">def</span> <span class="nf">_fix_obasis_normalize_contractions</span><span class="p">(</span><span class="n">obasis</span><span class="p">:</span> <span class="n">MolecularBasis</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MolecularBasis</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Return a basis with normalized contractions.</span>
+
+<span class="sd">    Files written by Molden don&#39;t need this fix and have properly normalized</span>
+<span class="sd">    contractions. When Molden reads files in the Molden format, it does</span>
+<span class="sd">    renormalize the contractions and other programs than Molden may generate</span>
+<span class="sd">    Molden files with unnormalized contractions. This renormalization is only a</span>
+<span class="sd">    last resort in IOData. If we would do it up-front, like Molden, we would not</span>
+<span class="sd">    be able to fix errors in files from ORCA and older PSI4 versions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fixed_shells</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">shell</span> <span class="ow">in</span> <span class="n">obasis</span><span class="o">.</span><span class="n">shells</span><span class="p">:</span>
+        <span class="n">shell_obasis</span> <span class="o">=</span> <span class="n">MolecularBasis</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">attr</span><span class="o">.</span><span class="n">evolve</span><span class="p">(</span><span class="n">shell</span><span class="p">,</span> <span class="n">icenter</span><span class="o">=</span><span class="mi">0</span><span class="p">)],</span>
+            <span class="n">obasis</span><span class="o">.</span><span class="n">conventions</span><span class="p">,</span>
+            <span class="n">obasis</span><span class="o">.</span><span class="n">primitive_normalization</span>
+        <span class="p">)</span>
+        <span class="c1"># 2) Get the first diagonal element of the overlap matrix</span>
+        <span class="n">olpdiag</span> <span class="o">=</span> <span class="n">compute_overlap</span><span class="p">(</span><span class="n">shell_obasis</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="nb">float</span><span class="p">))[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># 3) Normalize the contraction</span>
+        <span class="n">fixed_shell</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">shell</span><span class="p">)</span>
+        <span class="n">fixed_shell</span><span class="o">.</span><span class="n">coeffs</span><span class="p">[:]</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">olpdiag</span><span class="p">)</span>
+        <span class="n">fixed_shells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fixed_shell</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">MolecularBasis</span><span class="p">(</span><span class="n">fixed_shells</span><span class="p">,</span> <span class="n">obasis</span><span class="o">.</span><span class="n">conventions</span><span class="p">,</span> <span class="n">obasis</span><span class="o">.</span><span class="n">primitive_normalization</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_fix_mo_coeffs_psi4</span><span class="p">(</span><span class="n">obasis</span><span class="p">:</span> <span class="n">MolecularBasis</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">MolecularBasis</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Return correction values for the MO coefficients.</span>
+
+<span class="sd">    PSI4 &lt;= 1.3.2 uses a different normalizationion conventions for Cartesian</span>
+<span class="sd">    AO basis functions. The coefficients need to be divided by the returned</span>
+<span class="sd">    correction factor.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">correction</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">corrected</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">for</span> <span class="n">shell</span> <span class="ow">in</span> <span class="n">obasis</span><span class="o">.</span><span class="n">shells</span><span class="p">:</span>
+        <span class="c1"># We can safely assume segmented shells.</span>
+        <span class="k">assert</span> <span class="n">shell</span><span class="o">.</span><span class="n">ncon</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="n">angmom</span> <span class="o">=</span> <span class="n">shell</span><span class="o">.</span><span class="n">angmoms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">kind</span> <span class="o">=</span> <span class="n">shell</span><span class="o">.</span><span class="n">kinds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">factors</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">&quot;c&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">angmom</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">factors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">([</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">angmom</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="n">factors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">([</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">*</span> <span class="mi">6</span> <span class="o">+</span> <span class="p">[</span><span class="mi">15</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="n">angmom</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="n">factors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">([</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">*</span> <span class="mi">6</span> <span class="o">+</span> <span class="p">[</span><span class="mi">35</span> <span class="o">/</span> <span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="p">[</span><span class="mi">35</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">factors</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">factors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shell</span><span class="o">.</span><span class="n">nbasis</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">factors</span><span class="p">)</span> <span class="o">==</span> <span class="n">shell</span><span class="o">.</span><span class="n">nbasis</span>
+            <span class="n">corrected</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">correction</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">factors</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">corrected</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">correction</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">None</span>
+
+
+<span class="k">def</span> <span class="nf">_fix_molden_from_buggy_codes</span><span class="p">(</span><span class="n">result</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">lit</span><span class="p">:</span> <span class="n">LineIterator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Detect errors in the data loaded from a molden or mkl file and correct.</span>
+
+<span class="sd">    This function can recognize erroneous files created by PSI4, ORCA and</span>
+<span class="sd">    Turbomole. The value `results[&#39;obasis&#39;]` will be updated accordingly.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    result</span>
+<span class="sd">        A dictionary with the data loaded in the ``load_molden`` function.</span>
+<span class="sd">    lit</span>
+<span class="sd">        The line iterator to read the data from, used for warnings.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">obasis</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;obasis&#39;</span><span class="p">]</span>
+    <span class="n">atcoords</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;atcoords&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;mo&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;restricted&#39;</span><span class="p">:</span>
+        <span class="n">coeffsa</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;mo&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">coeffs</span>
+        <span class="c1"># Skip testing coeffsb if it is the same array as coeffsa.</span>
+        <span class="n">coeffsb</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">elif</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;mo&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;unrestricted&#39;</span><span class="p">:</span>
+        <span class="n">coeffsa</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;mo&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">coeffsa</span>
+        <span class="n">coeffsb</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;mo&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">coeffsb</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Molecular orbital kind=</span><span class="si">{0}</span><span class="s1"> not recognized&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;mo&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">kind</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">_is_normalized_properly</span><span class="p">(</span><span class="n">obasis</span><span class="p">,</span> <span class="n">atcoords</span><span class="p">,</span> <span class="n">coeffsa</span><span class="p">,</span> <span class="n">coeffsb</span><span class="p">):</span>
+        <span class="c1"># The file is good. No need to change obasis.</span>
+        <span class="k">return</span>
+
+    <span class="c1"># --- ORCA</span>
+    <span class="n">orca_obasis</span> <span class="o">=</span> <span class="n">_fix_obasis_orca</span><span class="p">(</span><span class="n">obasis</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">_is_normalized_properly</span><span class="p">(</span><span class="n">orca_obasis</span><span class="p">,</span> <span class="n">atcoords</span><span class="p">,</span> <span class="n">coeffsa</span><span class="p">,</span> <span class="n">coeffsb</span><span class="p">):</span>
+        <span class="n">lit</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Corrected for typical ORCA errors in Molden/MKL file.&#39;</span><span class="p">)</span>
+        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;obasis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">orca_obasis</span>
+        <span class="k">return</span>
+
+    <span class="c1"># --- PSI4 &lt; 1.0</span>
+    <span class="n">psi4_obasis</span> <span class="o">=</span> <span class="n">_fix_obasis_psi4</span><span class="p">(</span><span class="n">obasis</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">psi4_obasis</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> \
+       <span class="n">_is_normalized_properly</span><span class="p">(</span><span class="n">psi4_obasis</span><span class="p">,</span> <span class="n">atcoords</span><span class="p">,</span> <span class="n">coeffsa</span><span class="p">,</span> <span class="n">coeffsb</span><span class="p">):</span>
+        <span class="n">lit</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Corrected for PSI4 &lt; 1.0 errors in Molden/MKL file.&#39;</span><span class="p">)</span>
+        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;obasis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">psi4_obasis</span>
+        <span class="k">return</span>
+
+    <span class="c1"># -- Turbomole</span>
+    <span class="n">turbom_obasis</span> <span class="o">=</span> <span class="n">_fix_obasis_turbomole</span><span class="p">(</span><span class="n">obasis</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">turbom_obasis</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> \
+       <span class="n">_is_normalized_properly</span><span class="p">(</span><span class="n">turbom_obasis</span><span class="p">,</span> <span class="n">atcoords</span><span class="p">,</span> <span class="n">coeffsa</span><span class="p">,</span> <span class="n">coeffsb</span><span class="p">):</span>
+        <span class="n">lit</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Corrected for Turbomole errors in Molden/MKL file.&#39;</span><span class="p">)</span>
+        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;obasis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">turbom_obasis</span>
+        <span class="k">return</span>
+
+    <span class="c1"># --- Renormalized contractions</span>
+    <span class="n">normed_obasis</span> <span class="o">=</span> <span class="n">_fix_obasis_normalize_contractions</span><span class="p">(</span><span class="n">obasis</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">_is_normalized_properly</span><span class="p">(</span><span class="n">normed_obasis</span><span class="p">,</span> <span class="n">atcoords</span><span class="p">,</span> <span class="n">coeffsa</span><span class="p">,</span> <span class="n">coeffsb</span><span class="p">):</span>
+        <span class="n">lit</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Corrected for unnormalized contractions in Molden/MKL file.&#39;</span><span class="p">)</span>
+        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;obasis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">normed_obasis</span>
+        <span class="k">return</span>
+
+    <span class="c1"># --- PSI4 &lt;= 1.3.2</span>
+    <span class="n">psi4_coeff_correction</span> <span class="o">=</span> <span class="n">_fix_mo_coeffs_psi4</span><span class="p">(</span><span class="n">obasis</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">psi4_coeff_correction</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">coeffsa_psi4</span> <span class="o">=</span> <span class="n">coeffsa</span> <span class="o">/</span> <span class="n">psi4_coeff_correction</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">coeffsb</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">coeffsb_psi4</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">coeffsb_psi4</span> <span class="o">=</span> <span class="n">coeffsb</span> <span class="o">/</span> <span class="n">psi4_coeff_correction</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">_is_normalized_properly</span><span class="p">(</span><span class="n">normed_obasis</span><span class="p">,</span> <span class="n">atcoords</span><span class="p">,</span> <span class="n">coeffsa_psi4</span><span class="p">,</span> <span class="n">coeffsb_psi4</span><span class="p">):</span>
+            <span class="n">lit</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Corrected for PSI4 &lt;= 1.3.2 errors in Molden/MKL file.&#39;</span><span class="p">)</span>
+            <span class="n">result</span><span class="p">[</span><span class="s1">&#39;obasis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">normed_obasis</span>
+            <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;mo&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;restricted&#39;</span><span class="p">:</span>
+                <span class="n">result</span><span class="p">[</span><span class="s1">&#39;mo&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">coeffs</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">coeffsa_psi4</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">result</span><span class="p">[</span><span class="s1">&#39;mo&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">coeffsa</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">coeffsa_psi4</span>
+                <span class="n">result</span><span class="p">[</span><span class="s1">&#39;mo&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">coeffsb</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">coeffsb_psi4</span>
+            <span class="k">return</span>
+
+    <span class="n">lit</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Could not correct the data read from </span><span class="si">{}</span><span class="s1">. The molden or mkl file &#39;</span>
+              <span class="s1">&#39;you are trying to load contains errors. Please make an issue &#39;</span>
+              <span class="s1">&#39;here: https://github.com/theochem/iodata/issues, and attach &#39;</span>
+              <span class="s1">&#39;this file. Please provide one or more small files causing this &#39;</span>
+              <span class="s1">&#39;error. Thanks!&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="dump_one"><a class="viewcode-back" href="../../../pyapi/iodata.formats.molden.html#iodata.formats.molden.dump_one">[docs]</a><span class="nd">@document_dump_one</span><span class="p">(</span><span class="s2">&quot;Molden&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;atcoords&#39;</span><span class="p">,</span> <span class="s1">&#39;atnums&#39;</span><span class="p">,</span> <span class="s1">&#39;mo&#39;</span><span class="p">,</span> <span class="s1">&#39;obasis&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;atcorenums&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">dump_one</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">IOData</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Do not edit this docstring. It will be overwritten.&quot;&quot;&quot;</span>
+    <span class="c1"># Print the header</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;[Molden Format]</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">title</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;[Title]</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39; </span><span class="si">{}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">title</span><span class="p">))</span>
+
+    <span class="c1"># Print the elements numbers and the coordinates</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;[Atoms] AU</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">iatom</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">natom</span><span class="p">):</span>
+        <span class="n">atnum</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">atnums</span><span class="p">[</span><span class="n">iatom</span><span class="p">]</span>
+        <span class="n">atcorenum</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">atcorenums</span><span class="p">[</span><span class="n">iatom</span><span class="p">]</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">atcoords</span><span class="p">[</span><span class="n">iatom</span><span class="p">]</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:2s}</span><span class="s1"> </span><span class="si">{:3d}</span><span class="s1"> </span><span class="si">{:3.0f}</span><span class="s1">  </span><span class="si">{:25.18f}</span><span class="s1"> </span><span class="si">{:25.18f}</span><span class="s1"> </span><span class="si">{:25.18f}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">num2sym</span><span class="p">[</span><span class="n">atnum</span><span class="p">]</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">iatom</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">atcorenum</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
+        <span class="p">))</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Print the basis set</span>
+    <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">obasis</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s1">&#39;A Gaussian orbital basis is required to write a molden file.&#39;</span><span class="p">)</span>
+    <span class="n">obasis</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">obasis</span>
+
+    <span class="c1"># Figure out the pure/Cartesian situation. Note that the Molden</span>
+    <span class="c1"># format does not support mixed Cartesian and pure functions for the,</span>
+    <span class="c1"># same angular momentum. In practice, such combinations are too unlikely</span>
+    <span class="c1"># to be relevant. If it happens, an error is raised.</span>
+    <span class="n">angmom_kinds</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">shell</span> <span class="ow">in</span> <span class="n">obasis</span><span class="o">.</span><span class="n">shells</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">angmom</span><span class="p">,</span> <span class="n">kind</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">shell</span><span class="o">.</span><span class="n">angmoms</span><span class="p">,</span> <span class="n">shell</span><span class="o">.</span><span class="n">kinds</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">angmom</span> <span class="ow">in</span> <span class="n">angmom_kinds</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">kind</span> <span class="o">!=</span> <span class="n">angmom_kinds</span><span class="p">[</span><span class="n">angmom</span><span class="p">]:</span>
+                    <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s1">&#39;Molden format does not support mixed &#39;</span>
+                                  <span class="s1">&#39;pure+Cartesian functions for one &#39;</span>
+                                  <span class="s1">&#39;angular momentum.&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">angmom_kinds</span><span class="p">[</span><span class="n">angmom</span><span class="p">]</span> <span class="o">=</span> <span class="n">kind</span>
+
+    <span class="c1"># Fill in some defaults (Cartesian) for angmom kinds if needed.</span>
+    <span class="n">angmom_kinds</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)</span>
+    <span class="n">angmom_kinds</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)</span>
+    <span class="n">angmom_kinds</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)</span>
+    <span class="n">angmom_kinds</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Write out the Cartesian/Pure conventions. What a messy format...</span>
+    <span class="k">if</span> <span class="n">angmom_kinds</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;p&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">angmom_kinds</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;p&#39;</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;[5D]</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;[5D10F]</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">angmom_kinds</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;p&#39;</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;[7F]</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">angmom_kinds</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;p&#39;</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;[9G]</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;[GTO]</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">last_icenter</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="c1"># The shells must be sorted by center.</span>
+    <span class="k">for</span> <span class="n">shell</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">obasis</span><span class="o">.</span><span class="n">shells</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">icenter</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">shell</span><span class="o">.</span><span class="n">icenter</span> <span class="o">!=</span> <span class="n">last_icenter</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">last_icenter</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">last_icenter</span> <span class="o">=</span> <span class="n">shell</span><span class="o">.</span><span class="n">icenter</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%3i</span><span class="s1"> 0</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">shell</span><span class="o">.</span><span class="n">icenter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="c1"># Write out as a segmented basis. Molden format does not support</span>
+        <span class="c1"># generalized contractions.</span>
+        <span class="k">for</span> <span class="n">iangmom</span><span class="p">,</span> <span class="n">angmom</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">shell</span><span class="o">.</span><span class="n">angmoms</span><span class="p">):</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39; </span><span class="si">{:1s}</span><span class="s1">  </span><span class="si">{:3d}</span><span class="s1"> 1.00</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">angmom_its</span><span class="p">(</span><span class="n">angmom</span><span class="p">),</span> <span class="n">shell</span><span class="o">.</span><span class="n">nprim</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">exponent</span><span class="p">,</span> <span class="n">coeff</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">shell</span><span class="o">.</span><span class="n">exponents</span><span class="p">,</span> <span class="n">shell</span><span class="o">.</span><span class="n">coeffs</span><span class="p">[:,</span> <span class="n">iangmom</span><span class="p">]):</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:20.10f}</span><span class="s1"> </span><span class="si">{:20.10f}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">exponent</span><span class="p">,</span> <span class="n">coeff</span><span class="p">))</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Get the permutation to convert the orbital coefficients to Molden conventions.</span>
+    <span class="n">permutation</span><span class="p">,</span> <span class="n">signs</span> <span class="o">=</span> <span class="n">convert_conventions</span><span class="p">(</span><span class="n">obasis</span><span class="p">,</span> <span class="n">CONVENTIONS</span><span class="p">)</span>
+
+    <span class="c1"># Print the mean-field orbitals</span>
+    <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;unrestricted&#39;</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;[MO]</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">irrepsa</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">irrepsa</span>
+        <span class="k">if</span> <span class="n">irrepsa</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">irrepsa</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;1a&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">norba</span>
+        <span class="n">_dump_helper_orb</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s1">&#39;Alpha&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">occsa</span><span class="p">,</span>
+                         <span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">coeffsa</span><span class="p">[</span><span class="n">permutation</span><span class="p">]</span> <span class="o">*</span> <span class="n">signs</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                         <span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">energiesa</span><span class="p">,</span> <span class="n">irrepsa</span><span class="p">)</span>
+        <span class="n">irrepsb</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">irrepsb</span>
+        <span class="k">if</span> <span class="n">irrepsb</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">irrepsb</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;1a&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">norbb</span>
+        <span class="n">_dump_helper_orb</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s1">&#39;Beta&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">occsb</span><span class="p">,</span>
+                         <span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">coeffsb</span><span class="p">[</span><span class="n">permutation</span><span class="p">]</span> <span class="o">*</span> <span class="n">signs</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                         <span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">energiesb</span><span class="p">,</span> <span class="n">irrepsb</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;restricted&#39;</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;[MO]</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">irreps</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">irreps</span>
+        <span class="k">if</span> <span class="n">irreps</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">irreps</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;1a&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">norb</span>
+        <span class="n">_dump_helper_orb</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s1">&#39;Alpha&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">occs</span><span class="p">,</span>
+                         <span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">coeffs</span><span class="p">[</span><span class="n">permutation</span><span class="p">]</span> <span class="o">*</span> <span class="n">signs</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                         <span class="n">data</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">energies</span><span class="p">,</span> <span class="n">irreps</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+
+<span class="k">def</span> <span class="nf">_dump_helper_orb</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">spin</span><span class="p">,</span> <span class="n">occs</span><span class="p">,</span> <span class="n">coeffs</span><span class="p">,</span> <span class="n">energies</span><span class="p">,</span> <span class="n">irreps</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">ifn</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">coeffs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39; Ene= </span><span class="si">{</span><span class="n">energies</span><span class="p">[</span><span class="n">ifn</span><span class="p">]</span><span class="si">:</span><span class="s1">.17e</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39; Sym= </span><span class="si">{</span><span class="n">irreps</span><span class="p">[</span><span class="n">ifn</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39; Spin= </span><span class="si">{</span><span class="n">spin</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39; Occup= </span><span class="si">{</span><span class="n">occs</span><span class="p">[</span><span class="n">ifn</span><span class="p">]</span><span class="si">:</span><span class="s1">.17e</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">ibasis</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">coeffs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="c1"># The original molden floating-point formatting is too low</span>
+            <span class="c1"># precision. Molden also reads high-precision, so we use this</span>
+            <span class="c1"># instead.</span>
+            <span class="c1"># f.write(&#39;{:4d} {:10.6f}\n&#39;.format(ibasis + 1, orb_coeffs[ibasis, ifn]))</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:4d}</span><span class="s1"> </span><span class="si">{:.17e}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ibasis</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">coeffs</span><span class="p">[</span><span class="n">ibasis</span><span class="p">,</span> <span class="n">ifn</span><span class="p">]))</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, The IODATA Development Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+iodata.attrutils module
+=======================
+
+.. automodule:: iodata.attrutils
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :inherited-members:

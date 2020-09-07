@@ -1,0 +1,603 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Basis set conventions &mdash; IOData  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/override.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["fast-preview.js"], "TeX": {"Macros": {"ket": ["{\\left\\vert { #1 } \\right\\rangle}", 1], "bra": ["{\\left\\langle { #1} \\right\\vert}", 1], "braket": ["{\\left\\langle {#1} \\mid { #2} \\right\\rangle}", 2], "ketbra": ["{\\left\\vert { #1 } \\right\\rangle\\left\\langle { #2} \\right\\vert}", 2], "ev": ["{\\left\\langle {#2} \\vert {#1} \\vert {#2} \\right\\rangle}", 2], "mel": ["{\\left\\langle{ #1 }\\right\\vert{ #2 }\\left\\vert{#3}\\right\\rangle}", 3]}}})</script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="IOData Changelog" href="changelog.html" />
+    <link rel="prev" title="Supported File Formats" href="formats.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> IOData
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="formats.html">Supported File Formats</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Basis set conventions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#gaussian-basis-functions">Gaussian basis functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cartesian-basis-functions">Cartesian basis functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pure-or-harmonic-basis-functions">Pure or harmonic basis functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#the-conventions-attribute">The <code class="docutils literal notranslate"><span class="pre">conventions</span></code> attribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#notes-on-other-conventions">Notes on other conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#transformation-from-cartesian-to-pure-functions">Transformation from Cartesian to pure functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#recursive-computation-of-real-regular-solid-harmonics">Recursive computation of real regular solid harmonics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#transformation-matrices-without-normalization">Transformation matrices without normalization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#taking-into-account-normalization">Taking into account normalization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">IOData Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acknowledgments.html">Acknowledgments</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pyapi/modules.html">iodata</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">IOData</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Basis set conventions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/basis.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="basis-set-conventions">
+<span id="basis-conventions"></span><h1>Basis set conventions<a class="headerlink" href="#basis-set-conventions" title="Permalink to this headline">¶</a></h1>
+<p>IOData can load molecular orbital coefficients, density matrices and atomic orbital
+basis sets from various file formats, and it can also write orbitals and the
+basis sets in the Molden format. To achieve an unambiguous numerical
+representation of these objects, conventions for the ordering basis functions
+(within one shell) and normalization of Gaussian primitives must be fixed.</p>
+<p>IOData does not use hard-coded conventions but keeps track of them in attributes
+of them in <code class="docutils literal notranslate"><span class="pre">IOData.obasis</span></code>. This attribute is an instance of the
+<a class="reference internal" href="pyapi/iodata.basis.html#iodata.basis.MolecularBasis" title="iodata.basis.MolecularBasis"><code class="xref py py-class docutils literal notranslate"><span class="pre">iodata.basis.MolecularBasis</span></code></a> class, of which the <code class="docutils literal notranslate"><span class="pre">conventions</span></code> and
+<code class="docutils literal notranslate"><span class="pre">primitive_normalization</span></code> attributes contain all the relevant information.</p>
+<p>For the time being, the <code class="docutils literal notranslate"><span class="pre">primitive_normalization</span></code> is always set to <code class="docutils literal notranslate"><span class="pre">'L2'</span></code>,
+meaning that the contraction coefficients assume L2-normalized Gaussian
+primitives. However, IOData does <em>not</em> enforce normalized contractions.</p>
+<p>The first subsection provides a mathematical definition of the Gaussian basis
+functions, which is followed by the specification of the <code class="docutils literal notranslate"><span class="pre">conventions</span></code>
+attribute of the <code class="docutils literal notranslate"><span class="pre">MolecularBasis</span></code> class.</p>
+<div class="section" id="gaussian-basis-functions">
+<h2>Gaussian basis functions<a class="headerlink" href="#gaussian-basis-functions" title="Permalink to this headline">¶</a></h2>
+<p>IOData supports contracted Gaussian basis functions, which have in general the
+following form:</p>
+<div class="math notranslate nohighlight">
+\[b(\mathbf{r}; D_1, \ldots, D_k, P, \alpha_1, \ldots, \alpha_K, \mathbf{r}_A) =
+\sum_{k=1}^K D_k N(\alpha_k, P)
+P(\mathbf{r} - \mathbf{r}_A)
+\exp(-\alpha_k \Vert \mathbf{r} - \mathbf{r}_A \Vert^2)\]</div>
+<p>where <span class="math notranslate nohighlight">\(K\)</span> is the contraction length, <span class="math notranslate nohighlight">\(D_k\)</span> is a contraction
+coefficient, <span class="math notranslate nohighlight">\(N\)</span> is a normalization constant, <span class="math notranslate nohighlight">\(P\)</span> is a Cartesian
+polynomial, <span class="math notranslate nohighlight">\(\alpha_k\)</span> is an exponent and <span class="math notranslate nohighlight">\(\mathbf{r}_A\)</span> is the
+center of the basis function. The summation over <span class="math notranslate nohighlight">\(k\)</span> is
+conventionally called a contraction of <em>primitive Gaussian basis functions</em>.
+The L2-normalization of each primitive depends on both the polynomial and the
+exponent and is defined by the following relation:</p>
+<div class="math notranslate nohighlight">
+\[\int \Bigl\vert N(\alpha_k, P) P(\mathbf{r} - \mathbf{r}_A)
+\exp(-\alpha_k \Vert \mathbf{r} - \mathbf{r}_A \Vert^2)
+\Bigr\vert^2 d\mathbf{r} = 1\]</div>
+<p>Two types of polynomials will be defined below: Cartesian and pure (harmonic)
+basis functions.</p>
+<div class="section" id="cartesian-basis-functions">
+<h3>Cartesian basis functions<a class="headerlink" href="#cartesian-basis-functions" title="Permalink to this headline">¶</a></h3>
+<p>When the polynomial consists of a single term as follows:</p>
+<div class="math notranslate nohighlight">
+\[P(x,y,z) = x^{n_x} y^{n_y} z^{n_z}\]</div>
+<p>with <span class="math notranslate nohighlight">\(n_x\)</span>, <span class="math notranslate nohighlight">\(n_y\)</span>, <span class="math notranslate nohighlight">\(n_z\)</span>, zero or positive integer powers, one
+speaks of <cite>Cartesian Gaussian basis functions</cite>. One refers to the sum of the
+powers as the angular momentum of the Cartesian Gaussian basis.</p>
+<p>The normalization constant of a primitive function is:</p>
+<div class="math notranslate nohighlight">
+\[N(\alpha_k, n_x, n_y, n_z) = \sqrt{\frac
+{(2\alpha_k/\pi)^{3/2} (4\alpha_k)^{n_x+n_y+n_z}}
+{(2n_x-1)!! (2n_y-1)!! (2n_z-1)!!}
+}\]</div>
+<p>In practice one combines all basis functions of a given angular momentum (or
+algebraic order) into one <em>shell</em>. A basis specification typically only mentions
+the total angular momentum, and it is assumed that all polynomials of that order
+are included in the basis set. The number of basis functions, i.e. the number of
+polynomials, for a given angular momentum, <span class="math notranslate nohighlight">\(\ell=n_x+n_y+n_z\)</span>, is
+<span class="math notranslate nohighlight">\((\ell+1)(\ell+2)/2\)</span>.</p>
+</div>
+<div class="section" id="pure-or-harmonic-basis-functions">
+<h3>Pure or harmonic basis functions<a class="headerlink" href="#pure-or-harmonic-basis-functions" title="Permalink to this headline">¶</a></h3>
+<p>When the polynomial is a real regular solid harmonic, one speaks of <em>pure
+Gaussian basis functions</em>:</p>
+<div class="math notranslate nohighlight">
+\[P(r,\theta,\phi) = C_{\ell m}(r,\theta,\phi)
+\quad \text{or} \quad
+P(r,\theta,\phi) = S_{\ell m}(r,\theta,\phi)\]</div>
+<p>where <span class="math notranslate nohighlight">\(C_{\ell m}\)</span> and <span class="math notranslate nohighlight">\(S_{\ell m}\)</span> are cosine- and sine-like real
+regular solid harmonics, defined for <span class="math notranslate nohighlight">\(\ell \ge 0\)</span> as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}C_{\ell 0}(r,\theta,\phi) &amp;=
+    R_\ell^0(r,\theta,\phi) \\
+C_{\ell m}(r,\theta,\phi) &amp;=
+    \sqrt{2} (-1)^m \operatorname{Re}
+    R_\ell^m(\theta,\phi)
+    \quad m = 1\ldots \ell \\
+S_{\ell m}(r,\theta,\phi) &amp;=
+    \sqrt{2} (-1)^m \operatorname{Im}
+    R_\ell^m(\theta,\phi)
+    \quad m = 1\ldots \ell\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(R_\ell^m\)</span> are the regular solid harmonics, which have in general
+complex function values. The factor <span class="math notranslate nohighlight">\((-1)^m\)</span> undoes the Condon-Shortley
+phase. In these equations, spherical coordinates are used:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}x &amp;= R\sin\theta\cos\phi \\
+y &amp;= R\sin\theta\sin\phi \\
+z &amp;= R\cos\theta\end{split}\]</div>
+<p>The regular solid harmonics are derived from the standard spherical harmonics,
+<span class="math notranslate nohighlight">\(Y_\ell^m\)</span>, as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}R_\ell^m(r, \theta, \varphi) &amp;=
+    \sqrt{\frac{4\pi}{2\ell+1}} \,
+    r^\ell \,
+    Y_\ell^m(\theta, \varphi) \\
+&amp;=
+    \sqrt{\frac{(\ell-m)!}{(\ell+m)!}} \,
+    r^\ell \,
+    P_\ell^m(\cos{\theta}) \,
+    e^{i m \varphi}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(P_\ell^m\)</span> are the associated Legendre functions. After substituting
+this definition of the regular solid harmonics into the real forms, one obtains:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}C_{\ell 0}(r,\theta,\phi) &amp; = P_\ell^0(\cos{\theta}) \, r^\ell \\
+C_{\ell m}(r,\theta,\phi) &amp; =
+    (-1)^m \sqrt{\frac{2(\ell-m)!}{(\ell+m)!}} \,
+    r^\ell \,
+    P_\ell^m(\cos{\theta}) \,
+    \cos(m \phi)
+    \quad m = 1\ldots \ell \\
+S_{\ell m}(r,\theta,\phi) &amp; =
+    (-1)^m \sqrt{\frac{2(\ell-m)!}{(\ell+m)!}} \,
+    r^\ell \,
+    P_\ell^m(\cos{\theta}) \,
+    \sin(m \phi)
+    \quad m = 1\ldots \ell \\\end{split}\]</div>
+<p>Also here, the factor <span class="math notranslate nohighlight">\((-1)^m\)</span> cancels out the Condon-Shortley phase.
+These expressions show that cosine-like functions contain a factor <span class="math notranslate nohighlight">\(\cos(m
+\phi)\)</span>, and similarly the sine-like functions contain a factor
+<span class="math notranslate nohighlight">\(\sin(m \phi)\)</span>. The factor <span class="math notranslate nohighlight">\(r^\ell\)</span> causes real regular solid
+harmonics to be homogeneous Cartesian polynomials, i.e. linear combinations of
+the Cartesian polynomials defined in the previous subsection.</p>
+<p>Real regular solid harmonics are used because the pure s- and p-type functions
+are consistent with their Cartesian counterparts:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}C_{00}(x,y,z) &amp; = 1 \\
+C_{10}(x,y,z) &amp; = z \\
+C_{11}(x,y,z) &amp; = x \\
+S_{11}(x,y,z) &amp; = y \\
+\dots &amp;\end{split}\]</div>
+<p>The normalization constant of a pure Gaussian basis function is:</p>
+<div class="math notranslate nohighlight">
+\[N(\alpha_k, \ell) = \sqrt{\frac
+{(2\alpha_k/\pi)^{3/2} (4\alpha_k)^\ell}
+{(2\ell-1)!!}
+}\]</div>
+<p>In practical applications, all the basis functions of a given angular momentum
+are used and grouped into a <em>shell</em>. A basis specification typically only
+mentions the total angular momentum, and it is assumed that all polynomials of
+that order are included in the basis set. The number of basis functions, i.e.
+the number of polynomials, for a given angular momentum, <span class="math notranslate nohighlight">\(\ell\)</span>, is
+<span class="math notranslate nohighlight">\(2\ell+1\)</span>.</p>
+</div>
+</div>
+<div class="section" id="the-conventions-attribute">
+<h2>The <code class="docutils literal notranslate"><span class="pre">conventions</span></code> attribute<a class="headerlink" href="#the-conventions-attribute" title="Permalink to this headline">¶</a></h2>
+<p>Different file formats supported by IOData have an incompatible ordering of
+basis functions within one <em>shell</em>. Also the sign conventions may differ from
+the definitions given above. The <code class="docutils literal notranslate"><span class="pre">conventions</span></code> attribute of
+<a class="reference internal" href="pyapi/iodata.basis.html#iodata.basis.MolecularBasis" title="iodata.basis.MolecularBasis"><code class="xref py py-class docutils literal notranslate"><span class="pre">iodata.basis.MolecularBasis</span></code></a> specifies the ordering and sign flips
+relative to the above definitions. It is a dictionary,</p>
+<ul class="simple">
+<li><p>whose keys are tuples denoting a shell type <code class="docutils literal notranslate"><span class="pre">(angmom,</span> <span class="pre">char)</span></code> where
+<code class="docutils literal notranslate"><span class="pre">angmom</span></code> is a positive integer denoting the angular momentum and <code class="docutils literal notranslate"><span class="pre">char</span></code> is
+either <code class="docutils literal notranslate"><span class="pre">'c'</span></code> or <code class="docutils literal notranslate"><span class="pre">'p'</span></code> for Cartesian are pure, respectively</p></li>
+<li><p>and whose values are lists of <cite>basis function strings</cite>, where each string
+denotes one basis function.</p></li>
+</ul>
+<p>A basis function string has a one-to-one correspondence to the Cartesian or
+pure polynomials defined above.</p>
+<ul class="simple">
+<li><p>In case of Cartesian functions, <span class="math notranslate nohighlight">\(x^{n_x} y^{n_y} z^{n_z}\)</span> is represented
+by the string <code class="docutils literal notranslate"><span class="pre">'x'</span> <span class="pre">*</span> <span class="pre">nx</span> <span class="pre">+</span> <span class="pre">'y'</span> <span class="pre">*</span> <span class="pre">ny</span> <span class="pre">+</span> <span class="pre">'z'</span> <span class="pre">*</span> <span class="pre">nz</span></code>, except for the s-type
+function, which is represented by <code class="docutils literal notranslate"><span class="pre">'1'</span></code>.</p></li>
+<li><p>In case of pure functions, <span class="math notranslate nohighlight">\(C_{\ell m}\)</span> is represented by
+<code class="docutils literal notranslate"><span class="pre">'c{}'.format(m)</span></code> and <span class="math notranslate nohighlight">\(S_{\ell m}\)</span> is by <code class="docutils literal notranslate"><span class="pre">'s{}'.format(m)</span></code>. The
+angular momentum quantum number is not included because it is implied by the
+key in the <code class="docutils literal notranslate"><span class="pre">conventions</span></code> dictionary.</p></li>
+</ul>
+<p>Each basis function string can be prefixed with a minus sign, to denote a
+sign flip with respect to the definitions on this page. The order of the string
+in the list defines the order of the corresponding basis functions within one
+shell.</p>
+<p>For example, pure and Cartesian s, p and d functions in Gaussian FCHK files
+adhere to the following convention:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">conventions</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">):</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">],</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">):</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">],</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">):</span> <span class="p">[</span><span class="s1">&#39;xx&#39;</span><span class="p">,</span> <span class="s1">&#39;yy&#39;</span><span class="p">,</span> <span class="s1">&#39;zz&#39;</span><span class="p">,</span> <span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="s1">&#39;xz&#39;</span><span class="p">,</span> <span class="s1">&#39;yz&#39;</span><span class="p">],</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">):</span> <span class="p">[</span><span class="s1">&#39;c0&#39;</span><span class="p">,</span> <span class="s1">&#39;c1&#39;</span><span class="p">,</span> <span class="s1">&#39;s1&#39;</span><span class="p">,</span> <span class="s1">&#39;c2&#39;</span><span class="p">,</span> <span class="s1">&#39;s2&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>(Pure s and p functions are never used in a Gaussian FCHK file.)</p>
+</div>
+<div class="section" id="notes-on-other-conventions">
+<h2>Notes on other conventions<a class="headerlink" href="#notes-on-other-conventions" title="Permalink to this headline">¶</a></h2>
+<p>To avoid confusion, negative magnetic quantum numbers are never used to label
+pure functions in IOData. The basis strings contain <cite>‘c’</cite> and <cite>‘s’</cite> instead. In
+the literature, e.g. in the book <em>Molecular Electronic-Structure Theory</em> by
+Helgaker, Jørgensen and Olsen, negative magnetic quantum numbers for pure
+functions are usually referring to sine-like functions:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}R_{\ell, m} &amp;= C_{\ell m} \quad m = 0 \ldots \ell \\
+R_{\ell, -m} &amp;= S_{\ell m} \quad m = 1 \ldots \ell\end{split}\]</div>
+<p>Note that <span class="math notranslate nohighlight">\(\ell\)</span> and <span class="math notranslate nohighlight">\(m\)</span> both appear as subscripts in
+<span class="math notranslate nohighlight">\(R_{\ell, m}\)</span> and <span class="math notranslate nohighlight">\(R_{\ell, -m}\)</span> to tell them apart from their
+complex counterparts.</p>
+</div>
+<div class="section" id="transformation-from-cartesian-to-pure-functions">
+<h2>Transformation from Cartesian to pure functions<a class="headerlink" href="#transformation-from-cartesian-to-pure-functions" title="Permalink to this headline">¶</a></h2>
+<p>Pure Gaussian primitives can written as linear combinations of Cartesian ones.
+Hence, integrals over Cartesian functions can also be transformed
+into integrals over pure primitives. This transformation is the last step
+in the calculation of the overlap matrix in IOData:</p>
+<ol class="arabic simple">
+<li><p>Integrals are first computed for Gaussian primitives without normalization.</p></li>
+<li><p>Normalization constants for Cartesian primitives are multiplied into the
+integrals.</p></li>
+<li><p>Integrals over primitives are contracted.</p></li>
+<li><p>Optionally, the integrals for Cartesian functions are transformed into
+integrals for pure functions.</p></li>
+</ol>
+<p>For the last step, pre-computed transformations matrices (generated by
+<code class="docutils literal notranslate"><span class="pre">tools/harmonics.py</span></code> are stored in <code class="docutils literal notranslate"><span class="pre">iodata/overlap_cartpure.py</span></code> using the
+<code class="docutils literal notranslate"><span class="pre">HORTON2_CONVENTIONS</span></code>. The derivation of these transformation matrices is
+explained below.</p>
+<div class="section" id="recursive-computation-of-real-regular-solid-harmonics">
+<h3>Recursive computation of real regular solid harmonics<a class="headerlink" href="#recursive-computation-of-real-regular-solid-harmonics" title="Permalink to this headline">¶</a></h3>
+<p>First, we construct two sets of recursion relations for <span class="math notranslate nohighlight">\(\phi\)</span> and
+<span class="math notranslate nohighlight">\(\theta\)</span> separately. These will be combined to form the final set of
+recursion relations that directly operate on the real regular solid harmonics.
+In these two sets, the notation <span class="math notranslate nohighlight">\(\rho = \sqrt{x^2 + y^2}\)</span> is used.</p>
+<p>The first set of recursion relations starts from a fairly trivial idea:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{split}
+    \rho^m [\cos(m\phi) + i\sin(m\phi)]
+        &amp;= \rho^m \exp(im\phi) \\
+        &amp;= \rho \exp(i\phi) \; \rho^{m-1}\exp(i(m-1)\phi) \\
+        &amp;= (x + iy) \; \rho^{m-1} [\cos((m-1)\phi) + i\sin((m-1)\phi)]
+\end{split}\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}\rho \cos(\phi) &amp;= x \\
+\rho \sin(\phi) &amp;= y \\
+\rho \cos(m\phi) &amp;= x \cos((m-1)\phi) - y \sin((m-1)\phi) \\
+\rho \sin(m\phi) &amp;= x \sin((m-1)\phi) + y \cos((m-1)\phi)\end{split}\]</div>
+<p>Second, recursion relations for associated Legendre functions can be modified to
+contain <span class="math notranslate nohighlight">\(r\)</span>, <span class="math notranslate nohighlight">\(z\)</span> and <span class="math notranslate nohighlight">\(\rho\)</span>, such that <span class="math notranslate nohighlight">\(\cos\theta\)</span> does
+not appear explicitly:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}P_0^0(\cos\theta) &amp;= 1 \\
+r^\ell P_\ell^\ell(\cos\theta)
+    &amp;= (2\ell - 1) \rho \; r^{\ell-1} P_{\ell-1}^{\ell-1}(\cos\theta) \\
+r^{\ell} P_{\ell}^{\ell-1}(\cos\theta)
+    &amp;= -(2\ell - 1) z \; r^{\ell-1} P_{\ell-1}^{\ell-1}(\cos\theta) \\
+r^\ell P_{\ell}^{m}(\cos\theta)
+    &amp;= \frac{2\ell - 1}{\ell - m} z \; r^{\ell-1} P_{\ell-1}^{m}(\cos\theta)
+       -\frac{\ell + m - 1}{\ell - m} r^2 \; r^{\ell-2} P_{\ell-2}^{m}(\cos\theta)\end{split}\]</div>
+<p>The two sets could be used separately to construct real regular solid harmonics,
+but they feature <span class="math notranslate nohighlight">\(\rho=\sqrt{x^2+y^2}\)</span>, while the regular solid harmonics
+should be homogeneous polynomials. We can get rid of <span class="math notranslate nohighlight">\(\rho\)</span> by combining
+the two sets into one:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}C_{0,0} ={}&amp; 1 \\
+C_{1,0} ={}&amp; z \\
+C_{1,1} ={}&amp; x \\
+S_{1,1} ={}&amp; y \\
+C_{\ell,\ell}
+    ={}&amp; \sqrt{\frac{2\ell-1}{2\ell}} \;
+         \Bigl[x C_{\ell-1,\ell-1} - y S_{\ell-1,\ell-1} \Bigr]
+         \quad \forall \; \ell &gt; 1 \\
+S_{\ell,\ell}
+    ={}&amp; \sqrt{\frac{2\ell-1}{2\ell}} \;
+         \Bigl[x S_{\ell-1,\ell-1} + y C_{\ell-1,\ell-1} \Bigr]
+         \quad \forall \; \ell &gt; 1 \\
+\{CS\}_{\ell,\ell-1}
+    ={}&amp; z \sqrt{2\ell-1} \;
+    \{CS\}_{\ell-1, \ell-1}
+    \quad \forall \; \ell &gt; 1 \\
+\{CS\}_{\ell,m}
+    ={}&amp; \frac{(2\ell - 1)z}{\sqrt{(\ell+m)(\ell-m)}} \{CS\}_{\ell-1,m} \nonumber \\
+       &amp; - r^2 \sqrt{\frac{(\ell - m  - 1)(\ell + m - 1)}{(\ell + m)(\ell - m)}} \{CS\}_{\ell - 2,m} \nonumber \\
+       &amp; \quad \forall \; \ell &gt; m + 1 \text{ and } m \ge 0\end{split}\]</div>
+<p>These equations show that real regular solid harmonics are homogeneous
+polynomials in <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(z\)</span>. Advantages of this approach
+are (i) the absence of trigonometric expressions and (ii) the similarity between
+cosine and sine expressions. (Coefficients can be reused.) These recursion
+relations should be numerically stable for the computation of real regular solid
+harmonics as a function of Cartesian coordinates. They can also be used to build
+a transformation matrix from Cartesian mononomials into real regular solid
+harmonics.</p>
+</div>
+<div class="section" id="transformation-matrices-without-normalization">
+<h3>Transformation matrices without normalization<a class="headerlink" href="#transformation-matrices-without-normalization" title="Permalink to this headline">¶</a></h3>
+<p>The above recursion relations result in the following transformation matrices.
+These were obtained by running:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python tools/harmonics.py none latex <span class="m">3</span>
+</pre></div>
+</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left(\begin{array}{c}
+    b(C_{20}) \\ b(C_{21}) \\ b(S_{21}) \\ b(C_{22}) \\ b(S_{22})
+\end{array}\right)
+    &amp;=
+\left(\begin{array}{cccccc}
+    - \frac{1}{2} &amp; \cdot &amp; \cdot &amp; - \frac{1}{2} &amp; \cdot &amp; 1 \\
+    \cdot &amp; \cdot &amp; \sqrt{3} &amp; \cdot &amp; \cdot &amp; \cdot \\
+    \cdot &amp; \cdot &amp; \cdot &amp; \cdot &amp; \sqrt{3} &amp; \cdot \\
+    \frac{\sqrt{3}}{2} &amp; \cdot &amp; \cdot &amp; - \frac{\sqrt{3}}{2} &amp; \cdot &amp; \cdot \\
+    \cdot &amp; \sqrt{3} &amp; \cdot &amp; \cdot &amp; \cdot &amp; \cdot \\
+\end{array}\right)
+\left(\begin{array}{c}
+    b(xx) \\ b(xy) \\ b(xz) \\ b(yy) \\ b(yz) \\ b(zz)
+\end{array}\right)
+\\
+\left(\begin{array}{c}
+    b(C_{30}) \\ b(C_{31}) \\ b(S_{31}) \\ b(C_{32}) \\ b(S_{32}) \\ b(C_{33}) \\ b(S_{33})
+\end{array}\right)
+    &amp;=
+\left(\begin{array}{cccccccccc}
+    \cdot &amp; \cdot &amp; - \frac{3}{2} &amp; \cdot &amp; \cdot &amp; \cdot &amp; \cdot &amp; - \frac{3}{2} &amp; \cdot &amp; 1 \\
+    - \frac{\sqrt{6}}{4} &amp; \cdot &amp; \cdot &amp; - \frac{\sqrt{6}}{4} &amp; \cdot &amp; \sqrt{6} &amp; \cdot &amp; \cdot &amp; \cdot &amp; \cdot \\
+    \cdot &amp; - \frac{\sqrt{6}}{4} &amp; \cdot &amp; \cdot &amp; \cdot &amp; \cdot &amp; - \frac{\sqrt{6}}{4} &amp; \cdot &amp; \sqrt{6} &amp; \cdot \\
+    \cdot &amp; \cdot &amp; \frac{\sqrt{15}}{2} &amp; \cdot &amp; \cdot &amp; \cdot &amp; \cdot &amp; - \frac{\sqrt{15}}{2} &amp; \cdot &amp; \cdot \\
+    \cdot &amp; \cdot &amp; \cdot &amp; \cdot &amp; \sqrt{15} &amp; \cdot &amp; \cdot &amp; \cdot &amp; \cdot &amp; \cdot \\
+    \frac{\sqrt{10}}{4} &amp; \cdot &amp; \cdot &amp; - \frac{3 \sqrt{10}}{4} &amp; \cdot &amp; \cdot &amp; \cdot &amp; \cdot &amp; \cdot &amp; \cdot \\
+    \cdot &amp; \frac{3 \sqrt{10}}{4} &amp; \cdot &amp; \cdot &amp; \cdot &amp; \cdot &amp; - \frac{\sqrt{10}}{4} &amp; \cdot &amp; \cdot &amp; \cdot \\
+\end{array}\right)
+\left(\begin{array}{c}
+    b(xxx) \\ b(xxy) \\ b(xxz) \\ b(xyy) \\ b(xyz) \\ b(xzz) \\ b(yyy) \\ b(yyz) \\ b(yzz) \\ b(zzz)
+\end{array}\right)\end{split}\]</div>
+</div>
+<div class="section" id="taking-into-account-normalization">
+<h3>Taking into account normalization<a class="headerlink" href="#taking-into-account-normalization" title="Permalink to this headline">¶</a></h3>
+<p>For the calculation of the overlap matrix, the transformations need to be
+modified, to transform normalized Cartesian functions into normalized pure
+functions. Accounting for normalization yields slightly different matrices
+shown below. These were obtained by running:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python tools/harmonics.py L2 latex <span class="m">3</span>
+</pre></div>
+</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left(\begin{array}{c}
+    b(C_{20}) \\ b(C_{21}) \\ b(S_{21}) \\ b(C_{22}) \\ b(S_{22})
+\end{array}\right)
+    &amp;=
+\left(\begin{array}{cccccc}
+    - \frac{1}{2} &amp; \cdot &amp; \cdot &amp; - \frac{1}{2} &amp; \cdot &amp; 1 \\
+    \cdot &amp; \cdot &amp; 1 &amp; \cdot &amp; \cdot &amp; \cdot \\
+    \cdot &amp; \cdot &amp; \cdot &amp; \cdot &amp; 1 &amp; \cdot \\
+    \frac{\sqrt{3}}{2} &amp; \cdot &amp; \cdot &amp; - \frac{\sqrt{3}}{2} &amp; \cdot &amp; \cdot \\
+    \cdot &amp; 1 &amp; \cdot &amp; \cdot &amp; \cdot &amp; \cdot \\
+\end{array}\right)
+\left(\begin{array}{c}
+    b(xx) \\ b(xy) \\ b(xz) \\ b(yy) \\ b(yz) \\ b(zz)
+\end{array}\right)
+\\
+\left(\begin{array}{c}
+    b(C_{30}) \\ b(C_{31}) \\ b(S_{31}) \\ b(C_{32}) \\ b(S_{32}) \\ b(C_{33}) \\ b(S_{33})
+\end{array}\right)
+    &amp;=
+\left(\begin{array}{cccccccccc}
+    \cdot &amp; \cdot &amp; - \frac{3 \sqrt{5}}{10} &amp; \cdot &amp; \cdot &amp; \cdot &amp; \cdot &amp; - \frac{3 \sqrt{5}}{10} &amp; \cdot &amp; 1 \\
+    - \frac{\sqrt{6}}{4} &amp; \cdot &amp; \cdot &amp; - \frac{\sqrt{30}}{20} &amp; \cdot &amp; \frac{\sqrt{30}}{5} &amp; \cdot &amp; \cdot &amp; \cdot &amp; \cdot \\
+    \cdot &amp; - \frac{\sqrt{30}}{20} &amp; \cdot &amp; \cdot &amp; \cdot &amp; \cdot &amp; - \frac{\sqrt{6}}{4} &amp; \cdot &amp; \frac{\sqrt{30}}{5} &amp; \cdot \\
+    \cdot &amp; \cdot &amp; \frac{\sqrt{3}}{2} &amp; \cdot &amp; \cdot &amp; \cdot &amp; \cdot &amp; - \frac{\sqrt{3}}{2} &amp; \cdot &amp; \cdot \\
+    \cdot &amp; \cdot &amp; \cdot &amp; \cdot &amp; 1 &amp; \cdot &amp; \cdot &amp; \cdot &amp; \cdot &amp; \cdot \\
+    \frac{\sqrt{10}}{4} &amp; \cdot &amp; \cdot &amp; - \frac{3 \sqrt{2}}{4} &amp; \cdot &amp; \cdot &amp; \cdot &amp; \cdot &amp; \cdot &amp; \cdot \\
+    \cdot &amp; \frac{3 \sqrt{2}}{4} &amp; \cdot &amp; \cdot &amp; \cdot &amp; \cdot &amp; - \frac{\sqrt{10}}{4} &amp; \cdot &amp; \cdot &amp; \cdot \\
+\end{array}\right)
+\left(\begin{array}{c}
+    b(xxx) \\ b(xxy) \\ b(xxz) \\ b(xyy) \\ b(xyz) \\ b(xzz) \\ b(yyy) \\ b(yyz) \\ b(yzz) \\ b(zzz)
+\end{array}\right)\end{split}\]</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="changelog.html" class="btn btn-neutral float-right" title="IOData Changelog" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="formats.html" class="btn btn-neutral float-left" title="Supported File Formats" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, The IODATA Development Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

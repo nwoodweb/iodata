@@ -1,0 +1,468 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>iodata.orbitals module &mdash; IOData  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/override.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["fast-preview.js"], "TeX": {"Macros": {"ket": ["{\\left\\vert { #1 } \\right\\rangle}", 1], "bra": ["{\\left\\langle { #1} \\right\\vert}", 1], "braket": ["{\\left\\langle {#1} \\mid { #2} \\right\\rangle}", 2], "ketbra": ["{\\left\\vert { #1 } \\right\\rangle\\left\\langle { #2} \\right\\vert}", 2], "ev": ["{\\left\\langle {#2} \\vert {#1} \\vert {#2} \\right\\rangle}", 2], "mel": ["{\\left\\langle{ #1 }\\right\\vert{ #2 }\\left\\vert{#3}\\right\\rangle}", 3]}}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="iodata.overlap module" href="iodata.overlap.html" />
+    <link rel="prev" title="iodata.iodata module" href="iodata.iodata.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> IOData
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../formats.html">Supported File Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basis.html">Basis set conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">IOData Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgments.html">Acknowledgments</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">iodata</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="iodata.html">iodata package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="iodata.html#subpackages">Subpackages</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="iodata.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="iodata.api.html">iodata.api module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.attrutils.html">iodata.attrutils module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.basis.html">iodata.basis module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.docstrings.html">iodata.docstrings module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.iodata.html">iodata.iodata module</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">iodata.orbitals module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.overlap.html">iodata.overlap module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.overlap_cartpure.html">iodata.overlap_cartpure module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.periodic.html">iodata.periodic module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.utils.html">iodata.utils module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.version.html">iodata.version module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="iodata.html#module-iodata">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">IOData</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="modules.html">iodata</a> &raquo;</li>
+        
+          <li><a href="iodata.html">iodata package</a> &raquo;</li>
+        
+      <li>iodata.orbitals module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/pyapi/iodata.orbitals.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-iodata.orbitals">
+<span id="iodata-orbitals-module"></span><h1>iodata.orbitals module<a class="headerlink" href="#module-iodata.orbitals" title="Permalink to this headline">¶</a></h1>
+<p>Data structure for molecular orbitals.</p>
+<dl class="py class">
+<dt id="iodata.orbitals.MolecularOrbitals">
+<em class="property">class </em><code class="sig-name descname">MolecularOrbitals</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">kind</span></em>, <em class="sig-param"><span class="n">norba</span></em>, <em class="sig-param"><span class="n">norbb</span></em>, <em class="sig-param"><span class="n">occs</span></em>, <em class="sig-param"><span class="n">coeffs</span></em>, <em class="sig-param"><span class="n">energies</span></em>, <em class="sig-param"><span class="n">irreps</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iodata/orbitals.html#MolecularOrbitals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iodata.orbitals.MolecularOrbitals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Class of Orthonormal Molecular Orbitals.</p>
+<dl class="py attribute">
+<dt id="iodata.orbitals.MolecularOrbitals.kind">
+<code class="sig-name descname">kind</code><a class="headerlink" href="#iodata.orbitals.MolecularOrbitals.kind" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of molecular orbitals, which can be ‘restricted’, ‘unrestricted’, or ‘generalized’.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.orbitals.MolecularOrbitals.norba">
+<code class="sig-name descname">norba</code><a class="headerlink" href="#iodata.orbitals.MolecularOrbitals.norba" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of alpha molecular orbitals, set to <cite>None</cite> in case of type==’generalized’.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.orbitals.MolecularOrbitals.norbb">
+<code class="sig-name descname">norbb</code><a class="headerlink" href="#iodata.orbitals.MolecularOrbitals.norbb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of beta molecular orbitals, set to <cite>None</cite> in case of type==’generalized’.
+This is expected to be equal to <cite>norba</cite> for the <cite>restricted</cite> kind.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.orbitals.MolecularOrbitals.occs">
+<code class="sig-name descname">occs</code><a class="headerlink" href="#iodata.orbitals.MolecularOrbitals.occs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Molecular orbital occupation numbers. The length equals the number of columns of coeffs.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.orbitals.MolecularOrbitals.coeffs">
+<code class="sig-name descname">coeffs</code><a class="headerlink" href="#iodata.orbitals.MolecularOrbitals.coeffs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Molecular orbital coefficients.
+In case of restricted: shape = (nbasis, norba) = (nbasis, norbb).
+In case of unrestricted: shape = (nbasis, norba + norbb).
+In case of generalized: shape = (2 * nbasis, norb), where norb is the
+total number of orbitals.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.orbitals.MolecularOrbitals.energies">
+<code class="sig-name descname">energies</code><a class="headerlink" href="#iodata.orbitals.MolecularOrbitals.energies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Molecular orbital energies. The length equals the number of columns of coeffs.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.orbitals.MolecularOrbitals.irreps">
+<code class="sig-name descname">irreps</code><a class="headerlink" href="#iodata.orbitals.MolecularOrbitals.irreps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Irreducible representation. The length equals the number of columns of coeffs.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.orbitals.MolecularOrbitals.Warning">
+<code class="sig-name descname">Warning</code><a class="headerlink" href="#iodata.orbitals.MolecularOrbitals.Warning" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>the interpretation of the occupation numbers may only be suitable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">for single-reference orbitals (not fractionally occupied natural orbitals.)</code></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">When an occupation number is in ]0, 1], it is assumed that an alpha orbital</code></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">is (fractionally) occupied. When an occupation number is in ]1, 2], it is</code></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">assumed that the alpha orbital is fully occupied and the beta orbital is</code></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">(fractionally) occupied.</code></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="iodata.orbitals.MolecularOrbitals.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">kind</span></em>, <em class="sig-param"><span class="n">norba</span></em>, <em class="sig-param"><span class="n">norbb</span></em>, <em class="sig-param"><span class="n">occs</span></em>, <em class="sig-param"><span class="n">coeffs</span></em>, <em class="sig-param"><span class="n">energies</span></em>, <em class="sig-param"><span class="n">irreps</span></em><span class="sig-paren">)</span><a class="headerlink" href="#iodata.orbitals.MolecularOrbitals.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method generated by attrs for class MolecularOrbitals.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="id0">
+<code class="sig-name descname">coeffs</code><em class="property">: numpy.ndarray</em><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="iodata.orbitals.MolecularOrbitals.coeffsa">
+<em class="property">property </em><code class="sig-name descname">coeffsa</code><a class="headerlink" href="#iodata.orbitals.MolecularOrbitals.coeffsa" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return alpha orbital coefficients.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="iodata.orbitals.MolecularOrbitals.coeffsb">
+<em class="property">property </em><code class="sig-name descname">coeffsb</code><a class="headerlink" href="#iodata.orbitals.MolecularOrbitals.coeffsb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return beta orbital coefficients.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="id1">
+<code class="sig-name descname">energies</code><em class="property">: numpy.ndarray</em><a class="headerlink" href="#id1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="iodata.orbitals.MolecularOrbitals.energiesa">
+<em class="property">property </em><code class="sig-name descname">energiesa</code><a class="headerlink" href="#iodata.orbitals.MolecularOrbitals.energiesa" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return alpha orbital energies.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="iodata.orbitals.MolecularOrbitals.energiesb">
+<em class="property">property </em><code class="sig-name descname">energiesb</code><a class="headerlink" href="#iodata.orbitals.MolecularOrbitals.energiesb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return beta orbital energies.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="id2">
+<code class="sig-name descname">irreps</code><em class="property">: numpy.ndarray</em><a class="headerlink" href="#id2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="iodata.orbitals.MolecularOrbitals.irrepsa">
+<em class="property">property </em><code class="sig-name descname">irrepsa</code><a class="headerlink" href="#iodata.orbitals.MolecularOrbitals.irrepsa" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return alpha irreps.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="iodata.orbitals.MolecularOrbitals.irrepsb">
+<em class="property">property </em><code class="sig-name descname">irrepsb</code><a class="headerlink" href="#iodata.orbitals.MolecularOrbitals.irrepsb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return beta irreps.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="id3">
+<code class="sig-name descname">kind</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><a class="headerlink" href="#id3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="iodata.orbitals.MolecularOrbitals.nbasis">
+<em class="property">property </em><code class="sig-name descname">nbasis</code><a class="headerlink" href="#iodata.orbitals.MolecularOrbitals.nbasis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of spatial basis functions.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="iodata.orbitals.MolecularOrbitals.nelec">
+<em class="property">property </em><code class="sig-name descname">nelec</code><a class="headerlink" href="#iodata.orbitals.MolecularOrbitals.nelec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the total number of electrons.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="iodata.orbitals.MolecularOrbitals.norb">
+<em class="property">property </em><code class="sig-name descname">norb</code><a class="headerlink" href="#iodata.orbitals.MolecularOrbitals.norb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of orbitals.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="id4">
+<code class="sig-name descname">norba</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></em><a class="headerlink" href="#id4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id5">
+<code class="sig-name descname">norbb</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></em><a class="headerlink" href="#id5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id6">
+<code class="sig-name descname">occs</code><em class="property">: numpy.ndarray</em><a class="headerlink" href="#id6" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="iodata.orbitals.MolecularOrbitals.occsa">
+<em class="property">property </em><code class="sig-name descname">occsa</code><a class="headerlink" href="#iodata.orbitals.MolecularOrbitals.occsa" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return alpha occupation numbers.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="iodata.orbitals.MolecularOrbitals.occsb">
+<em class="property">property </em><code class="sig-name descname">occsb</code><a class="headerlink" href="#iodata.orbitals.MolecularOrbitals.occsb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return beta occupation numbers.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="iodata.orbitals.MolecularOrbitals.spinpol">
+<em class="property">property </em><code class="sig-name descname">spinpol</code><a class="headerlink" href="#iodata.orbitals.MolecularOrbitals.spinpol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the spin polarization of the Slater determinant.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="iodata.overlap.html" class="btn btn-neutral float-right" title="iodata.overlap module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="iodata.iodata.html" class="btn btn-neutral float-left" title="iodata.iodata module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, The IODATA Development Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

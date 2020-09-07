@@ -1,0 +1,8 @@
+iodata.formats.gamess module
+============================
+
+.. automodule:: iodata.formats.gamess
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :inherited-members:

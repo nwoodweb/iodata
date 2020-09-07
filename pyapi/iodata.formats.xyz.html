@@ -1,0 +1,352 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>iodata.formats.xyz module &mdash; IOData  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/override.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["fast-preview.js"], "TeX": {"Macros": {"ket": ["{\\left\\vert { #1 } \\right\\rangle}", 1], "bra": ["{\\left\\langle { #1} \\right\\vert}", 1], "braket": ["{\\left\\langle {#1} \\mid { #2} \\right\\rangle}", 2], "ketbra": ["{\\left\\vert { #1 } \\right\\rangle\\left\\langle { #2} \\right\\vert}", 2], "ev": ["{\\left\\langle {#2} \\vert {#1} \\vert {#2} \\right\\rangle}", 2], "mel": ["{\\left\\langle{ #1 }\\right\\vert{ #2 }\\left\\vert{#3}\\right\\rangle}", 3]}}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="iodata.test package" href="iodata.test.html" />
+    <link rel="prev" title="iodata.formats.wfx module" href="iodata.formats.wfx.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> IOData
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../formats.html">Supported File Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basis.html">Basis set conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">IOData Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgments.html">Acknowledgments</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">iodata</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="iodata.html">iodata package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="iodata.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="iodata.formats.html">iodata.formats package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.test.html">iodata.test package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="iodata.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="iodata.html#module-iodata">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">IOData</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="modules.html">iodata</a> &raquo;</li>
+        
+          <li><a href="iodata.html">iodata package</a> &raquo;</li>
+        
+          <li><a href="iodata.formats.html">iodata.formats package</a> &raquo;</li>
+        
+      <li>iodata.formats.xyz module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/pyapi/iodata.formats.xyz.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-iodata.formats.xyz">
+<span id="iodata-formats-xyz-module"></span><h1>iodata.formats.xyz module<a class="headerlink" href="#module-iodata.formats.xyz" title="Permalink to this headline">¶</a></h1>
+<p>XYZ file format.</p>
+<p>Usually, the different frames in a trajectory describe different geometries of the same
+molecule, with atoms in the same order. The <code class="docutils literal notranslate"><span class="pre">load_many</span></code> and <code class="docutils literal notranslate"><span class="pre">dump_many</span></code> functions
+below can also handle an XYZ with different molecules, e.g. a molecular database.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">load_*</span></code> and <code class="docutils literal notranslate"><span class="pre">dump_*</span></code> functions all accept the optional argument
+<code class="docutils literal notranslate"><span class="pre">atom_columns</span></code>. This argument fixes the meaning of the columns to be loaded
+from or dumped to an XYZ file. The following example defines, in addition to the
+conventional columns, also a column with atomic charges and three columns with
+atomic forces.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">atom_columns</span> <span class="o">=</span> <span class="n">iodata</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">xyz</span><span class="o">.</span><span class="n">DEFAULT_ATOM_COLUMNS</span> <span class="o">+</span> <span class="p">[</span>
+    <span class="c1"># Atomic charges are stored in a dictionary atcharges and they key</span>
+    <span class="c1"># refers to the name of the partitioning method.</span>
+    <span class="p">(</span><span class="s2">&quot;atcharges&quot;</span><span class="p">,</span> <span class="s2">&quot;mulliken&quot;</span><span class="p">,</span> <span class="p">(),</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{:10.5f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">),</span>
+    <span class="c1"># Note that in IOData, the energy gradient is stored, which contains the</span>
+    <span class="c1"># negative forces.</span>
+    <span class="p">(</span><span class="s2">&quot;atgradient&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,),</span> <span class="nb">float</span><span class="p">,</span>
+     <span class="p">(</span><span class="k">lambda</span> <span class="n">word</span><span class="p">:</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="n">word</span><span class="p">)),</span>
+     <span class="p">(</span><span class="k">lambda</span> <span class="n">value</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{:15.10f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">-</span><span class="n">value</span><span class="p">)))</span>
+<span class="p">]</span>
+
+<span class="n">mol</span> <span class="o">=</span> <span class="n">load_one</span><span class="p">(</span><span class="s2">&quot;test.xyz&quot;</span><span class="p">,</span> <span class="n">atom_columns</span><span class="o">=</span><span class="n">atom_columns</span><span class="p">)</span>
+<span class="c1"># The following attributes are present:</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">atnums</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">atcoords</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">atcharges</span><span class="p">[</span><span class="s2">&quot;mulliken&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">atgradient</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>When defining <code class="docutils literal notranslate"><span class="pre">atom_columns</span></code>, no columns can be skipped, such that all
+information loaded from a file can also be written back out when dumping it.</p>
+<dl class="py function">
+<dt id="iodata.formats.xyz.dump_many">
+<code class="sig-name descname">dump_many</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">datas</span></em>, <em class="sig-param"><span class="n">atom_columns</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iodata/formats/xyz.html#dump_many"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iodata.formats.xyz.dump_many" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dump multiple frames into a XYZ file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Textio</span></code>) – A writeable file object.</p></li>
+<li><p><strong>data</strong> – An IOData instance which must have the following attributes initialized:
+<code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>. If the following attributes are present, they are also dumped into the file: <code class="docutils literal notranslate"><span class="pre">title</span></code>.</p></li>
+<li><p><strong>atom_columns</strong> – A list of atomic fields to be loaded. Each field as a tuple with the following items: <strong>attribute</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>), <strong>key</strong> (<code class="docutils literal notranslate"><span class="pre">None</span></code> or <code class="docutils literal notranslate"><span class="pre">str</span></code>, when <code class="docutils literal notranslate"><span class="pre">str</span></code> the <code class="docutils literal notranslate"><span class="pre">IOData</span></code> attribute is a <code class="docutils literal notranslate"><span class="pre">dict</span></code>), <strong>shape</strong> for one atom (<code class="docutils literal notranslate"><span class="pre">tuple</span></code>), <strong>dtype</strong>, <strong>load_word</strong> (function taking string and returning a value with the correct type), <strong>dump_word</strong> (function taking a value and returning a formatted string).</p></li>
+<li><p><strong>None</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="iodata.formats.xyz.dump_one">
+<code class="sig-name descname">dump_one</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">atom_columns</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iodata/formats/xyz.html#dump_one"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iodata.formats.xyz.dump_one" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dump a single frame into a XYZ file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Textio</span></code>) – A writeable file object.</p></li>
+<li><p><strong>data</strong> (<a class="reference internal" href="iodata.iodata.html#iodata.iodata.IOData" title="iodata.iodata.IOData"><code class="xref py py-class docutils literal notranslate"><span class="pre">IOData</span></code></a>) – An IOData instance which must have the following attributes initialized:
+<code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>. If the following attributes are present, they are also dumped into the file: <code class="docutils literal notranslate"><span class="pre">title</span></code>.</p></li>
+<li><p><strong>atom_columns</strong> – A list of atomic fields to be loaded. Each field as a tuple with the following items: <strong>attribute</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>), <strong>key</strong> (<code class="docutils literal notranslate"><span class="pre">None</span></code> or <code class="docutils literal notranslate"><span class="pre">str</span></code>, when <code class="docutils literal notranslate"><span class="pre">str</span></code> the <code class="docutils literal notranslate"><span class="pre">IOData</span></code> attribute is a <code class="docutils literal notranslate"><span class="pre">dict</span></code>), <strong>shape</strong> for one atom (<code class="docutils literal notranslate"><span class="pre">tuple</span></code>), <strong>dtype</strong>, <strong>load_word</strong> (function taking string and returning a value with the correct type), <strong>dump_word</strong> (function taking a value and returning a formatted string).</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>None</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="iodata.formats.xyz.load_many">
+<code class="sig-name descname">load_many</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lit</span></em>, <em class="sig-param"><span class="n">atom_columns</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iodata/formats/xyz.html#load_many"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iodata.formats.xyz.load_many" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load a single frame from a XYZ file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lit</strong> (<a class="reference internal" href="iodata.utils.html#iodata.utils.LineIterator" title="iodata.utils.LineIterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">LineIterator</span></code></a>) – The line iterator to read the data from.</p></li>
+<li><p><strong>atom_columns</strong> – A list of atomic fields to be loaded. Each field as a tuple with the following items: <strong>attribute</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>), <strong>key</strong> (<code class="docutils literal notranslate"><span class="pre">None</span></code> or <code class="docutils literal notranslate"><span class="pre">str</span></code>, when <code class="docutils literal notranslate"><span class="pre">str</span></code> the <code class="docutils literal notranslate"><span class="pre">IOData</span></code> attribute is a <code class="docutils literal notranslate"><span class="pre">dict</span></code>), <strong>shape</strong> for one atom (<code class="docutils literal notranslate"><span class="pre">tuple</span></code>), <strong>dtype</strong>, <strong>load_word</strong> (function taking string and returning a value with the correct type), <strong>dump_word</strong> (function taking a value and returning a formatted string).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dictionary with IOData attributes. The following attributes are guaranteed to be
+loaded: <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">title</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>data</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="iodata.formats.xyz.load_one">
+<code class="sig-name descname">load_one</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lit</span></em>, <em class="sig-param"><span class="n">atom_columns</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iodata/formats/xyz.html#load_one"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iodata.formats.xyz.load_one" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load a single frame from a XYZ file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lit</strong> (<a class="reference internal" href="iodata.utils.html#iodata.utils.LineIterator" title="iodata.utils.LineIterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">LineIterator</span></code></a>) – The line iterator to read the data from.</p></li>
+<li><p><strong>atom_columns</strong> – A list of atomic fields to be loaded. Each field as a tuple with the following items: <strong>attribute</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>), <strong>key</strong> (<code class="docutils literal notranslate"><span class="pre">None</span></code> or <code class="docutils literal notranslate"><span class="pre">str</span></code>, when <code class="docutils literal notranslate"><span class="pre">str</span></code> the <code class="docutils literal notranslate"><span class="pre">IOData</span></code> attribute is a <code class="docutils literal notranslate"><span class="pre">dict</span></code>), <strong>shape</strong> for one atom (<code class="docutils literal notranslate"><span class="pre">tuple</span></code>), <strong>dtype</strong>, <strong>load_word</strong> (function taking string and returning a value with the correct type), <strong>dump_word</strong> (function taking a value and returning a formatted string).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dictionary with IOData attributes. The following attributes are guaranteed to be
+loaded: <code class="docutils literal notranslate"><span class="pre">atcoords</span></code>, <code class="docutils literal notranslate"><span class="pre">atnums</span></code>, <code class="docutils literal notranslate"><span class="pre">title</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>data</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="iodata.test.html" class="btn btn-neutral float-right" title="iodata.test package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="iodata.formats.wfx.html" class="btn btn-neutral float-left" title="iodata.formats.wfx module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, The IODATA Development Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

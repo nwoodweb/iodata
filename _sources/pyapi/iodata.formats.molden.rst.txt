@@ -1,0 +1,8 @@
+iodata.formats.molden module
+============================
+
+.. automodule:: iodata.formats.molden
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :inherited-members:

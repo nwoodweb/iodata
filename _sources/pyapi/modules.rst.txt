@@ -1,0 +1,7 @@
+iodata
+======
+
+.. toctree::
+   :maxdepth: 4
+
+   iodata

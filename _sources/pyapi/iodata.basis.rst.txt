@@ -1,0 +1,8 @@
+iodata.basis module
+===================
+
+.. automodule:: iodata.basis
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :inherited-members:

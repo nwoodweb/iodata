@@ -1,0 +1,8 @@
+iodata.formats.poscar module
+============================
+
+.. automodule:: iodata.formats.poscar
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :inherited-members:

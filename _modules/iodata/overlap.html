@@ -1,0 +1,435 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>iodata.overlap &mdash; IOData  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/override.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["fast-preview.js"], "TeX": {"Macros": {"ket": ["{\\left\\vert { #1 } \\right\\rangle}", 1], "bra": ["{\\left\\langle { #1} \\right\\vert}", 1], "braket": ["{\\left\\langle {#1} \\mid { #2} \\right\\rangle}", 2], "ketbra": ["{\\left\\vert { #1 } \\right\\rangle\\left\\langle { #2} \\right\\vert}", 2], "ev": ["{\\left\\langle {#2} \\vert {#1} \\vert {#2} \\right\\rangle}", 2], "mel": ["{\\left\\langle{ #1 }\\right\\vert{ #2 }\\left\\vert{#3}\\right\\rangle}", 3]}}})</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> IOData
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../formats.html">Supported File Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basis.html">Basis set conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">IOData Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgments.html">Acknowledgments</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pyapi/modules.html">iodata</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">IOData</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>iodata.overlap</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for iodata.overlap</h1><div class="highlight"><pre>
+<span></span><span class="c1"># IODATA is an input and output module for quantum chemistry.</span>
+<span class="c1"># Copyright (C) 2011-2019 The IODATA Development Team</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of IODATA.</span>
+<span class="c1">#</span>
+<span class="c1"># IODATA is free software; you can redistribute it and/or</span>
+<span class="c1"># modify it under the terms of the GNU General Public License</span>
+<span class="c1"># as published by the Free Software Foundation; either version 3</span>
+<span class="c1"># of the License, or (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># IODATA is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program; if not, see &lt;http://www.gnu.org/licenses/&gt;</span>
+<span class="c1"># --</span>
+<span class="sd">&quot;&quot;&quot;Module for computing overlap of atomic orbital basis functions.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">attr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">binom</span><span class="p">,</span> <span class="n">factorial2</span>
+
+<span class="kn">from</span> <span class="nn">.overlap_cartpure</span> <span class="kn">import</span> <span class="n">tfs</span>
+<span class="kn">from</span> <span class="nn">.basis</span> <span class="kn">import</span> <span class="n">convert_conventions</span><span class="p">,</span> <span class="n">iter_cart_alphabet</span><span class="p">,</span> <span class="n">MolecularBasis</span>
+<span class="kn">from</span> <span class="nn">.basis</span> <span class="kn">import</span> <span class="n">HORTON2_CONVENTIONS</span> <span class="k">as</span> <span class="n">OVERLAP_CONVENTIONS</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;OVERLAP_CONVENTIONS&#39;</span><span class="p">,</span> <span class="s1">&#39;compute_overlap&#39;</span><span class="p">,</span> <span class="s1">&#39;gob_cart_normalization&#39;</span><span class="p">]</span>
+
+
+<span class="c1"># pylint: disable=too-many-nested-blocks,too-many-statements</span>
+<div class="viewcode-block" id="compute_overlap"><a class="viewcode-back" href="../../pyapi/iodata.overlap.html#iodata.overlap.compute_overlap">[docs]</a><span class="k">def</span> <span class="nf">compute_overlap</span><span class="p">(</span><span class="n">obasis</span><span class="p">:</span> <span class="n">MolecularBasis</span><span class="p">,</span> <span class="n">atcoords</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute overlap matrix for the given molecular basis set.</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        \braket{\psi_{i}}{\psi_{j}}</span>
+
+<span class="sd">    This function takes into account the requested order of the basis functions</span>
+<span class="sd">    in ``obasis.conventions``. Note that only L2 normalized primitives are</span>
+<span class="sd">    supported at the moment.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    obasis</span>
+<span class="sd">        The orbital basis set.</span>
+<span class="sd">    atcoords</span>
+<span class="sd">        The atomic Cartesian coordinates (including those of ghost atoms).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    overlap</span>
+<span class="sd">        The matrix with overlap integrals, shape=(obasis.nbasis, obasis.nbasis).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">obasis</span><span class="o">.</span><span class="n">primitive_normalization</span> <span class="o">!=</span> <span class="s1">&#39;L2&#39;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;The overlap integrals are only implemented for L2 &#39;</span>
+                         <span class="s1">&#39;normalization.&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Initialize result</span>
+    <span class="n">overlap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">obasis</span><span class="o">.</span><span class="n">nbasis</span><span class="p">,</span> <span class="n">obasis</span><span class="o">.</span><span class="n">nbasis</span><span class="p">))</span>
+
+    <span class="c1"># Get a segmented basis, for simplicity</span>
+    <span class="n">obasis</span> <span class="o">=</span> <span class="n">obasis</span><span class="o">.</span><span class="n">get_segmented</span><span class="p">()</span>
+
+    <span class="c1"># Compute the normalization constants of the primitives</span>
+    <span class="n">scales</span> <span class="o">=</span> <span class="p">[</span><span class="n">_compute_cart_shell_normalizations</span><span class="p">(</span><span class="n">shell</span><span class="p">)</span> <span class="k">for</span> <span class="n">shell</span> <span class="ow">in</span> <span class="n">obasis</span><span class="o">.</span><span class="n">shells</span><span class="p">]</span>
+
+    <span class="n">n_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">shell</span><span class="o">.</span><span class="n">angmoms</span><span class="p">)</span> <span class="k">for</span> <span class="n">shell</span> <span class="ow">in</span> <span class="n">obasis</span><span class="o">.</span><span class="n">shells</span><span class="p">])</span>
+    <span class="n">go</span> <span class="o">=</span> <span class="n">GaussianOverlap</span><span class="p">(</span><span class="n">n_max</span><span class="p">)</span>
+
+    <span class="c1"># define a python ufunc (numpy function) for broadcasted calling over angular momentums</span>
+    <span class="n">compute_overlap_1d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">frompyfunc</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">compute_overlap_gaussian_1d</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Loop over shell0</span>
+    <span class="n">begin0</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># pylint: disable=too-many-nested-blocks</span>
+    <span class="k">for</span> <span class="n">i0</span><span class="p">,</span> <span class="n">shell0</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">obasis</span><span class="o">.</span><span class="n">shells</span><span class="p">):</span>
+        <span class="n">r0</span> <span class="o">=</span> <span class="n">atcoords</span><span class="p">[</span><span class="n">shell0</span><span class="o">.</span><span class="n">icenter</span><span class="p">]</span>
+        <span class="n">end0</span> <span class="o">=</span> <span class="n">begin0</span> <span class="o">+</span> <span class="n">shell0</span><span class="o">.</span><span class="n">nbasis</span>
+
+        <span class="c1"># Loop over shell1 (lower triangular only, including diagonal)</span>
+        <span class="n">begin1</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i1</span><span class="p">,</span> <span class="n">shell1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">obasis</span><span class="o">.</span><span class="n">shells</span><span class="p">[:</span><span class="n">i0</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]):</span>
+            <span class="n">r1</span> <span class="o">=</span> <span class="n">atcoords</span><span class="p">[</span><span class="n">shell1</span><span class="o">.</span><span class="n">icenter</span><span class="p">]</span>
+            <span class="n">end1</span> <span class="o">=</span> <span class="n">begin1</span> <span class="o">+</span> <span class="n">shell1</span><span class="o">.</span><span class="n">nbasis</span>
+
+            <span class="c1"># START of Cartesian coordinates. Shell types are positive</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">scales</span><span class="p">[</span><span class="n">i0</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">len</span><span class="p">(</span><span class="n">scales</span><span class="p">[</span><span class="n">i1</span><span class="p">][</span><span class="mi">0</span><span class="p">])))</span>
+
+            <span class="n">a0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">shell0</span><span class="o">.</span><span class="n">exponents</span><span class="p">)</span>
+            <span class="n">a1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">shell1</span><span class="o">.</span><span class="n">exponents</span><span class="p">)</span>
+
+            <span class="c1"># prepare some constants to save FLOPS later on</span>
+            <span class="n">rij</span> <span class="o">=</span> <span class="n">r0</span> <span class="o">-</span> <span class="n">r1</span>
+            <span class="n">rij_norm_sq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">rij</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+            <span class="n">prefactor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">a0</span> <span class="o">*</span> <span class="n">a1</span> <span class="o">*</span> <span class="n">rij_norm_sq</span> <span class="o">/</span> <span class="p">(</span><span class="n">a0</span> <span class="o">+</span> <span class="n">a1</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">prefactor</span> <span class="o">&gt;</span> <span class="mf">1.e-15</span><span class="p">:</span>
+                <span class="c1"># arrays of angular momentums [[2, 0, 0], [0, 2, 0], ..., [0, 1, 1]]</span>
+                <span class="n">n0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">iter_cart_alphabet</span><span class="p">(</span><span class="n">shell0</span><span class="o">.</span><span class="n">angmoms</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+                <span class="n">n1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">iter_cart_alphabet</span><span class="p">(</span><span class="n">shell1</span><span class="o">.</span><span class="n">angmoms</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+
+                <span class="c1"># Loop over primitives in shell0 (Cartesian)</span>
+                <span class="k">for</span> <span class="n">iexp0</span><span class="p">,</span> <span class="p">(</span><span class="n">a0</span><span class="p">,</span> <span class="n">cc0</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">shell0</span><span class="o">.</span><span class="n">exponents</span><span class="p">,</span> <span class="n">shell0</span><span class="o">.</span><span class="n">coeffs</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])):</span>
+                    <span class="n">scales0</span> <span class="o">=</span> <span class="n">scales</span><span class="p">[</span><span class="n">i0</span><span class="p">][</span><span class="n">iexp0</span><span class="p">]</span>
+                    <span class="n">a0_r0</span> <span class="o">=</span> <span class="n">a0</span> <span class="o">*</span> <span class="n">r0</span>
+
+                    <span class="c1"># Loop over primitives in shell1 (Cartesian)</span>
+                    <span class="k">for</span> <span class="n">iexp1</span><span class="p">,</span> <span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">cc1</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">shell1</span><span class="o">.</span><span class="n">exponents</span><span class="p">,</span> <span class="n">shell1</span><span class="o">.</span><span class="n">coeffs</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])):</span>
+                        <span class="n">scales1</span> <span class="o">=</span> <span class="n">scales</span><span class="p">[</span><span class="n">i1</span><span class="p">][</span><span class="n">iexp1</span><span class="p">]</span>
+
+                        <span class="n">at</span> <span class="o">=</span> <span class="n">a0</span> <span class="o">+</span> <span class="n">a1</span>
+                        <span class="n">prefactor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">a0</span> <span class="o">*</span> <span class="n">a1</span> <span class="o">/</span> <span class="n">at</span> <span class="o">*</span> <span class="n">rij_norm_sq</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">prefactor</span> <span class="o">&lt;</span> <span class="mf">1.0e-15</span><span class="p">:</span>
+                            <span class="k">continue</span>
+                        <span class="c1"># prepare some pre-factors to save FLOPS in inner loop</span>
+                        <span class="n">two_at</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">at</span>
+                        <span class="n">prefactor</span> <span class="o">*=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">at</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mi">3</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+                        <span class="n">rn</span> <span class="o">=</span> <span class="p">(</span><span class="n">a0_r0</span> <span class="o">+</span> <span class="n">a1</span> <span class="o">*</span> <span class="n">r1</span><span class="p">)</span> <span class="o">/</span> <span class="n">at</span>
+                        <span class="n">rn_0</span> <span class="o">=</span> <span class="n">rn</span> <span class="o">-</span> <span class="n">r0</span>
+                        <span class="n">rn_1</span> <span class="o">=</span> <span class="n">rn</span> <span class="o">-</span> <span class="n">r1</span>
+
+                        <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">compute_overlap_1d</span><span class="p">(</span><span class="n">rn_0</span><span class="p">,</span> <span class="n">rn_1</span><span class="p">,</span> <span class="n">n0</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:],</span> <span class="n">n1</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span>
+                                                       <span class="n">two_at</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+                        <span class="n">v</span> <span class="o">*=</span> <span class="n">prefactor</span>
+                        <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">v</span> <span class="o">*</span> <span class="n">cc0</span> <span class="o">*</span> <span class="n">cc1</span> <span class="o">*</span> <span class="n">scales0</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">scales1</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:])</span>
+
+            <span class="c1"># END of Cartesian coordinate system (if going to pure coordinates)</span>
+
+            <span class="c1"># cart to pure</span>
+            <span class="k">if</span> <span class="n">shell0</span><span class="o">.</span><span class="n">kinds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;p&#39;</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">tfs</span><span class="p">[</span><span class="n">shell0</span><span class="o">.</span><span class="n">angmoms</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">result</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">shell1</span><span class="o">.</span><span class="n">kinds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;p&#39;</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">tfs</span><span class="p">[</span><span class="n">shell1</span><span class="o">.</span><span class="n">angmoms</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+
+            <span class="c1"># store lower triangular result</span>
+            <span class="n">overlap</span><span class="p">[</span><span class="n">begin0</span><span class="p">:</span><span class="n">end0</span><span class="p">,</span> <span class="n">begin1</span><span class="p">:</span><span class="n">end1</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
+            <span class="c1"># store upper triangular result</span>
+            <span class="n">overlap</span><span class="p">[</span><span class="n">begin1</span><span class="p">:</span><span class="n">end1</span><span class="p">,</span> <span class="n">begin0</span><span class="p">:</span><span class="n">end0</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">T</span>
+
+            <span class="n">begin1</span> <span class="o">=</span> <span class="n">end1</span>
+        <span class="n">begin0</span> <span class="o">=</span> <span class="n">end0</span>
+
+    <span class="n">permutation</span><span class="p">,</span> <span class="n">signs</span> <span class="o">=</span> <span class="n">convert_conventions</span><span class="p">(</span><span class="n">obasis</span><span class="p">,</span> <span class="n">OVERLAP_CONVENTIONS</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">overlap</span> <span class="o">=</span> <span class="n">overlap</span><span class="p">[</span><span class="n">permutation</span><span class="p">]</span> <span class="o">*</span> <span class="n">signs</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">overlap</span> <span class="o">=</span> <span class="n">overlap</span><span class="p">[:,</span> <span class="n">permutation</span><span class="p">]</span> <span class="o">*</span> <span class="n">signs</span>
+    <span class="k">return</span> <span class="n">overlap</span></div>
+
+
+<div class="viewcode-block" id="GaussianOverlap"><a class="viewcode-back" href="../../pyapi/iodata.overlap.html#iodata.overlap.GaussianOverlap">[docs]</a><span class="k">class</span> <span class="nc">GaussianOverlap</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Gaussian Overlap Class.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="GaussianOverlap.__init__"><a class="viewcode-back" href="../../pyapi/iodata.overlap.html#iodata.overlap.GaussianOverlap.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_max</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize class.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        n_max : int</span>
+<span class="sd">            Maximum angular momentum.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">binomials</span> <span class="o">=</span> <span class="p">[[</span><span class="n">binom</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+        <span class="n">facts</span> <span class="o">=</span> <span class="p">[</span><span class="n">factorial2</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n_max</span><span class="p">)]</span>
+        <span class="n">facts</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">facts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">facts</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="GaussianOverlap.compute_overlap_gaussian_1d"><a class="viewcode-back" href="../../pyapi/iodata.overlap.html#iodata.overlap.GaussianOverlap.compute_overlap_gaussian_1d">[docs]</a>    <span class="k">def</span> <span class="nf">compute_overlap_gaussian_1d</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">two_at</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Compute overlap integral of two Gaussian functions in one-dimensions.&quot;&quot;&quot;</span>
+        <span class="c1"># compute overlap</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">pf_i</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">binomials</span><span class="p">[</span><span class="n">n1</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">**</span> <span class="p">(</span><span class="n">n1</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">m</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span>
+                <span class="k">if</span> <span class="n">m</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">integ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">facts</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">/</span> <span class="n">two_at</span> <span class="o">**</span> <span class="p">(</span><span class="n">m</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+                    <span class="n">value</span> <span class="o">+=</span> <span class="n">pf_i</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">binomials</span><span class="p">[</span><span class="n">n2</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">x2</span> <span class="o">**</span> <span class="p">(</span><span class="n">n2</span> <span class="o">-</span> <span class="n">j</span><span class="p">)</span> <span class="o">*</span> <span class="n">integ</span>
+        <span class="k">return</span> <span class="n">value</span></div></div>
+
+
+<span class="k">def</span> <span class="nf">_compute_cart_shell_normalizations</span><span class="p">(</span><span class="n">shell</span><span class="p">:</span> <span class="s1">&#39;Shell&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Return normalization constants for the primitives in a given shell.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    shell</span>
+<span class="sd">        The shell for which the normalization constants must be computed.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    np.ndarray</span>
+<span class="sd">        The normalization constants, always for Cartesian functions, even when</span>
+<span class="sd">        shell is pure.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">shell</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">evolve</span><span class="p">(</span><span class="n">shell</span><span class="p">,</span> <span class="n">kinds</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">shell</span><span class="o">.</span><span class="n">ncon</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">angmom</span> <span class="ow">in</span> <span class="n">shell</span><span class="o">.</span><span class="n">angmoms</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">exponent</span> <span class="ow">in</span> <span class="n">shell</span><span class="o">.</span><span class="n">exponents</span><span class="p">:</span>
+            <span class="n">row</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">iter_cart_alphabet</span><span class="p">(</span><span class="n">angmom</span><span class="p">):</span>
+                <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gob_cart_normalization</span><span class="p">(</span><span class="n">exponent</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">row</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<div class="viewcode-block" id="gob_cart_normalization"><a class="viewcode-back" href="../../pyapi/iodata.overlap.html#iodata.overlap.gob_cart_normalization">[docs]</a><span class="k">def</span> <span class="nf">gob_cart_normalization</span><span class="p">(</span><span class="n">alpha</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Compute normalization of exponent.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    alpha</span>
+<span class="sd">        Gaussian basis exponents</span>
+<span class="sd">    n</span>
+<span class="sd">        Cartesian subshell angular momenta</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    np.ndarray</span>
+<span class="sd">        The normalization constant for the gaussian cartesian basis.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="mi">4</span> <span class="o">*</span> <span class="n">alpha</span><span class="p">)</span> <span class="o">**</span> <span class="nb">sum</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">alpha</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">**</span> <span class="mf">1.5</span>
+                   <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">factorial2</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)))</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, The IODATA Development Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

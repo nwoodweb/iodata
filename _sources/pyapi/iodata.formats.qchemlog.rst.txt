@@ -1,0 +1,8 @@
+iodata.formats.qchemlog module
+==============================
+
+.. automodule:: iodata.formats.qchemlog
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :inherited-members:

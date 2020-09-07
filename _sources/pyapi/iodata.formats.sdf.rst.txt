@@ -1,0 +1,8 @@
+iodata.formats.sdf module
+=========================
+
+.. automodule:: iodata.formats.sdf
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :inherited-members:

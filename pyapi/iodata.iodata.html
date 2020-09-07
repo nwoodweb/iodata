@@ -1,0 +1,722 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>iodata.iodata module &mdash; IOData  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/override.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["fast-preview.js"], "TeX": {"Macros": {"ket": ["{\\left\\vert { #1 } \\right\\rangle}", 1], "bra": ["{\\left\\langle { #1} \\right\\vert}", 1], "braket": ["{\\left\\langle {#1} \\mid { #2} \\right\\rangle}", 2], "ketbra": ["{\\left\\vert { #1 } \\right\\rangle\\left\\langle { #2} \\right\\vert}", 2], "ev": ["{\\left\\langle {#2} \\vert {#1} \\vert {#2} \\right\\rangle}", 2], "mel": ["{\\left\\langle{ #1 }\\right\\vert{ #2 }\\left\\vert{#3}\\right\\rangle}", 3]}}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="iodata.orbitals module" href="iodata.orbitals.html" />
+    <link rel="prev" title="iodata.docstrings module" href="iodata.docstrings.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> IOData
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../formats.html">Supported File Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basis.html">Basis set conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">IOData Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgments.html">Acknowledgments</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">iodata</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="iodata.html">iodata package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="iodata.html#subpackages">Subpackages</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="iodata.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="iodata.api.html">iodata.api module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.attrutils.html">iodata.attrutils module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.basis.html">iodata.basis module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.docstrings.html">iodata.docstrings module</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">iodata.iodata module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.orbitals.html">iodata.orbitals module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.overlap.html">iodata.overlap module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.overlap_cartpure.html">iodata.overlap_cartpure module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.periodic.html">iodata.periodic module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.utils.html">iodata.utils module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iodata.version.html">iodata.version module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="iodata.html#module-iodata">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">IOData</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="modules.html">iodata</a> &raquo;</li>
+        
+          <li><a href="iodata.html">iodata package</a> &raquo;</li>
+        
+      <li>iodata.iodata module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/pyapi/iodata.iodata.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-iodata.iodata">
+<span id="iodata-iodata-module"></span><h1>iodata.iodata module<a class="headerlink" href="#module-iodata.iodata" title="Permalink to this headline">¶</a></h1>
+<p>Module for handling input/output from different file formats.</p>
+<dl class="py class">
+<dt id="iodata.iodata.IOData">
+<em class="property">class </em><code class="sig-name descname">IOData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">atcharges</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">atcoords</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">atcorenums</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">atffparams</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">atfrozen</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">atgradient</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">athessian</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">atmasses</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">atnums</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">basisdef</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">bonds</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">cellvecs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">charge</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">core_energy</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">cube</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">energy</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">extcharges</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">extra</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">g_rot</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lot</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">mo</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">moments</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">nelec</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">obasis</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">obasis_name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">one_ints</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">one_rdms</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">run_type</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">spinpol</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">title</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">two_ints</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">two_rdms</span><span class="o">=</span><span class="default_value">{}</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/iodata/iodata.html#IOData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#iodata.iodata.IOData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A container class for data loaded from (or to be written to) a file.</p>
+<p>In principle, the constructor accepts any keyword argument, which is
+stored as an attribute. All attributes are optional. Attributes can be
+set are removed after the IOData instance is constructed. The following
+attributes are supported by at least one of the io formats:</p>
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.atcharges">
+<code class="sig-name descname">atcharges</code><a class="headerlink" href="#iodata.iodata.IOData.atcharges" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dictionary where keys are names of charge definitions and values are
+arrays with atomic charges (size N).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.atcoords">
+<code class="sig-name descname">atcoords</code><a class="headerlink" href="#iodata.iodata.IOData.atcoords" title="Permalink to this definition">¶</a></dt>
+<dd><p>A (N, 3) float array with Cartesian coordinates of the atoms.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.atcorenums">
+<code class="sig-name descname">atcorenums</code><a class="headerlink" href="#iodata.iodata.IOData.atcorenums" title="Permalink to this definition">¶</a></dt>
+<dd><p>A (N,) float array with pseudo-potential core charges. The matrix
+elements corresponding to ghost atoms are zero.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.atffparams">
+<code class="sig-name descname">atffparams</code><a class="headerlink" href="#iodata.iodata.IOData.atffparams" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dictionary with arrays of atomic force field parameters (typically
+non-bonded). Keys include ‘charges’, ‘vdw_radii’, ‘sigmas’, ‘epsilons’,
+‘alphas’ (atomic polarizabilities), ‘c6s’, ‘c8s’, ‘c10s’, ‘buck_as’,
+‘buck_bs’, ‘lj_as’, ‘core_charges’, ‘valence_charges’, ‘valence_widths’,
+etc. Not all of them have to be present, depending on the use case.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.atfrozen">
+<code class="sig-name descname">atfrozen</code><a class="headerlink" href="#iodata.iodata.IOData.atfrozen" title="Permalink to this definition">¶</a></dt>
+<dd><p>A (N,) bool array with frozen atoms. (All atoms are free if this
+attribute is not set.)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.atgradient">
+<code class="sig-name descname">atgradient</code><a class="headerlink" href="#iodata.iodata.IOData.atgradient" title="Permalink to this definition">¶</a></dt>
+<dd><p>A (N, 3) float array with the first derivatives of the energy w.r.t.
+Cartesian atomic displacements.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.athessian">
+<code class="sig-name descname">athessian</code><a class="headerlink" href="#iodata.iodata.IOData.athessian" title="Permalink to this definition">¶</a></dt>
+<dd><p>A (3*N, 3*N) array containing the energy Hessian w.r.t Cartesian atomic
+displacements.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.atmasses">
+<code class="sig-name descname">atmasses</code><a class="headerlink" href="#iodata.iodata.IOData.atmasses" title="Permalink to this definition">¶</a></dt>
+<dd><p>A (N,) float array with atomic masses</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.atnums">
+<code class="sig-name descname">atnums</code><a class="headerlink" href="#iodata.iodata.IOData.atnums" title="Permalink to this definition">¶</a></dt>
+<dd><p>A (N,) int vector with the atomic numbers.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.basisdef">
+<code class="sig-name descname">basisdef</code><a class="headerlink" href="#iodata.iodata.IOData.basisdef" title="Permalink to this definition">¶</a></dt>
+<dd><p>A basis set definition, i.e. a dictionary whose keys are symbols (of
+chemical elements), atomic numbers (similar to previous, str to make
+distinction with following) or an atom index (integer referring to a
+specific atom in a molecule). The format of the values is to be decided
+when implementing a load function for basis set definitions.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.bonds">
+<code class="sig-name descname">bonds</code><a class="headerlink" href="#iodata.iodata.IOData.bonds" title="Permalink to this definition">¶</a></dt>
+<dd><p>An (nbond, 3) array with the list of covalent bonds. Each row represents
+one bond and consists of three integers: first atom index (starting
+from zero), second atom index &amp; an optional bond type (0: not known, 1:
+single, 2: double, 3: triple, 4: conjugated).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.cellvecs">
+<code class="sig-name descname">cellvecs</code><a class="headerlink" href="#iodata.iodata.IOData.cellvecs" title="Permalink to this definition">¶</a></dt>
+<dd><p>A (NP, 3) array containing the (real-space) cell vectors describing
+periodic boundary conditions. A single vector corresponds to a 1D cell,
+e.g. for a wire. Two vectors describe a 2D cell, e.g. for a membrane.
+Three vectors describe a 3D cell, e.g. a crystalline solid.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.charge">
+<code class="sig-name descname">charge</code><a class="headerlink" href="#iodata.iodata.IOData.charge" title="Permalink to this definition">¶</a></dt>
+<dd><p>The net charge of the system. When possible, this is derived from
+atcorenums and nelec.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.core_energy">
+<code class="sig-name descname">core_energy</code><a class="headerlink" href="#iodata.iodata.IOData.core_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Hartree-Fock energy due to the core orbitals</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.cube">
+<code class="sig-name descname">cube</code><a class="headerlink" href="#iodata.iodata.IOData.cube" title="Permalink to this definition">¶</a></dt>
+<dd><p>An instance of Cube, describing the volumetric data from a cube (or
+similar) file.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.energy">
+<code class="sig-name descname">energy</code><a class="headerlink" href="#iodata.iodata.IOData.energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>The total energy (electronic + nn)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.extcharges">
+<code class="sig-name descname">extcharges</code><a class="headerlink" href="#iodata.iodata.IOData.extcharges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array with values of external charges, with shape (nextcharge, 4). First
+three columns for Cartesian X, Y and Z coordinates, last column for the
+actual charge.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.extra">
+<code class="sig-name descname">extra</code><a class="headerlink" href="#iodata.iodata.IOData.extra" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dictionary with additional data loaded from a file. Any data which
+cannot be assigned to the other attributes belongs here. It may be
+decided in future to move some of the results from this dictionary to
+IOData attributes, with a more final name.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.g_rot">
+<code class="sig-name descname">g_rot</code><a class="headerlink" href="#iodata.iodata.IOData.g_rot" title="Permalink to this definition">¶</a></dt>
+<dd><p>The rotational symmetry number of the molecule.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.lot">
+<code class="sig-name descname">lot</code><a class="headerlink" href="#iodata.iodata.IOData.lot" title="Permalink to this definition">¶</a></dt>
+<dd><p>The level of theory used to compute the orbitals (and other properties).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.mo">
+<code class="sig-name descname">mo</code><a class="headerlink" href="#iodata.iodata.IOData.mo" title="Permalink to this definition">¶</a></dt>
+<dd><p>An instance of MolecularOrbitals.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.moments">
+<code class="sig-name descname">moments</code><a class="headerlink" href="#iodata.iodata.IOData.moments" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dictionary with electrostatic multipole moments. Keys are (angmom,
+kind) tuples where angmom is an integer for the angular momentum and
+kind is ‘c’ for Cartesian or ‘p’ for pure functions (only for angmom &gt;=
+2). The corresponding values are 1D numpy arrays. The order of the
+components of the multipole moments follows the HORTON2_CONVENTIONS from
+iodata/basis.py</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.nelec">
+<code class="sig-name descname">nelec</code><a class="headerlink" href="#iodata.iodata.IOData.nelec" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of electrons.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.obasis">
+<code class="sig-name descname">obasis</code><a class="headerlink" href="#iodata.iodata.IOData.obasis" title="Permalink to this definition">¶</a></dt>
+<dd><p>An OrderedDict containing parameters to instantiate a GOBasis class.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.obasis_name">
+<code class="sig-name descname">obasis_name</code><a class="headerlink" href="#iodata.iodata.IOData.obasis_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>A name or DOI describing the basis set used for the orbitals in the
+mo attribute (if applicable). Should be consistent with
+www.basissetexchange.org.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.one_ints">
+<code class="sig-name descname">one_ints</code><a class="headerlink" href="#iodata.iodata.IOData.one_ints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary where keys are names and values are numpy arrays with
+one-body operators, typically integrals of a one-body operator
+with a pair of (Gaussian) basis functions. Names can start with <code class="docutils literal notranslate"><span class="pre">olp</span></code>
+(overlap), <code class="docutils literal notranslate"><span class="pre">kin</span></code> (kinetic energy), <code class="docutils literal notranslate"><span class="pre">na</span></code> (nuclear attraction),
+<code class="docutils literal notranslate"><span class="pre">core</span></code> (core hamiltonian), etc. When relevant, these names must have a
+suffix <code class="docutils literal notranslate"><span class="pre">_ao</span></code> or <code class="docutils literal notranslate"><span class="pre">_mo</span></code> to clarify in which basis the integrals are
+computed. <code class="docutils literal notranslate"><span class="pre">_ao</span></code> is used to denote integrals in a non-orthogonal
+(atomic orbital) basis. <code class="docutils literal notranslate"><span class="pre">_mo</span></code> is used to denote an orthogonal
+(molecular orbital) basis. For the overlap integrals, this suffix can be
+omitted because it is only useful to compute them in the atomic-orbital
+basis.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.one_rdms">
+<code class="sig-name descname">one_rdms</code><a class="headerlink" href="#iodata.iodata.IOData.one_rdms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary where keys are names and values are one-particle density
+matrices. Names can be <code class="docutils literal notranslate"><span class="pre">scf</span></code>, <code class="docutils literal notranslate"><span class="pre">post_scf</span></code>, <code class="docutils literal notranslate"><span class="pre">scf_spin</span></code>,
+<code class="docutils literal notranslate"><span class="pre">post_scf_spin</span></code>. These matrices are always expressed in the AO basis.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.run_type">
+<code class="sig-name descname">run_type</code><a class="headerlink" href="#iodata.iodata.IOData.run_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type of calculation that lead to the results stored in IOData, which
+must be one of the following: ‘energy’, ‘energy_force’, ‘opt’, ‘scan’,
+‘freq’ or None.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.spinpol">
+<code class="sig-name descname">spinpol</code><a class="headerlink" href="#iodata.iodata.IOData.spinpol" title="Permalink to this definition">¶</a></dt>
+<dd><p>The spin polarization. By default, its value is derived from the
+molecular orbitals (mo attribute), as abs(nalpha - nbeta). In this case,
+spinpol cannot be set. When no molecular orbitals are present, this
+attribute can be set.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.title">
+<code class="sig-name descname">title</code><a class="headerlink" href="#iodata.iodata.IOData.title" title="Permalink to this definition">¶</a></dt>
+<dd><p>A suitable name for the data.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.two_ints">
+<code class="sig-name descname">two_ints</code><a class="headerlink" href="#iodata.iodata.IOData.two_ints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary where keys are names and values are numpy arrays with
+two-body operators, typically integrals of two-body operator
+with four of (Gaussian) basis functions. Names can start with <code class="docutils literal notranslate"><span class="pre">er</span></code>
+(electron repulsion) or <code class="docutils literal notranslate"><span class="pre">two</span></code> (general pairswise interaction). When
+relevant, these names must have a suffix <code class="docutils literal notranslate"><span class="pre">_ao</span></code> or <code class="docutils literal notranslate"><span class="pre">_mo</span></code> to clarify
+in which basis the integrals are computed, see one_ints for more
+details. Array indexes are in physicist’s notation.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="iodata.iodata.IOData.two_rdms">
+<code class="sig-name descname">two_rdms</code><a class="headerlink" href="#iodata.iodata.IOData.two_rdms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary where keys are names and values are two-particle density
+matrices. Names can be <code class="docutils literal notranslate"><span class="pre">post_scf</span></code> or <code class="docutils literal notranslate"><span class="pre">post_scf_spin</span></code>. These matrices
+are always expressed in the AO basis. Array indexes are in physicist’s
+notation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="iodata.iodata.IOData.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">atcharges</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">atcoords</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">atcorenums</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">atffparams</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">atfrozen</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">atgradient</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">athessian</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">atmasses</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">atnums</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">basisdef</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">bonds</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">cellvecs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">charge</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">core_energy</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">cube</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">energy</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">extcharges</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">extra</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">g_rot</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lot</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">mo</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">moments</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">nelec</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">obasis</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">obasis_name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">one_ints</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">one_rdms</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">run_type</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">spinpol</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">title</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">two_ints</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">two_rdms</span><span class="o">=</span><span class="default_value">{}</span></em><span class="sig-paren">)</span><a class="headerlink" href="#iodata.iodata.IOData.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method generated by attrs for class IOData.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="id0">
+<code class="sig-name descname">atcharges</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></em><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id1">
+<code class="sig-name descname">atcoords</code><em class="property">: numpy.ndarray</em><a class="headerlink" href="#id1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="id2">
+<em class="property">property </em><code class="sig-name descname">atcorenums</code><a class="headerlink" href="#id2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return effective core charges.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="id3">
+<code class="sig-name descname">atffparams</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></em><a class="headerlink" href="#id3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id4">
+<code class="sig-name descname">atfrozen</code><em class="property">: numpy.ndarray</em><a class="headerlink" href="#id4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id5">
+<code class="sig-name descname">atgradient</code><em class="property">: numpy.ndarray</em><a class="headerlink" href="#id5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id6">
+<code class="sig-name descname">athessian</code><em class="property">: numpy.ndarray</em><a class="headerlink" href="#id6" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id7">
+<code class="sig-name descname">atmasses</code><em class="property">: numpy.ndarray</em><a class="headerlink" href="#id7" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id8">
+<code class="sig-name descname">atnums</code><em class="property">: numpy.ndarray</em><a class="headerlink" href="#id8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id9">
+<code class="sig-name descname">basisdef</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><a class="headerlink" href="#id9" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id10">
+<code class="sig-name descname">bonds</code><em class="property">: numpy.ndarray</em><a class="headerlink" href="#id10" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id11">
+<code class="sig-name descname">cellvecs</code><em class="property">: numpy.ndarray</em><a class="headerlink" href="#id11" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="id12">
+<em class="property">property </em><code class="sig-name descname">charge</code><a class="headerlink" href="#id12" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the net charge of the system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="id13">
+<code class="sig-name descname">core_energy</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></em><a class="headerlink" href="#id13" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id14">
+<code class="sig-name descname">cube</code><em class="property">: <a class="reference internal" href="iodata.utils.html#iodata.utils.Cube" title="iodata.utils.Cube">iodata.utils.Cube</a></em><a class="headerlink" href="#id14" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id15">
+<code class="sig-name descname">energy</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></em><a class="headerlink" href="#id15" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id16">
+<code class="sig-name descname">extcharges</code><em class="property">: numpy.ndarray</em><a class="headerlink" href="#id16" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id17">
+<code class="sig-name descname">extra</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></em><a class="headerlink" href="#id17" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id18">
+<code class="sig-name descname">g_rot</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></em><a class="headerlink" href="#id18" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id19">
+<code class="sig-name descname">lot</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><a class="headerlink" href="#id19" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id20">
+<code class="sig-name descname">mo</code><em class="property">: <a class="reference internal" href="iodata.orbitals.html#iodata.orbitals.MolecularOrbitals" title="iodata.orbitals.MolecularOrbitals">iodata.orbitals.MolecularOrbitals</a></em><a class="headerlink" href="#id20" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id21">
+<code class="sig-name descname">moments</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></em><a class="headerlink" href="#id21" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="iodata.iodata.IOData.natom">
+<em class="property">property </em><code class="sig-name descname">natom</code><a class="headerlink" href="#iodata.iodata.IOData.natom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of atoms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="id22">
+<em class="property">property </em><code class="sig-name descname">nelec</code><a class="headerlink" href="#id22" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of electrons.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="id23">
+<code class="sig-name descname">obasis</code><em class="property">: <a class="reference internal" href="iodata.basis.html#iodata.basis.MolecularBasis" title="iodata.basis.MolecularBasis">iodata.basis.MolecularBasis</a></em><a class="headerlink" href="#id23" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id24">
+<code class="sig-name descname">obasis_name</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><a class="headerlink" href="#id24" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id25">
+<code class="sig-name descname">one_ints</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></em><a class="headerlink" href="#id25" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id26">
+<code class="sig-name descname">one_rdms</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></em><a class="headerlink" href="#id26" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id27">
+<code class="sig-name descname">run_type</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><a class="headerlink" href="#id27" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="id28">
+<em class="property">property </em><code class="sig-name descname">spinpol</code><a class="headerlink" href="#id28" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the spin polarization.</p>
+<p>Warning: for restricted wavefunctions, it is assumed that an occupation
+number in ]0, 2[ implies spin polarizaiton, which may not always be a
+valid assumption.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="id29">
+<code class="sig-name descname">title</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><a class="headerlink" href="#id29" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id30">
+<code class="sig-name descname">two_ints</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></em><a class="headerlink" href="#id30" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id31">
+<code class="sig-name descname">two_rdms</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></em><a class="headerlink" href="#id31" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="iodata.orbitals.html" class="btn btn-neutral float-right" title="iodata.orbitals module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="iodata.docstrings.html" class="btn btn-neutral float-left" title="iodata.docstrings module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, The IODATA Development Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
